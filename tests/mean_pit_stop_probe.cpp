@@ -1,0 +1,4 @@
+#include "rules/mean_pit_stop.h"
+#include <nlohmann/json.hpp>
+#include <iostream>
+int main(){nlohmann::json in;std::cin>>in;auto out=nlohmann::json::array();for(auto &c:in){slam::MeanBallResetState s;s.fields=c.at("fields").get<decltype(s.fields)>();s.table_mode=c.at("mode");s.field_438af8=c.at("af8");slam::MeanPitStopEvents e; if(c.value("tick",false))slam::mean_pit_stop_tick(s,c.at("service1c"));else if(c.contains("returns")){unsigned n=0;e=slam::mean_pit_stop(s,c.at("id"),[&](const slam::MeanPitStopRequest &){return c.at("returns").at(n++).get<std::uint32_t>();});}else e=slam::mean_pit_stop(s,c.at("id"),c.at("returned"));auto req=nlohmann::json::array();for(auto &v:e.requests)req.push_back({v.callback,v.eax,v.edx,v.ecx});out.push_back({{"fields",s.fields},{"mode",s.table_mode},{"af8",s.field_438af8},{"scores",e.scores},{"requests",req},{"clear",e.clear_capture_delays}});}std::cout<<out.dump()<<'\n';}

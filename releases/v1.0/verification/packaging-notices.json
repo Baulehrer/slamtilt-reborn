@@ -1,0 +1,15 @@
+{
+  "runtime_binaries_unchanged": true,
+  "exact_repacked_installer_smoke_exit_code": 0,
+  "notices": [
+    "nlohmann-json-MIT.txt",
+    "ancient-BSD-2-Clause.txt"
+  ],
+  "assets": {
+    "Slamtilt-Reborn-linux-arm64-preview.tar.gz": "431d1c00d5802b8c185a036879257d2dccc9078c54c7a3cf64811cdaf1a80d9d",
+    "Slamtilt-Reborn-windows-x86_64-portable.zip": "fc6005b4795b276743c3e7ec883ea0120fbf99d52754226aa8c8c3c6d4f95c2c",
+    "Slamtilt-Reborn-windows-x86_64-setup.exe": "879fde8352e47c8f4bd9d6a9898b1dce61ace1b3b7eab41fde02dbca22a87992"
+  },
+  "installer_version": "1.0",
+  "installer_check_log": "windows-installer-1.0.log"
+}

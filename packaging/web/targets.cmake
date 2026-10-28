@@ -1,0 +1,12 @@
+add_library(slamweb_view OBJECT src/renderer/main.cpp src/frontend/pirate_play.cpp)
+get_target_property(_view_defs slamview COMPILE_DEFINITIONS)
+target_compile_definitions(slamweb_view PRIVATE ${_view_defs} main=slam_native_view_main)
+target_link_libraries(slamweb_view PRIVATE slamassets slamui slampresentation pirate_session pirate_highscores slamaudio SDL3::SDL3 nlohmann_json::nlohmann_json)
+add_library(slamweb_slice OBJECT src/frontend/retail_slice.cpp)
+target_compile_definitions(slamweb_slice PRIVATE main=slam_native_slice_main SLAM_AUDIO_XMP=1)
+target_link_libraries(slamweb_slice PRIVATE slamassets slamui slampresentation pirate_step_lift pirate_highscores slamaudio SDL3::SDL3 nlohmann_json::nlohmann_json)
+add_executable(slamtilt-web packaging/web/main.cpp $<TARGET_OBJECTS:slamweb_view> $<TARGET_OBJECTS:slamweb_slice>)
+target_link_libraries(slamtilt-web PRIVATE slamassets slamui slampresentation slamimportlib pirate_session pirate_highscores slamaudio SDL3::SDL3 nlohmann_json::nlohmann_json)
+# JSPI preserves native C++ stacks across the SDL/browser wait boundary.
+target_link_options(slamtilt-web PRIVATE -O0 -sSINGLE_FILE=1 -sJSPI=1 -sJSPI_EXPORTS=web_play -sALLOW_MEMORY_GROWTH=1 -sSTACK_SIZE=8388608 -sINITIAL_MEMORY=67108864 -sMAXIMUM_MEMORY=2147483648 -sEXIT_RUNTIME=0 -sFORCE_FILESYSTEM=1 -sEXPORTED_RUNTIME_METHODS=ccall,FS,UTF8ToString,HEAPU8 -lidbfs.js --embed-file "${CMAKE_SOURCE_DIR}/build/web-release/meta@/meta" --shell-file "${CMAKE_SOURCE_DIR}/packaging/web/shell.html")
+set_target_properties(slamtilt-web PROPERTIES OUTPUT_NAME "Slamtilt-Reborn" SUFFIX ".html")

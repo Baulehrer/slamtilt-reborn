@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+"""Package cross-built asset-free Windows runtime and unsigned user installer."""
+import argparse,hashlib,json,shutil,subprocess,zipfile
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+p=argparse.ArgumentParser();p.add_argument('--build',type=Path,default=ROOT/'build/windows-release/native');p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+out=a.output.resolve();out.mkdir(parents=True,exist_ok=True)
+stage=out/'Slamtilt-Reborn-windows-x86_64'
+if stage.exists():raise FileExistsError(stage)
+(stage/'bin').mkdir(parents=True);share=stage/'share/slamtilt';share.mkdir(parents=True)
+for name in ['slamtilt','slamview','slamslice']:shutil.copy2(a.build/(name+'.exe'),stage/'bin')
+for src in [Path('/opt/windows/SDL3-3.4.18/x86_64-w64-mingw32/bin/SDL3.dll'),Path('/opt/windows/prefix/bin/libxmp.dll'),Path('/usr/x86_64-w64-mingw32/lib/libwinpthread-1.dll')]:shutil.copy2(src,stage/'bin')
+for recipe in (ROOT/'analysis/import').glob('*.json'):shutil.copy2(recipe,share)
+for src in [ROOT/'analysis/table-profiles.json',*list((ROOT/'packaging').glob('*.sha256'))]:shutil.copy2(src,share)
+shutil.copy2(ROOT/'packaging/mean-initial.json',share/'initial-state.json')
+for name in ['amiga-adf-import.md','amiga-pc-comparison.md']:shutil.copy2(ROOT/'docs'/name,share)
+licenses=stage/'LICENSES';licenses.mkdir();shutil.copytree(ROOT/'assets/fonts',licenses/'fonts',ignore=shutil.ignore_patterns('*.ttf'));shutil.copy2(ROOT/'third_party/stb/stb_truetype.h',licenses)
+for notice in ['nlohmann-json-MIT.txt','ancient-BSD-2-Clause.txt']:shutil.copy2(ROOT/'LICENSES'/notice,licenses/notice)
+shutil.copy2('/usr/share/doc/mingw-w64-common/copyright',licenses/'mingw-w64.txt');shutil.copy2('/usr/share/doc/gcc-mingw-w64-base/copyright',licenses/'gcc-runtime.txt');shutil.copy2('/opt/windows/SDL3-3.4.18/LICENSE.txt',licenses/'SDL3.txt');shutil.copy2(ROOT/'build/libxmp/docs/COPYING',licenses/'libxmp.txt')
+(stage/'README.txt').write_text('Slamtilt - Reborn | Windows x86_64\nRun bin/slamtilt.exe. Press F2 to import your original Windows DAT folder or supported five-ADF Amiga set. Original game assets are not included; no original EXE is needed.\nInstaller and application are unsigned; Windows may show publisher or SmartScreen warnings. No certificate is required to build or install this release.\nSettings and imported game data are stored in your Windows user profile and retained when uninstalling. Escape opens options; F10 returns to menu.\nAmiga assets use shared native rules; original Amiga physics/rule parity is unverified. See share/slamtilt/amiga-adf-import.md.\n')
+files={str(f.relative_to(stage)):hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted(stage.rglob('*')) if f.is_file()}
+if any(Path(n).suffix.lower() in ['.dat','.adf','.bin'] for n in files):raise RuntimeError('Original asset in staging')
+(stage/'windows-bundle.json').write_text(json.dumps(dict(format=1,architecture='x86_64',unsigned=True,original_assets_included=False,files=files),indent=2)+'\n')
+archive=out/(stage.name+'-portable.zip')
+with zipfile.ZipFile(archive,'x',zipfile.ZIP_DEFLATED) as z:
+ for f in sorted(stage.rglob('*')):
+  if f.is_file():z.write(f,f.relative_to(out))
+installer=out/'Slamtilt-Reborn-windows-x86_64-setup.exe'
+subprocess.run(['makensis','-DOUTPUT='+str(installer),'-DSTAGE='+str(stage),str(ROOT/'packaging/windows/installer.nsi')],check=True)
+(out/'SHA256SUMS').write_text(''.join(hashlib.sha256(f.read_bytes()).hexdigest()+'  '+f.name+'\n' for f in [archive,installer]))

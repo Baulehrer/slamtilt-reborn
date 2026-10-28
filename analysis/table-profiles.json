@@ -1,0 +1,170 @@
+{
+  "schema": 1,
+  "source": "analysis/corpus-table-descriptor-levers.json",
+  "build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "scope": "Original initialized geometry only; special layers created by callbacks not implied complete",
+  "tables": {
+    "mean": {
+      "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+      "initializer": "0x41b9e0",
+      "returned_descriptor": "0x464b98",
+      "engine_descriptor": "0x464988",
+      "layers": [
+        {
+          "layer": 0,
+          "planes": 3,
+          "stride": 24640,
+          "normal_offset": 612854,
+          "hit_offset": 637494,
+          "render_offset": 736054,
+          "switch_callback": "0x429378"
+        },
+        {
+          "layer": 1,
+          "planes": 1,
+          "stride": 24800,
+          "normal_offset": 760054,
+          "hit_offset": 784854,
+          "render_offset": 834454,
+          "switch_callback": "0x428ea4"
+        },
+        {
+          "layer": 2,
+          "planes": 1,
+          "stride": 13200,
+          "normal_offset": 858454,
+          "hit_offset": 871654,
+          "render_offset": 898054,
+          "switch_callback": "0x428810"
+        },
+        {
+          "layer": 3,
+          "planes": 1,
+          "stride": 16800,
+          "normal_offset": 911254,
+          "hit_offset": 928054,
+          "render_offset": 961654,
+          "switch_callback": "0x4277c4"
+        }
+      ],
+      "graphics_descriptor": "0x464b78"
+    },
+    "pirate": {
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "initializer": "0x42b390",
+      "returned_descriptor": "0x465958",
+      "engine_descriptor": "0x465784",
+      "layers": [
+        {
+          "layer": 0,
+          "planes": 3,
+          "stride": 24640,
+          "normal_offset": 543572,
+          "hit_offset": 568212,
+          "render_offset": 666772,
+          "switch_callback": "0x437460"
+        },
+        {
+          "layer": 1,
+          "planes": 2,
+          "stride": 24000,
+          "normal_offset": 690772,
+          "hit_offset": 714772,
+          "render_offset": 786772,
+          "switch_callback": "0x437bfc"
+        },
+        {
+          "layer": 2,
+          "planes": 2,
+          "stride": 18800,
+          "normal_offset": 810772,
+          "hit_offset": 829572,
+          "render_offset": 885972,
+          "switch_callback": "0x438954"
+        }
+      ],
+      "graphics_descriptor": "0x465938"
+    },
+    "space": {
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "initializer": "0x439ae0",
+      "returned_descriptor": "0x46664c",
+      "engine_descriptor": "0x466424",
+      "layers": [
+        {
+          "layer": 0,
+          "planes": 3,
+          "stride": 24640,
+          "normal_offset": 600805,
+          "hit_offset": 625445,
+          "render_offset": 724005,
+          "switch_callback": "0x447ae0"
+        },
+        {
+          "layer": 1,
+          "planes": 1,
+          "stride": 24000,
+          "normal_offset": 748005,
+          "hit_offset": 772005,
+          "render_offset": 820005,
+          "switch_callback": "0x4493dc"
+        },
+        {
+          "layer": 2,
+          "planes": 1,
+          "stride": 19000,
+          "normal_offset": 844005,
+          "hit_offset": 863005,
+          "render_offset": 901005,
+          "switch_callback": "0x44a2b8"
+        },
+        {
+          "layer": 3,
+          "planes": 1,
+          "stride": 10800,
+          "normal_offset": 920005,
+          "hit_offset": 930805,
+          "render_offset": 952405,
+          "switch_callback": "0x44a700"
+        }
+      ],
+      "graphics_descriptor": "0x46662c"
+    },
+    "demon": {
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "initializer": "0x40febc",
+      "returned_descriptor": "0x463b54",
+      "engine_descriptor": "0x4639a0",
+      "layers": [
+        {
+          "layer": 0,
+          "planes": 3,
+          "stride": 24640,
+          "normal_offset": 636806,
+          "hit_offset": 661446,
+          "render_offset": 760006,
+          "switch_callback": "0x418974"
+        },
+        {
+          "layer": 1,
+          "planes": 1,
+          "stride": 24640,
+          "normal_offset": 784006,
+          "hit_offset": 808646,
+          "render_offset": 760006,
+          "switch_callback": "0x419bac"
+        },
+        {
+          "layer": 2,
+          "planes": 2,
+          "stride": 18800,
+          "normal_offset": 857926,
+          "hit_offset": 876726,
+          "render_offset": 933126,
+          "switch_callback": "0x419f74"
+        }
+      ],
+      "graphics_descriptor": "0x463b34"
+    }
+  }
+}

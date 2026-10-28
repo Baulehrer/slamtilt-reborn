@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+"""Slamtilt - Reborn asset-free four-table distribution."""
+import argparse,hashlib,json,platform,re,shutil,subprocess,tempfile
+from pathlib import Path
+from importlib.machinery import SourceFileLoader
+ROOT=Path(__file__).resolve().parents[1]
+archive=SourceFileLoader('slam_archive',str(ROOT/'tools/slampack')).load_module().archive
+def main():
+ p=argparse.ArgumentParser();p.add_argument('--build',type=Path,default=ROOT/'build/native');p.add_argument('--output',type=Path,required=True);p.add_argument('--sdl-license',type=Path,default=Path('/usr/share/licenses/sdl3/LICENSE'));p.add_argument('--xmp-license',type=Path,default=ROOT/'build/libxmp/docs/COPYING');a=p.parse_args();out=a.output.resolve();packed=Path(str(out)+'.tar.gz');
+ if out.exists()or out.is_symlink()or packed.exists()or packed.is_symlink():raise FileExistsError('Destination exists')
+ out.parent.mkdir(parents=True,exist_ok=True)
+ with tempfile.TemporaryDirectory(dir=out.parent)as tmp:
+  stage=Path(tmp)/out.name
+  for component in ['Runtime','FrontendRuntime']:subprocess.run(['cmake','--install',a.build.resolve(),'--prefix',stage,'--component',component,'--strip'],check=True,stdout=subprocess.DEVNULL)
+  share=stage/'share/slamtilt'
+  for table in ['pirate','space','demon']:shutil.copyfile(ROOT/f'analysis/import/{table}-retail-startup.json',share/f'{table}-retail-startup.json')
+  lib=stage/'lib';lib.mkdir(exist_ok=True);libs={}
+  for binary in ['slamtilt','slamview','slamslice']:
+   for line in subprocess.check_output(['ldd',str(a.build/binary)],text=True).splitlines():
+    m=re.match(r'\s*(lib(?:SDL3|xmp)\.so[^ ]*) => (.+?) \(',line)
+    if m:libs[m[1]]=Path(m[2]).resolve()
+  if not(any(n.startswith('libSDL3')for n in libs)and any(n.startswith('libxmp')for n in libs)):raise RuntimeError('SDL3 and libxmp libraries required')
+  for name,path in libs.items():shutil.copyfile(path,lib/name)
+  for src,name in [(a.sdl_license,'SDL3.txt'),(a.xmp_license,'libxmp.txt')]:shutil.copyfile(src,stage/'LICENSES'/name)
+  starter=stage/'slamtilt-reborn';starter.write_text('#!/bin/sh\nset -eu\nhere=$(CDPATH= cd -P "$(dirname "$(readlink -f -- "$0")")" && pwd)\nexport LD_LIBRARY_PATH="$here/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"\nexec "$here/bin/slamtilt" "$@"\n');starter.chmod(0o755);shutil.copy2(starter,stage/'slamtilt')
+  (stage/'README.txt').write_text('Slamtilt - Reborn — four-table release candidate\nRun ./slamtilt-reborn (./slamtilt remains supported). Arrows/Enter or mouse select a table. F2 imports original Windows DAT files or a supported five-ADF Amiga folder; no separate EXE is needed.\nAll four tables: supported Windows DAT files or Amiga v1.224 DLM five-disk set. Mean Demo DAT files also work. Amiga uses the shared native rules; original Amiga physics/rule parity is unverified. Some Amiga scene variants remain unmapped; see share/slamtilt/amiga-adf-import.md.\nIn a table: Escape options, Main Menu button or F10 returns to selection.\nNeo-90s Premium is the default; select Classic in Options / General for original MENU.DAT art. Original assets are not included.\nNo Python, Wine, emulator or checkout needed for import/play. Linux x86_64; see bundle ABI requirements and separately recorded Debian12/runtime acceptance.\n')
+  (stage/'slamtilt-reborn.desktop').write_text('[Desktop Entry]\nType=Application\nName=Slamtilt - Reborn\nComment=Four classic pinball tables, reborn\nExec=slamtilt-reborn\nTerminal=false\nCategories=Game;ArcadeGame;\n')
+  files={str(f.relative_to(stage)):hashlib.sha256(f.read_bytes()).hexdigest()for f in sorted(stage.rglob('*'))if f.is_file()}
+  if any(Path(n).suffix.lower()in['.dat','.exe','.bin']for n in files):raise RuntimeError('Original assets in program staging area')
+  versions=set()
+  for binary in [*(stage/'bin').iterdir(),*lib.iterdir()]:
+   versions.update(re.findall(r'\b(?:GLIBCXX|GLIBC|CXXABI)_[0-9.]+',subprocess.check_output(['readelf','--version-info',str(binary)],text=True)))
+  (stage/'frontend-bundle.json').write_text(json.dumps(dict(format=1,project='Slamtilt - Reborn',architecture=platform.machine(),runtime_requirements=sorted(versions),tables=['mean','pirate','space','demon'],original_assets_included=False,files=files),indent=2)+'\n')
+  staged=Path(tmp)/(out.name+'.tar.gz');archive(stage,staged);stage.rename(out);staged.rename(packed)
+ print(packed)
+if __name__=='__main__':main()

@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+"""Build Mean with Debian12/GCC12 instead of the host's newer Linux ABI."""
+import argparse
+import hashlib
+import json
+import os
+import re
+import subprocess
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def run(command):
+    subprocess.run([str(x) for x in command], check=True)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=ROOT / 'build/compat')
+    parser.add_argument('--image', default='slamtilt-mean-toolchain:bookworm')
+    parser.add_argument('--release-name', default='slamtilt-mean-rc-bookworm')
+    parser.add_argument('--jobs', type=int, default=3)
+    args = parser.parse_args()
+    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]*', args.release_name) or args.jobs < 1:
+        parser.error('Use a plain release folder name and positive job count')
+    output = args.output.resolve()
+    for name in (args.release_name, args.release_name + '-data'):
+        for target in (output / 'releases' / name, output / 'releases' / (name + '.tar.gz')):
+            if target.exists():
+                parser.error('Output already exists: ' + str(target))
+    for name in ('mean_flippers.cpp', 'mean_minigame.cpp', 'mean_ball_pair.cpp', 'mean_normal_lift.cpp', 'retail_flippers.cpp'):
+        if not (ROOT / 'build/generated' / name).is_file():
+            parser.error('Missing existing verified local lift: ' + name)
+    pins = json.loads((ROOT / 'packaging/compat-sources.json').read_text())
+    context = ROOT / 'build/compat-context'
+    context.mkdir(parents=True, exist_ok=True)
+    sdl = context / ('SDL3-' + pins['sdl']['version'] + '.tar.gz')
+    if not sdl.exists():
+        temporary = sdl.with_suffix('.download')
+        try:
+            run(['curl', '--fail', '--location', '--max-time', '120', '--output', temporary, pins['sdl']['url']])
+            if digest(temporary) != pins['sdl']['sha256']:
+                raise RuntimeError('SDL source hash mismatch')
+            temporary.replace(sdl)
+        finally:
+            temporary.unlink(missing_ok=True)
+    if digest(sdl) != pins['sdl']['sha256']:
+        raise RuntimeError('Cached SDL source hash mismatch')
+    xmp = context / 'libxmp.tar.gz'
+    if not xmp.exists():
+        run(['git', '-C', ROOT / 'build/libxmp', 'archive', '--format=tar.gz', '--prefix=libxmp/', '-o', xmp, pins['libxmp']['commit']])
+    if digest(xmp) != pins['libxmp']['git_archive_sha256']:
+        raise RuntimeError('libxmp source hash mismatch')
+    run(['docker', 'build', '--progress', 'plain', '-f', ROOT / 'packaging/compat.Dockerfile', '-t', args.image, context])
+    output.mkdir(parents=True, exist_ok=True)
+    run(['docker', 'run', '--rm', '--network', 'none', '--user', f'{os.getuid()}:{os.getgid()}',
+         '--mount', f'type=bind,src={ROOT},dst=/workspace,readonly',
+         '--mount', f'type=bind,src={output},dst=/output',
+         '-e', 'SLAM_COMPAT_RELEASE_NAME=' + args.release_name, '-e', 'SLAM_COMPAT_JOBS=' + str(args.jobs),
+         args.image, '/bin/sh', '/workspace/packaging/compat-build.sh'])
+    image = json.loads(subprocess.check_output(['docker', 'image', 'inspect', args.image]))[0]
+    report = {'image_id': image['Id'], 'pins': pins, 'program': str(output / 'releases' / args.release_name),
+              'data': str(output / 'releases' / (args.release_name + '-data')),
+              'source_read_only': True, 'build_network_disabled': True,
+              'package_versions': str(output / 'toolchain-packages.txt'), 'verification_pending': True}
+    (output / 'build.json').write_text(json.dumps(report, indent=2) + '\n')
+    print(json.dumps(report))
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (OSError, RuntimeError, subprocess.CalledProcessError) as error:
+        raise SystemExit('slamcompat: ' + str(error))

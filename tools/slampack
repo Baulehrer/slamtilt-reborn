@@ -1,0 +1,72 @@
+#!/usr/bin/env python3
+"""Build a relocatable Linux RC; original data is a separate private opt-in pack."""
+import argparse,shlex,gzip,hashlib,json,os,platform,re,shutil,subprocess,tarfile,tempfile
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+DATA_FILES=('MEAN.DAT','MAIN.DAT','mean-prepared/pe-data.bin','mean-prepared/engine-globals.bin','mean-prepared/flipper-state.bin','mean-prepared/lookup.bin','mean-minigame-prepared/image.bin','mean-minigame-prepared/runtime.bin')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def archive(folder,destination):
+ with destination.open('wb') as raw,gzip.GzipFile(filename='',mode='wb',fileobj=raw,mtime=0) as gz,tarfile.open(fileobj=gz,mode='w') as tar:
+  for p in [folder,*sorted(folder.rglob('*'))]:
+   entry=tar.gettarinfo(str(p),arcname=str(Path(folder.name)/p.relative_to(folder)))
+   entry.uid=entry.gid=entry.mtime=0;entry.uname=entry.gname=''
+   if p.is_file():
+    with p.open('rb') as f:tar.addfile(entry,f)
+   else:tar.addfile(entry)
+def build(args):
+ output=args.output.resolve();private=args.data_output.resolve() if args.data_output else None
+ destinations=[output,Path(str(output)+'.tar.gz')]
+ if private:destinations += [private,Path(str(private)+'.tar.gz')]
+ for p in destinations:
+  if p.exists():raise RuntimeError('Destination already exists: '+str(p))
+ if len(set(destinations))!=len(destinations) or (private and (private in output.parents or output in private.parents)):raise RuntimeError('Program/data outputs must be separate directories')
+ output.parent.mkdir(parents=True,exist_ok=True)
+ with tempfile.TemporaryDirectory(prefix='.slam-rc-',dir=output.parent) as temporary:
+  stage=Path(temporary)/'app'/output.name
+  subprocess.run(['cmake','--install',str(args.build.resolve()),'--prefix',str(stage),'--component','Runtime','--strip'],check=True,stdout=subprocess.DEVNULL)
+  exe=stage/'bin/slamview';lib=stage/'lib';lib.mkdir();licenses=stage/'LICENSES'
+  dependencies=subprocess.check_output(['ldd',str(args.build.resolve()/'slamview')],text=True)
+  libraries={}
+  for line in dependencies.splitlines():
+   match=re.match(r'\s*(lib(?:SDL3|xmp)\.so[^ ]*) => (.+?) \(',line)
+   if match:libraries[match[1]]=Path(match[2]).resolve()
+  if len(libraries)!=2:raise RuntimeError('RC requires a build linked with SDL3 and libxmp')
+  for name,path in libraries.items():shutil.copyfile(path,lib/name)
+  shutil.copyfile(args.sdl_license,licenses/'SDL3.txt');shutil.copyfile(args.xmp_license,licenses/'libxmp.txt')
+  versions=set()
+  for p in [*sorted((stage/'bin').iterdir()),stage/'slamimport',*lib.iterdir()]:versions.update(re.findall(r'\b(?:GLIBCXX|GLIBC|CXXABI)_[0-9.]+',subprocess.check_output(['readelf','--version-info',str(p)],text=True)))
+  manifest={'format':1,'table':'Mean Machines','stage':'release-candidate','platform':platform.system(),'architecture':platform.machine(),'original_assets_included':False,'runtime_requirements':sorted(versions),'bundled_libraries':sorted(libraries),'files':{str(p.relative_to(stage)):sha(p) for p in sorted(stage.rglob('*')) if p.is_file()}}
+  (stage/'bundle.json').write_text(json.dumps(manifest,indent=2)+'\n')
+  # Stage private files before publishing either output. No source data is modified.
+  private_stage=None
+  if private:
+   private_stage=Path(temporary)/'userdata'/private.name;private_stage.mkdir(parents=True)
+   sources={'MEAN.DAT':args.source_data/'MEAN.DAT','MAIN.DAT':args.source_data/'MAIN.DAT'}
+   for name in DATA_FILES[2:]:sources[name]=(args.prepared if name.startswith('mean-prepared/') else args.minigame)/Path(name).name
+   for name,source in sources.items():
+    if not source.is_file():raise RuntimeError('Missing private input: '+str(source))
+    dest=private_stage/name;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source,dest)
+   fixture=json.loads((ROOT/'analysis/traces/mean-five-modes-input.json').read_text())
+   if sha(private_stage/'MEAN.DAT')!=fixture['dat_sha256'] or sha(private_stage/'mean-prepared/pe-data.bin')!=fixture['image_sha256']:raise RuntimeError('Unsupported Mean DAT or prepared image revision')
+   sizes={'mean-prepared/engine-globals.bin':160,'mean-prepared/flipper-state.bin':108,'mean-prepared/lookup.bin':10240,'mean-minigame-prepared/image.bin':1048576,'mean-minigame-prepared/runtime.bin':65536}
+   for name,size in sizes.items():
+    if (private_stage/name).stat().st_size!=size:raise RuntimeError('Invalid prepared file size: '+name)
+   hashes={name:sha(private_stage/name) for name in DATA_FILES}
+   expected=dict(line.split(None,1)[::-1] for line in (ROOT/'packaging/mean-data.sha256').read_text().splitlines())
+   if hashes!=expected:raise RuntimeError('Prepared data does not match the verified Mean runtime profile')
+   (private_stage/'data.sha256').write_text(''.join(value+'  '+name+'\n' for name,value in hashes.items()))
+   relative=os.path.relpath(output,private)
+   starter=private_stage/'play-mean'
+   starter.write_text('#!/bin/sh\nset -eu\nhere=$(CDPATH= cd -P "$(dirname "$(readlink -f -- "$0")")" && pwd)\nexec "$here"/'+shlex.quote(relative)+'/slamplay --data-dir "$here" "$@"\n')
+   starter.chmod(0o755)
+   (private_stage/'PRIVATE-DATA.txt').write_text('User-owned original and derived data. Private use; not part of the asset-free program release.\n')
+   (private_stage/'data.json').write_text(json.dumps({'format':1,'private_original_data':True,'files':hashes},indent=2)+'\n')
+   private.parent.mkdir(parents=True,exist_ok=True)
+  stage.rename(output);archive(output,Path(str(output)+'.tar.gz'))
+  if private:shutil.move(str(private_stage),str(private));archive(private,Path(str(private)+'.tar.gz'))
+ print(json.dumps({'program':str(output),'archive':str(output)+'.tar.gz','private_data':str(private) if private else None},indent=2))
+def main():
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);p.add_argument('--build',type=Path,default=ROOT/'build/native');p.add_argument('--data-output',type=Path);p.add_argument('--source-data',type=Path,default=ROOT/'build/corpus/win95/demo-1997/Slam Tilt Demo (Windows, 1996) - SLAMTILT/DAT');p.add_argument('--prepared',type=Path,default=ROOT/'build/mean-prepared');p.add_argument('--minigame',type=Path,default=ROOT/'build/mean-minigame-prepared');p.add_argument('--sdl-license',type=Path,default=Path('/usr/share/licenses/sdl3/LICENSE'));p.add_argument('--xmp-license',type=Path,default=ROOT/'build/libxmp/docs/COPYING');a=p.parse_args()
+ try:build(a)
+ except (OSError,RuntimeError,subprocess.CalledProcessError) as e:p.exit(1,'slampack: '+str(e)+'\n')
+if __name__=='__main__':main()

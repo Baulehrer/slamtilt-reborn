@@ -1,0 +1,7 @@
+wine: configuration in L"/workspace/build/windows-release/wineprefix-v1.0" has been updated.
+
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall\SlamtiltReborn
+    UninstallString    REG_SZ    "C:\users\root\AppData\Local\Programs\Slamtilt Reborn\Uninstall.exe"
+
+reg: Unable to find the specified registry key
+PASS silent per-user unsigned install, shortcut and uninstall registry, installed launcher, silent uninstall, retained user profile

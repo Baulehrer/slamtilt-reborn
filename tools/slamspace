@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+exec "$root/build/native/slamslice" space \
+ "${SLAM_SPACE_PREPARED:-$root/build/oracle/space-full-game}" \
+ "${SLAM_SPACE_DAT:-$root/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/SPACE.DAT}" "$@"

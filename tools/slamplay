@@ -1,0 +1,94 @@
+#!/bin/sh
+# Same launcher in a source checkout and in a relocated Linux runtime bundle.
+set -eu
+script=$(readlink -f -- "$0")
+script_dir=$(CDPATH= cd -P "$(dirname "$script")" && pwd)
+if [ -d "$script_dir/bin" ] && [ -d "$script_dir/share" ]; then
+    root=$script_dir
+    portable=true
+    profile_checks=$root/share/slamtilt/mean-data.sha256
+    executable=$root/bin/slamview
+    setup=$root/bin/slamsetup
+    importer=$root/slamimport
+    profiles=$root/share/slamtilt/table-profiles.json
+    trace=$root/share/slamtilt/initial-state.json
+    data=${SLAMTILT_DATA_DIR:-$root/data}
+    prepared=$data/mean-prepared
+else
+    portable=false
+    root=$(CDPATH= cd -P "$script_dir/.." && pwd)
+    profile_checks=$root/packaging/mean-data.sha256
+    executable=$root/build/native/slamview
+    setup=$root/build/native/slamsetup
+    importer=$root/tools/slamimport
+    profiles=$root/analysis/table-profiles.json
+    trace=$root/analysis/traces/mean-flight-100.json
+    if [ -n "${SLAMTILT_DATA_DIR:-}" ]; then
+        portable=true
+        data=$SLAMTILT_DATA_DIR
+        prepared=$data/mean-prepared
+    else
+        data="$root/build/corpus/win95/demo-1997/Slam Tilt Demo (Windows, 1996) - SLAMTILT/DAT"
+        prepared=$root/build/mean-prepared
+    fi
+fi
+check=false
+choose=false
+explicit=false
+[ -z "${SLAMTILT_DATA_DIR:-}" ] || explicit=true
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --data-dir)
+            [ "$#" -ge 2 ] || { echo 'Missing directory after --data-dir' >&2; exit 2; }
+            explicit=true; portable=true; data=$2; prepared=$data/mean-prepared; shift 2 ;;
+        --setup) choose=true; shift ;;
+        --check) check=true; shift ;;
+        --help|-h)
+            printf '%s\n' 'Usage: slamplay [--data-dir DIRECTORY] [--setup] [--check] [game options]' \
+                'Data: --data-dir, SLAMTILT_DATA_DIR, or the bundle data directory.' \
+                'Requires supported MEAN.DAT, MAIN.DAT and prepared runtime data.' \
+                'Shift: flippers; Enter: launch/Mode Lock; Alt/Space: nudge; R: new game.' \
+                'Escape: options; P: pause. Game options: --no-audio, --frames N, --capture FILE.'
+            exit 0 ;;
+        *) break ;;
+    esac
+done
+[ -x "$executable" ] || { echo "Missing native executable: $executable" >&2; exit 2; }
+if [ -d "$root/lib" ]; then
+    LD_LIBRARY_PATH="$root/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+    export LD_LIBRARY_PATH
+fi
+if ! "$explicit" && [ -x "$setup" ]; then
+    if saved=$("$setup" --importer "$importer" --profile "$profile_checks" --saved); then
+        data=$saved; prepared=$data/mean-prepared; portable=true
+    fi
+fi
+if "$choose" || { ! "$explicit" && ! "$check" && [ ! -s "$data/MEAN.DAT" ]; }; then
+    [ -x "$setup" ] || { echo "Missing native data chooser: $setup" >&2; exit 2; }
+    if selected=$("$setup" --importer "$importer" --profile "$profile_checks"); then
+        data=$selected; prepared=$data/mean-prepared; portable=true
+    else
+        exit "$?"
+    fi
+fi
+[ -d "$data" ] || { echo "Missing Mean data directory: $data. Use --data-dir or SLAMTILT_DATA_DIR." >&2; exit 2; }
+data=$(CDPATH= cd -P "$data" && pwd)
+prepared=$(CDPATH= cd -P "$prepared" 2>/dev/null && pwd) || { echo 'Missing mean-prepared directory.' >&2; exit 2; }
+mini=$(dirname "$prepared")/mean-minigame-prepared
+for file in "$profiles" "$trace" "$data/MEAN.DAT" "$data/MAIN.DAT" \
+    "$prepared/pe-data.bin" "$prepared/engine-globals.bin" "$prepared/flipper-state.bin" "$prepared/lookup.bin" \
+    "$mini/image.bin" "$mini/runtime.bin"; do
+    [ -s "$file" ] || { echo "Missing required Mean file: $file" >&2; exit 2; }
+done
+if "$portable"; then
+    [ -s "$profile_checks" ] || { echo "Missing supported data profile: $profile_checks" >&2; exit 2; }
+    "$importer" --profile "$profile_checks" --check "$data" >/dev/null || { echo 'Mean files do not match the supported data profile.' >&2; exit 2; }
+elif [ -f "$data/data.sha256" ]; then
+    (cd "$data" && sha256sum --check --status data.sha256) || { echo 'Mean data integrity check failed.' >&2; exit 2; }
+fi
+export SLAM_TABLE_PROFILES="$profiles"
+if "$check"; then
+    printf 'Mean ready\nProgram: %s\nData: %s\n' "$executable" "$data"
+    exit 0
+fi
+exec "$executable" "$data/MEAN.DAT" --play "$prepared" --trace "$trace" --retail-minigame "$@"

@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "appimage_sha256": "96dcd7068b7e1257ec1ba6e3f6c553f5373beadf8281bd8da5a8c425e1636f1a",
+  "mode": "actual AppImage extract-and-run, bwrap networkoff and checkout hidden",
+  "native_first_import": true,
+  "all_four_child_sessions": [
+    {
+      "event": "launched",
+      "table": "mean"
+    },
+    {
+      "event": "returned",
+      "exit_code": 0,
+      "table": "mean"
+    },
+    {
+      "event": "launched",
+      "table": "pirate"
+    },
+    {
+      "event": "returned",
+      "exit_code": 0,
+      "table": "pirate"
+    },
+    {
+      "event": "launched",
+      "table": "space"
+    },
+    {
+      "event": "returned",
+      "exit_code": 0,
+      "table": "space"
+    },
+    {
+      "event": "launched",
+      "table": "demon"
+    },
+    {
+      "event": "returned",
+      "exit_code": 0,
+      "table": "demon"
+    }
+  ],
+  "limitations": [
+    "FUSE mounting and real GPU/audio not tested in this run"
+  ]
+}

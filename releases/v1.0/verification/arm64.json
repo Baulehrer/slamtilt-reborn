@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "platform": "Linux",
+  "architecture": "aarch64",
+  "stage": "optional ARM64 candidate",
+  "original_assets_included": false,
+  "build": "Debian 12 GCC 12 cross compiler; SDL3 3.4.18; libxmp 4.7.3",
+  "checks": {
+    "all_runtime_elf_architecture": "AArch64 (elf-proof.txt)",
+    "frontend": "QEMU dummy video, three frames, menu-qemu.bmp/menu-qemu.json",
+    "native_import": "QEMU imported supported retail Mean DATs: eight files verified; private output removed after verification",
+    "four_table_smoke": "QEMU dummy video/audio: Mean 9 ticks with no failure; Pirate, Space and Demon 12 ticks each",
+    "compiled_video_backends": [
+      "wayland",
+      "kmsdrm",
+      "offscreen",
+      "dummy",
+      "evdev"
+    ],
+    "compiled_audio_backends": [
+      "alsa",
+      "disk",
+      "dummy"
+    ],
+    "audio_stream": "QEMU opened and closed dummy SDL audio stream",
+    "demon_amiga_v3_profile_included": true
+  },
+  "limitations": [
+    "No physical Raspberry Pi or Batocera hardware acceptance",
+    "QEMU checks CPU/software rendering only; no hardware GPU/display/audio/controller validation",
+    "No whole-game ARM64 endurance or new original-game parity claim"
+  ],
+  "evidence": [
+    "final-build.log",
+    "qemu-smoke.log",
+    "private-table-smoke.log",
+    "import-qemu.log",
+    "backends-qemu.txt",
+    "elf-proof.txt",
+    "toolchain-packages.txt",
+    "compiler.txt",
+    "SDL_build_config.h"
+  ],
+  "archive": "build/arm64-release/slamtilt-reborn-linux-aarch64.tar.gz",
+  "archive_sha256": "431d1c00d5802b8c185a036879257d2dccc9078c54c7a3cf64811cdaf1a80d9d",
+  "final_build_exit_code": 0,
+  "notice_repack": {
+    "runtime_binaries_unchanged": true,
+    "included": [
+      "nlohmann-json-MIT.txt",
+      "ancient-BSD-2-Clause.txt"
+    ],
+    "verification": "Both exact notice files and all final payload manifest hashes checked; previous runtime smoke applies to identical executable/library bytes."
+  }
+}

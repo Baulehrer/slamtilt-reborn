@@ -1,0 +1,9 @@
+{
+  "image": "emscripten/emsdk:4.0.20@sha256:460fff8f8ac87e11b16447fbd66538a686eafa0e4fb977aa0989ed19fe2079f7",
+  "cpp_exceptions": "native Wasm EH",
+  "libxmp_longjmp": "wasm",
+  "browser_suspension": "JSPI",
+  "sdl": "3.4.18 + packaging/web/patch_sdl.py",
+  "runtime_files": 1,
+  "external_game_assets_embedded": false
+}

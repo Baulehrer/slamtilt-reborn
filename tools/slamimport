@@ -1,0 +1,8 @@
+#!/bin/sh
+# Source-checkout entry point; packages install the native binary directly.
+set -eu
+script=$(readlink -f -- "$0")
+root=$(CDPATH= cd -P "$(dirname "$script")/.." && pwd)
+executable=$root/build/native/slamimport
+[ -x "$executable" ] || { echo 'Build the native slamimport target first.' >&2; exit 2; }
+exec "$executable" "$@"

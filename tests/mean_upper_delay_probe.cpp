@@ -1,0 +1,5 @@
+#include "physics/mean_upper_capture.h"
+#include "rules/mean_capture_delay.h"
+#include <iostream>
+#include <nlohmann/json.hpp>
+int main(){nlohmann::json in;std::cin>>in;auto out=nlohmann::json::array();for(auto&c:in){slam::MeanObject b;b.put16(0x58,3);b.put16(0x5a,1);slam::MeanUpperCaptureState s;s.table_mode=c["mode"];s.field_43f36a=c["timer"];s.field_43f364=c["gate"];s.field_43f394=c["field394"];s.field_43f1f2=c["field1f2"];s.field_43f1e6=c["selected"];s.field_438b5c[2]=c["delays"][0];slam::MeanUpperCaptureEvent e;bool ok=slam::mean_upper_capture_tick(b,s,e);auto delays=c["delays"].get<std::array<std::int32_t,5>>();std::int32_t field024=c["field024"];if(e.capture_delay_request){slam::mean_capture_delay(c["handle"],field024,delays,e.capture_delay_selectors,e.capture_delay);if(e.field_024_minus_one_after_delay)field024=-1;}out.push_back({{"ok",ok},{"timer",s.field_43f36a},{"mode",s.table_mode},{"field394",s.field_43f394},{"field1f2",s.field_43f1f2},{"delays",delays},{"field024",field024},{"request",e.capture_delay_request},{"delay",e.capture_delay},{"selectors",e.capture_delay_selectors}});}std::cout<<out.dump();}

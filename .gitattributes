@@ -1,0 +1,5 @@
+LICENSES/** -whitespace
+assets/fonts/OFL.txt -whitespace
+packaging/web/licenses/** -whitespace
+third_party/** -whitespace
+releases/**/verification/*.log -whitespace

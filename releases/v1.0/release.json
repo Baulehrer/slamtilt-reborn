@@ -1,0 +1,45 @@
+{
+  "project": "Slamtilt - Reborn",
+  "version": "1.0",
+  "original_game_data_in_runtime": false,
+  "windows_signed": false,
+  "arm64_physical_hardware_verified": false,
+  "assets": [
+    {
+      "name": "Slamtilt-Reborn-windows-x86_64-setup.exe",
+      "bytes": 9148782,
+      "sha256": "879fde8352e47c8f4bd9d6a9898b1dce61ace1b3b7eab41fde02dbca22a87992"
+    },
+    {
+      "name": "Slamtilt-Reborn-windows-x86_64-portable.zip",
+      "bytes": 9059667,
+      "sha256": "fc6005b4795b276743c3e7ec883ea0120fbf99d52754226aa8c8c3c6d4f95c2c"
+    },
+    {
+      "name": "Slamtilt-Reborn-linux-x86_64.AppImage",
+      "bytes": 7346680,
+      "sha256": "96dcd7068b7e1257ec1ba6e3f6c553f5373beadf8281bd8da5a8c425e1636f1a"
+    },
+    {
+      "name": "Slamtilt-Reborn-linux-arm64-preview.tar.gz",
+      "bytes": 6828895,
+      "sha256": "431d1c00d5802b8c185a036879257d2dccc9078c54c7a3cf64811cdaf1a80d9d"
+    },
+    {
+      "name": "Slamtilt-Reborn.html",
+      "bytes": 13967309,
+      "sha256": "905da595d5eaec3f037e935b4e0746e3c59f770d3617f58e92582133c2b0a3f8"
+    }
+  ],
+  "browser_preview": true,
+  "browser_requires": "WebAssembly JSPI + native Wasm exceptions",
+  "browser_verified": "Chromium155.0.8059.84",
+  "browser_acceptance": {
+    "windows": 18,
+    "amiga": 18
+  },
+  "windows_advanced_gpu_filters": false,
+  "tag": "v1.0",
+  "repository": "https://github.com/Baulehrer/slamtilt-reborn",
+  "release_url": "https://github.com/Baulehrer/slamtilt-reborn/releases/tag/v1.0"
+}

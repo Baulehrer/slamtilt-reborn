@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""Asset-free relocatable Ace of Space bundle, preserving existing destinations."""
+import argparse,hashlib,json,platform,re,shutil,subprocess,tempfile
+from pathlib import Path
+from importlib.machinery import SourceFileLoader
+ROOT=Path(__file__).resolve().parents[1]
+archive=SourceFileLoader('slam_pack_archive',str(ROOT/'tools/slampack')).load_module().archive
+
+def main():
+    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);p.add_argument('--build',type=Path,default=ROOT/'build/native');p.add_argument('--sdl-license',type=Path,default=Path('/usr/share/licenses/sdl3/LICENSE'));p.add_argument('--xmp-license',type=Path,default=ROOT/'build/libxmp/docs/COPYING');a=p.parse_args()
+    output=a.output.resolve();tar=Path(str(output)+'.tar.gz')
+    if any(x.exists()or x.is_symlink()for x in [a.output,output,tar]):p.error('Destination already exists')
+    output.parent.mkdir(parents=True,exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='.space-pack-',dir=output.parent)as tmp:
+        stage=Path(tmp)/output.name
+        for folder in ['bin','lib','share/slamtilt','LICENSES']:(stage/folder).mkdir(parents=True,exist_ok=True)
+        binaries=['slamslice','slamspace-import','slamspace-setup']
+        subprocess.run(['cmake','--install',str(a.build.resolve()),'--prefix',str(stage),'--component','SpaceRuntime','--strip'],check=True,stdout=subprocess.DEVNULL)
+        libs={}
+        for name in binaries:
+            for line in subprocess.check_output(['ldd',str(a.build/name)],text=True).splitlines():
+                match=re.match(r'\s*(lib(?:SDL3|xmp)\.so[^ ]*) => (.+?) \(',line)
+                if match:libs[match[1]]=Path(match[2]).resolve()
+        if not any(n.startswith('libxmp')for n in libs):raise RuntimeError('Audio-enabled build required')
+        for name,path in libs.items():shutil.copyfile(path,stage/'lib'/name)
+        shutil.copyfile(ROOT/'analysis/import/space-retail-startup.json',stage/'share/slamtilt/space-retail-startup.json')
+        shutil.copyfile(ROOT/'analysis/table-profiles.json',stage/'share/slamtilt/table-profiles.json')
+        shutil.copy2(ROOT/'tools/slamspace-launch',stage/'slamspace')
+        for source,name in [(a.sdl_license,'SDL3.txt'),(a.xmp_license,'libxmp.txt')]:shutil.copyfile(source,stage/'LICENSES'/name)
+        for source in (ROOT/'assets/fonts').glob('*.txt'):shutil.copyfile(source,stage/'LICENSES'/source.name)
+        shutil.copyfile(ROOT/'third_party/stb/stb_truetype.h',stage/'LICENSES/stb_truetype.h')
+        # Include existing port/font notices distributed by the Mean bundle.
+        for source in (ROOT/'LICENSES').glob('*'):
+            if source.is_file():shutil.copyfile(source,stage/'LICENSES'/source.name)
+        (stage/'README.txt').write_text('Slam Tilt Native — Ace of Space\nRun ./slamspace. Select your supported Windows Retail folder (SLAMTILT.EXE and DAT).\nOriginal assets are not included. Import and play require no Python, Wine or emulator.\n./slamspace --setup changes the data folder; --data DIR overrides saved selection; --check validates it.\nEnter launches, Shift controls flippers, Left Ctrl loop direction, Right Ctrl Magnasaver, Escape options.\nLinux '+platform.machine()+' build; system glibc/C++/GPU/audio drivers required. Broad distro/older ABI support unverified.\n')
+        files={str(f.relative_to(stage)):hashlib.sha256(f.read_bytes()).hexdigest()for f in sorted(stage.rglob('*'))if f.is_file()}
+        versions=set()
+        for binary in [*(stage/'bin').iterdir(),*(stage/'lib').iterdir()]:
+            versions.update(re.findall(r'\b(?:GLIBCXX|GLIBC|CXXABI)_[0-9.]+',subprocess.check_output(['readelf','--version-info',str(binary)],text=True)))
+        (stage/'bundle.json').write_text(json.dumps(dict(format=1,table='Ace of Space',original_assets_included=False,architecture=platform.machine(),runtime_requirements=sorted(versions),bundled_libraries=sorted(libs),files=files),indent=2)+'\n')
+        # Stage archive before publication; runtime folder contains no original DAT/EXE/context.
+        packed=Path(tmp)/(output.name+'.tar.gz');archive(stage,packed)
+        stage.rename(output);packed.rename(tar)
+    print(output)
+if __name__=='__main__':main()

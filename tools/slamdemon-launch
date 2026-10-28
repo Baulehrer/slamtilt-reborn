@@ -1,0 +1,45 @@
+#!/bin/sh
+set -eu
+script=$(readlink -f -- "$0")
+here=$(CDPATH= cd -P "$(dirname "$script")" && pwd)
+if [ -d "$here/bin" ]; then
+    root=$here; executable=$root/bin/slamslice; setup=$root/bin/slamdemon-setup
+    importer=$root/bin/slamdemon-import; recipe=$root/share/slamtilt/demon-retail-startup.json
+    profiles=$root/share/slamtilt/table-profiles.json
+    data=${SLAM_DEMON_DATA_DIR:-$root/data}; prepared=$data/demon-prepared
+else
+    root=$(CDPATH= cd -P "$here/.." && pwd)
+    executable=$root/build/native/slamslice; setup=$root/build/native/slamdemon-setup
+    importer=$root/build/native/slamdemon-import; recipe=$root/analysis/import/demon-retail-startup.json
+    profiles=$root/analysis/table-profiles.json
+    data=${SLAM_DEMON_DATA_DIR:-$root/build/imported/demon-retail}; prepared=${SLAM_DEMON_PREPARED:-$data/demon-prepared}
+fi
+explicit=false; choose=false; check=false
+[ -z "${SLAM_DEMON_DATA_DIR:-}" ] || explicit=true
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --data|--data-dir)
+            [ "$#" -ge 2 ] || { echo 'Missing Demon data directory.' >&2; exit 2; }
+            data=$2;prepared=$data/demon-prepared;explicit=true;shift 2 ;;
+        --setup) choose=true;shift ;;
+        --check) check=true;shift ;;
+        --help|-h)
+            echo 'Usage: slamdemon [--data DIRECTORY] [--setup] [--check] [game options]'
+            echo 'First start: choose original Retail data for native import, or existing imported data.'
+            echo 'Display: --fullscreen or --windowed; Escape: options.'
+            echo 'Enter: launch; Shift: flippers; Escape: options.'
+            exit 0 ;;
+        *) break ;;
+    esac
+done
+if [ -d "$root/lib" ]; then LD_LIBRARY_PATH="$root/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}";export LD_LIBRARY_PATH;fi
+if ! "$explicit"; then
+    if saved=$("$setup" --importer "$importer" --profile "$recipe" --saved); then data=$saved;prepared=$data/demon-prepared;fi
+fi
+if "$choose" || { ! "$explicit" && ! "$check" && [ ! -s "$data/DEMON.DAT" ]; }; then
+    if selected=$("$setup" --importer "$importer" --profile "$recipe");then data=$selected;prepared=$data/demon-prepared;else exit "$?";fi
+fi
+"$importer" --check "$data" >/dev/null || { echo 'Demon data does not match the supported Retail profile.' >&2;exit 2; }
+export SLAM_TABLE_PROFILES="$profiles"
+if "$check";then echo "Demon ready: $data";exit 0;fi
+exec "$executable" demon "$prepared" "$data/DEMON.DAT" --presentation --persist-options --audio "$@"

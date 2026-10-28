@@ -1,0 +1,45 @@
+#!/bin/sh
+set -eu
+script=$(readlink -f -- "$0")
+here=$(CDPATH= cd -P "$(dirname "$script")" && pwd)
+if [ -d "$here/bin" ]; then
+    root=$here; executable=$root/bin/slamview; setup=$root/bin/slampirate-setup
+    importer=$root/bin/slampirate-import; recipe=$root/share/slamtilt/pirate-retail-startup.json
+    profiles=$root/share/slamtilt/table-profiles.json
+    data=${SLAM_PIRATE_DATA_DIR:-$root/data}; prepared=$data/pirate-prepared
+else
+    root=$(CDPATH= cd -P "$here/.." && pwd)
+    executable=$root/build/native/slamview; setup=$root/build/native/slampirate-setup
+    importer=$root/build/native/slampirate-import; recipe=$root/analysis/import/pirate-retail-startup.json
+    profiles=$root/analysis/table-profiles.json
+    data=${SLAM_PIRATE_DATA_DIR:-$root/build/imported/pirate-retail}; prepared=${SLAM_PIRATE_PREPARED:-$data/pirate-prepared}
+fi
+explicit=false; choose=false; check=false
+[ -z "${SLAM_PIRATE_DATA_DIR:-}" ] || explicit=true
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+        --data|--data-dir)
+            [ "$#" -ge 2 ] || { echo 'Missing Pirate data directory.' >&2; exit 2; }
+            data=$2;prepared=$data/pirate-prepared;explicit=true;shift 2 ;;
+        --setup) choose=true;shift ;;
+        --check) check=true;shift ;;
+        --help|-h)
+            echo 'Usage: slampirate [--data DIRECTORY] [--setup] [--check] [game options]'
+            echo 'First start: choose original Retail data for native import, or existing imported data.'
+            echo 'Display: --fullscreen or --windowed; Escape: options.'
+            echo 'Enter: launch; Shift: flippers; Ctrl: Magnasaver; Alt/Space: nudge; Escape: options.'
+            exit 0 ;;
+        *) break ;;
+    esac
+done
+if [ -d "$root/lib" ]; then LD_LIBRARY_PATH="$root/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}";export LD_LIBRARY_PATH;fi
+if ! "$explicit"; then
+    if saved=$("$setup" --importer "$importer" --profile "$recipe" --saved); then data=$saved;prepared=$data/pirate-prepared;fi
+fi
+if "$choose" || { ! "$explicit" && ! "$check" && [ ! -s "$data/PIRATE.DAT" ]; }; then
+    if selected=$("$setup" --importer "$importer" --profile "$recipe");then data=$selected;prepared=$data/pirate-prepared;else exit "$?";fi
+fi
+"$importer" --check "$data" >/dev/null || { echo 'Pirate data does not match the supported Retail profile.' >&2;exit 2; }
+export SLAM_TABLE_PROFILES="$profiles"
+if "$check";then echo "Pirate ready: $data";exit 0;fi
+exec "$executable" "$data/PIRATE.DAT" --pirate-play "$prepared" "$@"

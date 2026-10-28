@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+"""Offline shared Debian12 build, preserving the pinned toolchain and old RCs."""
+import argparse,json,os,re,subprocess
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+def main():
+ p=argparse.ArgumentParser();p.add_argument('--output',type=Path,default=ROOT/'build/compat');p.add_argument('--release-name',default='slamtilt-reborn-linux-x86_64-rc1');a=p.parse_args();assert re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]*',a.release_name)
+ output=a.output.resolve();meta=json.loads((ROOT/'build/compat/build.json').read_text());image=meta['image_id']
+ for dest in [output/'releases'/a.release_name,output/'releases'/(a.release_name+'.tar.gz')]:assert not dest.exists()and not dest.is_symlink(),'Destination exists'
+ output.mkdir(parents=True,exist_ok=True)
+ subprocess.run(['docker','run','--rm','--network','none','--user',f'{os.getuid()}:{os.getgid()}', '--mount',f'type=bind,src={ROOT},dst=/workspace,readonly','--mount',f'type=bind,src={output},dst=/output','-e','SLAM_REBORN_NAME='+a.release_name,image,'/bin/sh','/workspace/packaging/reborn-compat-build.sh'],check=True)
+ (output/'reborn-build.json').write_text(json.dumps(dict(image_id=image,pins=meta['pins'],program=str(output/'releases'/a.release_name),network_disabled=True,source_read_only=True,verification_pending=True),indent=2)+'\n')
+if __name__=='__main__':main()

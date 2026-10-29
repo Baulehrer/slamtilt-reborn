@@ -1,5 +1,6 @@
 #pragma once
 #include "frontend/ui_skin.h"
+#include "input/gamepad_input.h"
 #include "renderer/visual_settings.h"
 #include <SDL3/SDL.h>
 #ifdef __EMSCRIPTEN__
@@ -28,7 +29,7 @@ enum class PortAction {
   SpecialRight
 };
 
-// Presentation only: settings never change simulation coordinates or cadence.
+// Frontend settings never change simulation coordinates or cadence.
 struct PortSettings {
   slam::VisualSettings visual;
 #ifdef __EMSCRIPTEN__
@@ -47,6 +48,7 @@ struct PortSettings {
                            SDL_SCANCODE_RETURN, SDL_SCANCODE_LALT,
                            SDL_SCANCODE_RALT, SDL_SCANCODE_SPACE,
                            SDL_SCANCODE_LCTRL, SDL_SCANCODE_RCTRL}};
+  slam::GamepadInput::Bindings gamepad_buttons=slam::GamepadInput::defaults;
   SDL_Scancode key(PortAction action) const {
     return static_cast<SDL_Scancode>(keys[static_cast<std::size_t>(action)]);
   }
@@ -105,7 +107,9 @@ public:
     SpecialRight = 38,
     MainMenu = 39,
     MenuStyle = 40,
-    ReducedMotion = 41
+    ReducedMotion = 41,
+    PadLeftFlipper = 42, PadRightFlipper, PadPlunger, PadNudgeLeft,
+    PadNudgeRight, PadNudgeUp, PadSpecialLeft, PadSpecialRight
   };
   void select_option(Option option) {
     selected_ = option;
@@ -143,6 +147,7 @@ public:
       s.fullscreen = j.at("fullscreen").get<bool>();
       s.modern_menu = j.value("modern_menu", true);
       s.reduced_motion = j.value("reduced_motion", false);
+      s.gamepad_buttons=j.value("gamepad_buttons",slam::GamepadInput::defaults);
       s.smooth = j.at("smooth").get<bool>();
       s.zoom = j.at("zoom").get<float>();
       s.dmd_size = j.at("dmd_size").get<float>();
@@ -203,7 +208,23 @@ public:
     return open && px >= x_ && px <= x_ + width_ && py >= y_ &&
            py <= y_ + height_;
   }
+  bool gamepad_binding() const {return open && binding_>=8;}
   bool handle(const SDL_Event &event) {
+    if(gamepad_binding()) {
+      if(event.type==SDL_EVENT_GAMEPAD_BUTTON_DOWN) {
+        const int button=event.gbutton.button;
+        if(button==SDL_GAMEPAD_BUTTON_START || button==SDL_GAMEPAD_BUTTON_BACK)binding_=-1;
+        else if(button>=0 && button<SDL_GAMEPAD_BUTTON_COUNT) {
+          const int action=binding_-8;
+          const int previous=settings.gamepad_buttons[action];
+          for(auto& current:settings.gamepad_buttons)if(current==button)current=previous;
+          settings.gamepad_buttons[action]=button;binding_=-1;error.clear();
+        }
+        return true;
+      }
+      if(event.type==SDL_EVENT_KEY_DOWN){if(event.key.key==SDLK_ESCAPE)binding_=-1;return true;}
+      if(event.type==SDL_EVENT_KEY_UP || event.type==SDL_EVENT_GAMEPAD_BUTTON_UP || event.type==SDL_EVENT_GAMEPAD_AXIS_MOTION)return true;
+    }
     if (main_menu_available && event.type == SDL_EVENT_KEY_DOWN &&
         !event.key.repeat && event.key.key == SDLK_F10) {
       return_to_menu();
@@ -248,6 +269,10 @@ public:
     }
     if (event.type == SDL_EVENT_KEY_DOWN && !event.key.repeat) {
       switch (event.key.key) {
+      case SDLK_PAGEUP:
+        select_category((category_+5)%6);break;
+      case SDLK_PAGEDOWN:
+        select_category((category_+1)%6);break;
       case SDLK_TAB:
         select_category(
             (category_ + ((event.key.mod & SDL_KMOD_SHIFT) ? 5 : 1)) % 6);
@@ -341,13 +366,13 @@ public:
     box({x_ + 5, y_ + 10, width_, height_}, 20, {0, 0, 0, 130});
     box({x_ - 2, y_ - 2, width_ + 4, height_ + 4}, 20, {123, 135, 139, 255});
     box({x_ - 1, y_ - 1, width_ + 2, height_ + 2}, 20, {61, 83, 96, 255});
-    box({x_, y_, width_, height_}, 19, {10, 19, 29, 252});
+    box({x_, y_, width_, height_}, 19, {21, 22, 15, 252});
     for (int stripe = 20; stripe < int(height_) - 20; stripe += 4) {
       SDL_SetRenderDrawColor(renderer, 153, 180, 194, 5);
       SDL_RenderLine(renderer, x_ + 10, y_ + stripe, x_ + width_ - 10,
                      y_ + stripe);
     }
-    box({x_ + 17, y_ + 18, width_ - 34, 66}, 11, {24, 35, 45, 255});
+    box({x_ + 17, y_ + 18, width_ - 34, 66}, 11, {43, 44, 28, 255});
     SDL_SetRenderDrawColor(renderer, 203, 222, 226, 80);
     SDL_RenderLine(renderer, x_ + 29, y_ + 19, x_ + width_ - 29, y_ + 19);
     SDL_SetRenderDrawColor(renderer, 196, 139, 57, 130);
@@ -361,23 +386,11 @@ public:
       SDL_SetRenderDrawColor(renderer, 28, 43, 53, 255);
       SDL_RenderLine(renderer, screw.x - 2, screw.y, screw.x + 2, screw.y);
     }
-    box({x_ + 24, y_ + 25, 4, 43}, 2, {255, 184, 79, 255});
+    box({x_ + 24, y_ + 25, 4, 43}, 2, {210, 228, 65, 255});
     skin.text(renderer, "SLAMTILT - REBORN", x_ + 44, y_ + 22,
               width_ < 680 ? 22 : 28, {245, 246, 250, 255}, true);
-    skin.text(renderer, "CABINET CONTROL  /  1996 SPIRIT. REBORN.", x_ + 46,
+    skin.text(renderer, "OPTIONS", x_ + 46,
               y_ + 61, width_ < 680 ? 9 : 11, {148, 162, 184, 255});
-    if (width_ > 750) {
-      box({x_ + width_ - 246, y_ + 30, 216, 32}, 10, {92, 77, 43, 255});
-      box({x_ + width_ - 245, y_ + 31, 214, 30}, 9, {11, 19, 22, 255});
-      for (int dot = 0; dot < 34; ++dot)
-        for (int row = 0; row < 4; ++row)
-          box({x_ + width_ - 238 + dot * 6.f, y_ + 35 + row * 6.f, 1, 1}, .5f,
-              {221, 156, 63, 28});
-      skin.text(renderer,
-                shaders_available ? "GPU EFFECTS AVAILABLE"
-                                  : "CLASSIC RENDERER",
-                x_ + width_ - 230, y_ + 36, 12, {115, 222, 205, 255}, true);
-    }
     if (width_ > 750)
       skin.text(renderer, "Hold V to preview the table", x_ + width_ - 240,
                 y_ + 73, 11, {142, 164, 186, 255});
@@ -392,13 +405,13 @@ public:
       SDL_FRect tab{x_ + 14, top + c * 54, sidebar - 18, 44};
       if (category_ == c || hover_ == -c - 1)
         box(tab, 9,
-            category_ == c ? SDL_Color{69, 57, 34, 255}
+            category_ == c ? SDL_Color{65, 69, 27, 255}
                            : SDL_Color{25, 38, 50, 255});
       if (category_ == c)
-        box({tab.x, tab.y + 11, 3, 22}, 1, {255, 184, 79, 255});
+        box({tab.x, tab.y + 11, 3, 22}, 1, {210, 228, 65, 255});
       skin.text(renderer, categories[c], tab.x + 12, tab.y + 10,
                 width_ < 680 ? 13 : 17,
-                category_ == c ? SDL_Color{255, 202, 123, 255}
+                category_ == c ? SDL_Color{228, 240, 109, 255}
                                : SDL_Color{158, 174, 196, 255},
                 category_ == c);
       hits_.push_back({tab, -c - 1});
@@ -431,17 +444,17 @@ public:
       const bool selected = selected_ == id;
       box(row, 8,
           selected       ? SDL_Color{80, 74, 54, 255}
-          : hover_ == id ? SDL_Color{43, 59, 70, 255}
-                         : SDL_Color{33, 46, 59, 255});
+          : hover_ == id ? SDL_Color{64, 65, 38, 255}
+                         : SDL_Color{61, 61, 43, 255});
       box({row.x + 1, row.y + 1, row.w - 2, row.h - 2}, 7,
-          selected ? SDL_Color{38, 40, 36, 255} : SDL_Color{17, 28, 39, 255});
+          selected ? SDL_Color{38, 40, 36, 255} : SDL_Color{24, 25, 18, 255});
       SDL_SetRenderDrawColor(renderer, 127, 153, 167, selected ? 90 : 35);
       SDL_RenderLine(renderer, row.x + 9, row.y + 1, row.x + row.w - 9,
                      row.y + 1);
       if (selected)
         box({row.x, row.y + 14 - 5 * selection_phase, 3,
              19 + 10 * selection_phase},
-            1, {255, 184, 79, 255});
+            1, {210, 228, 65, 255});
       const auto text = row_text(id);
       const auto split = text.find(": ");
       const auto label =
@@ -454,7 +467,7 @@ public:
       if (id == 0) {
         const SDL_FRect toggle{row.x + row.w - 91, row.y + 8, 77, 28};
         box(toggle, 14,
-            fullscreen_shown() ? SDL_Color{50, 92, 81, 255}
+            fullscreen_shown() ? SDL_Color{86, 99, 32, 255}
                                 : SDL_Color{57, 66, 81, 255});
         box({toggle.x + (fullscreen_shown() ? 51.f : 5.f), toggle.y + 5, 18,
              18},
@@ -467,7 +480,7 @@ public:
       } else
         skin.text(renderer, value,
                   row.x + row.w - 15 - skin.width(value, font, true), row.y + 7,
-                  font, {255, 202, 123, 255}, true);
+                  font, {228, 240, 109, 255}, true);
       if (slider(id)) {
         const auto range = slider_range(id);
         float t = std::clamp((current_slider(id) - range.first) /
@@ -475,7 +488,7 @@ public:
                              0.f, 1.f);
         box({row.x + 14, row.y + 34, row.w - 28, 3}, 1, {58, 71, 89, 255});
         box({row.x + 14, row.y + 34, (row.w - 28) * t, 3}, 1,
-            {100, 207, 199, 255});
+            {191, 212, 62, 255});
         box({row.x + 10 + (row.w - 28) * t, row.y + 31, 9, 9}, 4,
             {219, 248, 240, 255});
       }
@@ -489,7 +502,8 @@ public:
           1, {116, 143, 169, 255});
     }
     std::string help =
-        binding_ >= 0    ? "Press a new key. Escape cancels binding."
+        binding_ >= 8 ? "Press a pad button. Start / Back cancels."
+        : binding_ >= 0    ? "Press a new key. Escape cancels binding."
         : !error.empty() ? error
         : category_ == 1
             ? (shaders_available
@@ -499,7 +513,7 @@ public:
         : category_ == 2
             ? "Overlay position can also be changed by dragging the DMD."
         : category_ == 4
-            ? "Select an action, then press the key you want to use."
+            ? "Select a key or pad binding. Pad: D-pad / A / B; LB / RB tabs."
         : category_ == 5
             ? "Reborn and Original share your tables, controls and saved games."
             : "Preview changes now. Apply to save, or Cancel to restore.";
@@ -523,26 +537,30 @@ public:
       const int id = i == 3 ? 39 : 23 + i;
       SDL_FRect button{content_x + i * (button_w + 8), y_ + height_ - 79,
                        button_w, 39};
-      box(button, 8,
-          i == 1                            ? SDL_Color{242, 184, 81, 255}
-          : selected_ == id || hover_ == id ? SDL_Color{53, 67, 85, 255}
-                                            : SDL_Color{31, 42, 57, 255});
-      if (selected_ == id) {
-        SDL_SetRenderDrawColor(renderer, 255, 225, 164, 255);
-        SDL_RenderRect(renderer, &button);
-      }
+      const bool lit = selected_ == id || hover_ == id || i == 1;
+      // Raised, inset switches echo the original yellow-green menu bars.
+      box(button, 12, {8, 10, 5, 255});
+      box({button.x + 2, button.y + 2, button.w - 4, button.h - 5}, 10,
+          lit ? SDL_Color{114, 122, 32, 255} : SDL_Color{57, 60, 31, 255});
+      box({button.x + 4, button.y + 5, button.w - 8, button.h - 11}, 8,
+          lit ? SDL_Color{59, 66, 18, 255} : SDL_Color{28, 32, 16, 255});
+      SDL_SetRenderDrawColor(renderer, lit ? 222 : 121, lit ? 235 : 132, 65, 255);
+      SDL_RenderLine(renderer, button.x + 12, button.y + 4,
+                     button.x + button.w - 12, button.y + 4);
+      SDL_RenderLine(renderer, button.x + 12, button.y + button.h - 7,
+                     button.x + button.w - 12, button.y + button.h - 7);
       const float font = width_ < 680 ? 11.f : 14.f;
       skin.text(renderer, actions[i],
                 button.x + (button.w - skin.width(actions[i], font, true)) / 2,
                 button.y + 9, font,
-                i == 1 ? SDL_Color{30, 26, 20, 255}
-                       : SDL_Color{215, 225, 240, 255},
+                lit ? SDL_Color{237, 244, 144, 255}
+                    : SDL_Color{189, 197, 145, 255},
                 true);
       hits_.push_back({button, id});
     }
     skin.text(
         renderer,
-        "TAB  category     ARROWS  adjust     ENTER  select     ESC  cancel",
+        SDL_HasGamepad()?"PAD: LB/RB tabs   D-PAD adjust   A select   B cancel":"TAB  category     ARROWS  adjust     ENTER  select     ESC  cancel",
         x_ + 24, y_ + height_ - 25, width_ < 680 ? 9 : 11,
         {119, 139, 162, 255});
     SDL_SetRenderScale(renderer, 1, 1);
@@ -573,10 +591,11 @@ private:
     case 5:
       return {40, 41};
     default:
-      if (space_specials)
-        return {17, 18, 19, 37, 38};
-      return full_controls ? std::vector<int>{17, 18, 19, 20, 21, 22, 37}
-                           : std::vector<int>{17, 18, 19};
+      std::vector<int> rows=space_specials?std::vector<int>{17,18,19,37,38}:
+          full_controls?std::vector<int>{17,18,19,20,21,22,37}:std::vector<int>{17,18,19};
+      const auto keyboard_rows=rows;
+      for(int id:keyboard_rows)rows.push_back(id==37?48:id==38?49:42+id-17);
+      return rows;
     }
   }
   void navigate(int direction) {
@@ -671,6 +690,12 @@ private:
 #endif
   }
   std::string row_text(int id) const {
+    if(id>=42 && id<=49) {
+      const char* actions[]={"Left flipper","Right flipper","Plunger","Nudge left","Nudge right","Nudge up","Left special","Right special"};
+      const auto button=SDL_GamepadButton(settings.gamepad_buttons[id-42]);
+      const char* name=SDL_GetGamepadStringForButton(button);
+      return std::string("Pad ")+actions[id-42]+": "+(name?name:"unassigned");
+    }
     const char *positions[] = {"Top", "Left", "Right", "Overlay"};
     const char *aspects[] = {"Fit", "Stretch", "Crop"};
     const char *colors[] = {"Original", "Amber", "White", "Custom"};
@@ -786,6 +811,11 @@ private:
     }
   }
   static bool valid(const PortSettings &s) {
+    for(unsigned i=0;i<s.gamepad_buttons.size();++i) {
+      const int b=s.gamepad_buttons[i];
+      if(b<0 || b>=SDL_GAMEPAD_BUTTON_COUNT || b==SDL_GAMEPAD_BUTTON_START || b==SDL_GAMEPAD_BUTTON_BACK)return false;
+      for(unsigned j=0;j<i;++j)if(s.gamepad_buttons[j]==b)return false;
+    }
     for (std::size_t i = 0; i < s.keys.size(); ++i) {
       if (!allowed_key(s.keys[i]))
         return false;
@@ -834,6 +864,7 @@ private:
     SDL_PushEvent(&event);
   }
   void activate() {
+    if(selected_>=42 && selected_<=49){binding_=8+selected_-42;error.clear();return;}
     if (main_menu_available && selected_ == 39) {
       return_to_menu();
       return;
@@ -1013,7 +1044,8 @@ private:
                             {"custom_r", settings.custom_r},
                             {"custom_g", settings.custom_g},
                             {"custom_b", settings.custom_b},
-                            {"keys", settings.keys}};
+                            {"keys", settings.keys},
+                            {"gamepad_buttons",settings.gamepad_buttons}};
         const auto temporary = path_.string() + ".tmp";
         std::ofstream file(temporary, std::ios::trunc);
         file << j.dump(2) << '\n';

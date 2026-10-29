@@ -1,3 +1,4 @@
+#include "frontend/gamepad_overlay.h"
 // Bounded table-independent Retail vertical slice. Original code runs as static
 // C++; unsupported calls throw. No replacement physics or rule fields.
 #include "physics/pirate_step_lift.h"
@@ -26,8 +27,21 @@
 #include <memory>
 #include <map>
 #include <algorithm>
+#ifdef __linux__
+#include <time.h>
+#endif
 using json=nlohmann::json;
 namespace {
+std::uint64_t profile_thread_cpu_ns() {
+#ifdef __linux__
+  timespec sample{};
+  if(clock_gettime(CLOCK_THREAD_CPUTIME_ID,&sample)!=0)
+    throw std::runtime_error("Cannot read thread CPU clock");
+  return std::uint64_t(sample.tv_sec)*1000000000u+sample.tv_nsec;
+#else
+  return 0; // Unsupported: never substitute wall time for CPU time.
+#endif
+}
 std::vector<std::uint8_t> read(const std::filesystem::path& p){
  std::ifstream f(p,std::ios::binary);if(!f)throw std::runtime_error("Missing file: "+p.string());
  return {std::istreambuf_iterator<char>(f),{}};
@@ -39,11 +53,12 @@ struct SDLGuard{~SDLGuard(){SDL_Quit();}};
 }
 int main(int argc,char** argv){
  try{
+  const auto process_started=SDL_GetTicksNS();
   if(argc<4)throw std::runtime_error("Usage: slamslice TABLE PREPARED DAT [--frames N] [--replay JSON] [--trace JSON] [--capture BMP]");
   const std::string table=argv[1];const std::filesystem::path prepared=argv[2],dat_path=argv[3];
-  unsigned frames=0,realtime_steps=0;bool replay_only=false,fullscreen=false,no_audio=false,force_audio=false,force_presentation=false,windowed=false,menu_at_start=false,persist_options=false;std::filesystem::path replay,trace,capture,diagnostics,audio_trace,highscore_path,ui_events_path;
+  unsigned frames=0,realtime_steps=0;bool replay_only=false,fullscreen=false,no_audio=false,force_audio=false,force_presentation=false,windowed=false,menu_at_start=false,persist_options=false;std::filesystem::path replay,trace,capture,diagnostics,audio_trace,highscore_path,ui_events_path,performance_path;
   for(int i=4;i<argc;++i){const std::string a=argv[i];if(a=="--replay-only"){replay_only=true;continue;}if(a=="--persist-options"){persist_options=true;continue;}if(a=="--presentation"){force_presentation=true;continue;}if(a=="--windowed"){windowed=true;continue;}if(a=="--menu"){force_presentation=true;menu_at_start=true;continue;}if(a=="--no-audio"){no_audio=true;continue;}if(a=="--audio"){force_audio=true;continue;}if(a=="--fullscreen"){fullscreen=true;continue;}if(i+1>=argc)throw std::runtime_error("Missing argument");
-   if(a=="--frames")frames=std::stoul(argv[++i]);else if(a=="--realtime-steps")realtime_steps=std::stoul(argv[++i]);else if(a=="--replay")replay=argv[++i];else if(a=="--trace")trace=argv[++i];else if(a=="--diagnostic-shots")diagnostics=argv[++i];else if(a=="--audio-trace")audio_trace=argv[++i];else if(a=="--highscore-file")highscore_path=argv[++i];else if(a=="--ui-events")ui_events_path=argv[++i];else if(a=="--capture")capture=argv[++i];else throw std::runtime_error("Unknown argument: "+a);
+   if(a=="--frames")frames=std::stoul(argv[++i]);else if(a=="--realtime-steps")realtime_steps=std::stoul(argv[++i]);else if(a=="--replay")replay=argv[++i];else if(a=="--trace")trace=argv[++i];else if(a=="--diagnostic-shots")diagnostics=argv[++i];else if(a=="--audio-trace")audio_trace=argv[++i];else if(a=="--highscore-file")highscore_path=argv[++i];else if(a=="--ui-events")ui_events_path=argv[++i];else if(a=="--performance-output")performance_path=argv[++i];else if(a=="--capture")capture=argv[++i];else throw std::runtime_error("Unknown argument: "+a);
   }
   if(replay_only&&replay.empty())throw std::runtime_error("--replay-only requires --replay");
   slam::infer_asset_source(dat_path.parent_path());
@@ -95,6 +110,7 @@ int main(int argc,char** argv){
   check(SDL_StartTextInput(window.get()));
   Owner<SDL_Renderer,SDL_DestroyRenderer> renderer(presenting?slam::create_presentation_renderer(window.get(),true):SDL_CreateRenderer(window.get(),nullptr),SDL_DestroyRenderer);check(bool(renderer));
   PortOptions options=std::move(boot_options);
+  slam::GamepadInput gamepad;
   if(!frames)(void)SDL_SetRenderVSync(renderer.get(),1);
   if(!presenting)check(SDL_SetRenderLogicalPresentation(renderer.get(),320,680,SDL_LOGICAL_PRESENTATION_LETTERBOX));
   slam::Presentation presentation(renderer.get());options.shaders_available=presentation.available();options.shader_status=presentation.status();
@@ -110,6 +126,8 @@ int main(int argc,char** argv){
   auto ball_texture=texture(16,15);auto dmd_texture=texture(96,20);
   std::vector<Owner<SDL_Texture,SDL_DestroyTexture>> lamp_textures;
   for(const auto&l:lamps)lamp_textures.push_back(texture(l.width,l.height));
+  std::vector<int> uploaded_lamp_frames(lamps.size(), -1);
+  std::uint64_t lamp_texture_uploads = 0;
   std::vector<Owner<SDL_Texture,SDL_DestroyTexture>> flipper_textures;
   for(const auto&s:sprites)flipper_textures.push_back(texture(s.width,s.height));
   constexpr std::array<unsigned,3> pose_addresses={0x46c786,0x46c76c,0x46c752};
@@ -155,13 +173,17 @@ int main(int argc,char** argv){
   auto live_key=[&](const json&e){key(e);if(!trace.empty())physical_inputs[tick].push_back(e);};
   if(!trace.empty())states.push_back(state());
   const auto started=SDL_GetTicksNS();auto before=started;std::uint64_t accumulator=0;unsigned clamped=0;
+  std::uint64_t simulation_cpu_ns=0,simulation_ns=0,post_step_ns=0,render_ns=0,present_ns=0;
+  std::vector<std::uint64_t> measured_frames;
+  const bool profiling=!performance_path.empty();
   for(unsigned frame=0;running&&(!frames||frame<frames)&&(!realtime_steps||tick<realtime_steps);++frame){
+   const auto frame_started=profiling?SDL_GetTicksNS():0;
    if(const auto it=ui_events.find(frame);it!=ui_events.end())for(const auto&entry:it->second){SDL_Event event{};const std::string type=entry.at("type");
     if(type=="key"){event.type=entry.value("down",true)?SDL_EVENT_KEY_DOWN:SDL_EVENT_KEY_UP;event.key.key=SDL_GetKeyFromName(entry.at("key").get<std::string>().c_str());event.key.scancode=SDL_GetScancodeFromKey(event.key.key,nullptr);}
     else if(type=="focus_lost")event.type=SDL_EVENT_WINDOW_FOCUS_LOST;else if(type=="focus_gained")event.type=SDL_EVENT_WINDOW_FOCUS_GAINED;else throw std::runtime_error("Invalid UI event");
     check(SDL_PushEvent(&event));
    }
-   SDL_Event e;while(SDL_PollEvent(&e)){
+   SDL_Event e;while(gamepad.poll(e,options.settings.keys,options.settings.gamepad_buttons,options.open||paused,options.gamepad_binding())){
     if(e.type==SDL_EVENT_QUIT)running=false;
     if(e.type==SDL_EVENT_WINDOW_FOCUS_LOST||e.type==SDL_EVENT_WINDOW_MINIMIZED)audio_focus=false;
     if(e.type==SDL_EVENT_WINDOW_FOCUS_GAINED||e.type==SDL_EVENT_WINDOW_RESTORED)audio_focus=true;
@@ -190,6 +212,8 @@ int main(int argc,char** argv){
    if(!frames){const auto now=SDL_GetTicksNS();if(now-before>100000000)++clamped;accumulator+=std::min<std::uint64_t>(now-before,100000000);before=now;steps=unsigned(accumulator/5000000);accumulator%=5000000;}
    if(presenting&&(options.open||!audio_focus||paused)){steps=0;accumulator=0;}
    if(realtime_steps)steps=std::min(steps,realtime_steps-tick);
+   const auto simulation_started=profiling?SDL_GetTicksNS():0;
+   const auto simulation_cpu_started=profiling?profile_thread_cpu_ns():0;
    for(unsigned i=0;i<steps;++i){
     if(const auto it=inputs.find(tick);it!=inputs.end())for(const auto&event:it->second)key(event);
     if(const auto it=shots.find(tick);it!=shots.end())diagnostic(it->second);
@@ -197,14 +221,24 @@ int main(int argc,char** argv){
     if(tick%4==0){m.invoke(0x408da8);m.invoke(0x408674);}
     if(!trace.empty()){states.push_back(state());if(table=="demon"){clock_states.push_back(clock_sample());mode_aux_states.push_back(mode_aux_sample());video_states.push_back(video_sample());variant_states.push_back(variant_sample());}if(table=="space")weapon_states.push_back(weapon_sample());ball_pools.push_back(memory_hash(0x46c15c,800));aux_states.push_back(memory_hash(0x466b6c,256));globals.push_back(sample());poses_trace.push_back(pose_sample());lifecycle.push_back(life_sample());scores.push_back(memory_hash(m.rd(0x46c498,4),50));lamp_states.push_back(lamp_sample());if(table=="demon"||(!diagnostics.empty()&&table=="space"))raw_states.push_back(memory_hash(table=="demon"?0x46d400:0x46e970,table=="demon"?0x400:0x600));}
    }
+   if(profiling)simulation_cpu_ns+=profile_thread_cpu_ns()-simulation_cpu_started;
+   const auto simulation_finished=profiling?SDL_GetTicksNS():0;
+   if(profiling)simulation_ns+=simulation_finished-simulation_started;
 #ifdef SLAM_AUDIO_XMP
    if(audio){audio->set_paused(!audio_focus||(presenting&&(options.open||paused)));if(presenting)audio->set_levels(options.settings.volume,options.settings.music_volume,options.settings.sfx_volume);audio->pump();audio_queued=audio->queued_bytes();audio_device_paused=audio->device_paused();}
 #endif
    if(m.rd(0x46c6ac,4)==0&&!highscore_path.empty()&&records()!=saved_records){const auto current=records();if(score_store.save(highscore_path,current))saved_records=current;else options.error=score_store.error;}
+   const auto render_started=profiling?SDL_GetTicksNS():0;
+   if(profiling)post_step_ns+=render_started-simulation_finished;
    if(presenting)check(SDL_SetRenderTarget(renderer.get(),scene.get()));
    const float field_y=presenting?0.f:80.f;
    check(SDL_SetRenderDrawColor(renderer.get(),0,0,0,255));check(SDL_RenderClear(renderer.get()));const SDL_FRect field{0,field_y,320,600};check(SDL_RenderTexture(renderer.get(),background.get(),nullptr,&field));
-   for(unsigned i=0;i<lamps.size();++i){const auto&l=lamps[i];const auto&rgba=l.rgba.at(l.frame(m.image));check(SDL_UpdateTexture(lamp_textures[i].get(),nullptr,rgba.data(),l.width*4));const SDL_FRect d{float(l.x),float(l.y)+field_y,float(l.width),float(l.height)};check(SDL_RenderTexture(renderer.get(),lamp_textures[i].get(),nullptr,&d));}
+   for(unsigned i=0;i<lamps.size();++i){const auto&l=lamps[i];const auto frame=l.frame(m.image);
+    if(uploaded_lamp_frames[i]!=int(frame)){
+     const auto&rgba=l.rgba.at(frame);
+     check(SDL_UpdateTexture(lamp_textures[i].get(),nullptr,rgba.data(),l.width*4));
+     uploaded_lamp_frames[i]=int(frame);++lamp_texture_uploads;
+    }const SDL_FRect d{float(l.x),float(l.y)+field_y,float(l.width),float(l.height)};check(SDL_RenderTexture(renderer.get(),lamp_textures[i].get(),nullptr,&d));}
    for(unsigned i=0;i<sprites.size();++i){const auto&s=sprites[i];const auto pose=m.rd(pose_addresses[i],2);const auto rgba=slam::compose_table_flipper(flipper_profiles[i],s,s.frame(pose),image,m.image,m.dat);check(SDL_UpdateTexture(flipper_textures[i].get(),nullptr,rgba.data(),s.width*4));const SDL_FRect d{float(s.x),float(s.y)+field_y,float(s.width),float(s.height)};check(SDL_RenderTexture(renderer.get(),flipper_textures[i].get(),nullptr,&d));}
    const auto ball_count=m.rd(0x46c67c,4);if(ball_count>8)throw std::runtime_error("Invalid original ball count");
    std::vector<std::pair<unsigned,std::array<int,2>>> visible_balls;
@@ -236,19 +270,39 @@ int main(int argc,char** argv){
     auto layout=slam::display_layout(width,height,settings.dmd_position,settings.dmd_size,settings.zoom,settings.aspect,bx,by,600);
     if(settings.dmd_position==3){layout.dmd.x=(width-layout.dmd.w)*settings.overlay_x;layout.dmd.y=(height-layout.dmd.h)*settings.overlay_y;}
     check(SDL_SetTextureScaleMode(scene.get(),settings.smooth?SDL_SCALEMODE_LINEAR:SDL_SCALEMODE_NEAREST));const SDL_Rect clip{int(layout.viewport.x),int(layout.viewport.y),int(layout.viewport.w),int(layout.viewport.h)};
-    check(SDL_SetRenderClipRect(renderer.get(),&clip));presentation.draw(scene.get(),layout.table,settings.visual);check(SDL_SetRenderClipRect(renderer.get(),nullptr));presentation.draw(dmd_texture.get(),layout.dmd,settings.visual,true);options.draw(renderer.get(),width,height);
+    check(SDL_SetRenderClipRect(renderer.get(),&clip));presentation.draw(scene.get(),layout.table,settings.visual);check(SDL_SetRenderClipRect(renderer.get(),nullptr));presentation.draw(dmd_texture.get(),layout.dmd,settings.visual,true);if(!options.open)slam::draw_gamepad_pull(renderer.get(),gamepad,height);options.draw(renderer.get(),width,height);
     if(paused&&!options.open){if(!pause_skin)pause_skin=std::make_unique<slam::UiSkin>();pause_skin->text(renderer.get(),"Paused · P to resume",20,20,20,{255,220,160,255},true);}
     if(!trace.empty())ui_frames.push_back({{"elapsed_ms",double(SDL_GetTicksNS()-started)/1e6},{"frame",frame},{"tick",tick},{"menu",options.open},{"focused",audio_focus},{"paused",paused},{"audio_device_paused",audio_device_paused},{"zoom",settings.zoom},{"aspect",settings.aspect},{"dmd_position",settings.dmd_position},{"viewport",{layout.viewport.x,layout.viewport.y,layout.viewport.w,layout.viewport.h}},{"table",{layout.table.x,layout.table.y,layout.table.w,layout.table.h}},{"dmd",{layout.dmd.x,layout.dmd.y,layout.dmd.w,layout.dmd.h}}});
    }
+   if(!trace.empty() && gamepad.connected()) {
+    auto& row=ui_frames.back();row["controller"]={{"left",gamepad.held(options.settings.keys[0])},{"right",gamepad.held(options.settings.keys[1])},{"pull",gamepad.pull()}};
+    row["flipper_poses"]=pose_sample();
+   }
    if(!capture.empty()&&((frames&&frame+1==frames)||(realtime_steps&&tick==realtime_steps))){Owner<SDL_Surface,SDL_DestroySurface> s(SDL_RenderReadPixels(renderer.get(),nullptr),SDL_DestroySurface);check(bool(s));check(SDL_SaveBMP(s.get(),capture.string().c_str()));}
+   const auto present_started=profiling?SDL_GetTicksNS():0;
    check(SDL_RenderPresent(renderer.get()));
+   if(profiling){const auto finished=SDL_GetTicksNS();render_ns+=present_started-render_started;present_ns+=finished-present_started;measured_frames.push_back(finished-frame_started);}
 #ifdef __EMSCRIPTEN__
    SDL_Delay(1);
 #else
    if(!frames)SDL_Delay(1);
 #endif
   }
-  if(!trace.empty()){std::ofstream f(trace);f<<json{{"tick_count",tick},{"replay_only",replay_only},{"physical_inputs",physical_inputs},{"video_driver",SDL_GetCurrentVideoDriver()},{"renderer",SDL_GetRendererName(renderer.get())},{"fullscreen",bool(SDL_GetWindowFlags(window.get())&SDL_WINDOW_FULLSCREEN)},{"real_wall_ms",double(SDL_GetTicksNS()-started)/1000000.0},{"clamped_frames",clamped},{"states",states},{"globals",globals},{"poses",poses_trace},{"lifecycle",lifecycle},{"highscore_sha256",scores},{"lamp_sha256",lamp_states},{"raw_state_sha256",raw_states},{"ball_pool_sha256",ball_pools},{"aux_state_sha256",aux_states},{"weapon_state",weapon_states},{"clock_state",clock_states},{"mode_aux_sha256",mode_aux_states},{"video_state",video_states},{"variant_state",variant_states},{"presentation",presenting},{"ui_frames",ui_frames},{"highscore_loaded",scores_loaded},{"highscore_file",highscore_path.string()}}.dump()<<'\n';if(!f)throw std::runtime_error("Cannot write trace");}
+  if(profiling){
+   std::sort(measured_frames.begin(),measured_frames.end());
+   const auto percentile=[&](unsigned p){return measured_frames.empty()?std::uint64_t(0):measured_frames[(measured_frames.size()-1)*p/100];};
+   std::ofstream out(performance_path);
+   out<<json{{"table",table},{"ticks",tick},{"frames",measured_frames.size()},
+    {"setup_ns",started-process_started},{"simulation_ns",simulation_ns},
+    {"simulation_thread_cpu_ns",simulation_cpu_ns},{"thread_cpu_supported",simulation_cpu_ns>0},
+    {"post_step_ns",post_step_ns},{"render_prepare_ns",render_ns},{"present_ns",present_ns},
+    {"frame_p50_ns",percentile(50)},{"frame_p95_ns",percentile(95)},{"frame_p99_ns",percentile(99)},
+    {"renderer",SDL_GetRendererName(renderer.get())},{"video_driver",SDL_GetCurrentVideoDriver()},
+    {"lamp_texture_uploads",lamp_texture_uploads},{"trace_enabled",!trace.empty()},
+    {"note","Simulation includes original shared/table/DMD ticks and scheduled input; post-step includes audio/highscore; frame samples exclude final delay."}}.dump(2)<<'\n';
+   if(!out)throw std::runtime_error("Cannot write performance report");
+  }
+  if(!trace.empty()){std::ofstream f(trace);f<<json{{"lamp_texture_uploads",lamp_texture_uploads},{"tick_count",tick},{"replay_only",replay_only},{"physical_inputs",physical_inputs},{"video_driver",SDL_GetCurrentVideoDriver()},{"renderer",SDL_GetRendererName(renderer.get())},{"fullscreen",bool(SDL_GetWindowFlags(window.get())&SDL_WINDOW_FULLSCREEN)},{"real_wall_ms",double(SDL_GetTicksNS()-started)/1000000.0},{"clamped_frames",clamped},{"states",states},{"globals",globals},{"poses",poses_trace},{"lifecycle",lifecycle},{"highscore_sha256",scores},{"lamp_sha256",lamp_states},{"raw_state_sha256",raw_states},{"ball_pool_sha256",ball_pools},{"aux_state_sha256",aux_states},{"weapon_state",weapon_states},{"clock_state",clock_states},{"mode_aux_sha256",mode_aux_states},{"video_state",video_states},{"variant_state",variant_states},{"presentation",presenting},{"ui_frames",ui_frames},{"highscore_loaded",scores_loaded},{"highscore_file",highscore_path.string()}}.dump()<<'\n';if(!f)throw std::runtime_error("Cannot write trace");}
   if(!audio_trace.empty()){std::ofstream f(audio_trace);f<<json{{"events",audio_events},{"enabled",audio_enabled},{"queued_bytes",audio_queued},{"requests",audio_requests},{"driver",audio_enabled?SDL_GetCurrentAudioDriver():"none"}}.dump()<<'\n';if(!f)throw std::runtime_error("Cannot write audio trace");}
   // Independent native reset/replay of the same frozen keyboard schedule.
   if(!trace.empty()&&!replay.empty()){

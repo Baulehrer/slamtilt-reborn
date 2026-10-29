@@ -1975,3 +1975,36 @@ VERIFIED_BOUNDED: first nativefeedback policy(threshold440/duration4/side split1
 20 boundedmanualcontracts/36hashedfixtures/eight acceptanceindices, withreleasegateNOT_ASSESSED. Grave value5000/step verified byPE414946..414a33 andruntime samples49.685→48.58→47.475→46.37M, freezesaftertreasure; floor10M STATIC. Sevenplayedflags sufficeforfinal; fifthalready4 pays35M,3→4 refilldoesnot. ActualRetail behavior retained ratherthanforcingmanualwording.
 
 No newOriginalinstructions (57397total/outside5 unchanged); onlytraceobserverpolicy/tooling. Build0warnings/syntaxPASS;16/16CTestPASS314.25s plusfinalaudit1/1PASS0.04s. SearchCMake target reproduceskeys, auditdependsoneight acceptancechecks. Onekey schedule/freshprofile, nothumanphysicalkeys/listening/allmodes-key-only/fullraster/realtime/release. [Index](../analysis/demon-legal-audit-island.json).
+
+
+INPUT-GAMEPAD-001 — Native SDL controller bridge
+Claim: one controller adapter drives the existing actions in the menu and all4native tables, including Mean's polled keys.
+Evidence: build/native/gamepad-input.json (six real-SDL virtual contract groups); build/controller-acceptance/report.json (native ball motion, both flipper pose changes, options, focus release and Back return for Mean/Pirate/Space/Demon; menu navigation/options/cancel/quit); corresponding AArch64 QEMU controller report and four-table/import smokes in build/arm64-controller-candidate/. Launcher14 cases in build/batocera-launcher-test.json.
+Original force boundary: mean_step.cpp::mean_launch_kick writes the fixed -0x40000 launch value; the new input invokes existing digital handlers instead of scaling it.
+Confidence: VERIFIED for controlled virtual/native/QEMU scope; physical Pi graphics/audio/controller latency UNKNOWN. Publishedv1.0 assets untouched.
+
+## Browser verification 2026-10-29
+WEB-CANVAS-20261029 — Vivaldi baseline compositor capture was 4x4 pixels while native steps advanced. Explicit canvas CSS width/height fixes visible rendering. Final compressed HTML SHA and three browser reports: build/web-release/compact-verification.json. All reports reference the identical final HTML hash; actual input, simulation traces, changing pixels, fullscreen and IDBFS reload checked. Firefox/Safari not tested.
+
+## OPT-LAMP-20261029
+Claim: Space/Demon can skip unchanged immutable off/on lamp texture uploads without changing gameplay or pixels.
+Evidence: tools/verify_lamp_upload_cache.py compares old/new Release over 4,000 steps, all non-wall-clock state vectors and full BMP bytes. Original initialized lamp counts at image offset 0x6c6a4 are 48/52. Generated report: build/lamp-cache-final/report.json. Compiler-profile evidence and five-run CPU/memory reports indexed in docs/STATUS.md.
+Confidence: VERIFIED for tested PC DAT scenarios; no universal GPU/Amiga-path performance claim.
+
+## OPT-STAGES-20261029
+Claim: In bounded Space/Demon release replays on this host, rendering/presentation exceeds original shared/table simulation time.
+Evidence: 20 actual runs indexed in build/port-stage-profile/summary.json; 5 repetitions per table/renderer, 4,000 ticks each. Input-only JSON preserves original inputs exactly. All trace paths disabled for timing. Separate --performance parity check preserves full prior state vectors and screenshots.
+Confidence: VERIFIED for observed bounded runs. SDL present is wall time including submission/compositor effects; no pure GPU duration or Pi performance claim.
+
+## Shared engine experiment — 2026-10-29
+- SLAM_SHARED_ENGINE Linux-only opt-in; normal builds unchanged. Relative build RPATH verified after relocation; internal function binding avoids PLT interposition overhead.
+- Exact states and BMPs over 4,000 steps on all four tables with final shared library: build/shared-engine-final-parity/report.json and build/shared-engine-final-retail/report.json.
+- About 44% less stripped gameplay-program storage and 41% less gzip archive, counting shared library; exact final sizes/hashes: build/shared-engine-size/report.json. This covers two gameplay frontends and engine, not a complete distribution.
+- NOT promoted: wall-time phase regressions exceed 5% for Demon in some trials; noisy compositor timing and PIC costs need separation. Five-run measurements: build/shared-engine-performance/report.json; first interposition trial retained separately.
+- GPU/audio bounded timings: build/gpu-audio-profile/summary.json. Accelerated dummy-audio samples do not establish real-time audio decoding cost. Next: CPU-only timing and controlled affinity for shared-library assessment; Windows/ARM64 packaging remains open.
+
+## CPU-bound validation and safe archive reduction — 2026-10-29
+- Linux opt-in thread CPU timing separates simulation CPU from wall time; unsupported platforms explicitly report no CPU clock. Shared compiler-local binding reduced the observed overhead from 19–23% to 2–4% in five alternating 12,000-step repetitions. OpenGL tail-frame variance still blocks default adoption. Decision data: build/shared-engine-cpu-performance/report.json; earlier trial retained as before-compiler-binding.json.
+- Final shared-engine state/BMP parity: 12,000 steps on each of four tables, build/shared-engine-local-parity/report.json and build/shared-engine-local-retail/report.json. Runtime installation bundles the matching private engine library, resolved from package lib/; no default runtime change.
+- Optional `tools/slamtilt-pack --compression xz`: full static package 10,315,894 -> 6,632,996 bytes (-35.70%), tar payload exactly identical to gzip. Manifest hashes and no-original-assets check pass; packaged four-table 400-step smokes retain exact states/BMPs. Evidence: build/shared-engine-package/static-compact-verification.json, build/static-package-{mean-pirate,retail}/report.json.
+- Local Linux candidates only, no release update. Remaining: stable GPU tail timing, older Linux and ARM64/Windows validation, full gameplay audit beyond tested scenarios.

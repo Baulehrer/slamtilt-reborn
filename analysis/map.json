@@ -292,7 +292,26 @@
       ],
       "confidence": 0.6,
       "port_strategy": "SDL events map to game actions",
-      "next_action": "Trace input state reads; compiled pad helper"
+      "next_action": "Trace input state reads; compiled pad helper",
+      "native_controller": {
+        "status": "VERIFIED",
+        "scope": "native host and AArch64 QEMU with virtual SDL gamepads; physical hardware unverified",
+        "files": [
+          "src/input/gamepad_input.h",
+          "src/frontend/gamepad_overlay.h",
+          "docs/controllers.md"
+        ],
+        "evidence": [
+          "INPUT-GAMEPAD-001",
+          "build/controller-acceptance/report.json",
+          "build/native/gamepad-input.json",
+          "build/arm64-controller-candidate/gamepad-input-qemu.json"
+        ],
+        "confidence": 0.98,
+        "physics_changes": false,
+        "physical_hardware_verified": false,
+        "next_action": "Physical Pi/Batocera display, audio, mapping and hotplug acceptance"
+      }
     },
     "physics": {
       "status": "PARTIAL",
@@ -1148,6 +1167,30 @@
       "confidence": 1.0,
       "scope": "93 actual font pixel/width contexts inclvirtual lift ABI;5436terminalpixels; native winner/failure callback +threeSDL captures; scale/audio/fulloriginalframe excluded",
       "next_action": "Missing minigame countdown/event sample through existing audio pipeline"
+    },
+    "native_release_optimization": {
+      "status": "PARTIAL",
+      "confidence": 0.95,
+      "evidence": [
+        "build/shared-engine-cpu-performance/report.json",
+        "build/shared-engine-local-parity/report.json",
+        "build/shared-engine-local-retail/report.json",
+        "build/shared-engine-size/static-compression.json",
+        "build/shared-engine-local-parity/report.json",
+        "build/shared-engine-local-retail/report.json",
+        "build/shared-engine-package/static-compact-verification.json"
+      ],
+      "shared_engine_default": false,
+      "compression_options": [
+        "gzip",
+        "xz"
+      ],
+      "next_action": "Resolve GPU tail-time variance; validate static XZ candidate on older Linux and ARM64; keep shared engine opt-in",
+      "shared_cpu_delta_percent": {
+        "space": 4.18,
+        "demon": 2.39
+      },
+      "xz_package_verified": true
     }
   },
   "mean_demo_gameplay": {

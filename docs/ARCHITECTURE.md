@@ -1498,3 +1498,11 @@ Next: Audit Pirate manual-rule completion against existing end-to-end evidence a
 
 
 PIRATE-COMPLETION-038 final verification: 6/6 affected CTests PASS147.73s; modern/GCC12 builds0warnings;12actualWayland/PipeWire event cases PASS. RC1 fullscreen real-clock natural game15600steps/78.0398s matches10Originalvectors and233audio requests,0clampedframes;15.83M/ABC/GameOver/F1 andprivate saved-score fresh-process reload/no-rewrite PASS. Actual Debian12 import/25792game+90340rule steps andrelocated archive pass. Static automatic-throw PE snippets:`analysis/pirate-knife-auto-static.json`. Exactcommands/logs retained inislandJSON. NoGitmetadata/configuredformatter/linter;Python syntax,JSON/index references and48semanticcontracts PASS.
+
+
+Native controller adapter (2026-10-28)
+`src/input/gamepad_input.h` owns SDL gamepads and aggregates virtual key levels with the existing keyboard actions. All four frontend loops and the main menu consume it; Mean's polled keyboard path explicitly merges pad state. Menus have stable navigation, while game actions follow persisted pad/button and keyboard bindings. RT release emits one short original-Enter pulse; no physics changes. Controls use neutral barriers on focus/modal/remap/device changes. `gamepad_overlay.h` displays real trigger pull.
+Batocera launcher preflights native import once from a user data folder, preserves profiles and SDL mapping DBs, and does not generate pad2key mappings. Virtual/QEMU verification only; physical board/controller status remains UNKNOWN.
+
+## Renderer optimization delta — 2026-10-29
+Retail slice (Space/Demon) now keeps the last uploaded immutable lamp variant per SDL texture. Session-local initialization uses -1, so every texture is initialized before first draw; variant changes upload before drawing. Tick/state evaluation and composition order are unchanged. Trace exposes lamp_texture_uploads. Optional CMake SLAM_RELEASE_COMPACT and SLAM_RELEASE_LTO preserve default build behavior; experiment guide: docs/optimization.md.

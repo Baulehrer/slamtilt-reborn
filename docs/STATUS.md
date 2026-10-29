@@ -1,4 +1,11 @@
-# Current status — 2026-10-27
+# Current status — 2026-10-29
+
+## Version 1.1 release
+
+- Original-inspired menu/options screenshots, native controller support, smaller browser download and Vivaldi canvas fix. Standard downloads retain the static engine.
+- New Linux AppImage/TAR.XZ, unsigned Windows installer/ZIP, single HTML and ARM64 preview built from 1.1.
+- Release evidence and limitations: releases/v1.1/ACCEPTANCE.md. Previous v1.0 artifacts remain unchanged.
+
 
 ## Observed asset-read island / Demon revision3 — 071
 
@@ -1326,3 +1333,43 @@ Ready: build/compat/releases/slamtilt-mean-rc-pythonfree-data/play-mean. Import 
 PIRATE-COMPLETION-038 final verification: 6/6 affected CTests PASS147.73s; modern/GCC12 builds0warnings;12actualWayland/PipeWire event cases PASS. RC1 fullscreen real-clock natural game15600steps/78.0398s matches10Originalvectors and233audio requests,0clampedframes;15.83M/ABC/GameOver/F1 andprivate saved-score fresh-process reload/no-rewrite PASS. Actual Debian12 import/25792game+90340rule steps andrelocated archive pass. Static automatic-throw PE snippets:`analysis/pirate-knife-auto-static.json`. Exactcommands/logs retained inislandJSON. NoGitmetadata/configuredformatter/linter;Python syntax,JSON/index references and48semanticcontracts PASS.
 
 050 final verification: build0warnings; 5/5 final targeted CTests PASS78.34s. All25 distinct affected tests pass across runs: broader24-test run23PASS/1audio timeout180s, unchanged audio aggregate separatelyPASS164.23s. No timeouts/assertions weakened. Python syntax, PE hashes, seven fixture contracts, six SDL-key cases, JSON/evidence links and31-fixture audit integrity PASS. No Git metadata/configured formatter/linter; no full-suite claim. Logs and commands in050islandJSON.
+
+
+2026-10-28 — Native controller/Batocera candidate
+- IMPLEMENTED shared gamepad input in menu/options and Mean/Pirate/Space/Demon, saved pad bindings, mixed input, RT pull/release and neutral barriers. Original launch force unchanged.
+- VERIFIED virtual SDL6 contract groups, actual four-table controller flow + menu, AArch64 QEMU controller/menu/import/table smokes; launcher14 cases. Physical Pi/controller/GPU/audio remains unverified.
+- Candidate: build/arm64-controller-candidate/slamtilt-reborn-linux-aarch64.tar.gz. Publishedv1.0 unchanged. See controllers.md and packaging/batocera/README.md.
+
+## Menu refresh verification (2026-10-28)
+- Original-art Reborn menu and matching options implemented; classic remains selectable.
+- Six option categories captured at 800x600, 1280x800, 1920x1080, 2560x1600 (SDL dummy).
+- Actual OpenGL captures: main/options/preview, window 1566x946, render 2506x1514, pixel density ~1.6003.
+- Evidence: build/menu-review/gpu-{main,options,preview}.json and PNGs; options-matrix.jpg.
+- port_options, main_menu_flow, original_menu_pixels, gamepad_input passed. No release published.
+
+## Browser verification 2026-10-29
+Browser HTML: Vivaldi 4x4 canvas collapse fixed by explicit stage-filling CSS. Compact offline single HTML 3,025,140 bytes (78.4% reduction); 19 checks each on Chromium, Vivaldi, Brave. Local candidate build/web-release/Slamtilt-Reborn.html; published release unchanged.
+
+## Release optimization / lamp upload cache — 2026-10-29
+- Space/Demon immutable lamp-frame cache: 48,000 -> 1,026 and 52,000 -> 736 uploads across 1,000 rendered frames. State vectors and full BMP exact over 4,000 ticks per table.
+- Five 8,000-tick, trace-free software-renderer samples: Space median wall -9.0%, Demon -1.46%; RSS effectively unchanged. Includes startup/replay JSON, not pure simulation or GPU frame latency.
+- Optional compact+LTO stripped native sizes: menu -12.54%, slamview -2.78%, slamslice -1.61%. Mean/Pirate 4,000-tick profile parity and BMP exact; Space/Demon profile parity also verified. Flags remain opt-in pending CPU/platform benchmarks.
+- Evidence: build/optimization-size/report.json, build/optimization-profile-verification/report.json, build/optimization-compact-verification/report.json, build/lamp-cache-benchmark/summary.json. Windows/ARM64/HTML optimization-profile validation remains open; no release changed.
+
+## Phase profiling — 2026-10-29
+- Optional slamslice --performance-output reports setup/simulation/post-step/render/present and frame p50/p95/p99; disabled path retains normal gameplay. Profiling enabled: state vectors and BMP exact over 4,000 steps per Space/Demon.
+- Five runs each, input-only schedules, 4,000 steps per run, software/dummy vs OpenGL/actual Wayland, no trace/audio: original shared/table/DMD tick average 22–24us on this x86-64 host. Software presentation dominates; no physics simplification justified.
+- Evidence: build/port-stage-profile/summary.json; build/performance-parity/report.json. Audio/GPU-effects cost, Mean profiling and ARM64/Windows timing remain open.
+
+## Shared engine experiment — 2026-10-29
+- SLAM_SHARED_ENGINE Linux-only opt-in; normal builds unchanged. Relative build RPATH verified after relocation; internal function binding avoids PLT interposition overhead.
+- Exact states and BMPs over 4,000 steps on all four tables with final shared library: build/shared-engine-final-parity/report.json and build/shared-engine-final-retail/report.json.
+- About 44% less stripped gameplay-program storage and 41% less gzip archive, counting shared library; exact final sizes/hashes: build/shared-engine-size/report.json. This covers two gameplay frontends and engine, not a complete distribution.
+- NOT promoted: wall-time phase regressions exceed 5% for Demon in some trials; noisy compositor timing and PIC costs need separation. Five-run measurements: build/shared-engine-performance/report.json; first interposition trial retained separately.
+- GPU/audio bounded timings: build/gpu-audio-profile/summary.json. Accelerated dummy-audio samples do not establish real-time audio decoding cost. Next: CPU-only timing and controlled affinity for shared-library assessment; Windows/ARM64 packaging remains open.
+
+## CPU-bound validation and safe archive reduction — 2026-10-29
+- Linux opt-in thread CPU timing separates simulation CPU from wall time; unsupported platforms explicitly report no CPU clock. Shared compiler-local binding reduced the observed overhead from 19–23% to 2–4% in five alternating 12,000-step repetitions. OpenGL tail-frame variance still blocks default adoption. Decision data: build/shared-engine-cpu-performance/report.json; earlier trial retained as before-compiler-binding.json.
+- Final shared-engine state/BMP parity: 12,000 steps on each of four tables, build/shared-engine-local-parity/report.json and build/shared-engine-local-retail/report.json. Runtime installation bundles the matching private engine library, resolved from package lib/; no default runtime change.
+- Optional `tools/slamtilt-pack --compression xz`: full static package 10,315,894 -> 6,632,996 bytes (-35.70%), tar payload exactly identical to gzip. Manifest hashes and no-original-assets check pass; packaged four-table 400-step smokes retain exact states/BMPs. Evidence: build/shared-engine-package/static-compact-verification.json, build/static-package-{mean-pirate,retail}/report.json.
+- Local Linux candidates only, no release update. Remaining: stable GPU tail timing, older Linux and ARM64/Windows validation, full gameplay audit beyond tested scenarios.

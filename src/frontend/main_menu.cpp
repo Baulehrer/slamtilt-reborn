@@ -283,6 +283,8 @@ int main(int argc, char **argv) {
         renderer_owner(renderer, SDL_DestroyRenderer);
     SDL_SetRenderVSync(renderer, 1);
 
+    slam::GamepadInput gamepad;
+    json controller_frames=json::array();
     PortOptions options;
     options.full_controls = false;
     options.load(true);
@@ -460,7 +462,7 @@ int main(int argc, char **argv) {
           slam::RebornMenu::regions(w, h, !options.settings.modern_menu);
       const auto source_boxes=slam::RebornMenu::source_regions(w,h,!options.settings.modern_menu);
       SDL_Event e;
-      while (SDL_PollEvent(&e)) {
+      while (gamepad.poll(e,options.settings.keys,options.settings.gamepad_buttons,true,options.gamepad_binding())) {
         if (e.type == SDL_EVENT_QUIT ||
             e.type == SDL_EVENT_WINDOW_CLOSE_REQUESTED)
           running = false;
@@ -482,7 +484,9 @@ int main(int argc, char **argv) {
             selected = selected == 5 ? 4 : std::min(6, selected + 1);
           else if (e.key.key == SDLK_RETURN || e.key.key == SDLK_SPACE)
             activate = true;
-          else if (e.key.key == SDLK_O) {
+          else if (e.key.key == SDLK_V) {
+            menu_view.preview_open = !menu_view.preview_open;
+          } else if (e.key.key == SDLK_O) {
             selected = 4;
             activate = true;
           } else if(e.key.key==SDLK_F3){
@@ -510,6 +514,13 @@ int main(int argc, char **argv) {
             continue;
           SDL_FPoint p{x * w / ww, y * h / wh};
           if(e.type==SDL_EVENT_MOUSE_BUTTON_DOWN&&e.button.button==SDL_BUTTON_LEFT){
+            auto preview_box = boxes[6];
+            preview_box.y -= 29.f * (preview_box.h / 25.f);
+            preview_box.h *= 22.f / 25.f;
+            if(options.settings.modern_menu && SDL_PointInRectFloat(&p,&preview_box)) {
+              menu_view.preview_open = !menu_view.preview_open;
+              continue;
+            }
             bool handled=false;for(unsigned i=0;i<2;++i)if(SDL_PointInRectFloat(&p,&source_boxes[i])){choose_source(i?slam::AssetSource::AmigaAdf:slam::AssetSource::WindowsDat);handled=true;}
             if(handled)continue;
           }
@@ -563,6 +574,7 @@ int main(int argc, char **argv) {
         SDL_DestroySurface(s);
       }
       SDL_RenderPresent(renderer);
+      if(!trace.empty() && gamepad.connected())controller_frames.push_back({{"event","controller_frame"},{"selected",selected},{"options_open",options.open}});
       ++menu_frames;
       SDL_Delay(8);
     }
@@ -570,7 +582,15 @@ int main(int argc, char **argv) {
     save();
     if (!trace.empty()) {
       std::ofstream f(trace);
+      int logical_w = 0, logical_h = 0, pixel_w = 0, pixel_h = 0;
+      SDL_GetWindowSize(window, &logical_w, &logical_h);
+      SDL_GetRenderOutputSize(renderer, &pixel_w, &pixel_h);
       f << json{{"project", "Slamtilt - Reborn"},
+                {"renderer", SDL_GetRendererName(renderer)},
+                {"window_size", {logical_w, logical_h}},
+                {"render_size", {pixel_w, pixel_h}},
+                {"pixel_density", SDL_GetWindowPixelDensity(window)},
+                {"preview_open", menu_view.preview_open},
                 {"frames", menu_frames},
                 {"elapsed_ms", (SDL_GetTicksNS() - menu_started) / 1e6},
                 {"selected", selected},
@@ -580,6 +600,7 @@ int main(int argc, char **argv) {
                 {"menu_style",
                  options.settings.modern_menu ? "reborn" : "classic"},
                 {"events", journal},
+                {"controller_frames",controller_frames},
                 {"status", status}}
                .dump(2)
         << '\n';

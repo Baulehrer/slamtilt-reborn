@@ -1,0 +1,132 @@
+{
+  "windows": {
+    "events": [
+      {
+        "event": "launched",
+        "table": "mean"
+      },
+      {
+        "event": "returned",
+        "exit_code": 0,
+        "table": "mean"
+      },
+      {
+        "event": "launched",
+        "table": "pirate"
+      },
+      {
+        "event": "returned",
+        "exit_code": 0,
+        "table": "pirate"
+      },
+      {
+        "event": "launched",
+        "table": "space"
+      },
+      {
+        "event": "returned",
+        "exit_code": 0,
+        "table": "space"
+      },
+      {
+        "event": "launched",
+        "table": "demon"
+      },
+      {
+        "event": "returned",
+        "exit_code": 0,
+        "table": "demon"
+      }
+    ],
+    "passed": true,
+    "installer_install_uninstall_profile_retained": true,
+    "installer_version": "1.1.0.0"
+  },
+  "older_linux": {
+    "events": [
+      {
+        "event": "launched",
+        "table": "mean"
+      },
+      {
+        "event": "returned",
+        "exit_code": 0,
+        "table": "mean"
+      },
+      {
+        "event": "launched",
+        "table": "pirate"
+      },
+      {
+        "event": "returned",
+        "exit_code": 0,
+        "table": "pirate"
+      },
+      {
+        "event": "launched",
+        "table": "space"
+      },
+      {
+        "event": "returned",
+        "exit_code": 0,
+        "table": "space"
+      },
+      {
+        "event": "launched",
+        "table": "demon"
+      },
+      {
+        "event": "returned",
+        "exit_code": 0,
+        "table": "demon"
+      }
+    ],
+    "passed": true,
+    "runtime": "Debian 12 / glibc 2.36; container network disabled, checkout absent, DAT-only import"
+  },
+  "arm64": {
+    "qemu_tables": {
+      "mean": {
+        "ticks": 9,
+        "passed": true
+      },
+      "pirate": {
+        "ticks": 12,
+        "passed": true
+      },
+      "space": {
+        "ticks": 12,
+        "passed": true
+      },
+      "demon": {
+        "ticks": 12,
+        "passed": true
+      }
+    },
+    "isolated_dat_only_import": true,
+    "backend_virtual_pad": true,
+    "physical_hardware_verified": false
+  },
+  "linux-mean-pirate": {
+    "tables": [
+      "mean",
+      "pirate"
+    ],
+    "ticks_each": 4000,
+    "state_and_full_bmp_exact": true
+  },
+  "linux-retail": {
+    "tables": [
+      "space",
+      "demon"
+    ],
+    "ticks_each": 4000,
+    "state_and_full_bmp_exact": true
+  },
+  "source_export": {
+    "three_frontends_build_without_original_data": true,
+    "public_unit_tests": 4,
+    "local_audio_dependency_present": false,
+    "release_builds_include_libxmp": true
+  }
+}

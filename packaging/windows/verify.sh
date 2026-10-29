@@ -10,4 +10,6 @@ export WINEDEBUG=-all
 export WINEPREFIX=/workspace/build/windows-release/wineprefix
 mkdir -p "$WINEPREFIX"
 /usr/lib/wine/wine64 build/windows-release/native/windows_smoke.exe
-python3 tools/slamtilt-windows-pack --output build/windows-release/artifacts
+if [ "${SLAM_WINDOWS_SKIP_PACK:-0}" != 1 ]; then
+ python3 tools/slamtilt-windows-pack --output "${SLAM_WINDOWS_OUTPUT:-build/windows-release/artifacts}"
+fi

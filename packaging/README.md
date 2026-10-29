@@ -24,7 +24,7 @@ The runtime builder bundles SDL3/libxmp and records required ABI versions. The A
 
 ```sh
 docker build -t slamtilt-windows-toolchain:bookworm packaging/windows
-docker run --rm -v "$PWD:/workspace" slamtilt-windows-toolchain:bookworm \
+docker run --rm -w /workspace -v "$PWD:/workspace" slamtilt-windows-toolchain:bookworm \
   sh -c 'sh packaging/windows/build.sh && sh packaging/windows/verify.sh'
 ```
 

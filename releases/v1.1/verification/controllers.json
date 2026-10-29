@@ -1,0 +1,73 @@
+{
+  "status": "PASS",
+  "scope": "actual frontend code, SDL virtual gamepad identity + scheduled pad/focus events, dummy video/audio; no physical hardware",
+  "probe_sha256": "8b8cfb87f91d255cbc7c4f560fa9bc5160a778ac3f6b4f77c7d45190d15f34e5",
+  "tables": {
+    "mean": {
+      "tick_count": 563,
+      "launch": "RT pull/release",
+      "ball_range_xy": [
+        263.6673889160156,
+        487.51695251464844
+      ],
+      "flipper_pose_range": [
+        8704,
+        8704
+      ],
+      "options": true,
+      "focus_release": true,
+      "Back_returns": true
+    },
+    "pirate": {
+      "tick_count": 570,
+      "launch": "South/A",
+      "ball_range_xy": [
+        309.75,
+        581.990234375
+      ],
+      "flipper_pose_range": [
+        9054,
+        9054
+      ],
+      "options": true,
+      "focus_release": true,
+      "Back_returns": true
+    },
+    "space": {
+      "tick_count": 567,
+      "launch": "RT pull/release",
+      "ball_range_xy": [
+        308.75,
+        582.9934387207031
+      ],
+      "flipper_pose_range": [
+        8704,
+        8704
+      ],
+      "options": true,
+      "focus_release": true,
+      "Back_returns": true
+    },
+    "demon": {
+      "tick_count": 572,
+      "launch": "South/A",
+      "ball_range_xy": [
+        307.99998474121094,
+        589.9980316162109
+      ],
+      "flipper_pose_range": [
+        8704,
+        8704
+      ],
+      "options": true,
+      "focus_release": true,
+      "Back_returns": true
+    }
+  },
+  "menu": {
+    "navigated": true,
+    "opened_options": true,
+    "cancelled_options": true,
+    "quit_via_controller": true
+  }
+}

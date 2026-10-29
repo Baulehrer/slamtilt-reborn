@@ -1,3 +1,4 @@
+#include "frontend/gamepad_overlay.h"
 #include "frontend/window_mode.h"
 #include "frontend/pirate_play.h"
 #include "assets/asset_source.h"
@@ -128,6 +129,7 @@ int run_pirate_play(int argc,char**argv) {
     Owner<SDL_Renderer,SDL_DestroyRenderer> renderer(create_presentation_renderer(window.get(),!frames||realtime_ms),SDL_DestroyRenderer);
     if(!renderer)throw std::runtime_error(SDL_GetError());
     Presentation presentation(renderer.get());
+    slam::GamepadInput gamepad;
     PortOptions options;options.load(!frames&&!realtime_ms);
     options.shaders_available=presentation.available();options.shader_status=presentation.status();
     if(fullscreen)options.settings.fullscreen=true;
@@ -254,7 +256,7 @@ int run_pirate_play(int argc,char**argv) {
         }
       }
       SDL_Event event;
-      while(SDL_PollEvent(&event)){
+      while(gamepad.poll(event,options.settings.keys,options.settings.gamepad_buttons,options.open||paused,options.gamepad_binding())){
         if(!audio_acceptance_path.empty()&&(event.type==SDL_EVENT_WINDOW_FOCUS_LOST||event.type==SDL_EVENT_WINDOW_FOCUS_GAINED||event.type==SDL_EVENT_WINDOW_MINIMIZED||event.type==SDL_EVENT_WINDOW_RESTORED))
           audio_window_events.push_back({{"frame",rendered},{"type",event.type},{"window_id",event.window.windowID},{"time",event.common.timestamp}});
         if(event.type==SDL_EVENT_QUIT)running=false;
@@ -463,6 +465,7 @@ int run_pirate_play(int argc,char**argv) {
         ui.text(renderer.get(),"GAME OVER  ·  R / F1: New Game",28,float(height)-53,20,{255,220,160,255},true);
       }
       if(!shot_path.empty())ui.text(renderer.get(),"DIAGNOSTIC SHOTS",20,16,16,{255,220,160,255},true);
+      if(!options.open)draw_gamepad_pull(renderer.get(),gamepad,height);
       options.draw(renderer.get(),width,height);
       ++rendered;
       if((realtime_steps&&session.ticks()>=realtime_steps)||(frames&&rendered>=frames)||(realtime_ms&&SDL_GetTicksNS()-timing_profile.start>=std::uint64_t(realtime_ms)*1000000)){
@@ -477,6 +480,11 @@ int run_pirate_play(int argc,char**argv) {
         {"audio_device_paused",audio?audio->device_paused():true},
 #endif
         {"audio_queued_bytes",audio_queued}});
+      if(!trace_path.empty() && gamepad.connected()) {
+        auto& frame=session_ui_frames.back();
+        frame["controller"]={{"left",gamepad.held(options.settings.keys[0])},{"right",gamepad.held(options.settings.keys[1])},{"pull",gamepad.pull()}};
+        frame["flipper_poses"]=session.poses();
+      }
       const auto present_begin=SDL_GetTicksNS();SDL_RenderPresent(renderer.get());
       if(!timing_path.empty())timing_profile.frames.push_back({frame_begin-timing_profile.start,SDL_GetTicksNS()-frame_begin,render_begin-sim_begin,present_begin-render_begin,SDL_GetTicksNS()-present_begin,session.ticks(),session.ticks()-ticks_begin,advancing,audio_queued,accepted_delta,raw_delta});
 #ifdef __EMSCRIPTEN__

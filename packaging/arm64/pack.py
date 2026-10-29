@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Stage the cross build without running host ldd or mislabelling its architecture."""
-import hashlib,json,re,shutil,subprocess,tarfile
+import hashlib,json,os,re,shutil,subprocess,tarfile
 from pathlib import Path
-root=Path('/workspace'); work=root/'build/arm64-release'; stage=work/'slamtilt-reborn-linux-aarch64'
+root=Path('/workspace'); work=Path(os.environ.get('SLAM_ARM64_OUT',str(root/'build/arm64-release'))); stage=work/'slamtilt-reborn-linux-aarch64'
 if stage.exists(): shutil.rmtree(stage)
 for component in ['Runtime','FrontendRuntime']:
  subprocess.run(['cmake','--install',str(work/'native'),'--prefix',str(stage),'--component',component,'--strip'],check=True)
@@ -25,7 +25,7 @@ exec "$here/bin/slamtilt" "$@"
 ''');starter.chmod(0o755);shutil.copy2(starter,stage/'slamtilt')
 shutil.copyfile(root/'packaging/arm64/README.md',stage/'README-ARM64.md')
 shutil.copyfile(root/'packaging/arm64/README.md',stage/'README.txt')
-shutil.copytree(root/'packaging/batocera',stage/'batocera')
+shutil.copytree(root/'packaging/batocera',stage/'batocera',ignore=shutil.ignore_patterns('test_*.py','__pycache__'))
 proof=[]; versions=set()
 for binary in [*(stage/'bin').iterdir(),stage/'slamimport',*lib.iterdir()]:
  header=subprocess.check_output(['readelf','-h',str(binary)],text=True)

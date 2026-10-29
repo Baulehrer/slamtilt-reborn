@@ -1196,3 +1196,30 @@ Next: Transfer the verified shared engine to Ace of Space, beginning with its or
 
 
 PIRATE-COMPLETION-038 final verification: 6/6 affected CTests PASS147.73s; modern/GCC12 builds0warnings;12actualWayland/PipeWire event cases PASS. RC1 fullscreen real-clock natural game15600steps/78.0398s matches10Originalvectors and233audio requests,0clampedframes;15.83M/ABC/GameOver/F1 andprivate saved-score fresh-process reload/no-rewrite PASS. Actual Debian12 import/25792game+90340rule steps andrelocated archive pass. Static automatic-throw PE snippets:`analysis/pirate-knife-auto-static.json`. Exactcommands/logs retained inislandJSON. NoGitmetadata/configuredformatter/linter;Python syntax,JSON/index references and48semanticcontracts PASS.
+
+
+2026-10-28 — Controller + Pi vertical bundle
+DONE: shared controller-to-existing-action routing; options rebinding/persistence; RT release using original kick; device/focus/modal safety; real native4table/menu probes; Batocera first-import/persistent paths and isolated ARM64 candidate/QEMU validation.
+NEXT: physical64-bit Pi/Batocera run: display/audio, actual pad mappings, unplug/reconnect and four-table switching. No hardware success inferred from QEMU.
+
+## Optimization delta — 2026-10-29
+Implemented and verified Space/Demon lamp upload cache; optional native compact/LTO build profile and repeatable process benchmark tooling.
+Next: profile physics-only vs GPU/audio frame costs with minimal input-only schedules; benchmark compact profile CPU/latency before promoting flags. Cross-platform build checks and diagnostic separation remain outstanding. Do not equate stripped sizes or replay-JSON memory with live gameplay costs.
+
+Phase measurements now separate startup from simulation and presentation. Next high-value work: native GPU-effects/audio phase costs and shared-code/distribution size; retain exact original tick math. Pure physics rewrite is not supported by current measured costs.
+
+## Shared engine experiment — 2026-10-29
+- SLAM_SHARED_ENGINE Linux-only opt-in; normal builds unchanged. Relative build RPATH verified after relocation; internal function binding avoids PLT interposition overhead.
+- Exact states and BMPs over 4,000 steps on all four tables with final shared library: build/shared-engine-final-parity/report.json and build/shared-engine-final-retail/report.json.
+- About 44% less stripped gameplay-program storage and 41% less gzip archive, counting shared library; exact final sizes/hashes: build/shared-engine-size/report.json. This covers two gameplay frontends and engine, not a complete distribution.
+- NOT promoted: wall-time phase regressions exceed 5% for Demon in some trials; noisy compositor timing and PIC costs need separation. Five-run measurements: build/shared-engine-performance/report.json; first interposition trial retained separately.
+- GPU/audio bounded timings: build/gpu-audio-profile/summary.json. Accelerated dummy-audio samples do not establish real-time audio decoding cost. Next: CPU-only timing and controlled affinity for shared-library assessment; Windows/ARM64 packaging remains open.
+
+## CPU-bound validation and safe archive reduction — 2026-10-29
+- Linux opt-in thread CPU timing separates simulation CPU from wall time; unsupported platforms explicitly report no CPU clock. Shared compiler-local binding reduced the observed overhead from 19–23% to 2–4% in five alternating 12,000-step repetitions. OpenGL tail-frame variance still blocks default adoption. Decision data: build/shared-engine-cpu-performance/report.json; earlier trial retained as before-compiler-binding.json.
+- Final shared-engine state/BMP parity: 12,000 steps on each of four tables, build/shared-engine-local-parity/report.json and build/shared-engine-local-retail/report.json. Runtime installation bundles the matching private engine library, resolved from package lib/; no default runtime change.
+- Optional `tools/slamtilt-pack --compression xz`: full static package 10,315,894 -> 6,632,996 bytes (-35.70%), tar payload exactly identical to gzip. Manifest hashes and no-original-assets check pass; packaged four-table 400-step smokes retain exact states/BMPs. Evidence: build/shared-engine-package/static-compact-verification.json, build/static-package-{mean-pirate,retail}/report.json.
+- Local Linux candidates only, no release update. Remaining: stable GPU tail timing, older Linux and ARM64/Windows validation, full gameplay audit beyond tested scenarios.
+
+## Release 1.1
+Release artifacts, screenshots, changelog and SHA256 manifest prepared and verified; preserve v1.0. Shared-engine experiments remain opt-in. Follow-ups: stable GPU tail timing, Firefox/Safari, physical Windows/Pi/Batocera.

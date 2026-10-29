@@ -2,6 +2,9 @@
 """Add embedded dependency notices without introducing companion runtime files."""
 import argparse
 import html
+import base64
+import gzip
+import re
 from pathlib import Path
 
 parser = argparse.ArgumentParser()
@@ -27,6 +30,21 @@ for name, path in notices:
 parts.append('</details>')
 data = args.input.read_text()
 assert '</body>' in data
+# Compress the generated engine, including embedded Wasm, inside the same HTML.
+# The bootstrap uses browser APIs only; no CDN, server, or companion file.
+pattern = re.compile(r'<script[^>]*>(.*?)</script>', re.S)
+scripts = list(pattern.finditer(data))
+engine = max(scripts, key=lambda m: len(m.group(1)))
+if len(engine.group(1)) < 100000:
+    raise SystemExit('Generated engine script missing; refusing to package')
+packed = base64.b64encode(gzip.compress(engine.group(1).encode(), compresslevel=9, mtime=0)).decode()
+loader = """<script>(async()=>{try{
+if(typeof DecompressionStream!=='function')throw Error('This browser needs gzip decompression support.');
+const b=Uint8Array.from(atob('PAYLOAD'),c=>c.charCodeAt(0));
+const source=await new Response(new Blob([b]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+const script=document.createElement('script');script.id='mainScript';script.textContent=source;document.body.appendChild(script);
+}catch(e){status('Engine could not load: '+e.message,true)}})();</script>""".replace('PAYLOAD', packed)
+data = data[:engine.start()] + loader + data[engine.end():]
 args.output.parent.mkdir(parents=True, exist_ok=True)
 args.output.write_text(data.replace('</body>', ''.join(parts) + '</body>'))
 print(args.output)

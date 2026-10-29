@@ -25,9 +25,24 @@ async function run() {
   if(assetSource==='amiga' && files.length!==5)throw Error('Select exactly five ADF fixtures');
   for (const f of files) if (!fs.existsSync(f)) throw new Error('Missing private fixture: ' + f);
   const playwright = require(path.join(root, 'build/web-release/test-deps/node_modules/playwright-core'));
-  browser = await playwright.chromium.launch({executablePath: option('--chromium', '/usr/bin/chromium'), headless: true,
+  // Vivaldi's first-run window can expose an uninitialized blank page target.
+  // Initialize it before Playwright's automatic attachment waits on that target.
+  if (option('--cdp', '')) {
+    const targets = await (await fetch(option('--cdp', '') + '/json/list')).json();
+    const blank = targets.find(t => t.type === 'page' && !t.url);
+    if (blank) {
+      const socket = new WebSocket(blank.webSocketDebuggerUrl);
+      await new Promise((resolve, reject) => {
+        socket.onopen = () => socket.send(JSON.stringify({id: 1, method: 'Page.navigate', params: {url: pathToFileURL(html).href}}));
+        socket.onerror = reject;
+        socket.onmessage = () => { socket.close(); resolve(); };
+      });
+    }
+  }
+  browser = option('--cdp', '') ? await playwright.chromium.connectOverCDP(option('--cdp', '')) : await playwright.chromium.launch({executablePath: option('--chromium', '/usr/bin/chromium'), headless: !args.includes('--headed'),
     args: ['--no-sandbox', '--enable-unsafe-swiftshader']});
-  const context = await browser.newContext({viewport: {width: 1280, height: 900}, offline: true});
+  const context = option('--cdp', '') ? browser.contexts()[0] : await browser.newContext({viewport: {width: 1280, height: 900}, offline: true});
+  await context.setOffline(true);
   await context.route(/^(?:https?|wss?):/i, route => route.abort('internetdisconnected'));
   const page = await context.newPage();
   page.setDefaultTimeout(120000);
@@ -92,6 +107,10 @@ async function run() {
   await page.locator('#stage').waitFor({state: 'visible'});
   await page.locator('#canvas').focus();
   await page.waitForTimeout(200);
+  const canvasSize = await page.locator('#canvas').boundingBox();
+  if (!canvasSize || canvasSize.width < 200 || canvasSize.height < 200)
+    throw new Error('Collapsed gameplay canvas: ' + JSON.stringify(canvasSize));
+  check('gameplay canvas has usable display dimensions', canvasSize);
   const playShots = [0, 1, 2].map(i => path.join(output, 'mean-play-' + i + '.png'));
   await page.locator('#canvas').screenshot({path: playShots[0]});
   await page.keyboard.down('Enter'); await page.waitForTimeout(300); await page.keyboard.up('Enter');

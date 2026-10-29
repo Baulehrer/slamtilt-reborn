@@ -5,7 +5,7 @@ from pathlib import Path
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 def main():
- work=ROOT/'build/github-release/v0.1.0-rc1/screenshot-proof';work.mkdir(parents=True,exist_ok=True)
+ work=ROOT/'build/github-release/v1.1/screenshot-proof';work.mkdir(parents=True,exist_ok=True)
  output=ROOT/'docs/screenshots';output.mkdir(exist_ok=True)
  stage=work.parent/'screenshots';stage.mkdir(exist_ok=True)
  binary=ROOT/'build/native';game=ROOT/'build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT';demo=ROOT/'build/corpus/win95/demo-1997/Slam Tilt Demo (Windows, 1996) - SLAMTILT/DAT'

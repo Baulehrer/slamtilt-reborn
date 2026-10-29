@@ -2,7 +2,7 @@
 # Optional maintainer check using private, already verified local data.
 set -eu
 root=/workspace
-out=$root/build/arm64-release
+out="${SLAM_ARM64_OUT:-$root/build/arm64-release}"
 app=$out/slamtilt-reborn-linux-aarch64
 export SDL_VIDEO_DRIVER=dummy SDL_AUDIO_DRIVER=dummy SDL_RENDER_DRIVER=software
 export LD_LIBRARY_PATH="$app/lib:/usr/aarch64-linux-gnu/lib:/usr/lib/aarch64-linux-gnu" QEMU_LD_PREFIX=/usr/aarch64-linux-gnu

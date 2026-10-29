@@ -16,6 +16,7 @@ struct MenuTableView {
 // Presentation only. Own this object inside the renderer's lifetime.
 class RebornMenu {
 public:
+  bool preview_open = false;
   RebornMenu();
   ~RebornMenu();
   RebornMenu(const RebornMenu &) = delete;

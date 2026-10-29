@@ -1,3 +1,4 @@
+#include "frontend/gamepad_overlay.h"
 #include "dmd/mean_dmd_palette.h"
 #include "frontend/port_options.h"
 #ifdef SLAM_PIRATE_SESSION
@@ -253,6 +254,7 @@ int main(int argc, char **argv) {
     if(!renderer)throw std::runtime_error(SDL_GetError());
     slam::Presentation presentation(renderer);
     if(require_gpu && !presentation.available())throw std::runtime_error(presentation.status());
+    slam::GamepadInput gamepad;
     PortOptions options;
     const bool new_layout=options_preview || (frames==0 && !prepared_path.empty());
     options.load(new_layout && !options_preview);
@@ -1150,7 +1152,7 @@ int main(int argc, char **argv) {
         if(rendered==13)key(SDLK_P,SDL_SCANCODE_P);
       }
       SDL_Event event;
-      while (SDL_PollEvent(&event)) {
+      while (gamepad.poll(event,options.settings.keys,options.settings.gamepad_buttons,options.open||paused,options.gamepad_binding())) {
         if (event.type == SDL_EVENT_QUIT || event.type==SDL_EVENT_WINDOW_CLOSE_REQUESTED)
           running = false;
         if(event.type==SDL_EVENT_WINDOW_FOCUS_LOST || event.type==SDL_EVENT_WINDOW_FOCUS_GAINED ||
@@ -1266,7 +1268,7 @@ int main(int argc, char **argv) {
       if(raw_dt>.1f && input_focus&&!minimized&&!paused&&!options.open)++session_clamped;
       const float dt=(!session_replay.empty()&&frames)?0.02f:std::min(.1f,raw_dt);
       previous = now;
-      const bool *keys = SDL_GetKeyboardState(nullptr);
+      const bool *keys = gamepad.keyboard_state();
       scroll += (static_cast<int>(keys[SDL_SCANCODE_DOWN]) -
                  static_cast<int>(keys[SDL_SCANCODE_UP])) *
                 dt * 240;
@@ -1537,6 +1539,7 @@ int main(int argc, char **argv) {
         if(simulation)presentation.draw(dmd_target,layout.dmd,o.visual,true);
         options.shaders_available=presentation.available();options.shader_status=presentation.status();
         if(simulation && simulation->game_over() && !options.open)highscores.draw(renderer,rw,rh);
+        if(!options.open)slam::draw_gamepad_pull(renderer,gamepad,rh);
         options.draw(renderer,rw,rh);
       }
       if (!capture.empty()&&((frames&&rendered+1>=frames)||(realtime_steps&&session_tick==realtime_steps))) {
@@ -1591,6 +1594,11 @@ int main(int argc, char **argv) {
         {"audio_device_paused",audio?audio->device_paused():true},{"audio_queued_bytes",audio?audio->queued_bytes():0},
 #endif
         {"fullscreen",bool(SDL_GetWindowFlags(window)&SDL_WINDOW_FULLSCREEN)}});
+      if(!session_output.empty() && gamepad.connected() && simulation) {
+        auto& frame=session_frames.back();
+        frame["controller"]={{"left",gamepad.held(options.settings.keys[0])},{"right",gamepad.held(options.settings.keys[1])},{"pull",gamepad.pull()}};
+        frame["flipper_poses"]={simulation->flipper_pose(0),simulation->flipper_pose(1),simulation->flipper_pose(2)};
+      }
       frame_ms.push_back((SDL_GetTicksNS()-frame_started)/1e6);
       ++rendered;
       if (frames && rendered >= frames)

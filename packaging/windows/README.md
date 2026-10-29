@@ -4,7 +4,7 @@ Build on a Linux Docker host from the repository root:
 
 ```sh
 docker build -t slamtilt-windows-toolchain:bookworm packaging/windows
-docker run --rm -v "$PWD:/workspace" slamtilt-windows-toolchain:bookworm sh -c 'sh packaging/windows/build.sh && sh packaging/windows/verify.sh'
+docker run --rm -w /workspace -v "$PWD:/workspace" slamtilt-windows-toolchain:bookworm sh -c 'sh packaging/windows/build.sh && sh packaging/windows/verify.sh'
 ```
 
 The build uses MinGW GCC 12 (POSIX threading), SDL 3.4.18 and the existing

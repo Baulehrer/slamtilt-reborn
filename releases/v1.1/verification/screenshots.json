@@ -1,0 +1,68 @@
+[
+  {
+    "name": "main-menu",
+    "command": [
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/native/slamtilt",
+      "--config",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/frontend.json",
+      "--preview-size",
+      "1920x1080",
+      "--frames",
+      "8",
+      "--ui-events",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/main-menu-events.json",
+      "--capture",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/main-menu.bmp",
+      "--trace",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/main-menu.json"
+    ],
+    "sha256": "8c06379b378f832b899b7e6648192f13a40e222f31f20f9257f8020fbab1fdb7",
+    "binary_sha256": "5f870baa9ab8ffbd13eb660382e28e86cd7eda340cb347f29c99f4de20a9cfbb",
+    "renderer": "SDL software",
+    "original_assets_in_runtime": false
+  },
+  {
+    "name": "options-menu",
+    "command": [
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/native/slamtilt",
+      "--config",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/frontend.json",
+      "--preview-size",
+      "1920x1080",
+      "--frames",
+      "8",
+      "--ui-events",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/options-menu-events.json",
+      "--capture",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/options-menu.bmp",
+      "--trace",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/options-menu.json"
+    ],
+    "sha256": "c40a628a2cfd2ebf88ccbf50e34443bdd1def2efaa50195361c32c58ecb66841",
+    "binary_sha256": "5f870baa9ab8ffbd13eb660382e28e86cd7eda340cb347f29c99f4de20a9cfbb",
+    "renderer": "SDL software",
+    "original_assets_in_runtime": false
+  },
+  {
+    "name": "controller-options",
+    "command": [
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/native/slamtilt",
+      "--config",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/frontend.json",
+      "--preview-size",
+      "1920x1080",
+      "--frames",
+      "8",
+      "--ui-events",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/controller-options-events.json",
+      "--capture",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/controller-options.bmp",
+      "--trace",
+      "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/screenshot-proof/controller-options.json"
+    ],
+    "sha256": "0a3a257707b2b2384b9fe7b931bf9c32ae873ec86efb966b386142c523f5bfab",
+    "binary_sha256": "5f870baa9ab8ffbd13eb660382e28e86cd7eda340cb347f29c99f4de20a9cfbb",
+    "renderer": "SDL software",
+    "original_assets_in_runtime": false
+  }
+]

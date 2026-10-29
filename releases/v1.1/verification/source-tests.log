@@ -1,0 +1,13 @@
+Test project /home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/source-build
+    Start  16: pirate_highscore_storage
+1/4 Test  #16: pirate_highscore_storage .........   Passed    0.01 sec
+    Start 136: port_options
+2/4 Test #136: port_options .....................   Passed    0.53 sec
+    Start 283: frontend_runtime_safety
+3/4 Test #283: frontend_runtime_safety ..........   Passed    0.04 sec
+    Start 289: gamepad_input
+4/4 Test #289: gamepad_input ....................   Passed    0.55 sec
+
+100% tests passed out of 4
+
+Total Test time (real) =   1.14 sec

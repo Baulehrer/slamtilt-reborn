@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Slamtilt - Reborn asset-free four-table distribution."""
-import argparse,hashlib,json,platform,re,shutil,subprocess,tempfile
+import argparse,hashlib,json,platform,re,shutil,subprocess,tempfile,gzip,lzma
 from pathlib import Path
 from importlib.machinery import SourceFileLoader
 ROOT=Path(__file__).resolve().parents[1]
 archive=SourceFileLoader('slam_archive',str(ROOT/'tools/slampack')).load_module().archive
 def main():
- p=argparse.ArgumentParser();p.add_argument('--build',type=Path,default=ROOT/'build/native');p.add_argument('--output',type=Path,required=True);p.add_argument('--sdl-license',type=Path,default=Path('/usr/share/licenses/sdl3/LICENSE'));p.add_argument('--xmp-license',type=Path,default=ROOT/'build/libxmp/docs/COPYING');a=p.parse_args();out=a.output.resolve();packed=Path(str(out)+'.tar.gz');
+ p=argparse.ArgumentParser();p.add_argument('--compression',choices=['gzip','xz'],default='gzip');p.add_argument('--build',type=Path,default=ROOT/'build/native');p.add_argument('--output',type=Path,required=True);p.add_argument('--sdl-license',type=Path,default=Path('/usr/share/licenses/sdl3/LICENSE'));p.add_argument('--xmp-license',type=Path,default=ROOT/'build/libxmp/docs/COPYING');a=p.parse_args();out=a.output.resolve();packed=Path(str(out)+('.tar.xz'if a.compression=='xz'else'.tar.gz'));
  if out.exists()or out.is_symlink()or packed.exists()or packed.is_symlink():raise FileExistsError('Destination exists')
  out.parent.mkdir(parents=True,exist_ok=True)
  with tempfile.TemporaryDirectory(dir=out.parent)as tmp:
@@ -31,6 +31,12 @@ def main():
   for binary in [*(stage/'bin').iterdir(),*lib.iterdir()]:
    versions.update(re.findall(r'\b(?:GLIBCXX|GLIBC|CXXABI)_[0-9.]+',subprocess.check_output(['readelf','--version-info',str(binary)],text=True)))
   (stage/'frontend-bundle.json').write_text(json.dumps(dict(format=1,project='Slamtilt - Reborn',architecture=platform.machine(),runtime_requirements=sorted(versions),tables=['mean','pirate','space','demon'],original_assets_included=False,files=files),indent=2)+'\n')
-  staged=Path(tmp)/(out.name+'.tar.gz');archive(stage,staged);stage.rename(out);staged.rename(packed)
+  staged=Path(tmp)/(out.name+'.tar.gz');archive(stage,staged)
+  if a.compression=='xz':
+   compact=Path(tmp)/(out.name+'.tar.xz')
+   with gzip.open(staged,'rb') as source,lzma.open(compact,'wb',preset=6) as destination:
+    shutil.copyfileobj(source,destination)
+   staged=compact
+  stage.rename(out);staged.rename(packed)
  print(packed)
 if __name__=='__main__':main()

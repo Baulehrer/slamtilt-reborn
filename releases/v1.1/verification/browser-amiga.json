@@ -1,0 +1,314 @@
+{
+  "html": "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/assets/Slamtilt-Reborn.html",
+  "asset_source": "amiga",
+  "html_sha256": "382ccf37859582f7af14061edf969775937768e8b8567ea17d14e8364a32098d",
+  "original_assets_packaged": false,
+  "checks": [
+    {
+      "name": "single-file offline file URL loads",
+      "passed": true,
+      "detail": "Ready. Import your game files to begin."
+    },
+    {
+      "name": "actual file-input imports five ADFs and all four tables",
+      "passed": true,
+      "detail": {
+        "source": "amiga",
+        "root": "/user/import-1222599",
+        "entries": [
+          ".",
+          "..",
+          "mean",
+          "pirate",
+          "space",
+          "demon",
+          "amiga-import.json"
+        ]
+      }
+    },
+    {
+      "name": "all four previews contain decoded artwork",
+      "passed": true,
+      "detail": [
+        195,
+        200,
+        196,
+        199
+      ]
+    },
+    {
+      "name": "finite native play returns to menu: mean",
+      "passed": true,
+      "detail": {
+        "steps": 40,
+        "state": {
+          "status": "Your tables are ready. Choose Play table.",
+          "error": false,
+          "stage": "none",
+          "available": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "native trace confirms stepped simulation: mean",
+      "passed": true,
+      "detail": {
+        "ticks": 40,
+        "states": 40
+      }
+    },
+    {
+      "name": "finite native play returns to menu: pirate",
+      "passed": true,
+      "detail": {
+        "steps": 40,
+        "state": {
+          "status": "Your tables are ready. Choose Play table.",
+          "error": false,
+          "stage": "none",
+          "available": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "native trace confirms stepped simulation: pirate",
+      "passed": true,
+      "detail": {
+        "ticks": 44,
+        "states": 45
+      }
+    },
+    {
+      "name": "finite native play returns to menu: space",
+      "passed": true,
+      "detail": {
+        "steps": 40,
+        "state": {
+          "status": "Your tables are ready. Choose Play table.",
+          "error": false,
+          "stage": "none",
+          "available": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "native trace confirms stepped simulation: space",
+      "passed": true,
+      "detail": {
+        "ticks": 40,
+        "states": 41
+      }
+    },
+    {
+      "name": "finite native play returns to menu: demon",
+      "passed": true,
+      "detail": {
+        "steps": 40,
+        "state": {
+          "status": "Your tables are ready. Choose Play table.",
+          "error": false,
+          "stage": "none",
+          "available": [
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "name": "native trace confirms stepped simulation: demon",
+      "passed": true,
+      "detail": {
+        "ticks": 40,
+        "states": 41
+      }
+    },
+    {
+      "name": "gameplay canvas has usable display dimensions",
+      "passed": true,
+      "detail": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 900
+      }
+    },
+    {
+      "name": "rendered canvas changes during real Enter and both Shift key inputs",
+      "passed": true,
+      "detail": {
+        "changed_pixels": [
+          362171,
+          346790
+        ],
+        "caveat": "Visual change alone does not identify ball state."
+      }
+    },
+    {
+      "name": "real interactive session returns with F10",
+      "passed": true,
+      "detail": {
+        "controls": "Enter, left/right Shift, Escape, F10"
+      }
+    },
+    {
+      "name": "native trace confirms ball movement and Escape options",
+      "passed": true,
+      "detail": {
+        "unique_positions": 586,
+        "x_range": 263.8258972167969,
+        "y_range": 487.53021240234375,
+        "ticks": 589
+      }
+    },
+    {
+      "name": "IDBFS persistence survives reload",
+      "passed": true,
+      "detail": {
+        "status": "Ready. Import your game files to begin.",
+        "error": false,
+        "stage": "none",
+        "available": [
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "name": "persisted table plays after reload",
+      "passed": true,
+      "detail": "demon"
+    },
+    {
+      "name": "page fullscreen toggles during real Pirate play and exits cleanly",
+      "passed": true,
+      "detail": true
+    },
+    {
+      "name": "zero external network requests while offline",
+      "passed": true,
+      "detail": 0
+    }
+  ],
+  "network_requests": [],
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)"
+    },
+    {
+      "type": "warning",
+      "text": "emscripten_set_main_loop_timing: Cannot set timing mode for main loop since a main loop does not exist! Call emscripten_set_main_loop first to set one up."
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x19ec00eaaa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x19ec00eaaa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x19ec00eaaa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels"
+    },
+    {
+      "type": "warning",
+      "text": "[.WebGL-0x19ec00eaaa00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)"
+    },
+    {
+      "type": "log",
+      "text": "Rendered 8 frames; palette offset 0x1590c8"
+    },
+    {
+      "type": "warning",
+      "text": "The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)"
+    },
+    {
+      "type": "warning",
+      "text": "emscripten_set_main_loop_timing: Cannot set timing mode for main loop since a main loop does not exist! Call emscripten_set_main_loop first to set one up."
+    },
+    {
+      "type": "warning",
+      "text": "emscripten_set_main_loop_timing: Cannot set timing mode for main loop since a main loop does not exist! Call emscripten_set_main_loop first to set one up."
+    },
+    {
+      "type": "log",
+      "text": "space: 28 native original steps"
+    },
+    {
+      "type": "warning",
+      "text": "emscripten_set_main_loop_timing: Cannot set timing mode for main loop since a main loop does not exist! Call emscripten_set_main_loop first to set one up."
+    },
+    {
+      "type": "log",
+      "text": "demon: 28 native original steps"
+    },
+    {
+      "type": "warning",
+      "text": "The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)"
+    },
+    {
+      "type": "warning",
+      "text": "emscripten_set_main_loop_timing: Cannot set timing mode for main loop since a main loop does not exist! Call emscripten_set_main_loop first to set one up."
+    },
+    {
+      "type": "log",
+      "text": "Rendered d3 frames; palette offset 0x1590c8"
+    },
+    {
+      "type": "warning",
+      "text": "emscripten_set_main_loop_timing: Cannot set timing mode for main loop since a main loop does not exist! Call emscripten_set_main_loop first to set one up."
+    },
+    {
+      "type": "log",
+      "text": "demon: 40 native original steps"
+    },
+    {
+      "type": "warning",
+      "text": "The ScriptProcessorNode is deprecated. Use AudioWorkletNode instead. (https://bit.ly/audio-worklet)"
+    },
+    {
+      "type": "warning",
+      "text": "emscripten_set_main_loop_timing: Cannot set timing mode for main loop since a main loop does not exist! Call emscripten_set_main_loop first to set one up."
+    }
+  ],
+  "screenshots": [
+    "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/verification/browser-amiga/menu-imported.png",
+    "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/verification/browser-amiga/mean-play-0.png",
+    "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/verification/browser-amiga/mean-play-1.png",
+    "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/verification/browser-amiga/mean-play-2.png",
+    "/home/kaufmann/Projects/amiga/slamtilt-port/build/github-release/v1.1/verification/browser-amiga/mean-options.png"
+  ],
+  "selected_tables": [
+    "mean",
+    "pirate",
+    "space",
+    "demon"
+  ],
+  "browser": {
+    "version": "155.0.8059.84",
+    "jspi": true
+  },
+  "passed": true
+}

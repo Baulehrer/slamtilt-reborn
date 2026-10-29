@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "launcher_sha256": "f43a7130a6d794c2f3af259b13addf5d6f2a902bd2a52ba6ccf9874d0bbb6e39",
+  "checks": [
+    "first import uses native CLI, preserves quoted paths and forwards user argv",
+    "successful import is not repeated",
+    "existing partial configuration is preserved without marker",
+    "explicit refresh imports again",
+    "failed import stops launch, writes no marker and retries next time",
+    "missing configuration restores import despite existing marker",
+    "empty configuration restores import",
+    "disabled or absent source opens menu without attempting import",
+    "changed source with launcher marker refreshes import",
+    "SDL mapping precedence and unreadable explicit mapping are handled",
+    "native --config override controls both first import and interactive launch",
+    "explicit native --import bypasses automatic preflight",
+    "interactive game exit code propagates",
+    "missing executable fails clearly"
+  ],
+  "physical_hardware_verified": false
+}

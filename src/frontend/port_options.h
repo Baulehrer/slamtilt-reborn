@@ -63,6 +63,7 @@ public:
   bool shaders_available = false;
   bool full_controls = true;
   bool space_specials = false;
+  bool nudge_controls = false;
   bool main_menu_available = SDL_getenv("SLAM_FRONTEND_SESSION") != nullptr;
   std::string shader_status = "Original SDL rendering";
   enum Option {
@@ -591,8 +592,9 @@ private:
     case 5:
       return {40, 41};
     default:
-      std::vector<int> rows=space_specials?std::vector<int>{17,18,19,37,38}:
-          full_controls?std::vector<int>{17,18,19,20,21,22,37}:std::vector<int>{17,18,19};
+      std::vector<int> rows=space_specials?std::vector<int>{17,18,19,20,21,22,37,38}:
+          full_controls?std::vector<int>{17,18,19,20,21,22,37}:
+          nudge_controls?std::vector<int>{17,18,19,20,21,22}:std::vector<int>{17,18,19};
       const auto keyboard_rows=rows;
       for(int id:keyboard_rows)rows.push_back(id==37?48:id==38?49:42+id-17);
       return rows;

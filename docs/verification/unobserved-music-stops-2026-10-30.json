@@ -1,0 +1,199 @@
+{
+  "status": "BOUNDED_SURVEY",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": {
+    "pirate": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+    "space": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+    "demon": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d"
+  },
+  "functions": [
+    {
+      "table": "pirate",
+      "function_start": "0x435134",
+      "end_exclusive": "0x43515a",
+      "music_stop": "0x435149",
+      "service": "0x80",
+      "code_sha256": "b953108521fb22086ac7333713f6d9b62440254df1f7d7a517815047d5d55002",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "pirate",
+      "function_start": "0x4365c0",
+      "end_exclusive": "0x4365e2",
+      "music_stop": "0x4365db",
+      "service": "0x80",
+      "code_sha256": "94c0f4b3e219fc86f565b97407b413670ee2fb5b27bbbea4b2781ab9bf31fcb8",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "space",
+      "function_start": "0x44172c",
+      "end_exclusive": "0x441770",
+      "music_stop": "0x441743",
+      "service": "0x80",
+      "code_sha256": "a61cf10f2d6aa7a821ce53c8bb9cbdf0050a8bdb8628a01a5f5df04142b5b87c",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "space",
+      "function_start": "0x4440bc",
+      "end_exclusive": "0x4440de",
+      "music_stop": "0x4440d7",
+      "service": "0x80",
+      "code_sha256": "75395330430dc86f7475b59ae3cc73eef06b0d0ffd53d66f164dcd7f73a530e2",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": [
+        [
+          "image",
+          "0x169fb",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x1736b",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x17639",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x17649",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x24b39",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x256e9",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x2578f",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x2588e",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x25c74",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x25e5a",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x25f71",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x25f81",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x34a19",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x34cb3",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x34d93",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x35151",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x35161",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x44c9e",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x44d77",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x45074",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x46529",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x46539",
+          "0x4440c7"
+        ]
+      ]
+    },
+    {
+      "table": "space",
+      "function_start": "0x4440e0",
+      "end_exclusive": "0x444124",
+      "music_stop": "0x4440f7",
+      "service": "0x80",
+      "code_sha256": "fdf4b85df58819c255f292ee22673aa827d58499bf42be986578f081e180bbdf",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "space",
+      "function_start": "0x44650c",
+      "end_exclusive": "0x446532",
+      "music_stop": "0x446521",
+      "service": "0x80",
+      "code_sha256": "af5864134a9417ae66b40b8d666b74ecb3d0e04f28926572bd60b01bd430b88c",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "demon",
+      "function_start": "0x41761c",
+      "end_exclusive": "0x417642",
+      "music_stop": "0x417631",
+      "service": "0x80",
+      "code_sha256": "f973ff78759a0f743a34e52e661ad7aa15c1b3b0aec86dafcfecc828058ffa2a",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": [
+        [
+          "dat",
+          "0x146a91",
+          "0x41761f"
+        ]
+      ]
+    }
+  ],
+  "scope": "Raw byte candidates only: rel32 E8/E9 in mapped code 0x401000..0x453ffa, and little-endian 32-bit literals anywhere in mapped EXE and that table DAT. Not a full control-flow proof; indirect, computed, compressed, relocated or differently encoded references remain UNKNOWN."
+}

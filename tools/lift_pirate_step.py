@@ -15,6 +15,8 @@ def main():
   if (ROOT/f'analysis/{table}-full-tick-boundary.json').exists():
    profile=json.loads((ROOT/'analysis/table-profiles.json').read_text())['tables'][table]
    a.extra.extend(int(layer['switch_callback'],0) for layer in profile['layers'])
+   if table=='space':a.extra.extend([0x444a64,0x43a484])  # Nudge warning/Tilt and its DMD callback.
+   if table=='demon':a.extra.append(0x410600)  # Nudge warning DMD callback.
  a.extra=list(set(a.extra)|{0x406600,0x406938,0x437460,0x40950c,0x437bfc,0x43636c,0x434160,0x434268,0x434340,
                           0x405eec,0x405234,0x4071e0,0x4070bc,0x407b88,0x44f4d0,0x44f4c6,0x45021e,0x40bbac,
                           0x405d54,0x405de8,0x408ae0,0x407778,0x408da8,0x408674,0x40b0b4,0x40b2ec,0x405bb4,0x40bbec})

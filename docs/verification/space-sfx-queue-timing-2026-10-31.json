@@ -1,0 +1,155 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Execute Retail Space SFX queue/consumer with controlled descriptor mutation.\n\nThe state and mutation are synthetic; this does not establish that a live\nSpace event mutates a queued descriptor or prove complete playback parity.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+  "image_sha256": "2e12a0c8590b3cbe7dfe7221ba3881bb647ae414e43c9ad56525e05a6dac385e",
+  "entries": [
+    "0x406600",
+    "0x401760"
+  ],
+  "executed_original_blocks": 14,
+  "cases": [
+    {
+      "descriptor": "0x465ce4",
+      "synthetic_mutation": false,
+      "period_consumed": 226,
+      "volume_consumed": 64,
+      "pcm_sha256": "af0edcf31f0acb5a8d7f5b824c0a15e22803bbfcbad63bf5bbcd4496bbb51ce5"
+    },
+    {
+      "descriptor": "0x465ce4",
+      "synthetic_mutation": true,
+      "period_consumed": 227,
+      "volume_consumed": 32,
+      "pcm_sha256": "af0edcf31f0acb5a8d7f5b824c0a15e22803bbfcbad63bf5bbcd4496bbb51ce5"
+    },
+    {
+      "descriptor": "0x465d08",
+      "synthetic_mutation": false,
+      "period_consumed": 226,
+      "volume_consumed": 64,
+      "pcm_sha256": "7ac1a594d0c4ce6366bc0ea5543cfa5c770479468c161a41e90b1563b67ccb11"
+    },
+    {
+      "descriptor": "0x465d08",
+      "synthetic_mutation": true,
+      "period_consumed": 227,
+      "volume_consumed": 32,
+      "pcm_sha256": "7ac1a594d0c4ce6366bc0ea5543cfa5c770479468c161a41e90b1563b67ccb11"
+    },
+    {
+      "descriptor": "0x465d2c",
+      "synthetic_mutation": false,
+      "period_consumed": 226,
+      "volume_consumed": 64,
+      "pcm_sha256": "59a22840ff1120b42be1a7634ba6f4d590b6336cd668f51eaf549e64b8c6a5ad"
+    },
+    {
+      "descriptor": "0x465d2c",
+      "synthetic_mutation": true,
+      "period_consumed": 227,
+      "volume_consumed": 32,
+      "pcm_sha256": "59a22840ff1120b42be1a7634ba6f4d590b6336cd668f51eaf549e64b8c6a5ad"
+    },
+    {
+      "descriptor": "0x465d50",
+      "synthetic_mutation": false,
+      "period_consumed": 226,
+      "volume_consumed": 64,
+      "pcm_sha256": "f8e9eefee4fcff2bab05104e7f0caaaf03eaa1806d464178c6d158139ce5a1fa"
+    },
+    {
+      "descriptor": "0x465d50",
+      "synthetic_mutation": true,
+      "period_consumed": 227,
+      "volume_consumed": 32,
+      "pcm_sha256": "f8e9eefee4fcff2bab05104e7f0caaaf03eaa1806d464178c6d158139ce5a1fa"
+    },
+    {
+      "descriptor": "0x465d74",
+      "synthetic_mutation": false,
+      "period_consumed": 226,
+      "volume_consumed": 64,
+      "pcm_sha256": "f6578a49bbfd29d8c61aacb5173aac010ca1bd1af33333f743687f9eb7763506"
+    },
+    {
+      "descriptor": "0x465d74",
+      "synthetic_mutation": true,
+      "period_consumed": 227,
+      "volume_consumed": 32,
+      "pcm_sha256": "f6578a49bbfd29d8c61aacb5173aac010ca1bd1af33333f743687f9eb7763506"
+    },
+    {
+      "descriptor": "0x465d98",
+      "synthetic_mutation": false,
+      "period_consumed": 226,
+      "volume_consumed": 64,
+      "pcm_sha256": "03882957d49b5fbfca601b740879887035c86ad1cd867b8f1987179e572f00f4"
+    },
+    {
+      "descriptor": "0x465d98",
+      "synthetic_mutation": true,
+      "period_consumed": 227,
+      "volume_consumed": 32,
+      "pcm_sha256": "03882957d49b5fbfca601b740879887035c86ad1cd867b8f1987179e572f00f4"
+    },
+    {
+      "descriptor": "0x465dbc",
+      "synthetic_mutation": false,
+      "period_consumed": 226,
+      "volume_consumed": 64,
+      "pcm_sha256": "7ca06b0a74520784ddc5f17509344cbcb9ef9718ee45d28454ab9ac1a820407d"
+    },
+    {
+      "descriptor": "0x465dbc",
+      "synthetic_mutation": true,
+      "period_consumed": 227,
+      "volume_consumed": 32,
+      "pcm_sha256": "7ca06b0a74520784ddc5f17509344cbcb9ef9718ee45d28454ab9ac1a820407d"
+    },
+    {
+      "descriptor": "0x465de0",
+      "synthetic_mutation": false,
+      "period_consumed": 120,
+      "volume_consumed": 64,
+      "pcm_sha256": "ebd601d438a6923d05c808e4e9848c80eaba5abe58d6f2e162fab502196d1c18"
+    },
+    {
+      "descriptor": "0x465de0",
+      "synthetic_mutation": true,
+      "period_consumed": 121,
+      "volume_consumed": 32,
+      "pcm_sha256": "ebd601d438a6923d05c808e4e9848c80eaba5abe58d6f2e162fab502196d1c18"
+    },
+    {
+      "descriptor": "0x465e04",
+      "synthetic_mutation": false,
+      "period_consumed": 160,
+      "volume_consumed": 64,
+      "pcm_sha256": "e8db9cbe4b6e381976c39a22b6806d8048d1052cbdd9666542c3d0bcc3e99085"
+    },
+    {
+      "descriptor": "0x465e04",
+      "synthetic_mutation": true,
+      "period_consumed": 161,
+      "volume_consumed": 32,
+      "pcm_sha256": "e8db9cbe4b6e381976c39a22b6806d8048d1052cbdd9666542c3d0bcc3e99085"
+    },
+    {
+      "descriptor": "0x465e28",
+      "synthetic_mutation": false,
+      "period_consumed": 226,
+      "volume_consumed": 64,
+      "pcm_sha256": "c7b9ea4dab958971f3c3aabd86dbb7a122e1ab2e8c584b2470e30f76f9937b85"
+    },
+    {
+      "descriptor": "0x465e28",
+      "synthetic_mutation": true,
+      "period_consumed": 227,
+      "volume_consumed": 32,
+      "pcm_sha256": "c7b9ea4dab958971f3c3aabd86dbb7a122e1ab2e8c584b2470e30f76f9937b85"
+    }
+  ],
+  "conclusion": "consumer reads descriptor period and volume at consumption; live mutation remains unverified"
+}

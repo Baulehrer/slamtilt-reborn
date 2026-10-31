@@ -1,0 +1,45 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Bounded real Pirate simultaneous SFX: Retail resampler versus native mixer.\n\nThe selected recorded requests use initial idle voices and simultaneous start;\nactual device cadence, previous voices, tracker and final stereo mix are not tested.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+  "fixture_sha256": "2e8dfa961d57810f949aba9514ec94cebd7bf74fd4858bffe1341db98b206419",
+  "native_sha256": "94ca2f06162700b66b0b96969608820adb848056a1f617892af34f65e429b325",
+  "case": "acceptance-nudge",
+  "tick": 103,
+  "events": [
+    [
+      103,
+      92,
+      2,
+      1,
+      4607840
+    ],
+    [
+      103,
+      92,
+      2,
+      1,
+      4607876
+    ]
+  ],
+  "cases": [
+    {
+      "frames": 1,
+      "pcm_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "frames": 221,
+      "pcm_sha256": "e1743f32970cc8348b7463598dfc06f875366d07d136e810ca944376a6f22708"
+    },
+    {
+      "frames": 2048,
+      "pcm_sha256": "9fe545b1711dd0602c23ea22a3ab920a2e303969fd291b633595873a3b1a0e11"
+    },
+    {
+      "frames": 30000,
+      "pcm_sha256": "6c08c21f1b8d6d05ee4c6b75526f7b1e76d4bbee898091c437f0d7fa61005113"
+    }
+  ],
+  "executed_original_blocks": 21
+}

@@ -2,6 +2,8 @@
 
 Run commands from the repository root on a Linux host with Docker. These are packaging workflows for an existing development checkout: generated physics sources under `build/generated`, the libxmp checkout under `build/libxmp`, and the pinned SDL/libxmp archives under `build/compat-context` must already be present. Original game data is private and must stay out of distributable packages. Use new output names rather than overwriting frozen release candidates.
 
+Each platform builds a verified private libxmp copy with the STIM timing patch; the original source checkout is not modified. A mismatched upstream source fails the build instead of silently using a different patch.
+
 ## Linux x86_64
 
 Build the compatibility image from the pinned archives, then build an asset-free runtime:

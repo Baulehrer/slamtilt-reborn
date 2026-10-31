@@ -3,15 +3,15 @@
 #include <limits>
 #include <stdexcept>
 namespace slam {
-StimPlayer::StimPlayer(const std::filesystem::path &path, int order)
-    : order_(order) {
+StimPlayer::StimPlayer(const std::filesystem::path &path, int order, TrackerMix mix)
+    : order_(order), mix_(mix) {
   context_ = xmp_create_context();
   if (!context_)
     throw std::runtime_error("libxmp context allocation failed");
   initialize(xmp_load_module(context_, path.string().c_str()));
 }
-StimPlayer::StimPlayer(const std::vector<std::uint8_t> &data, int order)
-    : order_(order) {
+StimPlayer::StimPlayer(const std::vector<std::uint8_t> &data, int order, TrackerMix mix)
+    : order_(order), mix_(mix) {
   if (data.size() > std::size_t(std::numeric_limits<long>::max()))
     throw std::runtime_error("Music module exceeds libxmp limit");
   context_ = xmp_create_context();
@@ -56,6 +56,16 @@ void StimPlayer::restart() {
   xmp_end_player(context_);
   if (xmp_start_player(context_, sample_rate, 0) != 0)
     throw std::runtime_error("Cannot restart libxmp player");
+  // Retail 44b560 mixes all six game voices into one mono buffer, and
+  // 44cd4d reads the current sample without interpolation. Libxmp's nearest
+  // mode rounds sample positions; Retail floors them, so it is an approximation.
+  // Starting libxmp resets these options. The 66% level approximates the tested
+  // full-volume six-voice mix; timing and PCM are not yet identical to Retail.
+  if (mix_ == TrackerMix::RetailMono &&
+      (xmp_set_player(context_, XMP_PLAYER_MIX, 0) != 0 ||
+       xmp_set_player(context_, XMP_PLAYER_INTERP, XMP_INTERP_NEAREST) != 0 ||
+       xmp_set_player(context_, XMP_PLAYER_VOLUME, 66) != 0))
+    throw std::runtime_error("Cannot configure Retail tracker mix");
   if (order_ != 0 && xmp_set_position(context_, order_) < 0)
     throw std::runtime_error("Cannot select music order");
   ended_ = false;

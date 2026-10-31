@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Original service stream -> existing native audio, both silent observer and SDL."""
+from retail_audio_fixture import corrected_audio_events
 import argparse,json,os,subprocess
 from pathlib import Path
 from verify_space_asteroid import ROOT,read
@@ -19,7 +20,7 @@ def main():
   for key in ['lifecycle','highscore_sha256','lamp_sha256']:assert state[key]==gold[key],(case,key)
   assert state['poses']==gold.get('poses',[r['poses']for r in gold['globals']]if 'poses'in gold['globals'][0]else None)
   if gold.get('diagnostic_shots'):assert state['raw_state_sha256']==gold['raw_state_sha256']
-  actual=read(out);assert actual['events']==row['events'],(case,'events');assert actual['enabled']and actual['queued_bytes']>0
+  actual=read(out);assert actual['events']==corrected_audio_events(row['events'], 'space'),(case,'events');assert actual['enabled']and actual['queued_bytes']>0
   rows.append(dict(case=case,steps=n,requests=len(row['events']),original_native_exact=True,queued_bytes=actual['queued_bytes']));print(case,len(row['events']),'original/native audio requests EXACT',flush=True)
  (ROOT/'analysis/traces/space-audio-acceptance.json').write_text(json.dumps(dict(status='VERIFIED',cases=rows,scope='Original request ordering/registers plusSDLqueue; assets/PCM separatelyverified. Not Original mixed-device PCM or physical listening parity.'),indent=2)+'\n')
 if __name__=='__main__':main()

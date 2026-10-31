@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Prove isolated first import/play with DAT files only and no checkout or caches."""
 import argparse
+from retail_audio_fixture import corrected_audio_events
 import hashlib
 import json
 import os
@@ -47,6 +48,7 @@ def main():
     p.add_argument('--build', type=Path, default=ROOT / 'build/native')
     p.add_argument('--app', type=Path)
     p.add_argument('--ticks', type=int, default=4000)
+    p.add_argument('--legacy-audio-fixture', action='store_true', help='Expect historical 0/0 startup from an unchanged older package')
     p.add_argument('--report', type=Path, default=ROOT / 'analysis/traces/dat-only-import.json')
     a = p.parse_args()
     assert a.ticks > 0 and a.ticks % 4 == 0
@@ -183,6 +185,8 @@ def main():
                     exact_prefix(actual[vector], reference[vector], table, vector)
                 audio = read(state / 'audio.json')['events']
                 expected_audio = [e for e in reference['audio_events'] if e[0] < a.ticks]
+            if table != 'mean' and not a.legacy_audio_fixture:
+                expected_audio = corrected_audio_events(expected_audio, table)
             assert audio == expected_audio, (table, 'audio prefix', audio[:4], expected_audio[:4])
             cases.append(dict(table=table, ticks=a.ticks, exact_vectors=vectors,
                               audio_requests=len(audio), audio_sha256=digest(audio),
@@ -190,7 +194,7 @@ def main():
             print('DAT-only', table, a.ticks, 'state/audio exact PASS', flush=True)
             del source, reference, actual
         assert {q.name: sha(q) for q in (raw / 'DAT').iterdir()} == raw_hashes
-        report = dict(status='VERIFIED', source_inputs='Windows DAT files only',
+        report = dict(status='VERIFIED', legacy_audio_fixture=a.legacy_audio_fixture, source_inputs='Windows DAT files only',
                       source_dat_sha256=raw_hashes, checkout_hidden=True, corpus_hidden=True,
                       existing_prepared_caches_hidden=True, original_exe_present=False,
                       native_importer_sha256=sha(app / 'slamimport'), original_assets_bundled=False,

@@ -1,0 +1,20 @@
+{
+  "status": "VERIFIED_BOUNDED_WITH_TRACKER_PCM_GAP",
+  "scope": "Bounded Pirate music + two SFX comparison, with adapted timing and voices.\n\nThe actual Retail tracker first tick and real simultaneous SFX requests are\ncombined at a synthetic common start. Tests native SFX over identical original\nmusic, and measures (does not assert away) the real native tracker PCM gap.\nNo complete-game timing, device output or auditory equivalence is established.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+  "native_sha256": "5d08929ad9705c469e5300e5211ca865e010da65319445f985c9905fb254376a",
+  "sfx_probe_sha256": "94ca2f06162700b66b0b96969608820adb848056a1f617892af34f65e429b325",
+  "frames": 882,
+  "sfx_descriptors": [
+    "0x464f60",
+    "0x464f84"
+  ],
+  "shared_input_original_native_exact": true,
+  "final_mix_original_blocks": 20,
+  "native_music_plus_sfx_exact_frames": 15,
+  "native_music_plus_sfx_correlation": 0.987281,
+  "native_over_original_rms": 0.996222,
+  "original_combined_pcm_sha256": "0b7c54697d79fbc046731619753cf6edd40343fdb0114d57b87b989b2b9e27ef",
+  "native_combined_pcm_sha256": "c6c30f02d5be6dc5087e9e8111647ca3baf90a69adece9f506e36e612bca3bcd"
+}

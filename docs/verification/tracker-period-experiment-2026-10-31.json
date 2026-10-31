@@ -1,0 +1,47 @@
+{
+  "status": "EXPERIMENT_ONLY",
+  "scope": "Compare a private ProTracker-table period experiment on four first ticks.\n\nExperimental library applies a zero-finetune table to MODRNG notes, uses that\ninteger period for zero pitch bend, and floors nearest sampling globally. This\nchanges unrelated modules; it is never installed\nor used by the port. First ticks use adapted Original startup and cannot prove\nlong-run timing, finetune/effects, or audible equivalence.\n",
+  "library_sha256": "97a0d526a1c0071225dde92cc5e75dbda1445f5ccf84a33f0c6096cbd55735ba",
+  "period_source_sha256": "23cc96ef90974a6fffb213f6b5412257cca80ade143ad568157ee580a66c3f75",
+  "native_sha256": "84281b7236ae1a61c44affd9b14e11bfd5d7c7411d7ad05ce126d8b44159ab4b",
+  "frames_per_table": 882,
+  "pirate_channel_1_period_q12": 778240,
+  "cases": [
+    {
+      "table": "mean",
+      "original_sha256": "242c2b7155d21b8ab8affdab54757c33ac3fe2a323c388c5f3fa3b234468d6e8",
+      "baseline_correlation": 0.64103,
+      "floor_correlation": 0.999935,
+      "table_floor_correlation": 0.999935,
+      "table_floor_best_alignment": 0,
+      "table_floor_exact_frames": 47
+    },
+    {
+      "table": "pirate",
+      "original_sha256": "426a003fb367eaf6d3ab1e2df080ad68a74c62fe175aa2cc625843b76ed420c6",
+      "baseline_correlation": 0.979677,
+      "floor_correlation": 0.967773,
+      "table_floor_correlation": 0.999996,
+      "table_floor_best_alignment": 0,
+      "table_floor_exact_frames": 32
+    },
+    {
+      "table": "space",
+      "original_sha256": "eb11839ae2553d166e31f5c8abbaaaafedc03a9669790be704acab32ac355b30",
+      "baseline_correlation": 0.991826,
+      "floor_correlation": 0.998607,
+      "table_floor_correlation": 0.999876,
+      "table_floor_best_alignment": 0,
+      "table_floor_exact_frames": 40
+    },
+    {
+      "table": "demon",
+      "original_sha256": "4477f12955a982e99d4abcfcc1edfdd72053c790f1c27c979d4c4969dd4c989d",
+      "baseline_correlation": 0.99275,
+      "floor_correlation": 0.999788,
+      "table_floor_correlation": 0.999999,
+      "table_floor_best_alignment": 0,
+      "table_floor_exact_frames": 109
+    }
+  ]
+}

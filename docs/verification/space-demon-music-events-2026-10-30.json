@@ -1,0 +1,296 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "native_sha256": "92021fa0554bd06de6e22117b08c375cd7793e652aabab2c0cfb674a34249169",
+  "cases": [
+    {
+      "table": "space",
+      "case": "bigblam",
+      "ticks": 42864,
+      "diagnostic_contacts": 2251,
+      "original_trace_sha256": "e95ff4bc6a45e8be135517c5cb4ffc9be9821d2e784599c4ae5ad97962f8c526",
+      "pinned_fixture_sha256": "7639b3d444dc4d3b4828b57b5d0a6c55488243ddcf1117d9bb5ceb6bf99207fb",
+      "music_requests": [
+        [
+          132,
+          0,
+          17
+        ],
+        [
+          132,
+          0,
+          47
+        ],
+        [
+          132,
+          1,
+          8
+        ],
+        [
+          132,
+          1,
+          21
+        ],
+        [
+          132,
+          1,
+          25
+        ],
+        [
+          132,
+          1,
+          28
+        ],
+        [
+          136,
+          2,
+          34
+        ],
+        [
+          136,
+          2,
+          44
+        ],
+        [
+          136,
+          2,
+          46
+        ],
+        [
+          144,
+          0,
+          32
+        ]
+      ],
+      "audio_requests": 87
+    },
+    {
+      "table": "space",
+      "case": "mission-campaign",
+      "ticks": 25892,
+      "diagnostic_contacts": 153,
+      "original_trace_sha256": "09775c7cf89a5adb4a08d59898f97ab69ceb10b65ba239c15c890f67b001241c",
+      "pinned_fixture_sha256": "1893f764aea8ffe51280ef85ccdaa0ec9def664fb7cdb62c860f1282fa93f952",
+      "music_requests": [
+        [
+          132,
+          0,
+          0
+        ],
+        [
+          132,
+          0,
+          4
+        ],
+        [
+          132,
+          0,
+          45
+        ],
+        [
+          132,
+          0,
+          52
+        ],
+        [
+          132,
+          1,
+          0
+        ],
+        [
+          136,
+          2,
+          55
+        ],
+        [
+          144,
+          0,
+          32
+        ]
+      ],
+      "audio_requests": 53
+    },
+    {
+      "table": "space",
+      "case": "multiball",
+      "ticks": 10260,
+      "diagnostic_contacts": 451,
+      "original_trace_sha256": "01c1d51f0f39295e4fa481623fc3bf7cce42162d5ddd97f51a6c293a805f5a4d",
+      "pinned_fixture_sha256": "6eadf88d0302ea4cfb4def601a173a53c447a6849a0d5cb83b3a58f6cc9bde74",
+      "music_requests": [
+        [
+          132,
+          0,
+          37
+        ],
+        [
+          144,
+          0,
+          32
+        ]
+      ],
+      "audio_requests": 23
+    },
+    {
+      "table": "demon",
+      "case": "final-campaign",
+      "ticks": 52904,
+      "diagnostic_contacts": 1868,
+      "original_trace_sha256": "85299ca66b08119b29f1d10742f60f4299cd2c0da7bd99adda1a27d0088d0675",
+      "pinned_fixture_sha256": "93b6650ac9f338c453d75208cfc7e90a7b8b36ff6e2377a86b996da826ce7dc2",
+      "music_requests": [
+        [
+          132,
+          0,
+          5
+        ],
+        [
+          132,
+          0,
+          8
+        ],
+        [
+          132,
+          0,
+          13
+        ],
+        [
+          132,
+          0,
+          17
+        ],
+        [
+          132,
+          0,
+          38
+        ],
+        [
+          132,
+          0,
+          43
+        ],
+        [
+          132,
+          0,
+          50
+        ],
+        [
+          132,
+          0,
+          60
+        ],
+        [
+          136,
+          2,
+          24
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 64
+    },
+    {
+      "table": "demon",
+      "case": "video-consecutive",
+      "ticks": 8352,
+      "diagnostic_contacts": 35,
+      "original_trace_sha256": "1e8e42aa039e9dfcc9fede317cd95e662d395f3f21e71ef3d39957546738eb04",
+      "pinned_fixture_sha256": "960cfdebc437c1a6e3df9356a2a5be16368e2142f76260a74b6a46eacac43381",
+      "music_requests": [
+        [
+          136,
+          0,
+          62
+        ],
+        [
+          136,
+          2,
+          30
+        ],
+        [
+          136,
+          2,
+          32
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 56
+    },
+    {
+      "table": "demon",
+      "case": "kickback-on",
+      "ticks": 2228,
+      "diagnostic_contacts": 46,
+      "original_trace_sha256": "f8f64217b52fa45fbb6651a71c7b56ae624a01cd0bce1dc020df2cf45efd7a52",
+      "pinned_fixture_sha256": "cb898eb1ea39cf11c625be0fc38753451add8e3b665235464e8a359d1c5a381a",
+      "music_requests": [
+        [
+          136,
+          2,
+          13
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 14
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-4",
+      "ticks": 3072,
+      "diagnostic_contacts": 24,
+      "original_trace_sha256": "350c856f71732b1b6506633c0a23763c92c148ef85f42cf88507d838a3c22063",
+      "pinned_fixture_sha256": "143b1631fdf09443ed1850614e247742e5cda34faf7063f35584437205d376b5",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-rewards",
+      "ticks": 9488,
+      "diagnostic_contacts": 319,
+      "original_trace_sha256": "aa393210e5fff7f100bd91a94825f6e21814283d41a9543a8ddc89bb3cb3062c",
+      "pinned_fixture_sha256": "a53aeffe1dac944c0799ba4d2b453980601209af50c31f0f46973907c0b4b1bd",
+      "music_requests": [
+        [
+          132,
+          1,
+          0
+        ],
+        [
+          136,
+          2,
+          2
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 29
+    }
+  ],
+  "scope": "Eight retained original mode/minigame traces; diagnostic contacts; historical synthetic start corrected from separate executed Retail initialization; later SDL audio service events exact. Does not prove final mixed PCM, human listening or unvisited original branches."
+}

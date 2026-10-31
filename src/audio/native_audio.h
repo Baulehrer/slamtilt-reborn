@@ -11,7 +11,8 @@ public:
   void set_mean_samples(const std::vector<std::uint8_t> &dat);
   void set_samples(const std::vector<std::uint8_t>& dat,
                    std::vector<SampleProfile> profiles);
-  void request(int service, int bank, int order, unsigned descriptor = 0);
+  void request(int service, int bank, int order, unsigned descriptor = 0,
+               unsigned period = 0, unsigned volume = 64);
   ~NativeAudio();
   NativeAudio(const NativeAudio &) = delete;
   NativeAudio &operator=(const NativeAudio &) = delete;

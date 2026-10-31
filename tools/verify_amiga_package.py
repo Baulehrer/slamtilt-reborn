@@ -2,12 +2,13 @@
 """Debian12 relocated package: only five ADFs and fresh state, no checkout/PC data."""
 import argparse,hashlib,json,os,shutil,subprocess,tempfile
 from verify_dat_only_import import exact_prefix,world_states
+from retail_audio_fixture import corrected_audio_events
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def read(p):return json.loads(p.read_text())
 def main():
- p=argparse.ArgumentParser();p.add_argument('--package',type=Path,required=True);p.add_argument('--ticks',type=int,default=4000);p.add_argument('--report',type=Path,default=ROOT/'analysis/traces/amiga-package-debian12.json');a=p.parse_args();package=a.package.resolve();assert a.ticks>0 and a.ticks%4==0
+ p=argparse.ArgumentParser();p.add_argument('--package',type=Path,required=True);p.add_argument('--ticks',type=int,default=4000);p.add_argument('--legacy-audio-fixture',action='store_true',help='Expect historical 0/0 startup from an unchanged older package');p.add_argument('--report',type=Path,default=ROOT/'analysis/traces/amiga-package-debian12.json');a=p.parse_args();package=a.package.resolve();assert a.ticks>0 and a.ticks%4==0
  manifest=read(package/'frontend-bundle.json')
  for name,h in manifest['files'].items():assert sha(package/name)==h,name
  assert not manifest['original_assets_included']
@@ -60,10 +61,12 @@ def main():
      exact_prefix(result[vector],reference[vector],table,vector)
     sound=read(state/(table+'-audio.json'));assert sound['enabled']
     audio=sound['events']
-   assert audio==[e for e in reference['audio_events']if e[0]<a.ticks],(table,'shared native audio events')
+   expected_audio=[e for e in reference['audio_events']if e[0]<a.ticks]
+   if table!='mean' and not a.legacy_audio_fixture:expected_audio=corrected_audio_events(expected_audio,table)
+   assert audio==expected_audio,(table,'shared native audio events')
    cases.append({'table':table,'shared_native_state_vectors':vectors,'audio_requests':len(audio),'audio_sha256':hashlib.sha256(json.dumps(audio,separators=(',',':')).encode()).hexdigest(),'tick_count':a.ticks,'trace_sha256':sha(state/(table+'-game.json')),'status':'PASS'})
    print(table,a.ticks,'isolated Debian12 ADF-only ticks PASS',flush=True)
   assert originals=={f.name:sha(f)for f in raw.iterdir()}
- report={'status':'PASS','image_id':image,'package_manifest_sha256':sha(package/'frontend-bundle.json'),'runtime_requirements':manifest['runtime_requirements'],'adf_sha256':originals,'cases':cases,'first_import':'ADF-only native, empty PATH, no checkout or PC files mounted','menu':'four imports, two reload/child cycles','protection':'read-only program/ADFs/root filesystem; network disabled; existing destination preserved','limitations':['Shared native gameplay, no original Amiga physics/rule parity claim','Dummy SDL, not a subjective GPU/audio test','Remaining individual scene fragments not mapped']}
+ report={'status':'PASS','legacy_audio_fixture':a.legacy_audio_fixture,'image_id':image,'package_manifest_sha256':sha(package/'frontend-bundle.json'),'runtime_requirements':manifest['runtime_requirements'],'adf_sha256':originals,'cases':cases,'first_import':'ADF-only native, empty PATH, no checkout or PC files mounted','menu':'four imports, two reload/child cycles','protection':'read-only program/ADFs/root filesystem; network disabled; existing destination preserved','limitations':['Shared native gameplay, no original Amiga physics/rule parity claim','Dummy SDL, not a subjective GPU/audio test','Remaining individual scene fragments not mapped']}
  a.report.parent.mkdir(parents=True,exist_ok=True);a.report.write_text(json.dumps(report,indent=2)+'\n')
 if __name__=='__main__':main()

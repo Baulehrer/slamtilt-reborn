@@ -344,6 +344,7 @@ private:
   MeanSkillshotDisplayAssets skillshot_display_assets_;
   bool skillshot_display_visible_ = false;
   MeanMaterial5Display material5_display_;
+  unsigned mean_display_sfx_cursor_ = 0;
   std::array<unsigned, 8> switch_reward_variants_{};
   unsigned pending_mode4_rewards_ = 0;
   unsigned mode4_starts_ = 0, mode4_completions_ = 0, state7_steps_ = 0;

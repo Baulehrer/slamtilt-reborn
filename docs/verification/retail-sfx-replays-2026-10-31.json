@@ -1,0 +1,183 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Replay targeted retained Original Space/Demon SFX events through SDL.\n\nOriginal fixtures include diagnostic contacts except legal-game. The comparison\nchecks recorded service requests, not final audio waveform or complete gameplay.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "native_sha256": "11659fc1e50f5f054724e36d8a28a1c507f3c0708beaf8d5b8c5d0b43b517fb7",
+  "cases": [
+    {
+      "table": "space",
+      "case": "base-rules",
+      "ticks": 13296,
+      "diagnostic_contacts": 185,
+      "original_trace_sha256": "c736d2e8de8c06cb8c79a2efe61033590c6a2fb2d7ffad98cde68749a290d966",
+      "pinned_fixture_sha256": "75e86e1ca0a91e1f3ffea180febd76f4ffdfa2c9113e26690daa7e61ba9a4f61",
+      "music_requests": [
+        [
+          136,
+          2,
+          55
+        ],
+        [
+          144,
+          0,
+          32
+        ]
+      ],
+      "audio_requests": 55
+    },
+    {
+      "table": "space",
+      "case": "kickback-off",
+      "ticks": 700,
+      "diagnostic_contacts": 5,
+      "original_trace_sha256": "cd33bad1738da141c3983d6463d9f21c0e9c3aa66d1262220771bca607c14607",
+      "pinned_fixture_sha256": "a265627d47a02e83a0e3642c8522d93a692c02ca186f780ab72900df55c791ae",
+      "music_requests": [
+        [
+          144,
+          0,
+          32
+        ]
+      ],
+      "audio_requests": 6
+    },
+    {
+      "table": "space",
+      "case": "race-variants",
+      "ticks": 8692,
+      "diagnostic_contacts": 185,
+      "original_trace_sha256": "95e52b84cd7aee94459318ee3ebce31da3393d9f8bd47ab781a2fc3bc1245e99",
+      "pinned_fixture_sha256": "fa6a9fc0987b571514a8b94d6ba7fa648229cbd21815694b27662449f0e9abf2",
+      "music_requests": [
+        [
+          132,
+          0,
+          52
+        ],
+        [
+          136,
+          2,
+          55
+        ],
+        [
+          144,
+          0,
+          32
+        ]
+      ],
+      "audio_requests": 16
+    },
+    {
+      "table": "demon",
+      "case": "twice-cycles",
+      "ticks": 11892,
+      "diagnostic_contacts": 251,
+      "original_trace_sha256": "1d5b4dc34d473e70455b183cd6c73cbd9efc20de89b9bec833e16db83450c0b8",
+      "pinned_fixture_sha256": "dafdb13c9e79764102b85d16b3a6952a3f849e458d5cfe74d8337b9aae24cc91",
+      "music_requests": [
+        [
+          132,
+          0,
+          17
+        ],
+        [
+          136,
+          2,
+          24
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 128
+    },
+    {
+      "table": "demon",
+      "case": "legal-game",
+      "ticks": 10512,
+      "diagnostic_contacts": 0,
+      "original_trace_sha256": "f0b57a03eba07e24dad6b5f7be0eaa79bea3d78583e004110cae7a2a347335fa",
+      "pinned_fixture_sha256": "5d35315bd1a10ce940015ff7a37b73617a06e7c31f7167a1e64e6c0d90c111ab",
+      "music_requests": [
+        [
+          136,
+          2,
+          24
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 31
+    },
+    {
+      "table": "demon",
+      "case": "video-wolf-shoot",
+      "ticks": 3708,
+      "diagnostic_contacts": 15,
+      "original_trace_sha256": "c305ffcf3c610d9d89ceca9ce25f28cf3812514b1018437a55cbea64bc428ad4",
+      "pinned_fixture_sha256": "2f17dd84bfe7ac09d711307b8d36905341405724032dc754eefe23c4f90a43ee",
+      "music_requests": [
+        [
+          136,
+          0,
+          62
+        ],
+        [
+          136,
+          2,
+          32
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 95
+    }
+  ],
+  "newly_covered_descriptors": {
+    "space": [
+      "0x465d74",
+      "0x465de0",
+      "0x465e28"
+    ],
+    "demon": [
+      "0x463278",
+      "0x463350",
+      "0x463398",
+      "0x4633e0",
+      "0x463428"
+    ]
+  },
+  "observed_descriptors": {
+    "space": [
+      "0x465d50",
+      "0x465d74",
+      "0x465d98",
+      "0x465dbc",
+      "0x465de0",
+      "0x465e04",
+      "0x465e28"
+    ],
+    "demon": [
+      "0x463278",
+      "0x46329c",
+      "0x4632c0",
+      "0x4632e4",
+      "0x46332c",
+      "0x463350",
+      "0x463374",
+      "0x463398",
+      "0x4633bc",
+      "0x4633e0",
+      "0x463404",
+      "0x463428"
+    ]
+  }
+}

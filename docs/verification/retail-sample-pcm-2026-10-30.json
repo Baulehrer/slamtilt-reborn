@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "scope": "Compare bounded Pirate/Space/Demon SFX directly against the Windows Retail x86 mixer.\n\nRuns the Retail gain-LUT initializer 44b640 and mono one-shot resampler 44cc00\ninside Unicorn. These samples use the explicit six-voice/full-volume convention;\nthis does not test tracker music, overlapping voices, the final stereo device mix,\noriginal event timing or undocumented live mixer settings. Original media stays\noutside the output: only build/context hashes and PCM hashes are retained.\n",
+  "native_sha256": "a7dca7bdfad126135100ee4b6f888edae8bf4eef89f56ef33d4e71be0f532f7a",
+  "tables": [
+    {
+      "table": "pirate",
+      "cases": 60,
+      "descriptors": 15,
+      "fixture_sha256": "ba7f9701282e676a36850e7ac7ada2d83afa1cc61b84fda70e3f0a1c5a3f6381",
+      "image_sha256": "5c112a970a16ab4d768201c98b2838f2200bc4996de719db8477e3f42fbf0379",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "executed_original_blocks": 21,
+      "lazy_descriptor_pointers": [
+        "0x464f3c",
+        "0x465038",
+        "0x46505c",
+        "0x465080",
+        "0x4650a4",
+        "0x4650c8",
+        "0x4650ec"
+      ]
+    },
+    {
+      "table": "space",
+      "cases": 40,
+      "descriptors": 10,
+      "fixture_sha256": "e0fa045c83924f4f95b99edd2e9c72b0440788e7729c7a04f21f4ce42034c3b7",
+      "image_sha256": "2e12a0c8590b3cbe7dfe7221ba3881bb647ae414e43c9ad56525e05a6dac385e",
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "executed_original_blocks": 21,
+      "lazy_descriptor_pointers": [
+        "0x465de0"
+      ]
+    },
+    {
+      "table": "demon",
+      "cases": 56,
+      "descriptors": 14,
+      "fixture_sha256": "41d023c8383cbdb9158fb0ffbfd9b4d12679bc01a356de451bb2ad7ea6f125f7",
+      "image_sha256": "dfb7d9549360d68f9cb6ecb88003164650b66017934067d8237c6f494bdcb976",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "executed_original_blocks": 21,
+      "lazy_descriptor_pointers": [
+        "0x463398",
+        "0x463428",
+        "0x46344c"
+      ]
+    }
+  ]
+}

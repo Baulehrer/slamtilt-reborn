@@ -1,0 +1,101 @@
+{
+  "status": "BOUNDED_NO_TARGET_ACCESSES",
+  "scope": "Watch selected Mean Demo descriptor accesses during bounded DMD callbacks.\n\nActual Demo callback code and drawing services run with synthetic initialized\ndisplay state; sound and two external display services are stubbed. This is\nnot a full original game or a proof of unreachability. No asset bytes are saved.\n",
+  "demo_sha256": "31192e0b316bf6fe0a4a41336a5ef6ae53ac659c04edf001607a8de63239fc00",
+  "mean_dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+  "main_dat_sha256": "e82addadc9b40b172615983034825ebf3e077c3ff3c167531520c50dd8c9188c",
+  "prepared_image_sha256": "8ec7d39b5b56cee1d929536d71446743604fb0ae8fcf260f9be6a3fde81e96d1",
+  "targets": [
+    "0x437f54",
+    "0x437f78",
+    "0x437f9c"
+  ],
+  "callback_count": 16,
+  "frames": 1902,
+  "callbacks": [
+    {
+      "callback": "0x4133d4",
+      "frames": 99,
+      "adapted_external_calls": 3
+    },
+    {
+      "callback": "0x413518",
+      "frames": 139,
+      "adapted_external_calls": 3
+    },
+    {
+      "callback": "0x4131cc",
+      "frames": 129,
+      "adapted_external_calls": 3
+    },
+    {
+      "callback": "0x4132d4",
+      "frames": 104,
+      "adapted_external_calls": 3
+    },
+    {
+      "callback": "0x412fa8",
+      "frames": 156,
+      "adapted_external_calls": 5
+    },
+    {
+      "callback": "0x411824",
+      "frames": 80,
+      "adapted_external_calls": 3
+    },
+    {
+      "callback": "0x41041c",
+      "frames": 118,
+      "adapted_external_calls": 1
+    },
+    {
+      "callback": "0x410158",
+      "frames": 88,
+      "adapted_external_calls": 3
+    },
+    {
+      "callback": "0x4102c0",
+      "frames": 113,
+      "adapted_external_calls": 0
+    },
+    {
+      "callback": "0x411c60",
+      "frames": 101,
+      "adapted_external_calls": 0
+    },
+    {
+      "callback": "0x411db4",
+      "frames": 226,
+      "adapted_external_calls": 0
+    },
+    {
+      "callback": "0x413490",
+      "frames": 81,
+      "adapted_external_calls": 0
+    },
+    {
+      "callback": "0x413770",
+      "frames": 128,
+      "adapted_external_calls": 0
+    },
+    {
+      "callback": "0x4107c8",
+      "frames": 149,
+      "adapted_external_calls": 0
+    },
+    {
+      "callback": "0x41086c",
+      "frames": 149,
+      "adapted_external_calls": 0
+    },
+    {
+      "callback": "0x410504",
+      "frames": 42,
+      "adapted_external_calls": 2
+    }
+  ],
+  "target_accesses": [],
+  "positive_control_accesses": 12,
+  "positive_control_service_calls": 6,
+  "executed_original_blocks": 429
+}

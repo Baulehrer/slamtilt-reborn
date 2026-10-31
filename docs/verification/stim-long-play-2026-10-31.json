@@ -1,0 +1,38 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Exercise four real STIM startup banks for ten deterministic seconds each.\n\nThis checks actual native output, not long-run equality with the Original.\nThe original bank bytes remain in the private work directory.\n",
+  "cases": [
+    {
+      "table": "mean",
+      "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+      "order": 4,
+      "frames": 441000,
+      "pcm_sha256": "fab2d770759e6cd7036329081cc0b25e6348f6262f78ef103ab3553a3883c543",
+      "peak": 10699
+    },
+    {
+      "table": "pirate",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "order": 34,
+      "frames": 441000,
+      "pcm_sha256": "0ce0bc5e9d16874d826b96b61d7604983ef5db32d63ed0b5ff13dbb4eff61a18",
+      "peak": 8298
+    },
+    {
+      "table": "space",
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "order": 32,
+      "frames": 441000,
+      "pcm_sha256": "e27babede437991666a5c27a3b9aa0d244957f5c798df382091c79b9cd3b3ffa",
+      "peak": 9066
+    },
+    {
+      "table": "demon",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "order": 25,
+      "frames": 441000,
+      "pcm_sha256": "5ffa608b779d75795fbf47d48009fafd5a0941ff47c1876f146c06ff48a29bd7",
+      "peak": 8185
+    }
+  ]
+}

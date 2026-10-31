@@ -1,0 +1,40 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "table": "demon",
+  "case": "video-consecutive",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+  "original_trace_sha256": "1e8e42aa039e9dfcc9fede317cd95e662d395f3f21e71ef3d39957546738eb04",
+  "pinned_fixture_sha256": "960cfdebc437c1a6e3df9356a2a5be16368e2142f76260a74b6a46eacac43381",
+  "native_sha256": "a62fa270467c972f3ec7a5c4c62e2c74e966d816eba1c0f42d038fc874871754",
+  "tick_count": 8352,
+  "ball_number": 1,
+  "first_video_start": 881,
+  "first_return": 4597,
+  "second_bank_armed": 4601,
+  "second_video_start": 4873,
+  "second_confirm": 7532,
+  "second_return": 8349,
+  "brain_award": {
+    "tick": 7525,
+    "amount": 50000000,
+    "return_address": "0x4169c7"
+  },
+  "SDL_control_events": 8,
+  "audio_requests": 56,
+  "compared_vectors": [
+    "states",
+    "globals",
+    "poses",
+    "lifecycle",
+    "highscore_sha256",
+    "lamp_sha256",
+    "raw_state_sha256",
+    "ball_pool_sha256",
+    "clock_state",
+    "mode_aux_sha256",
+    "video_state"
+  ],
+  "scope": "One original/reset and current native/reset game. Video modes earned by diagnostic physical contacts; second mode controlled by injected SDL events chosen from observed brain position, not human visual tracking. Original mixed PCM and other seeds/outcomes remain open.",
+  "historical_startup_audio_correction": "The initial 0/0 audio request in this retained fixture was synthetic and is corrected separately using the actual Retail table configuration; later audio requests remain strictly compared. See retail-music-start-2026-10-30.json."
+}

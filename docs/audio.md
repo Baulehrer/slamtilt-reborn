@@ -1,5 +1,9 @@
 # Audio / STIM
 
+## Current verification — 2026-10-30
+
+The four pinned Windows and Amiga source sets reconstruct ten byte-identical tracker banks, including source-backed samples ([evidence](verification/amiga-windows-music-banks-2026-10-30.json)). Original Amiga playback sequencing remains unverified. The SDL queue no longer discards active sound for deferred or inactive lower-track commands ([evidence](verification/retail-audio-deferred-2026-10-30.json)); full original mixed-output equivalence remains open.
+
 Status: original music extraction and bounded libxmp PCM rendering VERIFIED. Avoid writing a new tracker decoder.
 
 The upstream [libxmp STIM loader](https://github.com/libxmp/libxmp/blob/372272995bc67323a6e59a907ebdd093970c7875/src/loaders/stim_load.c) explicitly implements Slamtilt. Reviewed source at commit `372272995bc67323a6e59a907ebdd093970c7875`; built successfully with CMake into `build/libxmp-build/libxmp.so.4.7.3`. It recognizes `STIM`, reads big-endian sample and pattern offsets, decodes four channels of 64-row patterns, and loads signed PCM samples with loop metadata. This is sufficient groundwork for module-to-PCM playback once a valid STIM payload is available. It does not establish original trigger/timing behavior.

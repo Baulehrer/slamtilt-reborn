@@ -1,0 +1,8 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Check a non-STIM tracker is unchanged by the private STIM library.",
+  "frames": 88200,
+  "module_sha256": "e4b1403321fded8788c3cdcb51b4f4823888594abf47798fa3f6812ae0945b3d",
+  "pcm_sha256": "269faaff2aa7de4ee9fb172bf415a18f79ff63ad9c89251dcce0db99f1b43ef8",
+  "equal": true
+}

@@ -1,0 +1,135 @@
+{
+  "status": "VERIFIED_BOUNDED_WITH_SYNTHETIC_OVERFLOW_GAP",
+  "scope": "Compare a bounded final-mixer mode against the actual native gain helper.\n\nInputs are synthetic signed samples, not captured music or sound effects. The\ntest proves arithmetic for the selected Retail device format and highlights an\noverflow difference; it does not establish original/native tracker gain parity,\nreal-world clipping frequency, device timing, or audible game equivalence.\n",
+  "executable_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "native_probe_sha256": "fc3de2208a236049559bc6cd3313892b3f75e07175f715f9688c08cacc1959b7",
+  "original_entry": "0x44b8bc",
+  "original_selected_branch": "0x44bca9",
+  "format": "signed 16-bit stereo; mono, left and right buffers enabled",
+  "seed": 23117,
+  "frames": 1032,
+  "executed_original_blocks": 20,
+  "matching_channels": 1550,
+  "synthetic_overflow_channels": 514,
+  "production_sfx_path": {
+    "frames": 768,
+    "all_signed_8_bit_values_tested": true,
+    "synthetic_overflow_channels": 380,
+    "executed_original_blocks": 20,
+    "scope": "one synthetic PCM voice plus synthetic stereo music; no original tracker scaling or gameplay capture"
+  },
+  "factory_six_voice_math": {
+    "gain_factor": 21845,
+    "single_sample_min": -5419,
+    "single_sample_max": 5376,
+    "six_voice_sum_min": -32514,
+    "six_voice_sum_max": 32256,
+    "scope": "signed 8-bit full volume sample terms; excludes tracker input"
+  },
+  "examples": [
+    {
+      "mono": 0,
+      "left": 0,
+      "right": 0,
+      "original": [
+        0,
+        0
+      ],
+      "native": [
+        0,
+        0
+      ]
+    },
+    {
+      "mono": 1000,
+      "left": 2000,
+      "right": -2000,
+      "original": [
+        3000,
+        -1000
+      ],
+      "native": [
+        3000,
+        -1000
+      ]
+    },
+    {
+      "mono": 10000,
+      "left": 30000,
+      "right": 1000,
+      "original": [
+        -25536,
+        11000
+      ],
+      "native": [
+        32767,
+        11000
+      ]
+    },
+    {
+      "mono": -10000,
+      "left": -30000,
+      "right": -1000,
+      "original": [
+        25536,
+        -11000
+      ],
+      "native": [
+        -32768,
+        -11000
+      ]
+    },
+    {
+      "mono": 32767,
+      "left": 0,
+      "right": 1,
+      "original": [
+        32767,
+        -32768
+      ],
+      "native": [
+        32767,
+        32767
+      ]
+    },
+    {
+      "mono": -32768,
+      "left": 0,
+      "right": -1,
+      "original": [
+        -32768,
+        32767
+      ],
+      "native": [
+        -32768,
+        -32768
+      ]
+    },
+    {
+      "mono": 32767,
+      "left": 32767,
+      "right": -32768,
+      "original": [
+        -2,
+        -1
+      ],
+      "native": [
+        32767,
+        -1
+      ]
+    },
+    {
+      "mono": -32768,
+      "left": -32768,
+      "right": 32767,
+      "original": [
+        0,
+        -1
+      ],
+      "native": [
+        -32768,
+        -1
+      ]
+    }
+  ]
+}

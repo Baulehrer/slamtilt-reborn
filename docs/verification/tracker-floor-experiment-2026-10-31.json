@@ -1,0 +1,45 @@
+{
+  "status": "EXPERIMENT_ONLY",
+  "scope": "Compare an isolated, globally modified libxmp with the unmodified build.\n\nThis is an experiment, not a runtime dependency or a production patch. It\nchanges nearest interpolation globally in a private source copy, including\nreverse/stereo samples. It does not establish loop or long-run correctness.\n",
+  "original_mixer_source_sha256": "8f0a03008f35852029d586029ac308aefd8089c5bcb2cb67d193320e33a2ef10",
+  "experimental_library_sha256": "4161d0cfa6e2a78396d347be384075d70e70157d53489aa6639d821f7fdedeaf",
+  "frames_per_table": 882,
+  "cases": [
+    {
+      "table": "mean",
+      "baseline_correlation": 0.64103,
+      "floor_correlation": 0.999935,
+      "baseline_best_aligned_correlation": 0.923031,
+      "floor_best_aligned_correlation": 0.999935,
+      "floor_best_alignment_frames": 0,
+      "floor_rms_ratio": 0.994796
+    },
+    {
+      "table": "pirate",
+      "baseline_correlation": 0.979677,
+      "floor_correlation": 0.967773,
+      "baseline_best_aligned_correlation": 0.979677,
+      "floor_best_aligned_correlation": 0.97956,
+      "floor_best_alignment_frames": -2,
+      "floor_rms_ratio": 0.996557
+    },
+    {
+      "table": "space",
+      "baseline_correlation": 0.991826,
+      "floor_correlation": 0.998607,
+      "baseline_best_aligned_correlation": 0.998607,
+      "floor_best_aligned_correlation": 0.998607,
+      "floor_best_alignment_frames": 0,
+      "floor_rms_ratio": 0.993333
+    },
+    {
+      "table": "demon",
+      "baseline_correlation": 0.99275,
+      "floor_correlation": 0.999788,
+      "baseline_best_aligned_correlation": 0.99782,
+      "floor_best_aligned_correlation": 0.999788,
+      "floor_best_alignment_frames": 0,
+      "floor_rms_ratio": 0.994966
+    }
+  ]
+}

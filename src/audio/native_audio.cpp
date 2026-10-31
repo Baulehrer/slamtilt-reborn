@@ -81,31 +81,38 @@ void NativeAudio::set_samples(const std::vector<std::uint8_t>& dat,
   samples_=std::make_unique<MeanSampleMixer>(dat,std::move(profiles));
 }
 void NativeAudio::request(int service, int bank, int order,
-                          unsigned descriptor) {
+                          unsigned descriptor, unsigned period, unsigned volume) {
   if (service == 0x5c) {
     if (samples_)
-      samples_->request(bank, order, descriptor);
+      samples_->request(bank, order, descriptor, period, volume);
     return;
   }
   if (!mean_)
     return;
+  const int foreground = mean_->foreground_service();
+  bool changes_foreground = true;
   if (service == 0x8c) {
     // Display preemption sends conditional cancellation; an inactive88 must
     // leave both the lower/base context and already queued PCM untouched.
     if (mean_->foreground_service() != 0x88)
       return;
     mean_->stop88();
-  } else if (service == 0x80)
+  } else if (service == 0x80) {
+    // Cancelling a paused/absent lower track leaves the audible upper/base
+    // track alone; discarding its queued PCM would skip music and effects.
+    changes_foreground = foreground == 0x84;
     mean_->stop84();
-  else if (service == 0x90)
+  } else if (service == 0x90)
     mean_->request90(bank, order);
   else if (service == 0x88)
     mean_->request88(bank, order);
-  else if (service == 0x84)
+  else if (service == 0x84) {
+    // Retail 0x40634c defers this request until the upper track ends.
+    changes_foreground = foreground != 0x88;
     mean_->request84(bank, order);
-  else
+  } else
     throw std::runtime_error("Unsupported Mean sound service");
-  if (!SDL_ClearAudioStream(stream_))
+  if (changes_foreground && !SDL_ClearAudioStream(stream_))
     throw std::runtime_error(SDL_GetError());
 }
 void NativeAudio::restart() {

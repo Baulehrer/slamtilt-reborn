@@ -1,0 +1,61 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "cases": [
+    {
+      "table": "pirate",
+      "entry": "0x435134",
+      "engine": "0x46c67c",
+      "field_30": 0,
+      "field_44_after": 0,
+      "service_calls": 1,
+      "code_sha256": "b953108521fb22086ac7333713f6d9b62440254df1f7d7a517815047d5d55002"
+    },
+    {
+      "table": "pirate",
+      "entry": "0x435134",
+      "engine": "0x46c67c",
+      "field_30": 1,
+      "field_44_after": 0,
+      "service_calls": 0,
+      "code_sha256": "b953108521fb22086ac7333713f6d9b62440254df1f7d7a517815047d5d55002"
+    },
+    {
+      "table": "space",
+      "entry": "0x44650c",
+      "engine": "0x46c67c",
+      "field_30": 0,
+      "field_44_after": 0,
+      "service_calls": 1,
+      "code_sha256": "af5864134a9417ae66b40b8d666b74ecb3d0e04f28926572bd60b01bd430b88c"
+    },
+    {
+      "table": "space",
+      "entry": "0x44650c",
+      "engine": "0x46c67c",
+      "field_30": 1,
+      "field_44_after": 0,
+      "service_calls": 0,
+      "code_sha256": "af5864134a9417ae66b40b8d666b74ecb3d0e04f28926572bd60b01bd430b88c"
+    },
+    {
+      "table": "demon",
+      "entry": "0x41761c",
+      "engine": "0x46c67c",
+      "field_30": 0,
+      "field_44_after": 0,
+      "service_calls": 1,
+      "code_sha256": "f973ff78759a0f743a34e52e661ad7aa15c1b3b0aec86dafcfecc828058ffa2a"
+    },
+    {
+      "table": "demon",
+      "entry": "0x41761c",
+      "engine": "0x46c67c",
+      "field_30": 1,
+      "field_44_after": 0,
+      "service_calls": 0,
+      "code_sha256": "f973ff78759a0f743a34e52e661ad7aa15c1b3b0aec86dafcfecc828058ffa2a"
+    }
+  ],
+  "scope": "Original x86 instructions on initialized table snapshots with explicit test values in engine+0x30/+0x44. Service 0x80 hooked at entry; does not establish gameplay reachability, native implementation, or final audio."
+}

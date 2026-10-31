@@ -1,0 +1,162 @@
+{
+  "status": "BOUNDED_NO_TARGET_ACCESSES",
+  "scope": "Watch three unresolved Mean SFX descriptors in original Demo mode callbacks.\n\nExecutes the existing bounded mode-audio cases with synthetic states and adapted\nservices. This tests only those component paths; it cannot prove unreachability.\n",
+  "demo_sha256": "31192e0b316bf6fe0a4a41336a5ef6ae53ac659c04edf001607a8de63239fc00",
+  "prepared_image_sha256": "8ec7d39b5b56cee1d929536d71446743604fb0ae8fcf260f9be6a3fde81e96d1",
+  "cases": 12,
+  "targets": [
+    "0x437f54",
+    "0x437f78",
+    "0x437f9c"
+  ],
+  "target_accesses": [],
+  "positive_control_reads": 6,
+  "adapted_service_calls": 21,
+  "executed_original_blocks": 127,
+  "mode_cases": [
+    {
+      "case": "selection-0",
+      "final_mode": 5,
+      "requests": [
+        {
+          "address": "0x415969",
+          "service": "0x84",
+          "bank": 0,
+          "order": 51
+        }
+      ]
+    },
+    {
+      "case": "selection-1",
+      "final_mode": 5,
+      "requests": [
+        {
+          "address": "0x415ac6",
+          "service": "0x84",
+          "bank": 0,
+          "order": 46
+        }
+      ]
+    },
+    {
+      "case": "selection-2",
+      "final_mode": 5,
+      "requests": [
+        {
+          "address": "0x415b83",
+          "service": "0x84",
+          "bank": 0,
+          "order": 40
+        }
+      ]
+    },
+    {
+      "case": "selection-4",
+      "final_mode": 5,
+      "requests": [
+        {
+          "address": "0x415dba",
+          "service": "0x84",
+          "bank": 0,
+          "order": 2
+        }
+      ]
+    },
+    {
+      "case": "speed-start",
+      "final_mode": 6,
+      "requests": [
+        {
+          "address": "0x415710",
+          "service": "0x84",
+          "bank": 0,
+          "order": 29
+        }
+      ]
+    },
+    {
+      "case": "terminal-audio",
+      "field_37a": -32768,
+      "requests": [
+        {
+          "address": "0x41950b",
+          "service": "0x80",
+          "bank": 0,
+          "order": 0
+        }
+      ]
+    },
+    {
+      "case": "terminal-audio",
+      "field_37a": -1,
+      "requests": [
+        {
+          "address": "0x41950b",
+          "service": "0x80",
+          "bank": 0,
+          "order": 0
+        }
+      ]
+    },
+    {
+      "case": "terminal-audio",
+      "field_37a": 0,
+      "requests": [
+        {
+          "address": "0x4194fd",
+          "service": "0x84",
+          "bank": 0,
+          "order": 62
+        }
+      ]
+    },
+    {
+      "case": "terminal-audio",
+      "field_37a": 1,
+      "requests": [
+        {
+          "address": "0x4194fd",
+          "service": "0x84",
+          "bank": 0,
+          "order": 62
+        }
+      ]
+    },
+    {
+      "case": "terminal-audio",
+      "field_37a": 32767,
+      "requests": [
+        {
+          "address": "0x4194fd",
+          "service": "0x84",
+          "bank": 0,
+          "order": 62
+        }
+      ]
+    },
+    {
+      "case": "chicken-complete",
+      "field_37a": -1,
+      "requests": [
+        {
+          "address": "0x41950b",
+          "service": "0x80",
+          "bank": 0,
+          "order": 0
+        }
+      ]
+    },
+    {
+      "case": "chicken-complete",
+      "field_37a": 0,
+      "requests": [
+        {
+          "address": "0x4194fd",
+          "service": "0x84",
+          "bank": 0,
+          "order": 62
+        }
+      ]
+    }
+  ]
+}

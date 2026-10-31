@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2 — 2026-10-31
+
+- Corrected table music startup positions and expanded checks of music transitions and sound effects against the Windows original.
+- Improved STIM sample timing for all four tables with a Slam Tilt-specific libxmp correction.
+- Improved Mean sound handling and several table-specific gameplay and audio paths.
+- Expanded original-data import, display options and controller-related checks.
+
+Original game data is not included. Audio and gameplay comparisons cover tested scenarios; complete original parity has not been established. Windows and ARM64 validation uses Wine and QEMU rather than physical hardware.
+
 ## 1.1 — 2026-10-29
 
 - Main menu returns to the original metal logo and table switches, with a Reborn subtitle and table preview. Options use matching colors and controls.

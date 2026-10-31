@@ -2,6 +2,16 @@
 
 Install a C++17 compiler, CMake, Python3, SDL3 (3.4+ recommended), nlohmann/json and libxmp development files. `glslc` is optional for advanced GPU effects.
 
+For the corrected Slam Tilt STIM music timing, use the pinned libxmp source checkout at `build/libxmp` and build a private patched copy before configuring the port:
+
+```sh
+python3 tools/prepare_stim_libxmp.py --source build/libxmp --output build/libxmp-stim-fixed
+cmake -S build/libxmp-stim-fixed -B build/libxmp-stim-build -DBUILD_SHARED=ON -DBUILD_STATIC=OFF -DCMAKE_BUILD_TYPE=Release
+cmake --build build/libxmp-stim-build -j2
+```
+
+The patch is limited to STIM. A system libxmp without it still plays music but does not have the timing correction. For an existing CMake build, explicitly set `-DXMP_INCLUDE_DIR=$PWD/build/libxmp-stim-fixed/include -DXMP_LIBRARY=$PWD/build/libxmp-stim-build/libxmp.so` when reconfiguring; otherwise a cached older library may remain selected.
+
 ```sh
 cmake -S . -B out/native -DCMAKE_BUILD_TYPE=Release
 cmake --build out/native --target slamtilt slamview slamslice -j2

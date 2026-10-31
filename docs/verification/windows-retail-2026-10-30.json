@@ -1,0 +1,383 @@
+{
+  "status": "PARTIAL",
+  "whole_game_equivalence": false,
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "replay_scope": "Saved original initialized contexts; legal observed-state keyboard schedules; state vectors and audio service requests, not final PCM, original video raster or human play. Exact reset status is specified per case.",
+  "replays": [
+    {
+      "table": "pirate",
+      "case": "primary",
+      "tick_count": 60000,
+      "source_sha256": "e2a339aec3df46e3adb5659fc303b6b288f6d0a8f629e6d62601ab6a7e14df77",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "runtime_sha256": "554c361bc63fa6815a69ed1283c3173d66d9adc8df043960cb83c0dc073630e2",
+      "input_events": 1160,
+      "diagnostic_contacts": 0,
+      "audio_requests": 698,
+      "vectors": [
+        "states",
+        "lifecycle",
+        "highscore_sha256",
+        "lamp_sha256",
+        "ball_pool_sha256",
+        "timing",
+        "dmd_sha256",
+        "rule_sha256",
+        "video_sha256"
+      ],
+      "scope": "Frozen observed-state legal keys against actual Original instructions; exact per-step arrays and canonical audio requests. No physical hearing/input or whole-raster claim.",
+      "original_reset_exact": false
+    },
+    {
+      "table": "pirate",
+      "case": "variant-1",
+      "tick_count": 4000,
+      "source_sha256": "35498c66ab351d3d10f55508b334686a6d2c86a6c34a49a91d8313d4d036a01c",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "runtime_sha256": "554c361bc63fa6815a69ed1283c3173d66d9adc8df043960cb83c0dc073630e2",
+      "input_events": 58,
+      "diagnostic_contacts": 0,
+      "audio_requests": 41,
+      "vectors": [
+        "states",
+        "lifecycle",
+        "highscore_sha256",
+        "lamp_sha256",
+        "ball_pool_sha256",
+        "timing",
+        "dmd_sha256",
+        "rule_sha256",
+        "video_sha256"
+      ],
+      "scope": "Frozen observed-state legal keys against actual Original instructions; exact per-step arrays and canonical audio requests. No physical hearing/input or whole-raster claim.",
+      "original_reset_exact": false
+    },
+    {
+      "table": "pirate",
+      "case": "variant-2",
+      "tick_count": 4000,
+      "source_sha256": "0fd64ca19794cc86339439ec92286fe5ebfa3c26ab813d70cc9b5f204edb16c7",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "runtime_sha256": "554c361bc63fa6815a69ed1283c3173d66d9adc8df043960cb83c0dc073630e2",
+      "input_events": 76,
+      "diagnostic_contacts": 0,
+      "audio_requests": 47,
+      "vectors": [
+        "states",
+        "lifecycle",
+        "highscore_sha256",
+        "lamp_sha256",
+        "ball_pool_sha256",
+        "timing",
+        "dmd_sha256",
+        "rule_sha256",
+        "video_sha256"
+      ],
+      "scope": "Frozen observed-state legal keys against actual Original instructions; exact per-step arrays and canonical audio requests. No physical hearing/input or whole-raster claim.",
+      "original_reset_exact": false
+    },
+    {
+      "table": "space",
+      "case": "primary",
+      "tick_count": 60000,
+      "source_sha256": "e44564791419a48265ea9d0a020a6d7cd3495a5575f1f175573b92a4dce34b6e",
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "runtime_sha256": "a62fa270467c972f3ec7a5c4c62e2c74e966d816eba1c0f42d038fc874871754",
+      "input_events": 914,
+      "diagnostic_contacts": 0,
+      "audio_requests": 518,
+      "vectors": [
+        "states",
+        "lifecycle",
+        "highscore_sha256",
+        "lamp_sha256",
+        "ball_pool_sha256",
+        "poses",
+        "globals"
+      ],
+      "scope": "Frozen observed-state legal keys against actual Original instructions; exact per-step arrays and canonical audio requests. No physical hearing/input or whole-raster claim.",
+      "original_reset_exact": false
+    },
+    {
+      "table": "space",
+      "case": "variant-1",
+      "tick_count": 4000,
+      "source_sha256": "937ccd93e875ff814c8012807288c6f664fe39b3be7e5ea9caed616b9beca72f",
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "runtime_sha256": "a62fa270467c972f3ec7a5c4c62e2c74e966d816eba1c0f42d038fc874871754",
+      "input_events": 126,
+      "diagnostic_contacts": 0,
+      "audio_requests": 69,
+      "vectors": [
+        "states",
+        "lifecycle",
+        "highscore_sha256",
+        "lamp_sha256",
+        "ball_pool_sha256",
+        "poses",
+        "globals"
+      ],
+      "scope": "Frozen observed-state legal keys against actual Original instructions; exact per-step arrays and canonical audio requests. No physical hearing/input or whole-raster claim.",
+      "original_reset_exact": false
+    },
+    {
+      "table": "space",
+      "case": "variant-2",
+      "tick_count": 4000,
+      "source_sha256": "ea6b11e06208ba8335e5605325fe3c047ed457c7aa2bdc6af40505ef8695fc23",
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "runtime_sha256": "a62fa270467c972f3ec7a5c4c62e2c74e966d816eba1c0f42d038fc874871754",
+      "input_events": 98,
+      "diagnostic_contacts": 0,
+      "audio_requests": 57,
+      "vectors": [
+        "states",
+        "lifecycle",
+        "highscore_sha256",
+        "lamp_sha256",
+        "ball_pool_sha256",
+        "poses",
+        "globals"
+      ],
+      "scope": "Frozen observed-state legal keys against actual Original instructions; exact per-step arrays and canonical audio requests. No physical hearing/input or whole-raster claim.",
+      "original_reset_exact": false
+    },
+    {
+      "table": "demon",
+      "case": "primary",
+      "tick_count": 60000,
+      "source_sha256": "0e26dce6de05a900937d44c65a190b085d7cef2210face636c0d778c4ff15ab5",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "runtime_sha256": "a62fa270467c972f3ec7a5c4c62e2c74e966d816eba1c0f42d038fc874871754",
+      "input_events": 1048,
+      "diagnostic_contacts": 0,
+      "audio_requests": 633,
+      "vectors": [
+        "states",
+        "lifecycle",
+        "highscore_sha256",
+        "lamp_sha256",
+        "ball_pool_sha256",
+        "poses",
+        "globals",
+        "raw_state_sha256"
+      ],
+      "scope": "Frozen observed-state legal keys against actual Original instructions; exact per-step arrays and canonical audio requests. No physical hearing/input or whole-raster claim.",
+      "original_reset_exact": false
+    },
+    {
+      "table": "demon",
+      "case": "variant-1",
+      "tick_count": 4000,
+      "source_sha256": "ffb68e95b535414688e2a2f453cbf234967e07766f7f518d9a55d9fd14cc7fe2",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "runtime_sha256": "a62fa270467c972f3ec7a5c4c62e2c74e966d816eba1c0f42d038fc874871754",
+      "input_events": 52,
+      "diagnostic_contacts": 0,
+      "audio_requests": 38,
+      "vectors": [
+        "states",
+        "lifecycle",
+        "highscore_sha256",
+        "lamp_sha256",
+        "ball_pool_sha256",
+        "poses",
+        "globals",
+        "raw_state_sha256"
+      ],
+      "scope": "Frozen observed-state legal keys against actual Original instructions; exact per-step arrays and canonical audio requests. No physical hearing/input or whole-raster claim.",
+      "original_reset_exact": false
+    },
+    {
+      "table": "demon",
+      "case": "variant-2",
+      "tick_count": 4000,
+      "source_sha256": "60d4a74efb9395ef31362f501dedd1d1c8bff28c6fcc558d00b989104da05777",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "runtime_sha256": "a62fa270467c972f3ec7a5c4c62e2c74e966d816eba1c0f42d038fc874871754",
+      "input_events": 94,
+      "diagnostic_contacts": 0,
+      "audio_requests": 55,
+      "vectors": [
+        "states",
+        "lifecycle",
+        "highscore_sha256",
+        "lamp_sha256",
+        "ball_pool_sha256",
+        "poses",
+        "globals",
+        "raw_state_sha256"
+      ],
+      "scope": "Frozen observed-state legal keys against actual Original instructions; exact per-step arrays and canonical audio requests. No physical hearing/input or whole-raster claim.",
+      "original_reset_exact": false
+    }
+  ],
+  "mean_integration": {
+    "status": "VERIFIED",
+    "original_entry": "0x40aca8",
+    "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+    "native_sim_sha256": "1a4608a6bb0c11d9554c1407d59f3b186f1ba3edecfe4c5b460aff2c70d4a172",
+    "native_integrator_sha256": "ebd783a305429d5eb0a65184ceb39f22fea8250b1bb8ed5f2a787bbe83843149",
+    "lookup_sha256": "85afe42c8cb15dba43b251f41bb6f1ee858d7634ff6e08b1db2e947f30c5a0f2",
+    "input_trace_sha256": "41ca6994d48ef777f9e681dfb105ab6daf30372fee46c9ecc499d74e31442ba7",
+    "cases": 22,
+    "skipped": [
+      {
+        "seed": 0,
+        "tick": 100,
+        "state": 1,
+        "point_force_type": 0,
+        "bonus_phase": 0
+      },
+      {
+        "seed": 0,
+        "tick": 2000,
+        "state": 65535,
+        "point_force_type": 0,
+        "bonus_phase": 1
+      },
+      {
+        "seed": 0,
+        "tick": 2500,
+        "state": 65535,
+        "point_force_type": 0,
+        "bonus_phase": 5
+      },
+      {
+        "seed": 0,
+        "tick": 3000,
+        "state": 2,
+        "point_force_type": 0,
+        "bonus_phase": 5
+      },
+      {
+        "seed": 0,
+        "tick": 4000,
+        "state": 2,
+        "point_force_type": 0,
+        "bonus_phase": 5
+      },
+      {
+        "seed": 1,
+        "tick": 100,
+        "state": 1,
+        "point_force_type": 0,
+        "bonus_phase": 0
+      },
+      {
+        "seed": 1,
+        "tick": 1000,
+        "state": 1,
+        "point_force_type": 0,
+        "bonus_phase": 0
+      },
+      {
+        "seed": 1,
+        "tick": 2500,
+        "state": 65535,
+        "point_force_type": 0,
+        "bonus_phase": 1
+      },
+      {
+        "seed": 1,
+        "tick": 3000,
+        "state": 65535,
+        "point_force_type": 0,
+        "bonus_phase": 5
+      },
+      {
+        "seed": 1,
+        "tick": 4000,
+        "state": 2,
+        "point_force_type": 0,
+        "bonus_phase": 5
+      },
+      {
+        "seed": 2,
+        "tick": 100,
+        "state": 1,
+        "point_force_type": 0,
+        "bonus_phase": 0
+      },
+      {
+        "seed": 2,
+        "tick": 1000,
+        "state": 0,
+        "point_force_type": 0,
+        "bonus_phase": 0
+      },
+      {
+        "seed": 2,
+        "tick": 3000,
+        "state": 65535,
+        "point_force_type": 0,
+        "bonus_phase": 1
+      },
+      {
+        "seed": 2,
+        "tick": 4000,
+        "state": 2,
+        "point_force_type": 0,
+        "bonus_phase": 5
+      }
+    ],
+    "compared": "All100 ball bytes after actual Original integration vs existing native mean_integrate",
+    "scope": "Natural-input-derived ball state, bounded component execution. No point force/debug override; no contact/scheduler/table dispatch comparison.",
+    "whole_trajectory_equivalence": false,
+    "source_context": "native-derived snapshots; not an original trajectory"
+  },
+  "unverified": [
+    "complete natural original Mean trajectory",
+    "other unvisited gameplay and minigame branches",
+    "final mixed audio, music sequencing, event-to-device timing and physical listening",
+    "whole original video raster",
+    "Amiga gameplay equivalence"
+  ],
+  "mean_minigame": {
+    "scope": "Actual unmodified Retail/Fix code with translated cached Demo selected3-capture context and compatible Demo DAT/LUT; external presentation/audio/scoring/lamp services adapted. Not Retail startup or whole-table equivalence.",
+    "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+    "cases": [
+      {
+        "build": "retail",
+        "scenario": "win",
+        "build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+        "instructions": 2544,
+        "ticks": 2455,
+        "points": 120000000,
+        "callback": "0x40fb78",
+        "trace_sha256": "b6dff92e2f20e1d76a420612d4c526ecdf4c2b2f0702b1c7e5897217c4c59cc1"
+      },
+      {
+        "build": "retail",
+        "scenario": "one-lap-abort",
+        "build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+        "instructions": 2544,
+        "ticks": 1189,
+        "points": 40000000,
+        "callback": "0x40f994",
+        "trace_sha256": "2476bc5a4e97dd3adad50fd2e87c2abc6c835eff3d138936ba887bd0afcb7224"
+      },
+      {
+        "build": "fix",
+        "scenario": "win",
+        "build_sha256": "5054441d4966efc4cdf14edef6061bad9c8af70ea56ec7f772d69cdc16612667",
+        "instructions": 2544,
+        "ticks": 2455,
+        "points": 120000000,
+        "callback": "0x40fb78",
+        "trace_sha256": "b6dff92e2f20e1d76a420612d4c526ecdf4c2b2f0702b1c7e5897217c4c59cc1"
+      },
+      {
+        "build": "fix",
+        "scenario": "one-lap-abort",
+        "build_sha256": "5054441d4966efc4cdf14edef6061bad9c8af70ea56ec7f772d69cdc16612667",
+        "instructions": 2544,
+        "ticks": 1189,
+        "points": 40000000,
+        "callback": "0x40f994",
+        "trace_sha256": "2476bc5a4e97dd3adad50fd2e87c2abc6c835eff3d138936ba887bd0afcb7224"
+      }
+    ]
+  },
+  "historical_startup_audio_correction": "These original fixture comparisons seeded their first audio request from incomplete zeroed snapshot globals. Retail initialization independently establishes Pirate order 34, Space 32 and Demon 25; see retail-music-start-2026-10-30.json. Earlier audio-request exactness does not establish the actual startup selection."
+}

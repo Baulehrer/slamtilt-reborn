@@ -9,7 +9,7 @@ std::unique_ptr<StimPlayer> MeanMusicSequencer::start(int bank,
                                                       int order) const {
   if (bank < 0 || std::size_t(bank) >= banks_.size())
     throw std::runtime_error("Invalid Mean music bank");
-  return std::make_unique<StimPlayer>(banks_[bank], order);
+  return std::make_unique<StimPlayer>(banks_[bank], order, TrackerMix::RetailMono);
 }
 void MeanMusicSequencer::request90(int bank, int order) {
   auto next = start(bank, order);

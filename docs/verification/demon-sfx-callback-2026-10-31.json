@@ -1,0 +1,18 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Compare Original/native Demon callback 0x413048 on controlled states.\n\nOnly the callback boundary is executed. Counter, phase, position, prior index,\ndispatcher and service stubs are adapted; no natural gameplay reachability,\nreal graphics, original queue cadence or physical playback is inferred.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+  "image_sha256": "dfb7d9549360d68f9cb6ecb88003164650b66017934067d8237c6f494bdcb976",
+  "native_sha256": "31d20ce55579d714266bc6b064fba074f7995ef165dad4ff5fcf368a04ea09ef",
+  "callback": "0x413048",
+  "sample_descriptor": "0x463308",
+  "cases": 100,
+  "emitting_cases": 30,
+  "executed_original_blocks": 10,
+  "rule": "phase >= 312 and ((position >> 8) % 12) differs from previous",
+  "service_arguments": {
+    "edx": 7,
+    "ebx": 6
+  }
+}

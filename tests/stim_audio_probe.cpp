@@ -4,9 +4,11 @@
 #include <vector>
 int main(int argc, char **argv) {
   try {
-    if (argc < 4 || argc > 6)
+    if (argc < 4 || argc > 7 || (argc == 7 && std::string(argv[6]) != "retail"))
       return 2;
-    slam::StimPlayer player(argv[1], argc >= 6 ? std::stoi(argv[5]) : 0);
+    slam::StimPlayer player(argv[1], argc >= 6 ? std::stoi(argv[5]) : 0,
+                            argc == 7 ? slam::TrackerMix::RetailMono
+                                      : slam::TrackerMix::Default);
     const auto frames = std::stoul(argv[2]), chunk = std::stoul(argv[3]);
     if (frames > 44100 * 60 || chunk == 0)
       return 2;

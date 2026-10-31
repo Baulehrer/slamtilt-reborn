@@ -1,0 +1,266 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Compare twelve retained Demon clock awards' audio requests with SDL.\n\nOriginal fixtures use diagnostic contacts and corrected historical startup;\nthis covers recorded requests, not natural reachability or audible PCM.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+  "native_sha256": "11659fc1e50f5f054724e36d8a28a1c507f3c0708beaf8d5b8c5d0b43b517fb7",
+  "cases": [
+    {
+      "table": "demon",
+      "case": "clock-award-0",
+      "ticks": 3284,
+      "diagnostic_contacts": 25,
+      "original_trace_sha256": "0de95298f4f66fdc7f11171a98de2db707a6157052b8c702f62c6b11f93d8a88",
+      "pinned_fixture_sha256": "0603b05437b4e507755fa594cfc430e01890b0fa9fc673a7fd162c3889922712",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-1",
+      "ticks": 3376,
+      "diagnostic_contacts": 25,
+      "original_trace_sha256": "51b2028b2c7fc7966cad74ab46cbda33dca86bf28465e540d598df00876de089",
+      "pinned_fixture_sha256": "8993026e39d4667f0ce8de8e83400908ef8d7dde19c58b8c7a27ab9f45695136",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-2",
+      "ticks": 3288,
+      "diagnostic_contacts": 25,
+      "original_trace_sha256": "d39f79527930e0068b703a735553cd06f1de7ab50ebd117eae9c851523809427",
+      "pinned_fixture_sha256": "d9eee2fe7897797b6c73ce2bd734f6c40bf2f6d3016952b849fa24ad66b58f0b",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-3",
+      "ticks": 3076,
+      "diagnostic_contacts": 24,
+      "original_trace_sha256": "bbeeca54f44437dee900b394fa6bb006b4409f1ade6ec34263193109fa8ff528",
+      "pinned_fixture_sha256": "2dbec58fc2acb0e88846e3ea50c0ff57732732f92097bfef59cd35a9d50df62a",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-4",
+      "ticks": 3072,
+      "diagnostic_contacts": 24,
+      "original_trace_sha256": "350c856f71732b1b6506633c0a23763c92c148ef85f42cf88507d838a3c22063",
+      "pinned_fixture_sha256": "143b1631fdf09443ed1850614e247742e5cda34faf7063f35584437205d376b5",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-5",
+      "ticks": 3380,
+      "diagnostic_contacts": 25,
+      "original_trace_sha256": "b0a3f6ab709c39b09170c81a9d86f047a860740e863b05d7bf755525eeebf053",
+      "pinned_fixture_sha256": "0c0073e2e8445f777f3301aaa57a59dd1d8d779e71c1a879afc2619d5714fd22",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-6",
+      "ticks": 4488,
+      "diagnostic_contacts": 26,
+      "original_trace_sha256": "829ddb7b9cbd26d3f1f46a23817495de0effc0ed7089b1660ca648629c2a2f06",
+      "pinned_fixture_sha256": "f08afbf40b621e6a03eff5098a70f26d6694f5c0a713dedecde83996a875bbb0",
+      "music_requests": [
+        [
+          136,
+          2,
+          24
+        ],
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 20
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-7",
+      "ticks": 3076,
+      "diagnostic_contacts": 24,
+      "original_trace_sha256": "cd1c0602e4764baac623e8afea442bf3f8a4abd49d8e0c73ddc188b24f5a4ea7",
+      "pinned_fixture_sha256": "64bdeafa9b42f9db7771bbc9ad27955ecda9cb6662d323be0d40c92d8a9fb092",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-8",
+      "ticks": 3188,
+      "diagnostic_contacts": 24,
+      "original_trace_sha256": "fd4e072532b3d9e7da31978a1c8cfe044552f801d64cd1a70279157ef92b8e84",
+      "pinned_fixture_sha256": "f2c4213d3f3494156ed5c10a29adcebd5dd2c5018f51961e594be4df5e3a65c8",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-9",
+      "ticks": 3380,
+      "diagnostic_contacts": 25,
+      "original_trace_sha256": "33ef25e5d299581cfe3e923d42d3448a2909ff9be88e9ada6cd6dd44aad80e94",
+      "pinned_fixture_sha256": "0aa111b03dbc0a0ba394ee38d20920042dd64461313d8ab0c68a9f9c30bf3dbe",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-10",
+      "ticks": 3356,
+      "diagnostic_contacts": 25,
+      "original_trace_sha256": "b0692b486950058063fa64d535c57e19d8e61c50674ff217b1a90fd075fe112a",
+      "pinned_fixture_sha256": "9477bf4d0e4c89b858872aadaf1be930b901c2597c0fe6db80914186ecc4dcfe",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 19
+    },
+    {
+      "table": "demon",
+      "case": "clock-award-11",
+      "ticks": 3084,
+      "diagnostic_contacts": 25,
+      "original_trace_sha256": "88df148f81ceac635e9e4bf63e037e2a786552778e3761c6ac75c16a9ad6ae83",
+      "pinned_fixture_sha256": "86f8f22860f3eac8e3b37d26bd7f390e18095ff88b0bfe6c0f7352db60bb73a1",
+      "music_requests": [
+        [
+          136,
+          2,
+          36
+        ],
+        [
+          144,
+          0,
+          25
+        ]
+      ],
+      "audio_requests": 17
+    }
+  ]
+}

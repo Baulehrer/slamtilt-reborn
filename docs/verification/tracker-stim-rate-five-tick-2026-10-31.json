@@ -1,0 +1,254 @@
+{
+  "status": "EXPERIMENT_ONLY",
+  "scope": "Compare five manually clocked Original/native tracker/mixer windows.\n\nRetains synthetic startup, 50 Hz cadence and fixed original voice links. It\nis not a complete scheduler, effect/finetune/loop or audible-output proof.\nThe experimental library must be built separately and is not installed.\n",
+  "native_sha256": "84281b7236ae1a61c44affd9b14e11bfd5d7c7411d7ad05ce126d8b44159ab4b",
+  "library_sha256": "6443da012564c4612bce28d286a64d16343a7ffa61f5b4e38537d7403c63bd5b",
+  "frames_per_window": 882,
+  "windows": 5,
+  "cases": [
+    {
+      "table": "mean",
+      "original_pcm_sha256": "16492e1494f34bc187aaa7e0c005cebcfe3913210439ed71c0099e522bd6eb3d",
+      "original_report_sha256": "357204673e66b7ac02cccbe9e98b868f6b302e51a0b772a62358faaec62867b0",
+      "variants": {
+        "baseline": [
+          {
+            "correlation": 0.64103,
+            "rms_ratio": 1.012271,
+            "exact_frames": 24
+          },
+          {
+            "correlation": 0.980176,
+            "rms_ratio": 0.992488,
+            "exact_frames": 20
+          },
+          {
+            "correlation": 0.975426,
+            "rms_ratio": 0.993402,
+            "exact_frames": 9
+          },
+          {
+            "correlation": 0.966914,
+            "rms_ratio": 0.99123,
+            "exact_frames": 13
+          },
+          {
+            "correlation": 0.899974,
+            "rms_ratio": 0.989193,
+            "exact_frames": 31
+          }
+        ],
+        "experiment": [
+          {
+            "correlation": 0.999935,
+            "rms_ratio": 0.994796,
+            "exact_frames": 47
+          },
+          {
+            "correlation": 0.999977,
+            "rms_ratio": 0.994789,
+            "exact_frames": 34
+          },
+          {
+            "correlation": 0.999829,
+            "rms_ratio": 0.994517,
+            "exact_frames": 13
+          },
+          {
+            "correlation": 0.99977,
+            "rms_ratio": 0.994157,
+            "exact_frames": 26
+          },
+          {
+            "correlation": 0.999998,
+            "rms_ratio": 0.995216,
+            "exact_frames": 60
+          }
+        ]
+      }
+    },
+    {
+      "table": "pirate",
+      "original_pcm_sha256": "7011461c3a707edbe251e9a45b42788ec8d8bc1c2113a85e45a8af25db0f5dfa",
+      "original_report_sha256": "3f1f05b43057da1e48f6e37f5ceba2afe8cd9c81e8258f38a47e23cdb20480a3",
+      "variants": {
+        "baseline": [
+          {
+            "correlation": 0.979677,
+            "rms_ratio": 0.99591,
+            "exact_frames": 15
+          },
+          {
+            "correlation": 0.836706,
+            "rms_ratio": 0.971983,
+            "exact_frames": 0
+          },
+          {
+            "correlation": 0.83227,
+            "rms_ratio": 0.997986,
+            "exact_frames": 0
+          },
+          {
+            "correlation": 0.914559,
+            "rms_ratio": 0.984828,
+            "exact_frames": 1
+          },
+          {
+            "correlation": 0.971579,
+            "rms_ratio": 0.997766,
+            "exact_frames": 3
+          }
+        ],
+        "experiment": [
+          {
+            "correlation": 0.999882,
+            "rms_ratio": 0.995463,
+            "exact_frames": 32
+          },
+          {
+            "correlation": 0.999274,
+            "rms_ratio": 0.993117,
+            "exact_frames": 45
+          },
+          {
+            "correlation": 0.998679,
+            "rms_ratio": 0.996596,
+            "exact_frames": 29
+          },
+          {
+            "correlation": 0.999594,
+            "rms_ratio": 0.993525,
+            "exact_frames": 29
+          },
+          {
+            "correlation": 0.999947,
+            "rms_ratio": 0.995709,
+            "exact_frames": 28
+          }
+        ]
+      }
+    },
+    {
+      "table": "space",
+      "original_pcm_sha256": "66f76fb9b4d808f240e7ba677005b07ce885b9a774d03e77680bee24e74dd3a0",
+      "original_report_sha256": "92d77bac12da6aec8c3a8dfb7d1ac4cecaef6c16278f04b076df329ec964eec3",
+      "variants": {
+        "baseline": [
+          {
+            "correlation": 0.991826,
+            "rms_ratio": 0.996148,
+            "exact_frames": 15
+          },
+          {
+            "correlation": 0.999608,
+            "rms_ratio": 0.996583,
+            "exact_frames": 1
+          },
+          {
+            "correlation": 0.996309,
+            "rms_ratio": 0.99267,
+            "exact_frames": 4
+          },
+          {
+            "correlation": 0.998634,
+            "rms_ratio": 0.995604,
+            "exact_frames": 3
+          },
+          {
+            "correlation": 0.994229,
+            "rms_ratio": 0.998109,
+            "exact_frames": 0
+          }
+        ],
+        "experiment": [
+          {
+            "correlation": 0.999876,
+            "rms_ratio": 0.994379,
+            "exact_frames": 40
+          },
+          {
+            "correlation": 0.999996,
+            "rms_ratio": 0.995191,
+            "exact_frames": 7
+          },
+          {
+            "correlation": 0.999979,
+            "rms_ratio": 0.994998,
+            "exact_frames": 12
+          },
+          {
+            "correlation": 0.999996,
+            "rms_ratio": 0.995182,
+            "exact_frames": 7
+          },
+          {
+            "correlation": 0.999969,
+            "rms_ratio": 0.995535,
+            "exact_frames": 13
+          }
+        ]
+      }
+    },
+    {
+      "table": "demon",
+      "original_pcm_sha256": "864f8c28070742addc7c71bdd379e5fe351d688fcb8c74841834b55bd4e7cd61",
+      "original_report_sha256": "8c8b6329b8901ac56956a336ccdcaddcd931cb41a964f452b7c73d1ffc3453f9",
+      "variants": {
+        "baseline": [
+          {
+            "correlation": 0.99275,
+            "rms_ratio": 0.995145,
+            "exact_frames": 47
+          },
+          {
+            "correlation": 0.996031,
+            "rms_ratio": 0.994752,
+            "exact_frames": 6
+          },
+          {
+            "correlation": 0.99499,
+            "rms_ratio": 0.997248,
+            "exact_frames": 3
+          },
+          {
+            "correlation": 0.996742,
+            "rms_ratio": 0.99253,
+            "exact_frames": 2
+          },
+          {
+            "correlation": 0.994327,
+            "rms_ratio": 0.99549,
+            "exact_frames": 0
+          }
+        ],
+        "experiment": [
+          {
+            "correlation": 0.999999,
+            "rms_ratio": 0.994927,
+            "exact_frames": 109
+          },
+          {
+            "correlation": 0.999999,
+            "rms_ratio": 0.994947,
+            "exact_frames": 14
+          },
+          {
+            "correlation": 0.999984,
+            "rms_ratio": 0.99509,
+            "exact_frames": 20
+          },
+          {
+            "correlation": 0.999976,
+            "rms_ratio": 0.994962,
+            "exact_frames": 22
+          },
+          {
+            "correlation": 0.999998,
+            "rms_ratio": 0.995048,
+            "exact_frames": 9
+          }
+        ]
+      }
+    }
+  ]
+}

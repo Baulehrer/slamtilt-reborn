@@ -1,0 +1,44 @@
+{
+  "status": "BOUNDED_NO_LITERAL_REFERENCES",
+  "scope": "Inventory direct pointer bytes for the three unobserved Mean descriptors.\n\nThis is a bounded static negative search of two authenticated PE images. It\ncannot exclude computed/indexed pointers, runtime patches, addresses encoded\nas offsets, indirect references, unvisited events or differing Amiga logic.\n",
+  "demo_sha256": "31192e0b316bf6fe0a4a41336a5ef6ae53ac659c04edf001607a8de63239fc00",
+  "retail_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "cases": [
+    {
+      "build": "demo",
+      "descriptor": "0x437f54",
+      "mapped_pe_bytes_scanned": 284672,
+      "direct_pointer_matches": []
+    },
+    {
+      "build": "demo",
+      "descriptor": "0x437f78",
+      "mapped_pe_bytes_scanned": 284672,
+      "direct_pointer_matches": []
+    },
+    {
+      "build": "demo",
+      "descriptor": "0x437f9c",
+      "mapped_pe_bytes_scanned": 284672,
+      "direct_pointer_matches": []
+    },
+    {
+      "build": "retail",
+      "descriptor": "0x464008",
+      "mapped_pe_bytes_scanned": 504320,
+      "direct_pointer_matches": []
+    },
+    {
+      "build": "retail",
+      "descriptor": "0x46402c",
+      "mapped_pe_bytes_scanned": 504320,
+      "direct_pointer_matches": []
+    },
+    {
+      "build": "retail",
+      "descriptor": "0x464050",
+      "mapped_pe_bytes_scanned": 504320,
+      "direct_pointer_matches": []
+    }
+  ]
+}

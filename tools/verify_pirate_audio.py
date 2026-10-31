@@ -4,6 +4,7 @@
 --refresh replays retained diagnostic/finite trajectories in original x86 code.
 No sound-state writes, no audio-device emulation; original mixer PCM is excluded.
 """
+from retail_audio_fixture import corrected_audio_events
 import argparse
 from collections import Counter
 import hashlib
@@ -115,7 +116,7 @@ def main():
                  '--replay',path,'--audio-trace',output]
             if row['case']!='complete-game':cmd+=['--diagnostic-shots',path]
             subprocess.run(cmd,check=True,cwd=ROOT,env=dict(os.environ,SDL_VIDEODRIVER='dummy',SDL_AUDIODRIVER='dummy'))
-            actual=read(output);assert actual['events']==row['events'],(row['case'],'SDL events')
+            actual=read(output);assert actual['events']==corrected_audio_events(row['events'], 'pirate'),(row['case'],'SDL events')
             assert actual['enabled']and actual['queued_bytes']>0 and actual['error']=='',actual
         output=work/'frontend.json'
         subprocess.run([a.viewer,DAT,'--pirate-play',ROOT/'build/oracle/pirate-full-tick','--frames','14','--audio-acceptance',output],

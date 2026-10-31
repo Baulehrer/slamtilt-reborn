@@ -1,0 +1,258 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "original_exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+  "profile_sha256": "4e8bf8a60e44fb9cc1c820857f86c182148b900793c365cf617b2efa90aca68c",
+  "native_profile_probe_sha256": "eadd0d672e57fe812ba4bbb9375941136de499387f14db1d346443372f5b71e6",
+  "scope": "Check Space SFX descriptor period/volume in retained original x86 replays.\n\nUses actual Original service-entry observations on private Retail snapshots.\nMode scenarios include diagnostic contacts; this is not all-path proof.\nDescriptor fields are sampled at request time, not at later queue consumption.\nNo original audio or game data is copied into the report.\n",
+  "cases": [
+    {
+      "case": "launch",
+      "ticks": 1200,
+      "diagnostic_contacts": 0,
+      "source_sha256": "7a8bf4f2158afbf795305a057325ca572f6afdc42b259ab8f9f08077ea6a2de3",
+      "fixture_sha256": "dd7752dc19241b84d6d33a888b55671193f0ce4cc482768cbabe0f3191fe8192",
+      "events": 4,
+      "fields": [
+        {
+          "descriptor": "0x465d08",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x465d2c",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x465d50",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x465e04",
+          "period": 160,
+          "volume": 64,
+          "events": 1
+        }
+      ]
+    },
+    {
+      "case": "base-rules",
+      "ticks": 13296,
+      "diagnostic_contacts": 185,
+      "source_sha256": "c736d2e8de8c06cb8c79a2efe61033590c6a2fb2d7ffad98cde68749a290d966",
+      "fixture_sha256": "75e86e1ca0a91e1f3ffea180febd76f4ffdfa2c9113e26690daa7e61ba9a4f61",
+      "events": 51,
+      "fields": [
+        {
+          "descriptor": "0x465d50",
+          "period": 226,
+          "volume": 64,
+          "events": 6
+        },
+        {
+          "descriptor": "0x465d98",
+          "period": 226,
+          "volume": 64,
+          "events": 2
+        },
+        {
+          "descriptor": "0x465dbc",
+          "period": 226,
+          "volume": 64,
+          "events": 2
+        },
+        {
+          "descriptor": "0x465e04",
+          "period": 160,
+          "volume": 64,
+          "events": 6
+        },
+        {
+          "descriptor": "0x465e28",
+          "period": 226,
+          "volume": 64,
+          "events": 35
+        }
+      ]
+    },
+    {
+      "case": "kickback-off",
+      "ticks": 700,
+      "diagnostic_contacts": 5,
+      "source_sha256": "cd33bad1738da141c3983d6463d9f21c0e9c3aa66d1262220771bca607c14607",
+      "fixture_sha256": "a265627d47a02e83a0e3642c8522d93a692c02ca186f780ab72900df55c791ae",
+      "events": 5,
+      "fields": [
+        {
+          "descriptor": "0x465d50",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x465d74",
+          "period": 226,
+          "volume": 64,
+          "events": 3
+        },
+        {
+          "descriptor": "0x465e04",
+          "period": 160,
+          "volume": 64,
+          "events": 1
+        }
+      ]
+    },
+    {
+      "case": "race-variants",
+      "ticks": 8692,
+      "diagnostic_contacts": 185,
+      "source_sha256": "95e52b84cd7aee94459318ee3ebce31da3393d9f8bd47ab781a2fc3bc1245e99",
+      "fixture_sha256": "fa6a9fc0987b571514a8b94d6ba7fa648229cbd21815694b27662449f0e9abf2",
+      "events": 13,
+      "fields": [
+        {
+          "descriptor": "0x465d50",
+          "period": 226,
+          "volume": 64,
+          "events": 2
+        },
+        {
+          "descriptor": "0x465d98",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x465dbc",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x465de0",
+          "period": 120,
+          "volume": 64,
+          "events": 7
+        },
+        {
+          "descriptor": "0x465e04",
+          "period": 160,
+          "volume": 64,
+          "events": 2
+        }
+      ]
+    },
+    {
+      "case": "mission-campaign",
+      "ticks": 25892,
+      "diagnostic_contacts": 153,
+      "source_sha256": "09775c7cf89a5adb4a08d59898f97ab69ceb10b65ba239c15c890f67b001241c",
+      "fixture_sha256": "1893f764aea8ffe51280ef85ccdaa0ec9def664fb7cdb62c860f1282fa93f952",
+      "events": 38,
+      "fields": [
+        {
+          "descriptor": "0x465d50",
+          "period": 226,
+          "volume": 64,
+          "events": 4
+        },
+        {
+          "descriptor": "0x465d98",
+          "period": 226,
+          "volume": 64,
+          "events": 15
+        },
+        {
+          "descriptor": "0x465dbc",
+          "period": 226,
+          "volume": 64,
+          "events": 15
+        },
+        {
+          "descriptor": "0x465e04",
+          "period": 160,
+          "volume": 64,
+          "events": 4
+        }
+      ]
+    },
+    {
+      "case": "lane-shift",
+      "ticks": 1004,
+      "diagnostic_contacts": 1,
+      "source_sha256": "d24803cd43174b7fc0589348ab78e687e40e4f37ab621c38ef11a72b30f66f4c",
+      "fixture_sha256": "b75810245951885f59c1a8cfa7515419050aab9da51411697c443680ddfe88c6",
+      "events": 3,
+      "fields": [
+        {
+          "descriptor": "0x465d08",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x465d50",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x465e04",
+          "period": 160,
+          "volume": 64,
+          "events": 1
+        }
+      ]
+    },
+    {
+      "case": "planet-success",
+      "ticks": 19392,
+      "diagnostic_contacts": 26,
+      "source_sha256": "dd07ece5221f8d15ef53a0f3b26bb2a20dec7b1df94402290d67ecb8d39bc16a",
+      "fixture_sha256": "e29687d8fec5c9f1a36a3815c477ef87972e58122e3815db55b95996a942c53c",
+      "events": 10,
+      "fields": [
+        {
+          "descriptor": "0x465ce4",
+          "period": 226,
+          "volume": 64,
+          "events": 2
+        },
+        {
+          "descriptor": "0x465d50",
+          "period": 226,
+          "volume": 64,
+          "events": 2
+        },
+        {
+          "descriptor": "0x465d98",
+          "period": 226,
+          "volume": 64,
+          "events": 2
+        },
+        {
+          "descriptor": "0x465dbc",
+          "period": 226,
+          "volume": 64,
+          "events": 2
+        },
+        {
+          "descriptor": "0x465e04",
+          "period": 160,
+          "volume": 64,
+          "events": 2
+        }
+      ]
+    }
+  ],
+  "descriptor_count": 10,
+  "events": 124,
+  "ticks": 70176,
+  "unvisited_mutations": "UNKNOWN"
+}

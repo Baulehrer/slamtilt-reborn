@@ -43,4 +43,14 @@ int main() {
     assert(crop.table.y<=crop.viewport.y+.01f && crop.table.y+crop.table.h>=crop.viewport.y+crop.viewport.h-.01f);
    }
   }
+ // Cabinet output reserves no on-playfield DMD area and fits all600 rows.
+ SDL_SetEnvironmentVariable(SDL_GetEnvironment(),"SLAMTILT_CABINET_DMD","1",true);
+ for(int pos=0;pos<4;++pos){
+  const auto l=slam::display_layout(2160,3840,pos,1,1,0,160,300,600);
+  assert(l.viewport.x==0 && l.viewport.y==0);
+  assert(l.viewport.w==2160 && l.viewport.h==3840);
+  assert(std::abs(l.table.w/l.table.h-320.f/600)<.0001f);
+  assert(l.table.y>=0 && l.table.y+l.table.h<=3840.01f);
+ }
+ SDL_UnsetEnvironmentVariable(SDL_GetEnvironment(),"SLAMTILT_CABINET_DMD");
 }

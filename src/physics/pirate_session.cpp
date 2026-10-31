@@ -3,6 +3,7 @@
 #include "assets/amiga_data_profiles.h"
 #include "assets/amiga_data_profiles_v2.h"
 #include "core/sha256.h"
+#include "core/retail_music_start.h"
 #include <algorithm>
 #include <fstream>
 namespace slam {
@@ -38,6 +39,7 @@ void PirateSession::reset() {
   // Original405b6a..405b78: the isolated snapshot assigned the math table
   // after ABI startup, so finish that pointer binding before gameplay.
   if(mode_==PirateTickMode::Full)machine_.wr(0x46b778,machine_.rd(0x46c66c,4),4);
+  if(mode_==PirateTickMode::Full)initialize_retail_music_start(machine_);
   ticks_=0;left_=right_=false;
   enable_audio_events(audio_enabled_);
 }

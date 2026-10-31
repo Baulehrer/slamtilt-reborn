@@ -1,0 +1,98 @@
+{
+  "status": "VERIFIED_BOUNDED_WITH_PCM_GAP",
+  "scope": "Compare bounded first-tick Retail tracker PCM with native table playback.\n\nThe original's tracker state, full music volume, mixer configuration and 882\nframe window are explicitly adapted in verify_retail_tracker_pcm.py. Samples\nare not asserted identical: this test checks mono, deterministic chunking and\nan approximate level range while recording the remaining timing/PCM gap.\n",
+  "native_probe_sha256": "84281b7236ae1a61c44affd9b14e11bfd5d7c7411d7ad05ce126d8b44159ab4b",
+  "output": "44100 Hz signed 16-bit duplicated mono",
+  "frames_per_table": 882,
+  "native_tracker_mix": {
+    "separation": 0,
+    "interpolation": "nearest",
+    "volume_percent": 66
+  },
+  "cases": [
+    {
+      "table": "mean",
+      "bank": 0,
+      "order": 4,
+      "original_sha256": "242c2b7155d21b8ab8affdab54757c33ac3fe2a323c388c5f3fa3b234468d6e8",
+      "native_sha256": "486060a9c0b0b0cefcd8e148784a60147c24f48299554de9dc888320c95f40de",
+      "native_rms_over_original": 1.012271,
+      "uncentered_correlation": 0.64103,
+      "best_correlation_within_8_frames": 0.923031,
+      "original_relative_frame_offset": 1,
+      "original_range": [
+        -5419,
+        4444
+      ],
+      "native_range": [
+        -5392,
+        4423
+      ],
+      "exact_frames": 24,
+      "executed_original_blocks": 176
+    },
+    {
+      "table": "pirate",
+      "bank": 0,
+      "order": 34,
+      "original_sha256": "426a003fb367eaf6d3ab1e2df080ad68a74c62fe175aa2cc625843b76ed420c6",
+      "native_sha256": "c1e007e742043b5644673ad6191e8e13e1060eef24c0a2c14c2902a8b6356576",
+      "native_rms_over_original": 0.99591,
+      "uncentered_correlation": 0.979677,
+      "best_correlation_within_8_frames": 0.979677,
+      "original_relative_frame_offset": 0,
+      "original_range": [
+        -4319,
+        5671
+      ],
+      "native_range": [
+        -4424,
+        5939
+      ],
+      "exact_frames": 15,
+      "executed_original_blocks": 178
+    },
+    {
+      "table": "space",
+      "bank": 0,
+      "order": 32,
+      "original_sha256": "eb11839ae2553d166e31f5c8abbaaaafedc03a9669790be704acab32ac355b30",
+      "native_sha256": "32820fe47a88984b1b43fd5024024c513742ca166b3a24398263a6499c9e47d7",
+      "native_rms_over_original": 0.996148,
+      "uncentered_correlation": 0.991826,
+      "best_correlation_within_8_frames": 0.998607,
+      "original_relative_frame_offset": 2,
+      "original_range": [
+        -5091,
+        5079
+      ],
+      "native_range": [
+        -5098,
+        5055
+      ],
+      "exact_frames": 15,
+      "executed_original_blocks": 183
+    },
+    {
+      "table": "demon",
+      "bank": 0,
+      "order": 25,
+      "original_sha256": "4477f12955a982e99d4abcfcc1edfdd72053c790f1c27c979d4c4969dd4c989d",
+      "native_sha256": "e924be46890ad99082554cbda8e9e0e8e8440f0240b1e51201e1156a2bcc0063",
+      "native_rms_over_original": 0.995145,
+      "uncentered_correlation": 0.99275,
+      "best_correlation_within_8_frames": 0.99782,
+      "original_relative_frame_offset": 2,
+      "original_range": [
+        -4279,
+        3634
+      ],
+      "native_range": [
+        -4254,
+        3610
+      ],
+      "exact_frames": 47,
+      "executed_original_blocks": 179
+    }
+  ]
+}

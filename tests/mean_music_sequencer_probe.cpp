@@ -49,10 +49,10 @@ int main() {
   try {
     const auto base = module(false), event = module(true);
     slam::MeanMusicSequencer s({base, event});
-    slam::StimPlayer reference(base);
+    slam::StimPlayer reference(base, 0, slam::TrackerMix::RetailMono);
     std::vector<std::int16_t> a(400), b(400), upper(88200);
     s.request90(0, 0);
-    slam::StimPlayer base_reference(base);
+    slam::StimPlayer base_reference(base, 0, slam::TrackerMix::RetailMono);
     s.render(a.data(), 200);
     base_reference.render(b.data(), 200);
     require(a == b, "Base90 PCM mismatch");
@@ -69,7 +69,7 @@ int main() {
     s.request88(1, 0);
     s.request84(0, 0);
     s.request90(0, 0);
-    slam::StimPlayer new_base(base);
+    slam::StimPlayer new_base(base, 0, slam::TrackerMix::RetailMono);
     s.render(a.data(), 200);
     new_base.render(b.data(), 200);
     require(a == b && s.foreground_service() == 0x90,
@@ -89,7 +89,7 @@ int main() {
     s.request88(1, 0);
     s.request84(0, 0);
     s.stop88();
-    slam::StimPlayer fresh(base);
+    slam::StimPlayer fresh(base, 0, slam::TrackerMix::RetailMono);
     s.render(a.data(), 200);
     fresh.render_once(b.data(), 200);
     require(a == b, "Pending84 did not replace saved84");

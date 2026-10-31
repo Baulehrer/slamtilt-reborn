@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """SHA-bound Original/native/reset/SDL ball-pool verification for Space."""
+from retail_audio_fixture import corrected_audio_events
 import argparse,json,os,subprocess
 from verify_space_asteroid import ROOT,read,sha,digest
 from demon_base_contracts import contracts
@@ -23,7 +24,7 @@ def main():
   subprocess.run(cmd,check=True,env=dict(os.environ,SDL_VIDEODRIVER='dummy',SDL_AUDIODRIVER='dummy'))
   actual=read(out)
   for k in KEYS:assert actual[k]==t[k],(case,k)
-  sound=read(audio);assert sound['events']==t['audio_events'] and sound['enabled'] and sound['queued_bytes']>0
+  sound=read(audio);assert sound['events']==corrected_audio_events(t['audio_events'], 'demon') and sound['enabled'] and sound['queued_bytes']>0
   assert capture.read_bytes()[:2]==b'BM';rows.append(dict(case=case,steps=n,max_balls=max(counts),phase=phase,contract=contract,audio_requests=len(t['audio_events']),fixture_sha256=sha(path)));print(case,n,'eight vectors and audio exact',flush=True)
  (ROOT/'analysis/traces/demon-base-acceptance.json').write_text(json.dumps(dict(status='VERIFIED',cases=rows),indent=2)+'\n')
 if __name__=='__main__':main()

@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """Actual older userspace acceptance for the shared native import/frontend bundle."""
 import argparse,hashlib,json,os,shutil,subprocess,tempfile
+from retail_audio_fixture import corrected_audio_events
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def read(p):return json.loads(p.read_text())
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
- p=argparse.ArgumentParser();p.add_argument('--retail-only',action='store_true');p.add_argument('--dat-only',action='store_true');p.add_argument('--report',type=Path,default=ROOT/'analysis/traces/reborn-distribution.json');a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--retail-only',action='store_true');p.add_argument('--dat-only',action='store_true');p.add_argument('--legacy-audio-fixture',action='store_true',help='Expect historical 0/0 startup from an unchanged older package');p.add_argument('--report',type=Path,default=ROOT/'analysis/traces/reborn-distribution.json');a=p.parse_args()
  if a.dat_only:a.retail_only=True
  meta=read(ROOT/'build/compat/reborn-build.json');app=Path(meta['program']);archive=Path(str(app)+'.tar.gz');archive_sha=sha(archive);manifest=read(app/'frontend-bundle.json');maxima={}
  for item in manifest['runtime_requirements']:
@@ -53,10 +54,11 @@ def main():
    else:
     keys=['states','lifecycle','highscore_sha256','lamp_sha256','ball_pool_sha256']+(['timing','dmd_sha256','rule_sha256','video_sha256']if table=='pirate'else['poses','globals']+(['raw_state_sha256']if table=='demon'else[]))
     for key in keys:assert t[key]==g[key],(table,key)
-    assert read(state/'audio.json')['events']==g['audio_events'],table
+    expected_audio=g['audio_events'] if a.legacy_audio_fixture else corrected_audio_events(g['audio_events'],table)
+    assert read(state/'audio.json')['events']==expected_audio,table
    sessions.append(dict(table=table,steps=n,exact=True,equivalence_target='native baseline + separate Original components'if table=='mean'else'configured Original Retail',whole_original_trajectory=table!='mean'));print('Debian Reborn',table,n,'PASS',flush=True)
  assert sha(archive)==archive_sha,'Archive changed during runtime acceptance'
- report=dict(status='VERIFIED',project='Slamtilt - Reborn',archive_sha256=archive_sha,actual_runtime=libc,image_id=meta['image_id'],abi_maxima=maxima,checkout_not_mounted=True,network_disabled=True,program_originals_readonly=True,empty_PATH_import_and_four_children=True,all_imported_files_exact=True,old_launcher_alias=True,accelerated_sessions=sessions,total_steps=sum(s['steps']for s in sessions),scope='Actual pinned Debian12 userspace/currenthost kernel, dummySDL. HostGPU/audio/endurance/focus separately recorded.')
+ report=dict(legacy_audio_fixture=a.legacy_audio_fixture,status='VERIFIED',project='Slamtilt - Reborn',archive_sha256=archive_sha,actual_runtime=libc,image_id=meta['image_id'],abi_maxima=maxima,checkout_not_mounted=True,network_disabled=True,program_originals_readonly=True,empty_PATH_import_and_four_children=True,all_imported_files_exact=True,old_launcher_alias=True,accelerated_sessions=sessions,total_steps=sum(s['steps']for s in sessions),scope='Actual pinned Debian12 userspace/currenthost kernel, dummySDL. HostGPU/audio/endurance/focus separately recorded.')
  report['retail_only_inputs']=a.retail_only
  report['dat_only_inputs']=a.dat_only
  a.report.write_text(json.dumps(report,indent=2)+'\n');print('Reborn actual Debian12 runtime/import/four tables PASS',maxima)

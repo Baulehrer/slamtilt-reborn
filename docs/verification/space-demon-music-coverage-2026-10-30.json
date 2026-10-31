@@ -1,0 +1,2165 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "tables": {
+    "space": {
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "linear_range": [
+        "0x439ae0",
+        "0x44b640"
+      ],
+      "bank_order_counts": [
+        67,
+        40,
+        56
+      ],
+      "fixture_count": 31,
+      "fixtures": [
+        {
+          "case": "alien",
+          "pinned_sha256": "87cf66ca3854f4198eb3c96f50696e5d1b842c23d8af73c3837c6f6e8b6d68b4",
+          "source_sha256": "9f349ba82137c1f8644a3ad42ec55ab59b424d841dbfc5bb7ffb37c578fdbe7f",
+          "steps": 7416,
+          "sequences": 8,
+          "original_reset_exact": true
+        },
+        {
+          "case": "base-rules",
+          "pinned_sha256": "75e86e1ca0a91e1f3ffea180febd76f4ffdfa2c9113e26690daa7e61ba9a4f61",
+          "source_sha256": "c736d2e8de8c06cb8c79a2efe61033590c6a2fb2d7ffad98cde68749a290d966",
+          "steps": 13296,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "bigblam",
+          "pinned_sha256": "7639b3d444dc4d3b4828b57b5d0a6c55488243ddcf1117d9bb5ceb6bf99207fb",
+          "source_sha256": "e95ff4bc6a45e8be135517c5cb4ffc9be9821d2e784599c4ae5ad97962f8c526",
+          "steps": 42864,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "bikes",
+          "pinned_sha256": "25fa0b5924346abd10121ed96dc8ee2587316547d289bcadbfc9f897bb5335e0",
+          "source_sha256": "1cfa659f81976675679663f8734e2ac2009c367f7b39c2d98ba74ed7265aab5c",
+          "steps": 13592,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "combo-mode-guard",
+          "pinned_sha256": "8d93ad3d4adf9a29fc0975b13c33e044f53b74d7952525619c4b6461126e09ec",
+          "source_sha256": "3af3ca7e06adbc16a8437f135ecad97424868f36e17ae3e58fdd2e57c77eef1d",
+          "steps": 5028,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "kickback-off",
+          "pinned_sha256": "a265627d47a02e83a0e3642c8522d93a692c02ca186f780ab72900df55c791ae",
+          "source_sha256": "cd33bad1738da141c3983d6463d9f21c0e9c3aa66d1262220771bca607c14607",
+          "steps": 700,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "kickback-on",
+          "pinned_sha256": "69b016955ec8f3c861c8f9dfa425066693cd1ff0e8f5021a236f07b8d0a71302",
+          "source_sha256": "895dd6c24b9ab0e4579144b5850086a76338ace4499085ff7f7513ade581c35c",
+          "steps": 1632,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "lane-default",
+          "pinned_sha256": "fc513d275c1531d404f667b7829de08a37111e6e4cbcf2d264b3fd773cc0594a",
+          "source_sha256": "4ed4eadc5a1821398fbd2079394cce1474e861f88425816013512e78e2eae5c0",
+          "steps": 1004,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "lane-double",
+          "pinned_sha256": "f42a8bc47178933cea0b2462444ae1ae6ada572a5c3dbcc66630a1a578598635",
+          "source_sha256": "a9bcc8587edeee3711915b337d3dd1f3e866400b0b784c3c2af3764551af7933",
+          "steps": 1004,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "lane-live",
+          "pinned_sha256": "30b79c4f1e2209b2f4ffc58c0734633d98a134a2496bbf0a41b67edf06f97d53",
+          "source_sha256": "85fd68c2f26a60d492956168ca2203472d845739aaed2d800af8ce4b864e9627",
+          "steps": 1004,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "lane-shift",
+          "pinned_sha256": "b75810245951885f59c1a8cfa7515419050aab9da51411697c443680ddfe88c6",
+          "source_sha256": "d24803cd43174b7fc0589348ab78e687e40e4f37ab621c38ef11a72b30f66f4c",
+          "steps": 1004,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "lane-toggle",
+          "pinned_sha256": "cf1a1e1c3b6bded0799693aef2cb53b29cfb6a0ad52d1cec76a24651ba0cf167",
+          "source_sha256": "dd608981d5897a6cc94d733607084ce16e807c951e8f6228197614e20cd99ce1",
+          "steps": 1004,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "magna-off",
+          "pinned_sha256": "247d2710394443d3a02bf7cf7254c1da8fa459a6048f3f736fa26982a10a62b0",
+          "source_sha256": "117053dcaae6f9bf736efdd8af4be91baef3aa59e0c458cfd90131838e89919a",
+          "steps": 624,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "magna-on",
+          "pinned_sha256": "c4afca4a996c21d80d8d166846f11fed3b4f9d5836ffd40e7aa8395f276403f5",
+          "source_sha256": "566e2cc341fdcd2716966467429e82dd24be60fd7f4acb71d505b4caa228429b",
+          "steps": 1412,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "mission-campaign",
+          "pinned_sha256": "1893f764aea8ffe51280ef85ccdaa0ec9def664fb7cdb62c860f1282fa93f952",
+          "source_sha256": "09775c7cf89a5adb4a08d59898f97ab69ceb10b65ba239c15c890f67b001241c",
+          "steps": 25892,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "multiball-repeat",
+          "pinned_sha256": "940f102db3bd6b480275299d1252786baf186a8f1a70367ac01d5885b199c7a8",
+          "source_sha256": "b55546e7ee2c73b74e48c05c466a7f711da66871c76f0367f8b5dca20eb84f74",
+          "steps": 16932,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "multiball",
+          "pinned_sha256": "6eadf88d0302ea4cfb4def601a173a53c447a6849a0d5cb83b3a58f6cc9bde74",
+          "source_sha256": "01c1d51f0f39295e4fa481623fc3bf7cce42162d5ddd97f51a6c293a805f5a4d",
+          "steps": 10260,
+          "sequences": 8,
+          "original_reset_exact": true
+        },
+        {
+          "case": "planet",
+          "pinned_sha256": "dc03bb3382c306d624f0f98b143486c4dec65d7884ec3ba5e5ac2b77149ad59c",
+          "source_sha256": "2c2bc16dc725a7948cfc9cd17eb7fb1a0db233db5f6bcb33674c74c6086ee75e",
+          "steps": 5824,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "planet-success",
+          "pinned_sha256": "e29687d8fec5c9f1a36a3815c477ef87972e58122e3815db55b95996a942c53c",
+          "source_sha256": "dd07ece5221f8d15ef53a0f3b26bb2a20dec7b1df94402290d67ecb8d39bc16a",
+          "steps": 19392,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "race-variants",
+          "pinned_sha256": "fa6a9fc0987b571514a8b94d6ba7fa648229cbd21815694b27662449f0e9abf2",
+          "source_sha256": "95e52b84cd7aee94459318ee3ebce31da3393d9f8bd47ab781a2fc3bc1245e99",
+          "steps": 8692,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "sabre",
+          "pinned_sha256": "1fba12c31604a1f0725664c27b6fd4dcbb97b0c26fb93d94da36bef5836a473b",
+          "source_sha256": "72eb2879f65d1541406585e2ef29dace1aa56148368c483527e826650b76149a",
+          "steps": 3568,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "sabre-variants",
+          "pinned_sha256": "d7d648ec123fd72f1826437c584b596dcba07de4e34866bd9febc6d8dafbe721",
+          "source_sha256": "c61cb31efba76c5b8da5913f69c353fc13ccca41340e20d9dcf996af39414abf",
+          "steps": 7240,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "skillshot-expiry",
+          "pinned_sha256": "1fd74750aa9d4f0e95d8578274a17ccd4020c3cc34c058dea261c41573a2d046",
+          "source_sha256": "6c30a8b435404b336dd2701d9ef671f86cec8e74eeb381cf35903c4c45fe1b23",
+          "steps": 1308,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "special-left",
+          "pinned_sha256": "3b5cffe2127478ac1199bb4e946b599ee159dff93cd7251dfa9d503fc3d74e7d",
+          "source_sha256": "badb4528447c12708df980c1ffc5effbfaeb1fae6e5943481768a673b97a3d4e",
+          "steps": 620,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "speed-rules",
+          "pinned_sha256": "c9e7af4c3c13ad0a2a060c26d0408996a23dcdf493cfbff6d95d0e369b13d979",
+          "source_sha256": "47feb9bb29b6ca8ae33e333bf432bba1f720dd12ec12ca3bf13f66e430f9068a",
+          "steps": 4840,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "walker-aim70",
+          "pinned_sha256": "cb905f60e1f2ff2eba886a6930c29de49c87a1928d82d0095ad2b3be777e2f87",
+          "source_sha256": "caa6624df875cdeed5c9162d645a5ff959a60768f7396bdc2d54244c9128546e",
+          "steps": 5240,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "walker-aim87",
+          "pinned_sha256": "40d696c8a44125df7390fa95953748eb1053b7d4434a09aeb8367e97aa49596b",
+          "source_sha256": "715ef4b135535657c039ce6175e65e572a626cff11cb58105c3b951749aa9b84",
+          "steps": 5308,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "walker-aim88",
+          "pinned_sha256": "cd6b488c63adae6e07564c9df6fa0de05fd89b1f193d48319f5cea717dbb95fd",
+          "source_sha256": "0025cccf9a642a8baa28a791b176a9cbd0906368efbdfadb926b0c3b10121f28",
+          "steps": 5312,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "walker-repeat",
+          "pinned_sha256": "f2db649fdd7d346a06c106251bdb60c544444c5a1621bfe57c734b06b8328555",
+          "source_sha256": "82dbda4697412d0056a0b9ee430dacaf53af4290831ae361ffd4433470535403",
+          "steps": 8092,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "walker",
+          "pinned_sha256": "ab25653df393db974f219cd8ef6c21dc1bcd87147c5d30990ec86abaf71b8eae",
+          "source_sha256": "2884b865ec52ed64d5a386a3f9779273f172a622214af885a27c198cde4f29dd",
+          "steps": 5484,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "weapons-ladder",
+          "pinned_sha256": "1780370b2bf7aa88d044f1170912739e211ebd9815660a92bf7128ce0f6aca14",
+          "source_sha256": "e2867efa3992d69022d4770a2400db5bc55a3a7cc21ebcd0ced20e2ccd6aa4bf",
+          "steps": 2892,
+          "sequences": 10,
+          "original_reset_exact": true
+        }
+      ],
+      "missing_source_traces": [],
+      "observed_requests": [
+        {
+          "service": "0x80",
+          "bank": 0,
+          "order": 0,
+          "events": 25,
+          "case_count": 16
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 0,
+          "events": 1,
+          "case_count": 1
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 4,
+          "events": 1,
+          "case_count": 1
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 17,
+          "events": 3,
+          "case_count": 3
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 37,
+          "events": 3,
+          "case_count": 2
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 45,
+          "events": 2,
+          "case_count": 1
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 47,
+          "events": 3,
+          "case_count": 3
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 52,
+          "events": 2,
+          "case_count": 2
+        },
+        {
+          "service": "0x84",
+          "bank": 1,
+          "order": 0,
+          "events": 2,
+          "case_count": 1
+        },
+        {
+          "service": "0x84",
+          "bank": 1,
+          "order": 8,
+          "events": 3,
+          "case_count": 3
+        },
+        {
+          "service": "0x84",
+          "bank": 1,
+          "order": 21,
+          "events": 6,
+          "case_count": 6
+        },
+        {
+          "service": "0x84",
+          "bank": 1,
+          "order": 25,
+          "events": 2,
+          "case_count": 2
+        },
+        {
+          "service": "0x84",
+          "bank": 1,
+          "order": 28,
+          "events": 1,
+          "case_count": 1
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 34,
+          "events": 3,
+          "case_count": 3
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 44,
+          "events": 4,
+          "case_count": 2
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 46,
+          "events": 7,
+          "case_count": 6
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 55,
+          "events": 9,
+          "case_count": 5
+        }
+      ],
+      "decoded_candidates": [
+        {
+          "address": "0x44084b",
+          "service_offset": "0x88",
+          "target_register": "ecx",
+          "api_pointer_proven": false,
+          "api_source": null,
+          "bank": 2,
+          "order": 46,
+          "status": "unresolved",
+          "instruction_hex": "ff9188000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x440f08",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x440f6c",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x441039",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x441379",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x441652",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4416fb",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x441743",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": false
+        },
+        {
+          "address": "0x4417ca",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x441865",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4418db",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x44195b",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4419cf",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x441a45",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x441e08",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 45,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x442586",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4427a6",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x442e96",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 37,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x443342",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 1,
+          "order": 28,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x44352b",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 17,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4435f2",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 47,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4437c0",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 1,
+          "order": 21,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4438c1",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 1,
+          "order": 25,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4440d7",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": false
+        },
+        {
+          "address": "0x4440f7",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": false
+        },
+        {
+          "address": "0x444ab1",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 54,
+          "status": "unobserved_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x444cf0",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": false,
+          "api_source": null,
+          "bank": 2,
+          "order": 34,
+          "status": "unresolved",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x444d06",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 1,
+          "order": 8,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x444d42",
+          "service_offset": "0x88",
+          "target_register": "ecx",
+          "api_pointer_proven": false,
+          "api_source": null,
+          "bank": 2,
+          "order": 44,
+          "status": "unresolved",
+          "instruction_hex": "ff9188000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x444d6a",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x444d8a",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x445067",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x445096",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x446521",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": false
+        },
+        {
+          "address": "0x446545",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x446591",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 55,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x448080",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 1,
+          "order": 0,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x448163",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 52,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x44827d",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 0,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x448382",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46ed24",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 4,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        }
+      ],
+      "candidate_counts": {
+        "unresolved": 3,
+        "observed_service": 23,
+        "observed_pair": 13,
+        "unobserved_pair": 1
+      },
+      "not_in_generated_lift": [
+        "0x441743",
+        "0x4440d7",
+        "0x4440f7",
+        "0x446521"
+      ],
+      "additional_tilt_test": {
+        "report_sha256": "00b53454328ab47a5d44392b29e75c8d8f8f1fa2885d43e0a9c33a8ba68efe5f",
+        "original_keyboard_steps": 800,
+        "original_music_request": [
+          609,
+          132,
+          2,
+          54,
+          0
+        ],
+        "scope": "Separate 800-step Original/native SDL proof; not included in historical fixture counts."
+      }
+    },
+    "demon": {
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "linear_range": [
+        "0x40febc",
+        "0x41b9e0"
+      ],
+      "bank_order_counts": [
+        66,
+        31,
+        37
+      ],
+      "fixture_count": 37,
+      "fixtures": [
+        {
+          "case": "base-rules",
+          "pinned_sha256": "6a90895bd8575664292111a5386a4e3707f81026209bf6ddd822d2f659dac41c",
+          "source_sha256": "bd53d152b2bd187a5d72f5e892dbab0b41eac196be6c486265af12c874f2d340",
+          "steps": 6668,
+          "sequences": 8,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-0",
+          "pinned_sha256": "0603b05437b4e507755fa594cfc430e01890b0fa9fc673a7fd162c3889922712",
+          "source_sha256": "0de95298f4f66fdc7f11171a98de2db707a6157052b8c702f62c6b11f93d8a88",
+          "steps": 3284,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-1",
+          "pinned_sha256": "8993026e39d4667f0ce8de8e83400908ef8d7dde19c58b8c7a27ab9f45695136",
+          "source_sha256": "51b2028b2c7fc7966cad74ab46cbda33dca86bf28465e540d598df00876de089",
+          "steps": 3376,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-10",
+          "pinned_sha256": "9477bf4d0e4c89b858872aadaf1be930b901c2597c0fe6db80914186ecc4dcfe",
+          "source_sha256": "b0692b486950058063fa64d535c57e19d8e61c50674ff217b1a90fd075fe112a",
+          "steps": 3356,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-11",
+          "pinned_sha256": "86f8f22860f3eac8e3b37d26bd7f390e18095ff88b0bfe6c0f7352db60bb73a1",
+          "source_sha256": "88df148f81ceac635e9e4bf63e037e2a786552778e3761c6ac75c16a9ad6ae83",
+          "steps": 3084,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-2",
+          "pinned_sha256": "d9eee2fe7897797b6c73ce2bd734f6c40bf2f6d3016952b849fa24ad66b58f0b",
+          "source_sha256": "d39f79527930e0068b703a735553cd06f1de7ab50ebd117eae9c851523809427",
+          "steps": 3288,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-3",
+          "pinned_sha256": "2dbec58fc2acb0e88846e3ea50c0ff57732732f92097bfef59cd35a9d50df62a",
+          "source_sha256": "bbeeca54f44437dee900b394fa6bb006b4409f1ade6ec34263193109fa8ff528",
+          "steps": 3076,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-4",
+          "pinned_sha256": "143b1631fdf09443ed1850614e247742e5cda34faf7063f35584437205d376b5",
+          "source_sha256": "350c856f71732b1b6506633c0a23763c92c148ef85f42cf88507d838a3c22063",
+          "steps": 3072,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-5",
+          "pinned_sha256": "0c0073e2e8445f777f3301aaa57a59dd1d8d779e71c1a879afc2619d5714fd22",
+          "source_sha256": "b0a3f6ab709c39b09170c81a9d86f047a860740e863b05d7bf755525eeebf053",
+          "steps": 3380,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-6",
+          "pinned_sha256": "f08afbf40b621e6a03eff5098a70f26d6694f5c0a713dedecde83996a875bbb0",
+          "source_sha256": "829ddb7b9cbd26d3f1f46a23817495de0effc0ed7089b1660ca648629c2a2f06",
+          "steps": 4488,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-7",
+          "pinned_sha256": "64bdeafa9b42f9db7771bbc9ad27955ecda9cb6662d323be0d40c92d8a9fb092",
+          "source_sha256": "cd1c0602e4764baac623e8afea442bf3f8a4abd49d8e0c73ddc188b24f5a4ea7",
+          "steps": 3076,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-8",
+          "pinned_sha256": "f2c4213d3f3494156ed5c10a29adcebd5dd2c5018f51961e594be4df5e3a65c8",
+          "source_sha256": "fd4e072532b3d9e7da31978a1c8cfe044552f801d64cd1a70279157ef92b8e84",
+          "steps": 3188,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-award-9",
+          "pinned_sha256": "0aa111b03dbc0a0ba394ee38d20920042dd64461313d8ab0c68a9f9c30bf3dbe",
+          "source_sha256": "33ef25e5d299581cfe3e923d42d3448a2909ff9be88e9ada6cd6dd44aad80e94",
+          "steps": 3380,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-bonus",
+          "pinned_sha256": "bbfd1fb9c5b8a9e167947a40b65322580f5abc3f0826be56ce1d41ce887adfc9",
+          "source_sha256": "d306948d5184ffac73f2a1060e1d84a143b8c4df8553b932a8f5afb9905a3c5d",
+          "steps": 3868,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-rewards",
+          "pinned_sha256": "a53aeffe1dac944c0799ba4d2b453980601209af50c31f0f46973907c0b4b1bd",
+          "source_sha256": "aa393210e5fff7f100bd91a94825f6e21814283d41a9543a8ddc89bb3cb3062c",
+          "steps": 9488,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "clock-tower",
+          "pinned_sha256": "4230ee4e6b7d1337a5c5ad997f04d5cf807f56cf86c047d01daa8ad0c5b65954",
+          "source_sha256": "ae0a72022cf98cdf4500ba2d4328fa69e967931f43ab213f15c7b9211bff0fb2",
+          "steps": 11128,
+          "sequences": 9,
+          "original_reset_exact": true
+        },
+        {
+          "case": "final-campaign",
+          "pinned_sha256": "93b6650ac9f338c453d75208cfc7e90a7b8b36ff6e2377a86b996da826ce7dc2",
+          "source_sha256": "85299ca66b08119b29f1d10742f60f4299cd2c0da7bd99adda1a27d0088d0675",
+          "steps": 52904,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "kickback-off",
+          "pinned_sha256": "b695e5186d0fd3bc198432f2b93b18bf0898ad8430717b2958b322b391aed7a3",
+          "source_sha256": "d9b2c6a41c8b8ad950fcf5213e8a24fd692e50a95d33ca8947998eb6cf87d39d",
+          "steps": 1384,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "kickback-on",
+          "pinned_sha256": "cb898eb1ea39cf11c625be0fc38753451add8e3b665235464e8a359d1c5a381a",
+          "source_sha256": "f8f64217b52fa45fbb6651a71c7b56ae624a01cd0bce1dc020df2cf45efd7a52",
+          "steps": 2228,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "legal-game",
+          "pinned_sha256": "5d35315bd1a10ce940015ff7a37b73617a06e7c31f7167a1e64e6c0d90c111ab",
+          "source_sha256": "f0b57a03eba07e24dad6b5f7be0eaa79bea3d78583e004110cae7a2a347335fa",
+          "steps": 10512,
+          "sequences": 12,
+          "original_reset_exact": true
+        },
+        {
+          "case": "mode-bat",
+          "pinned_sha256": "072f15da3fd3f3f2a9f8a3e340dfa49dd932066a4f730dc62371262a074f8fe1",
+          "source_sha256": "260e49df339e223838987bcd199f9bb2e0ffa20aac83c3968e3b0d1b74d76761",
+          "steps": 6468,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "mode-grave",
+          "pinned_sha256": "61660d70cabe964a02d595fa1ca69412223965ee0a4e42f379e9408899d050ac",
+          "source_sha256": "33ff6210314e5bca7857c13a19645b0d0cb227b50df3ac41763a2330c2489977",
+          "steps": 6072,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "mode-meatball",
+          "pinned_sha256": "ba7559566609df6b0e0864e6447af90111ca02757b0b83a0c6990aa9e0ce2966",
+          "source_sha256": "4b9f4e57ef05ddd9f3ba04d6c6b113fb5684dd83c8829fd0e5d7a7b99971917f",
+          "steps": 5096,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "mode-twice",
+          "pinned_sha256": "47bc037096db9bb9604a811202cc16d3a847fdde4425f1b516f985c9f84187f0",
+          "source_sha256": "73f857ed0455158a1c1ede041ac5a0510a41ad6f7630ed9b20fbe0cda4e97c65",
+          "steps": 6268,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "mode-vampires",
+          "pinned_sha256": "9d85ec3bd50d09d692206a3b8e0afd423bacd58dd6cb9ed70d78499ce36a6668",
+          "source_sha256": "e78b635f02b48b8cd1cde6273f82551aebc8dd88069ea9356e96d0ee430b7db8",
+          "steps": 5572,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "mode-witch",
+          "pinned_sha256": "3a3de9ce41bb7c1baab58bf01770e0c604989eb0c1f85fcab65ac67bcb3a3bef",
+          "source_sha256": "f48b40ac9b8b732f424c251f3066372bb5f90ca6bb933e25d2b9f3161d600834",
+          "steps": 7468,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "mode-zombie",
+          "pinned_sha256": "e9b97c049da60bcfc3e6d364f1c88e572b60c0fc124a06c6f187fdbf5488ed57",
+          "source_sha256": "bd2ca8d00d0837848045533c46b990d6b14562259f42de668721be2e61c000a9",
+          "steps": 5468,
+          "sequences": 10,
+          "original_reset_exact": true
+        },
+        {
+          "case": "twice-cycles",
+          "pinned_sha256": "dafdb13c9e79764102b85d16b3a6952a3f849e458d5cfe74d8337b9aae24cc91",
+          "source_sha256": "1d5b4dc34d473e70455b183cd6c73cbd9efc20de89b9bec833e16db83450c0b8",
+          "steps": 11892,
+          "sequences": 12,
+          "original_reset_exact": true
+        },
+        {
+          "case": "video-brain-miss",
+          "pinned_sha256": "7f6aa46beac737a440661c1fa56699e023c39a5bb2032107ccbe354e942f3150",
+          "source_sha256": "84de04b7cc53b1517048beaccd7f75273c843afb6f1000fc682031e3db4dfa08",
+          "steps": 4344,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "video-brain-win",
+          "pinned_sha256": "e15afaec121c578bb2b2097d65f12bc850228d79b49e5d9c5f8c9738e244fe68",
+          "source_sha256": "84df74b5547b9ea5903426480197e9aae6cc02285f3ccd0873266ed94b130418",
+          "steps": 4400,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "video-consecutive",
+          "pinned_sha256": "960cfdebc437c1a6e3df9356a2a5be16368e2142f76260a74b6a46eacac43381",
+          "source_sha256": "1e8e42aa039e9dfcc9fede317cd95e662d395f3f21e71ef3d39957546738eb04",
+          "steps": 8352,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "video-wolf-idle",
+          "pinned_sha256": "9b8244c36f59c1cd549eaa3e0d47431d756e139ee587740834375b69a88774e9",
+          "source_sha256": "80b40f7a38ad7b6f81c6c0a1aef998c60a040ca9538edd509344d5196abe6c04",
+          "steps": 4600,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "video-wolf-shoot",
+          "pinned_sha256": "2f17dd84bfe7ac09d711307b8d36905341405724032dc754eefe23c4f90a43ee",
+          "source_sha256": "c305ffcf3c610d9d89ceca9ce25f28cf3812514b1018437a55cbea64bc428ad4",
+          "steps": 3708,
+          "sequences": 11,
+          "original_reset_exact": true
+        },
+        {
+          "case": "witch-force-off",
+          "pinned_sha256": "de51cc0eaa6693f9b2750efab855468072180ba1bcadfa3472d347878590253c",
+          "source_sha256": "0d2fa8ef62e9731fb73c0c4e8b9324a79e46977d69a9e258a8c4c4460a96c749",
+          "steps": 3248,
+          "sequences": 12,
+          "original_reset_exact": true
+        },
+        {
+          "case": "witch-force-on",
+          "pinned_sha256": "e1115b8d15488f23bbfe47c869dd580cc331f23faec4692a30d73df0abb68e2a",
+          "source_sha256": "2305f9a27eec8c733b008a89ba3d8311aab3cc94afd09785bb17f0bbeac8e6d3",
+          "steps": 3248,
+          "sequences": 12,
+          "original_reset_exact": true
+        },
+        {
+          "case": "witch-left",
+          "pinned_sha256": "684a04bf01ab001a75ff4ee9bfc209ed678422cb26474eca00bc92af5531a1a2",
+          "source_sha256": "b5e25186b59a3b7fab16252ad001b99f5197d41edafa3f5215d1f7897e43b1a0",
+          "steps": 1876,
+          "sequences": 12,
+          "original_reset_exact": true
+        },
+        {
+          "case": "zombie-values",
+          "pinned_sha256": "755eca4d0e389915bfdbaa9f900af2af7e80b300a923c8c8d2793f2ae9836614",
+          "source_sha256": "bbc1f486dbeab09e8a725aa5aac388008c49d338a4254721dcda8772dc82db54",
+          "steps": 4896,
+          "sequences": 12,
+          "original_reset_exact": true
+        }
+      ],
+      "missing_source_traces": [],
+      "observed_requests": [
+        {
+          "service": "0x80",
+          "bank": 0,
+          "order": 0,
+          "events": 18,
+          "case_count": 11
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 5,
+          "events": 2,
+          "case_count": 2
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 8,
+          "events": 3,
+          "case_count": 3
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 13,
+          "events": 2,
+          "case_count": 2
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 17,
+          "events": 3,
+          "case_count": 3
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 38,
+          "events": 2,
+          "case_count": 2
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 43,
+          "events": 5,
+          "case_count": 5
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 50,
+          "events": 2,
+          "case_count": 2
+        },
+        {
+          "service": "0x84",
+          "bank": 0,
+          "order": 60,
+          "events": 1,
+          "case_count": 1
+        },
+        {
+          "service": "0x84",
+          "bank": 1,
+          "order": 0,
+          "events": 2,
+          "case_count": 2
+        },
+        {
+          "service": "0x88",
+          "bank": 0,
+          "order": 62,
+          "events": 5,
+          "case_count": 3
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 2,
+          "events": 2,
+          "case_count": 1
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 13,
+          "events": 3,
+          "case_count": 1
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 24,
+          "events": 15,
+          "case_count": 11
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 30,
+          "events": 3,
+          "case_count": 3
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 32,
+          "events": 4,
+          "case_count": 3
+        },
+        {
+          "service": "0x88",
+          "bank": 2,
+          "order": 36,
+          "events": 12,
+          "case_count": 12
+        },
+        {
+          "service": "0x8c",
+          "bank": 0,
+          "order": 0,
+          "events": 1,
+          "case_count": 1
+        }
+      ],
+      "decoded_candidates": [
+        {
+          "address": "0x410a9d",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 2,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x410be8",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 2,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x411c1c",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 2,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x412d5c",
+          "service_offset": "0x8c",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff908c000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x412e27",
+          "service_offset": "0x88",
+          "target_register": "esi",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 32,
+          "status": "observed_pair",
+          "instruction_hex": "ff9688000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x413463",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 36,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4145f3",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4146f0",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x41481b",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x414910",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x414936",
+          "service_offset": "0x88",
+          "target_register": "ecx",
+          "api_pointer_proven": false,
+          "api_source": null,
+          "bank": 2,
+          "order": 14,
+          "status": "unresolved",
+          "instruction_hex": "ff9188000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x414a23",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x414adb",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x414c48",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x414de5",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x415556",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 62,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x415c34",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 30,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4163fd",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 1,
+          "order": 0,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x41694a",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4169b0",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": false,
+          "api_source": null,
+          "bank": null,
+          "order": null,
+          "status": "unresolved",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x416dae",
+          "service_offset": "0x8c",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff908c000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x416dc1",
+          "service_offset": "0x84",
+          "target_register": "esi",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 0,
+          "status": "unobserved_pair",
+          "instruction_hex": "ff9684000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4170bc",
+          "service_offset": "0x88",
+          "target_register": "esi",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 32,
+          "status": "observed_pair",
+          "instruction_hex": "ff9688000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4171d9",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 62,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x417327",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x417631",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": false
+        },
+        {
+          "address": "0x417655",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x41767a",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 24,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x418b49",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 17,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x418b64",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 13,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x418b7f",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 5,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x418b9a",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 50,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x418bb5",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 38,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x418bd0",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 43,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x418beb",
+          "service_offset": "0x84",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 0,
+          "order": 60,
+          "status": "observed_pair",
+          "instruction_hex": "ff9384000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x4195f3",
+          "service_offset": "0x88",
+          "target_register": "ebx",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": 2,
+          "order": 13,
+          "status": "observed_pair",
+          "instruction_hex": "ff9388000000",
+          "native_lift_label_present": true
+        },
+        {
+          "address": "0x41b8c6",
+          "service_offset": "0x80",
+          "target_register": "eax",
+          "api_pointer_proven": true,
+          "api_source": {
+            "memory": "0x46d64c",
+            "index_register": null,
+            "base_register": null,
+            "scale": 1
+          },
+          "bank": null,
+          "order": null,
+          "status": "observed_service",
+          "instruction_hex": "ff9080000000",
+          "native_lift_label_present": true
+        }
+      ],
+      "candidate_counts": {
+        "observed_pair": 19,
+        "observed_service": 15,
+        "unresolved": 2,
+        "unobserved_pair": 1
+      },
+      "not_in_generated_lift": [
+        "0x417631"
+      ],
+      "additional_tilt_test": {
+        "report_sha256": "7268df5825ed2a377023621bc3fdef0bccab24e15c1794746b4d4d0c95ffa78b",
+        "original_keyboard_steps": 800,
+        "original_music_request": [
+          609,
+          132,
+          2,
+          0,
+          0
+        ],
+        "scope": "Separate 800-step Original/native SDL proof; not included in historical fixture counts."
+      }
+    }
+  },
+  "scope": "Linear decoding of bounded original EXE ranges, conservative same-block register analysis and SHA-verified Original traces. Any target, bank, order or producer not resolved is explicitly UNKNOWN. Pair or stop service observed elsewhere does not prove this callsite ran; lift label absence is a static finding, not proof that a path is reachable. Counts exclude synthetic fixture startup. Does not prove whole-program reachability, complete original music PCM/mix or original Amiga sequencing."
+}

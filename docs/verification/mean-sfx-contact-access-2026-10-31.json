@@ -1,0 +1,54 @@
+{
+  "status": "BOUNDED_NO_TARGET_ACCESSES",
+  "scope": "Watch Mean Demo SFX descriptors in bounded original contact replays.\n\nInputs are retained native legal-input contact snapshots replayed through\noriginal collision code; audio/display/score services are adapted. This is\ncomponent evidence, not an original whole-game trajectory or reachability proof.\n",
+  "demo_sha256": "31192e0b316bf6fe0a4a41336a5ef6ae53ac659c04edf001607a8de63239fc00",
+  "prepared_image_sha256": "8ec7d39b5b56cee1d929536d71446743604fb0ae8fcf260f9be6a3fde81e96d1",
+  "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+  "routes_sha256": {
+    "analysis/traces/mean-five-modes-input.json": "6efc45eb0d4cb5609e5d90712b7c7a0258d786a0f8d8f3199399ed0f951723f7",
+    "analysis/traces/mean-live-goal-input.json": "7c9b975b1c3783441caa666d6450de64f5dd1e4a568787aeda1f1548de66f72b"
+  },
+  "contact_fixture_sha256": "d7423039df5a80344a6a5d0aac2bba499edfd2d819d728414c3a30f076d91735",
+  "retained_contacts": 1036,
+  "observed_native_contacts": 110615,
+  "full_response_separation": {
+    "layer0_material0_admit0": 55,
+    "layer0_material0_admit1": 55,
+    "layer1_material0_admit0": 49,
+    "layer1_material0_admit1": 49,
+    "layer3_material0_admit0": 42,
+    "layer3_material0_admit1": 42,
+    "layer0_material1_admit0": 35,
+    "layer0_material1_admit1": 35,
+    "layer1_material1_admit0": 32,
+    "layer1_material1_admit1": 32,
+    "layer2_material0_admit0": 30,
+    "layer2_material0_admit1": 30,
+    "layer4_material0_admit0": 12,
+    "layer4_material0_admit1": 12,
+    "layer0_material4_admit0": 27,
+    "layer0_material4_admit1": 27,
+    "layer0_material2_admit0": 30,
+    "layer0_material2_admit1": 30,
+    "layer0_material3_admit0": 17,
+    "layer0_material3_admit1": 17,
+    "layer0_material5_admit0": 25,
+    "layer0_material5_admit1": 25,
+    "layer0_material7_admit0": 4,
+    "layer0_material7_admit1": 4
+  },
+  "targets": [
+    "0x437f54",
+    "0x437f78",
+    "0x437f9c"
+  ],
+  "target_accesses": [],
+  "positive_control_memory_reads": 100,
+  "adapted_audio_calls": 116,
+  "adapted_audio_eax_counts": {
+    "0x437cf0": 4,
+    "0x437d14": 64,
+    "0x437da4": 48
+  },
+  "executed_original_blocks": 366
+}

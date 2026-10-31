@@ -73,6 +73,7 @@ int main(int argc, char **argv) {
   std::vector<SDL_Texture *> flipper_textures;
   std::vector<SDL_Texture *> lamp_textures;
   try {
+    slam::CabinetDmd cabinet_dmd;
     std::string output, capture, frontend_acceptance;
     int frames = 0, music_order = 0;
     int visual_preset=-1,menu_category=0,preview_width=0,preview_height=0;
@@ -291,7 +292,7 @@ int main(int argc, char **argv) {
       applied=options.settings;set_window_mode(applied);
     }
     if(new_layout) {
-      table_target=SDL_CreateTexture(renderer,SDL_PIXELFORMAT_RGBA32,SDL_TEXTUREACCESS_TARGET,320,400);
+      table_target=SDL_CreateTexture(renderer,SDL_PIXELFORMAT_RGBA32,SDL_TEXTUREACCESS_TARGET,320,slam::cabinet_dmd_enabled()?600:400);
       if(!table_target) throw std::runtime_error(SDL_GetError());
       dmd_target=SDL_CreateTexture(renderer,SDL_PIXELFORMAT_RGBA32,SDL_TEXTUREACCESS_TARGET,96,20);
       if(!dmd_target)throw std::runtime_error(SDL_GetError());
@@ -1320,7 +1321,7 @@ int main(int argc, char **argv) {
 #ifdef SLAM_AUDIO_XMP
               if(!session_replay.empty())for(const auto&request:simulation->take_audio_requests()){
                 if(!session_output.empty())session_audio.push_back({session_tick,request.service,request.bank,request.order,request.descriptor});
-                if(audio)audio->request(request.service,request.bank,request.order,request.descriptor);
+                if(audio)audio->request(request.service,request.bank,request.order,request.descriptor,request.period,request.volume);
               }
 #endif
               step_camera();++session_tick;
@@ -1341,12 +1342,12 @@ int main(int argc, char **argv) {
         const auto title = "Slamtilt - Reborn | Mean Machines - Ball " +
                            std::to_string(displayed_ball) +
                            ": Enter launch, Shift flippers, R reset";
-        SDL_SetWindowTitle(window, simulation->game_over()
+        SDL_SetWindowTitle(window, simulation->game_over() && !slam::cabinet_dmd_enabled()
                                        ? simulation->status()
                                        : title.c_str());
       }
       if(lane_saver_preview || natural_mode_preview=="laps")scroll=200;
-      scroll = std::clamp(scroll, 0.0f, 200.0f);
+      scroll = slam::cabinet_dmd_enabled()?0.f:std::clamp(scroll, 0.0f, 200.0f);
       if(new_layout) {
         const auto &s=options.settings;
         if(s.fullscreen!=applied.fullscreen || s.fullscreen_mode!=applied.fullscreen_mode || s.window_width!=applied.window_width || s.window_height!=applied.window_height) {
@@ -1361,7 +1362,7 @@ int main(int argc, char **argv) {
         }
         SDL_SetRenderTarget(renderer,table_target);
       }
-      const SDL_FRect source{0, scroll, 320, 400};
+      const SDL_FRect source{0, scroll, 320, slam::cabinet_dmd_enabled()?600.f:400.f};
       SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
       if (!SDL_RenderClear(renderer) ||
           !SDL_RenderTexture(renderer, texture, &source, nullptr))
@@ -1514,7 +1515,7 @@ int main(int argc, char **argv) {
         const auto &o=options.settings;
         float bx=160,by=200;
         if(simulation){bx=simulation->ball().i32(0)/65536.f;by=simulation->ball().i32(4)/65536.f-scroll;}
-        auto layout=slam::display_layout(rw,rh,o.dmd_position,o.dmd_size,o.zoom,o.aspect,bx,by);
+        auto layout=slam::display_layout(rw,rh,o.dmd_position,o.dmd_size,o.zoom,o.aspect,bx,by,slam::cabinet_dmd_enabled()?600.f:400.f);
         if(o.dmd_position==3){layout.dmd.x=o.overlay_x*(rw-layout.dmd.w);layout.dmd.y=o.overlay_y*(rh-layout.dmd.h);}
         last_dmd=layout.dmd;
         SDL_SetRenderDrawColor(renderer,0,0,0,255);SDL_RenderClear(renderer);
@@ -1525,6 +1526,7 @@ int main(int argc, char **argv) {
           slam::WindowsDmdPixels idle{};slam::draw_mean_score_u64(*score_font,idle,simulation->score(),4,1,2);
           const auto &pixels=simulation->bonus_active()?simulation->bonus_pixels():simulation->minigame_active()?simulation->minigame_pixels():simulation->material5_display_active()?simulation->material5_pixels():idle;
           SDL_SetRenderTarget(renderer,dmd_target);
+          std::array<std::uint8_t,96*20*4> cabinet_rgba{};
           for(unsigned y=0;y<20;++y)for(unsigned x=0;x<96;++x) {
             const unsigned level=pixels[y*96+x];
             const auto &rgb=dmd_palette.at(level);
@@ -1532,11 +1534,14 @@ int main(int argc, char **argv) {
             else if(o.color==1)SDL_SetRenderDrawColor(renderer,level*85,level*53,0,255);
             else if(o.color==2)SDL_SetRenderDrawColor(renderer,level*85,level*85,level*85,255);
             else SDL_SetRenderDrawColor(renderer,level*o.custom_r/3,level*o.custom_g/3,level*o.custom_b/3,255);
+            auto* pixel=cabinet_rgba.data()+(y*96+x)*4;
+            SDL_GetRenderDrawColor(renderer,pixel,pixel+1,pixel+2,pixel+3);
             const SDL_FRect dot{float(x),float(y),1,1};SDL_RenderFillRect(renderer,&dot);
           }
+          cabinet_dmd.draw(cabinet_rgba.data());
         }
         SDL_SetRenderTarget(renderer,nullptr);
-        if(simulation)presentation.draw(dmd_target,layout.dmd,o.visual,true);
+        if(simulation && !slam::cabinet_dmd_enabled())presentation.draw(dmd_target,layout.dmd,o.visual,true);
         options.shaders_available=presentation.available();options.shader_status=presentation.status();
         if(simulation && simulation->game_over() && !options.open)highscores.draw(renderer,rw,rh);
         if(!options.open)slam::draw_gamepad_pull(renderer,gamepad,rh);
@@ -1555,7 +1560,7 @@ int main(int argc, char **argv) {
       if (simulation) {
         for (const auto &request : simulation->take_audio_requests()) {
           if(!session_output.empty())session_audio.push_back({session_tick,request.service,request.bank,request.order,request.descriptor});
-          if(audio)audio->request(request.service,request.bank,request.order,request.descriptor);
+          if(audio)audio->request(request.service,request.bank,request.order,request.descriptor,request.period,request.volume);
         }
       }
       if (audio) {

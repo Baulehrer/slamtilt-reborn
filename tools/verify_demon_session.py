@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Shared presentation/audio/options on Demon, Original-record loading, private state."""
+from retail_audio_fixture import corrected_audio_events
 import json,os,subprocess,tempfile,hashlib
 from pathlib import Path
 from verify_space_session import compare
@@ -12,12 +13,13 @@ def main():
   def run(label,*args):
    out=work/(label+'.json');subprocess.run([ROOT/'build/native/slamslice','demon',ROOT/'build/oracle/demon-full-game',game/'DAT/DEMON.DAT',*map(str,args),'--trace',out],check=True,env=env);return read(out)
   source=ROOT/'build/oracle/demon-full-tick/trace.json';actual=run('presentation','--presentation','--frames',300,'--replay',source,'--audio','--audio-trace',work/'launch-audio.json');compare(actual,read(source))
-  assert read(work/'launch-audio.json')['events']==read(ROOT/'analysis/demon-audio-profile.json')['launch']['events']
-  keys=['Escape','Down','Down','Down','Right','Tab','Right','Tab','Right','Tab','Left','Tab','Down','Down','Down','Down','Return']
-  events=[dict(frame=i,type='key',key=k,down=True)for i,k in enumerate(keys)]+[dict(frame=17,type='focus_lost'),dict(frame=18,type='focus_gained')]
+  assert read(work/'launch-audio.json')['events']==corrected_audio_events(read(ROOT/'analysis/demon-audio-profile.json')['launch']['events'], 'demon')
+  keys=['Escape','Down','Down','Down','Right','Tab','Right','Tab','Right','Tab','Left','Tab']+['Down']*13+['Return']
+  closed=len(keys)-1
+  events=[dict(frame=i,type='key',key=k,down=True)for i,k in enumerate(keys)]+[dict(frame=closed+1,type='focus_lost'),dict(frame=closed+2,type='focus_gained')]
   path=work/'events.json';path.write_text(json.dumps(dict(events=events)))
-  ui=run('menu','--presentation','--persist-options','--frames',20,'--ui-events',path,'--audio','--audio-trace',work/'menu-audio.json','--capture',work/'menu.bmp');f=ui['ui_frames']
-  assert all(r['tick']==0 and r['menu']and r['audio_device_paused']for r in f[:16]);assert not f[16]['menu']and f[17]['tick']==f[16]['tick']and not f[17]['focused']and f[17]['audio_device_paused'];assert f[18]['focused']and f[18]['tick']>f[17]['tick']
+  ui=run('menu','--presentation','--persist-options','--frames',closed+4,'--ui-events',path,'--audio','--audio-trace',work/'menu-audio.json','--capture',work/'menu.bmp');f=ui['ui_frames']
+  assert all(r['tick']==0 and r['menu']and r['audio_device_paused']for r in f[:closed]);assert not f[closed]['menu']and f[closed+1]['tick']==f[closed]['tick']and not f[closed+1]['focused']and f[closed+1]['audio_device_paused'];assert f[closed+2]['focused']and f[closed+2]['tick']>f[closed+1]['tick']
   assert abs(f[-1]['zoom']-1.05)<1e-5 and f[-1]['dmd_position']==1
   again=run('options-reload','--presentation','--persist-options','--frames',1);assert abs(again['ui_frames'][0]['zoom']-1.05)<1e-5
   profile=tmp/'scores.json';source=ROOT/'build/oracle/demon-full-game/trace.json';first=run('natural','--frames',3000,'--replay',source,'--highscore-file',profile);compare(first,read(source));assert not profile.exists(),'Zero-score unqualified natural fixture must not save a new table'

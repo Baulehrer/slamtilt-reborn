@@ -90,6 +90,7 @@ void pirate_4104bc(PirateStepLift &m);
 void pirate_4104c8(PirateStepLift &m);
 void pirate_410514(PirateStepLift &m);
 void pirate_41056c(PirateStepLift &m);
+void pirate_410600(PirateStepLift &m);
 void pirate_410658(PirateStepLift &m);
 void pirate_410830(PirateStepLift &m);
 void pirate_4108b0(PirateStepLift &m);
@@ -400,6 +401,7 @@ void pirate_43a340(PirateStepLift &m);
 void pirate_43a34c(PirateStepLift &m);
 void pirate_43a398(PirateStepLift &m);
 void pirate_43a3d0(PirateStepLift &m);
+void pirate_43a484(PirateStepLift &m);
 void pirate_43a4dc(PirateStepLift &m);
 void pirate_43a618(PirateStepLift &m);
 void pirate_43a798(PirateStepLift &m);
@@ -492,6 +494,7 @@ void pirate_444784(PirateStepLift &m);
 void pirate_444810(PirateStepLift &m);
 void pirate_44486c(PirateStepLift &m);
 void pirate_444940(PirateStepLift &m);
+void pirate_444a64(PirateStepLift &m);
 void pirate_444ac8(PirateStepLift &m);
 void pirate_444b34(PirateStepLift &m);
 void pirate_444bd8(PirateStepLift &m);
@@ -9218,6 +9221,38 @@ L41058e: if(m.instruction_observer)m.instruction_observer(m,0x41058e); m.r[5]=(m
 L41058f: if(m.instruction_observer)m.instruction_observer(m,0x41058f); m.r[7]=(m.r[7]&0x0u)|((m.pop()&0xffffffffu)<<0);
 L410590: if(m.instruction_observer)m.instruction_observer(m,0x410590); m.r[6]=(m.r[6]&0x0u)|((m.pop()&0xffffffffu)<<0);
 L410591: if(m.instruction_observer)m.instruction_observer(m,0x410591); (void)m.pop();m.r[4]+=12u;return;
+}
+void pirate_410600(PirateStepLift &m) {
+goto L410600;
+L410600: if(m.instruction_observer)m.instruction_observer(m,0x410600); m.push(((m.r[3]>>0)&0xffffffffu));
+L410601: if(m.instruction_observer)m.instruction_observer(m,0x410601); m.push(((m.r[2]>>0)&0xffffffffu));
+L410602: if(m.instruction_observer)m.instruction_observer(m,0x410602); m.r[0]=(m.r[0]&0x0u)|((m.rd((4642316u),4)&0xffffffffu)<<0);
+L410607: if(m.instruction_observer)m.instruction_observer(m,0x410607); m.r[2]=(m.r[2]&0x0u)|((m.rd((28u+((m.r[0]>>0)&0xffffffffu)),4)&0xffffffffu)<<0);
+L41060a: if(m.instruction_observer)m.instruction_observer(m,0x41060a); m.wr((4602844u),((m.r[2]>>0)&0xffffffffu),4);
+L410610: if(m.instruction_observer)m.instruction_observer(m,0x410610); {const auto carry=m.c;m.r[2]=(m.r[2]&0x0u)|((m.add(((m.r[2]>>0)&0xffffffffu),1,4)&0xffffffffu)<<0);m.c=carry;}
+L410611: if(m.instruction_observer)m.instruction_observer(m,0x410611); m.r[3]=(m.r[3]&0x0u)|((m.rd((4602844u),4)&0xffffffffu)<<0);
+L410617: if(m.instruction_observer)m.instruction_observer(m,0x410617); m.wr((28u+((m.r[0]>>0)&0xffffffffu)),((m.r[2]>>0)&0xffffffffu),4);
+L41061a: if(m.instruction_observer)m.instruction_observer(m,0x41061a); (void)m.sub(((m.r[3]>>0)&0xffffffffu),50u,4);
+L41061d: if(m.instruction_observer)m.instruction_observer(m,0x41061d); if(m.s!=m.o){goto L410629;}
+L41061f: if(m.instruction_observer)m.instruction_observer(m,0x41061f); m.wr((20u+((m.r[0]>>0)&0xffffffffu)),0u,4);
+L410626: if(m.instruction_observer)m.instruction_observer(m,0x410626); m.r[2]=(m.r[2]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L410627: if(m.instruction_observer)m.instruction_observer(m,0x410627); m.r[3]=(m.r[3]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L410628: if(m.instruction_observer)m.instruction_observer(m,0x410628); (void)m.pop();return;
+L410629: if(m.instruction_observer)m.instruction_observer(m,0x410629); (void)m.logic(m.rd((4602844u),1)&2u,1);
+L410630: if(m.instruction_observer)m.instruction_observer(m,0x410630); if(!m.z){goto L410640;}
+L410632: if(m.instruction_observer)m.instruction_observer(m,0x410632); m.r[2]=(m.r[2]&0x0u)|((m.rd((4642380u),4)&0xffffffffu)<<0);
+L410638: if(m.instruction_observer)m.instruction_observer(m,0x410638); m.r[0]=(m.r[0]&0x0u)|((m.logic(((m.r[0]>>0)&0xffffffffu)^((m.r[0]>>0)&0xffffffffu),4)&0xffffffffu)<<0);
+L41063a: if(m.instruction_observer)m.instruction_observer(m,0x41063a); {const auto target=m.rd((76u+((m.r[2]>>0)&0xffffffffu)),4);m.push(4261437u);m.call(target);}
+L41063d: if(m.instruction_observer)m.instruction_observer(m,0x41063d); m.r[2]=(m.r[2]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L41063e: if(m.instruction_observer)m.instruction_observer(m,0x41063e); m.r[3]=(m.r[3]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L41063f: if(m.instruction_observer)m.instruction_observer(m,0x41063f); (void)m.pop();return;
+L410640: if(m.instruction_observer)m.instruction_observer(m,0x410640); m.r[0]=(m.r[0]&0x0u)|((m.rd((4642124u),4)&0xffffffffu)<<0);
+L410645: if(m.instruction_observer)m.instruction_observer(m,0x410645); m.r[2]=(m.r[2]&0x0u)|((m.rd((4642380u),4)&0xffffffffu)<<0);
+L41064b: if(m.instruction_observer)m.instruction_observer(m,0x41064b); m.r[0]=(m.r[0]&0x0u)|((m.add(((m.r[0]>>0)&0xffffffffu),1310512u,4)&0xffffffffu)<<0);
+L410650: if(m.instruction_observer)m.instruction_observer(m,0x410650); {const auto target=m.rd((60u+((m.r[2]>>0)&0xffffffffu)),4);m.push(4261459u);m.call(target);}
+L410653: if(m.instruction_observer)m.instruction_observer(m,0x410653); m.r[2]=(m.r[2]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L410654: if(m.instruction_observer)m.instruction_observer(m,0x410654); m.r[3]=(m.r[3]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L410655: if(m.instruction_observer)m.instruction_observer(m,0x410655); (void)m.pop();return;
 }
 void pirate_410658(PirateStepLift &m) {
 goto L410658;
@@ -39791,6 +39826,38 @@ L43a3eb: if(m.instruction_observer)m.instruction_observer(m,0x43a3eb); m.r[6]=(m
 L43a3ec: if(m.instruction_observer)m.instruction_observer(m,0x43a3ec); m.r[1]=(m.r[1]&0x0u)|((m.pop()&0xffffffffu)<<0);
 L43a3ed: if(m.instruction_observer)m.instruction_observer(m,0x43a3ed); (void)m.pop();return;
 }
+void pirate_43a484(PirateStepLift &m) {
+goto L43a484;
+L43a484: if(m.instruction_observer)m.instruction_observer(m,0x43a484); m.push(((m.r[3]>>0)&0xffffffffu));
+L43a485: if(m.instruction_observer)m.instruction_observer(m,0x43a485); m.push(((m.r[2]>>0)&0xffffffffu));
+L43a486: if(m.instruction_observer)m.instruction_observer(m,0x43a486); m.r[0]=(m.r[0]&0x0u)|((m.rd((4648224u),4)&0xffffffffu)<<0);
+L43a48b: if(m.instruction_observer)m.instruction_observer(m,0x43a48b); m.r[2]=(m.r[2]&0x0u)|((m.rd((28u+((m.r[0]>>0)&0xffffffffu)),4)&0xffffffffu)<<0);
+L43a48e: if(m.instruction_observer)m.instruction_observer(m,0x43a48e); m.wr((4615076u),((m.r[2]>>0)&0xffffffffu),4);
+L43a494: if(m.instruction_observer)m.instruction_observer(m,0x43a494); {const auto carry=m.c;m.r[2]=(m.r[2]&0x0u)|((m.add(((m.r[2]>>0)&0xffffffffu),1,4)&0xffffffffu)<<0);m.c=carry;}
+L43a495: if(m.instruction_observer)m.instruction_observer(m,0x43a495); m.r[3]=(m.r[3]&0x0u)|((m.rd((4615076u),4)&0xffffffffu)<<0);
+L43a49b: if(m.instruction_observer)m.instruction_observer(m,0x43a49b); m.wr((28u+((m.r[0]>>0)&0xffffffffu)),((m.r[2]>>0)&0xffffffffu),4);
+L43a49e: if(m.instruction_observer)m.instruction_observer(m,0x43a49e); (void)m.sub(((m.r[3]>>0)&0xffffffffu),50u,4);
+L43a4a1: if(m.instruction_observer)m.instruction_observer(m,0x43a4a1); if(m.s!=m.o){goto L43a4ad;}
+L43a4a3: if(m.instruction_observer)m.instruction_observer(m,0x43a4a3); m.wr((20u+((m.r[0]>>0)&0xffffffffu)),0u,4);
+L43a4aa: if(m.instruction_observer)m.instruction_observer(m,0x43a4aa); m.r[2]=(m.r[2]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L43a4ab: if(m.instruction_observer)m.instruction_observer(m,0x43a4ab); m.r[3]=(m.r[3]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L43a4ac: if(m.instruction_observer)m.instruction_observer(m,0x43a4ac); (void)m.pop();return;
+L43a4ad: if(m.instruction_observer)m.instruction_observer(m,0x43a4ad); (void)m.logic(m.rd((4615076u),1)&2u,1);
+L43a4b4: if(m.instruction_observer)m.instruction_observer(m,0x43a4b4); if(!m.z){goto L43a4c4;}
+L43a4b6: if(m.instruction_observer)m.instruction_observer(m,0x43a4b6); m.r[2]=(m.r[2]&0x0u)|((m.rd((4648228u),4)&0xffffffffu)<<0);
+L43a4bc: if(m.instruction_observer)m.instruction_observer(m,0x43a4bc); m.r[0]=(m.r[0]&0x0u)|((m.logic(((m.r[0]>>0)&0xffffffffu)^((m.r[0]>>0)&0xffffffffu),4)&0xffffffffu)<<0);
+L43a4be: if(m.instruction_observer)m.instruction_observer(m,0x43a4be); {const auto target=m.rd((76u+((m.r[2]>>0)&0xffffffffu)),4);m.push(4433089u);m.call(target);}
+L43a4c1: if(m.instruction_observer)m.instruction_observer(m,0x43a4c1); m.r[2]=(m.r[2]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L43a4c2: if(m.instruction_observer)m.instruction_observer(m,0x43a4c2); m.r[3]=(m.r[3]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L43a4c3: if(m.instruction_observer)m.instruction_observer(m,0x43a4c3); (void)m.pop();return;
+L43a4c4: if(m.instruction_observer)m.instruction_observer(m,0x43a4c4); m.r[0]=(m.r[0]&0x0u)|((m.rd((4648124u),4)&0xffffffffu)<<0);
+L43a4c9: if(m.instruction_observer)m.instruction_observer(m,0x43a4c9); m.r[2]=(m.r[2]&0x0u)|((m.rd((4648228u),4)&0xffffffffu)<<0);
+L43a4cf: if(m.instruction_observer)m.instruction_observer(m,0x43a4cf); m.r[0]=(m.r[0]&0x0u)|((m.add(((m.r[0]>>0)&0xffffffffu),1330549u,4)&0xffffffffu)<<0);
+L43a4d4: if(m.instruction_observer)m.instruction_observer(m,0x43a4d4); {const auto target=m.rd((60u+((m.r[2]>>0)&0xffffffffu)),4);m.push(4433111u);m.call(target);}
+L43a4d7: if(m.instruction_observer)m.instruction_observer(m,0x43a4d7); m.r[2]=(m.r[2]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L43a4d8: if(m.instruction_observer)m.instruction_observer(m,0x43a4d8); m.r[3]=(m.r[3]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L43a4d9: if(m.instruction_observer)m.instruction_observer(m,0x43a4d9); (void)m.pop();return;
+}
 void pirate_43a4dc(PirateStepLift &m) {
 goto L43a4dc;
 L43a4dc: if(m.instruction_observer)m.instruction_observer(m,0x43a4dc); m.push(((m.r[3]>>0)&0xffffffffu));
@@ -52009,6 +52076,43 @@ L444a10: if(m.instruction_observer)m.instruction_observer(m,0x444a10); m.r[1]=(m
 L444a11: if(m.instruction_observer)m.instruction_observer(m,0x444a11); m.r[3]=(m.r[3]&0x0u)|((m.pop()&0xffffffffu)<<0);
 L444a12: if(m.instruction_observer)m.instruction_observer(m,0x444a12); (void)m.pop();return;
 }
+void pirate_444a64(PirateStepLift &m) {
+goto L444a64;
+L444a64: if(m.instruction_observer)m.instruction_observer(m,0x444a64); m.push(((m.r[3]>>0)&0xffffffffu));
+L444a65: if(m.instruction_observer)m.instruction_observer(m,0x444a65); m.push(((m.r[1]>>0)&0xffffffffu));
+L444a66: if(m.instruction_observer)m.instruction_observer(m,0x444a66); m.push(((m.r[2]>>0)&0xffffffffu));
+L444a67: if(m.instruction_observer)m.instruction_observer(m,0x444a67); m.push(((m.r[6]>>0)&0xffffffffu));
+L444a68: if(m.instruction_observer)m.instruction_observer(m,0x444a68); (void)m.logic(((m.r[0]>>0)&0xffffffffu)&((m.r[0]>>0)&0xffffffffu),4);
+L444a6a: if(m.instruction_observer)m.instruction_observer(m,0x444a6a); if(!m.z){goto L444a99;}
+L444a6c: if(m.instruction_observer)m.instruction_observer(m,0x444a6c); m.push(4433028u);
+L444a71: if(m.instruction_observer)m.instruction_observer(m,0x444a71); m.r[1]=(m.r[1]&0x0u)|((2u&0xffffffffu)<<0);
+L444a76: if(m.instruction_observer)m.instruction_observer(m,0x444a76); m.push(4294967295u);
+L444a78: if(m.instruction_observer)m.instruction_observer(m,0x444a78); m.r[2]=(m.r[2]&0x0u)|((1u&0xffffffffu)<<0);
+L444a7d: if(m.instruction_observer)m.instruction_observer(m,0x444a7d); m.r[6]=(m.r[6]&0x0u)|((m.rd((4648228u),4)&0xffffffffu)<<0);
+L444a83: if(m.instruction_observer)m.instruction_observer(m,0x444a83); m.push(4294967295u);
+L444a85: if(m.instruction_observer)m.instruction_observer(m,0x444a85); m.r[0]=(m.r[0]&0x0u)|((14u&0xffffffffu)<<0);
+L444a8a: if(m.instruction_observer)m.instruction_observer(m,0x444a8a); m.r[3]=(m.r[3]&0x0u)|((m.logic(((m.r[3]>>0)&0xffffffffu)^((m.r[3]>>0)&0xffffffffu),4)&0xffffffffu)<<0);
+L444a8c: if(m.instruction_observer)m.instruction_observer(m,0x444a8c); {const auto target=m.rd((52u+((m.r[6]>>0)&0xffffffffu)),4);m.push(4475535u);m.call(target);}
+L444a8f: if(m.instruction_observer)m.instruction_observer(m,0x444a8f); m.wr((4615072u),((m.r[0]>>0)&0xffffffffu),4);
+L444a94: if(m.instruction_observer)m.instruction_observer(m,0x444a94); m.r[6]=(m.r[6]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L444a95: if(m.instruction_observer)m.instruction_observer(m,0x444a95); m.r[2]=(m.r[2]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L444a96: if(m.instruction_observer)m.instruction_observer(m,0x444a96); m.r[1]=(m.r[1]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L444a97: if(m.instruction_observer)m.instruction_observer(m,0x444a97); m.r[3]=(m.r[3]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L444a98: if(m.instruction_observer)m.instruction_observer(m,0x444a98); (void)m.pop();return;
+L444a99: if(m.instruction_observer)m.instruction_observer(m,0x444a99); m.r[0]=(m.r[0]&0x0u)|((54u&0xffffffffu)<<0);
+L444a9e: if(m.instruction_observer)m.instruction_observer(m,0x444a9e); m.r[2]=(m.r[2]&0x0u)|((m.logic(((m.r[2]>>0)&0xffffffffu)^((m.r[2]>>0)&0xffffffffu),4)&0xffffffffu)<<0);
+L444aa0: if(m.instruction_observer)m.instruction_observer(m,0x444aa0); m.r[3]=(m.r[3]&0x0u)|((m.rd((4648228u),4)&0xffffffffu)<<0);
+L444aa6: if(m.instruction_observer)m.instruction_observer(m,0x444aa6); m.wr((4615044u),((m.r[2]>>0)&0xffffffffu),4);
+L444aac: if(m.instruction_observer)m.instruction_observer(m,0x444aac); m.r[2]=(m.r[2]&0x0u)|((2u&0xffffffffu)<<0);
+L444ab1: if(m.instruction_observer)m.instruction_observer(m,0x444ab1); {const auto target=m.rd((132u+((m.r[3]>>0)&0xffffffffu)),4);m.push(4475575u);m.call(target);}
+L444ab7: if(m.instruction_observer)m.instruction_observer(m,0x444ab7); m.r[0]=(m.r[0]&0x0u)|((m.rd((4648224u),4)&0xffffffffu)<<0);
+L444abc: if(m.instruction_observer)m.instruction_observer(m,0x444abc); m.wr((20u+((m.r[0]>>0)&0xffffffffu)),0u,4);
+L444ac3: if(m.instruction_observer)m.instruction_observer(m,0x444ac3); m.r[6]=(m.r[6]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L444ac4: if(m.instruction_observer)m.instruction_observer(m,0x444ac4); m.r[2]=(m.r[2]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L444ac5: if(m.instruction_observer)m.instruction_observer(m,0x444ac5); m.r[1]=(m.r[1]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L444ac6: if(m.instruction_observer)m.instruction_observer(m,0x444ac6); m.r[3]=(m.r[3]&0x0u)|((m.pop()&0xffffffffu)<<0);
+L444ac7: if(m.instruction_observer)m.instruction_observer(m,0x444ac7); (void)m.pop();return;
+}
 void pirate_444ac8(PirateStepLift &m) {
 goto L444ac8;
 L444ac8: if(m.instruction_observer)m.instruction_observer(m,0x444ac8); m.push(((m.r[2]>>0)&0xffffffffu));
@@ -59866,6 +59970,7 @@ case 4261052u:pirate_4104bc(*this);return;
 case 4261064u:pirate_4104c8(*this);return;
 case 4261140u:pirate_410514(*this);return;
 case 4261228u:pirate_41056c(*this);return;
+case 4261376u:pirate_410600(*this);return;
 case 4261464u:pirate_410658(*this);return;
 case 4261936u:pirate_410830(*this);return;
 case 4262064u:pirate_4108b0(*this);return;
@@ -60176,6 +60281,7 @@ case 4432704u:pirate_43a340(*this);return;
 case 4432716u:pirate_43a34c(*this);return;
 case 4432792u:pirate_43a398(*this);return;
 case 4432848u:pirate_43a3d0(*this);return;
+case 4433028u:pirate_43a484(*this);return;
 case 4433116u:pirate_43a4dc(*this);return;
 case 4433432u:pirate_43a618(*this);return;
 case 4433816u:pirate_43a798(*this);return;
@@ -60268,6 +60374,7 @@ case 4474756u:pirate_444784(*this);return;
 case 4474896u:pirate_444810(*this);return;
 case 4474988u:pirate_44486c(*this);return;
 case 4475200u:pirate_444940(*this);return;
+case 4475492u:pirate_444a64(*this);return;
 case 4475592u:pirate_444ac8(*this);return;
 case 4475700u:pirate_444b34(*this);return;
 case 4475864u:pirate_444bd8(*this);return;

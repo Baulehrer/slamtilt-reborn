@@ -1,0 +1,46 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "table": "space",
+  "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+  "native_sha256": "92021fa0554bd06de6e22117b08c375cd7793e652aabab2c0cfb674a34249169",
+  "steps": 800,
+  "callbacks": [
+    [
+      604,
+      0,
+      79
+    ],
+    [
+      608,
+      1,
+      118
+    ]
+  ],
+  "tilt_music": [
+    609,
+    132,
+    2,
+    54,
+    0
+  ],
+  "audio_requests": 4,
+  "ball_states": 801,
+  "compared_vectors": [
+    "ball",
+    "globals including DMD hash",
+    "poses",
+    "lifecycle",
+    "highscores",
+    "lamps",
+    "ball pool"
+  ],
+  "scope": "Actual original x86 default keyboard handler vs actual native SDL events and fresh reset/replay; original snapshot keyboard/base-music initialization adapted; no ball or rule injection. Audio requests and gameplay/display state, not mixed PCM or physical listening.",
+  "amiga_adapter": {
+    "dat_sha256": "fb0ca1b88f6d752a928f10a3a31a740017cbb6a700a26e49d282de2e50ba6454",
+    "image_sha256": "3fe3da0e4e992c0f1f65b3b1fff267aa69d69dae17b5ed8e68554f5a02c5e18f",
+    "steps": 800,
+    "events_exact": true,
+    "scope": "Native Amiga data adapter compared with native Windows gameplay; not original Amiga gameplay or music."
+  }
+}

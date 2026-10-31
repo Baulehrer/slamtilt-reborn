@@ -1,0 +1,214 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "scope": "Actual Retail initialization/reset x86 on retained table contexts, checked against original EXE bytes; does not prove tracker PCM or whole original startup.",
+  "tables": [
+    {
+      "table": "pirate",
+      "image_sha256": "5c112a970a16ab4d768201c98b2838f2200bc4996de719db8477e3f42fbf0379",
+      "runtime_sha256": "0ddf844045e1e69ac9c949a638f83601901720a6ad2b057d18c861b2013dbca5",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "runs": [
+        {
+          "start": "0x404f56",
+          "end_exclusive": "0x404f82",
+          "descriptor": "0x465958",
+          "config": "0x465134",
+          "bank": 0,
+          "order": 34,
+          "verified_exe_code_sha256": "cf9045e9d04d1e62b2913ff5c946c521d42b2aa953fb04d0365c25ee4e52e999"
+        },
+        {
+          "start": "0x40841c",
+          "end_exclusive": "0x408455",
+          "descriptor": "0x465958",
+          "config": "0x465134",
+          "bank": 0,
+          "order": 34,
+          "verified_exe_code_sha256": "2dd43d3faf038d47e211ae0fec754a4217566efda59cb68d1557ffc6f4d3292c"
+        }
+      ]
+    },
+    {
+      "table": "space",
+      "image_sha256": "2e12a0c8590b3cbe7dfe7221ba3881bb647ae414e43c9ad56525e05a6dac385e",
+      "runtime_sha256": "0ddf844045e1e69ac9c949a638f83601901720a6ad2b057d18c861b2013dbca5",
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "runs": [
+        {
+          "start": "0x404f56",
+          "end_exclusive": "0x404f82",
+          "descriptor": "0x46664c",
+          "config": "0x465e4c",
+          "bank": 0,
+          "order": 32,
+          "verified_exe_code_sha256": "cf9045e9d04d1e62b2913ff5c946c521d42b2aa953fb04d0365c25ee4e52e999"
+        },
+        {
+          "start": "0x40841c",
+          "end_exclusive": "0x408455",
+          "descriptor": "0x46664c",
+          "config": "0x465e4c",
+          "bank": 0,
+          "order": 32,
+          "verified_exe_code_sha256": "2dd43d3faf038d47e211ae0fec754a4217566efda59cb68d1557ffc6f4d3292c"
+        }
+      ]
+    },
+    {
+      "table": "demon",
+      "image_sha256": "dfb7d9549360d68f9cb6ecb88003164650b66017934067d8237c6f494bdcb976",
+      "runtime_sha256": "0ddf844045e1e69ac9c949a638f83601901720a6ad2b057d18c861b2013dbca5",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "runs": [
+        {
+          "start": "0x404f56",
+          "end_exclusive": "0x404f82",
+          "descriptor": "0x463b54",
+          "config": "0x463470",
+          "bank": 0,
+          "order": 25,
+          "verified_exe_code_sha256": "cf9045e9d04d1e62b2913ff5c946c521d42b2aa953fb04d0365c25ee4e52e999"
+        },
+        {
+          "start": "0x40841c",
+          "end_exclusive": "0x408455",
+          "descriptor": "0x463b54",
+          "config": "0x463470",
+          "bank": 0,
+          "order": 25,
+          "verified_exe_code_sha256": "2dd43d3faf038d47e211ae0fec754a4217566efda59cb68d1557ffc6f4d3292c"
+        }
+      ]
+    }
+  ],
+  "frontend": [
+    {
+      "table": "pirate",
+      "profile": "retail-context",
+      "startup_event": [
+        0,
+        144,
+        0,
+        34,
+        0
+      ],
+      "native_sha256": "853b3d62c7848580952837a76869a730cba50660aa79b51e021876ae703e2796",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "image_sha256": "5c112a970a16ab4d768201c98b2838f2200bc4996de719db8477e3f42fbf0379"
+    },
+    {
+      "table": "pirate",
+      "profile": "dat-only",
+      "startup_event": [
+        0,
+        144,
+        0,
+        34,
+        0
+      ],
+      "native_sha256": "853b3d62c7848580952837a76869a730cba50660aa79b51e021876ae703e2796",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "image_sha256": "8b0f3f06f16d0b4f6d0595d042870a39d65f504b3c5e85810deb1f45d0d57efd"
+    },
+    {
+      "table": "pirate",
+      "profile": "amiga-adapter",
+      "startup_event": [
+        0,
+        144,
+        0,
+        34,
+        0
+      ],
+      "native_sha256": "853b3d62c7848580952837a76869a730cba50660aa79b51e021876ae703e2796",
+      "dat_sha256": "a72344d3fdff63b4cd5ea9cbbdaab221f6e5711db296ddc8aae3562dee915afe",
+      "image_sha256": "a37fe7568247711718a8ff4a31a5f4411d3ca446a6986c7f75e2f870fc0570ef"
+    },
+    {
+      "table": "space",
+      "profile": "retail-context",
+      "startup_event": [
+        0,
+        144,
+        0,
+        32,
+        0
+      ],
+      "native_sha256": "92021fa0554bd06de6e22117b08c375cd7793e652aabab2c0cfb674a34249169",
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "image_sha256": "2e12a0c8590b3cbe7dfe7221ba3881bb647ae414e43c9ad56525e05a6dac385e"
+    },
+    {
+      "table": "space",
+      "profile": "dat-only",
+      "startup_event": [
+        0,
+        144,
+        0,
+        32,
+        0
+      ],
+      "native_sha256": "92021fa0554bd06de6e22117b08c375cd7793e652aabab2c0cfb674a34249169",
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "image_sha256": "4c6336ec3a8a142f0e44bc5b7c9c360c9cd25a7514496ff240eb66aaa7f442b0"
+    },
+    {
+      "table": "space",
+      "profile": "amiga-adapter",
+      "startup_event": [
+        0,
+        144,
+        0,
+        32,
+        0
+      ],
+      "native_sha256": "92021fa0554bd06de6e22117b08c375cd7793e652aabab2c0cfb674a34249169",
+      "dat_sha256": "fb0ca1b88f6d752a928f10a3a31a740017cbb6a700a26e49d282de2e50ba6454",
+      "image_sha256": "3fe3da0e4e992c0f1f65b3b1fff267aa69d69dae17b5ed8e68554f5a02c5e18f"
+    },
+    {
+      "table": "demon",
+      "profile": "retail-context",
+      "startup_event": [
+        0,
+        144,
+        0,
+        25,
+        0
+      ],
+      "native_sha256": "92021fa0554bd06de6e22117b08c375cd7793e652aabab2c0cfb674a34249169",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "image_sha256": "dfb7d9549360d68f9cb6ecb88003164650b66017934067d8237c6f494bdcb976"
+    },
+    {
+      "table": "demon",
+      "profile": "dat-only",
+      "startup_event": [
+        0,
+        144,
+        0,
+        25,
+        0
+      ],
+      "native_sha256": "92021fa0554bd06de6e22117b08c375cd7793e652aabab2c0cfb674a34249169",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "image_sha256": "966cb540178fc3b0acce99ba7f514832ad9de4e794d4e075723c61dd338586af"
+    },
+    {
+      "table": "demon",
+      "profile": "amiga-adapter",
+      "startup_event": [
+        0,
+        144,
+        0,
+        25,
+        0
+      ],
+      "native_sha256": "92021fa0554bd06de6e22117b08c375cd7793e652aabab2c0cfb674a34249169",
+      "dat_sha256": "65e7392a53ad114bc946868995ea046d3d94df165dfa1f6ea7bb4b1e66326e61",
+      "image_sha256": "c71db823f72e1bd7c36d20c67e318458bbfc458d789fd87b647b5d0ac10956a9"
+    }
+  ],
+  "frontend_scope": "SDL dummy audio/video actual startup request; Amiga uses the shared native adapter, not original Amiga music logic."
+}

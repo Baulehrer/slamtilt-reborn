@@ -1,0 +1,68 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Compare three isolated Pirate first-row voices against original voice state.\n\nThe Retail state is reconstructed by verify_retail_tracker_pcm.py. Native\nlibxmp channels are muted independently. Correlations cover one synthetic\n882-frame window, not gameplay timing, later notes, effects or loop handling.\n",
+  "original_exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+  "native_probe_sha256": "b87d9da2a647f09a952d144b5aa9278e6b1824847bfd051e27f37279ff85eb7e",
+  "floor_library_sha256": "4161d0cfa6e2a78396d347be384075d70e70157d53489aa6639d821f7fdedeaf",
+  "frames": 882,
+  "cases": [
+    {
+      "channel": 1,
+      "original_period": 190,
+      "sample_offset": "0x14446",
+      "variants": {
+        "baseline": {
+          "period_q12": 780911,
+          "zero_offset_correlation": 0.895023,
+          "best_correlation": 0.897928,
+          "best_offset_frames": -1
+        },
+        "floor": {
+          "period_q12": 780911,
+          "zero_offset_correlation": 0.821776,
+          "best_correlation": 0.901204,
+          "best_offset_frames": -2
+        }
+      }
+    },
+    {
+      "channel": 2,
+      "original_period": 214,
+      "sample_offset": "0x15eee",
+      "variants": {
+        "baseline": {
+          "period_q12": 876544,
+          "zero_offset_correlation": 0.910791,
+          "best_correlation": 0.981409,
+          "best_offset_frames": 1
+        },
+        "floor": {
+          "period_q12": 876544,
+          "zero_offset_correlation": 0.999999,
+          "best_correlation": 0.999999,
+          "best_offset_frames": 0
+        }
+      }
+    },
+    {
+      "channel": 3,
+      "original_period": 214,
+      "sample_offset": "0x5d6c",
+      "variants": {
+        "baseline": {
+          "period_q12": 876544,
+          "zero_offset_correlation": 0.998906,
+          "best_correlation": 0.999696,
+          "best_offset_frames": 1
+        },
+        "floor": {
+          "period_q12": 876544,
+          "zero_offset_correlation": 0.999998,
+          "best_correlation": 0.999998,
+          "best_offset_frames": 0
+        }
+      }
+    }
+  ]
+}

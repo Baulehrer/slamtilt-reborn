@@ -49,3 +49,7 @@ The repeat/payout/damage/aim bundle adds56,816steps/121audio events: second4-loc
 
 Standalone import/package/ABI/session acceptance now passes as053. [Release island](../../analysis/space-release-island.json). Mean/Pirate/Space RC baselines stay frozen; Demon is the remaining preview table. Untested mode variants and multiball edge cases remain unverified; these finite games do not imply complete
 rule or original-raster equivalence. Mean/Pirate RC paths are retained.
+
+## Post-Jackpot station sequence — 2026-10-30
+
+A pinned Windows Retail Original replay and the current native SDL frontend match across 25,892 steps and ten state vectors. The 3,365-step station sequence after the earned Super Jackpot returns the ball through states 2→3→6→3→2, pays the recorded 75M jackpot and 5M station prize, and matches four audio requests and DMD-memory hashes. No diagnostic contact occurs between station entry and release. The entry and earlier route do use diagnostic contacts; other outcomes and mixed PCM remain open. [Evidence](../verification/space-post-jackpot-2026-10-30.json).

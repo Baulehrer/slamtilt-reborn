@@ -1,0 +1,32 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "original": {
+    "status": "VERIFIED_BOUNDED",
+    "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+    "addresses": [
+      "0x406240",
+      "0x406268",
+      "0x40634c"
+    ],
+    "deferred": {
+      "service": "0x84",
+      "bank": 1,
+      "order": 50,
+      "pending": "0xffffffff",
+      "active_flags": 2,
+      "tracker_start_calls": 0
+    },
+    "canceled": {
+      "service": "0x80",
+      "pending": 0,
+      "stop_lower": "0xffffffff",
+      "active_flags": 2,
+      "tracker_start_calls": 0
+    },
+    "scope": "Actual Retail x86 service entry and scheduler with synthetic active-88 flag; no tracker output or scheduler cadence."
+  },
+  "native_probe_sha256": "776f69118609d832602a455de2c36c9bc5516835193747ffdedb73b765345e55",
+  "native_source_sha256": "a41de86511c67ff0c57c8499145575e4245e3626543a3c38536f980538fa33fe",
+  "native_test_sha256": "7e881526c51281e77def10397c8907cc5dab6c05f35f83bf8943907b56a35ee9",
+  "scope": "Original x86 service/scheduler on synthetic active upper-voice state plus SDL dummy-device queue regression with a synthetic module. Not original device PCM, final mix or real-time equivalence."
+}

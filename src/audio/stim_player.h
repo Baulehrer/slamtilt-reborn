@@ -5,10 +5,13 @@
 #include <vector>
 #include <xmp.h>
 namespace slam {
+enum class TrackerMix { Default, RetailMono };
 class StimPlayer {
 public:
-  explicit StimPlayer(const std::filesystem::path &, int order = 0);
-  StimPlayer(const std::vector<std::uint8_t> &, int order = 0);
+  explicit StimPlayer(const std::filesystem::path &, int order = 0,
+                      TrackerMix mix = TrackerMix::Default);
+  StimPlayer(const std::vector<std::uint8_t> &, int order = 0,
+             TrackerMix mix = TrackerMix::Default);
   ~StimPlayer();
   StimPlayer(const StimPlayer &) = delete;
   StimPlayer &operator=(const StimPlayer &) = delete;
@@ -24,6 +27,7 @@ public:
 private:
   xmp_context context_ = nullptr;
   int order_ = 0;
+  TrackerMix mix_ = TrackerMix::Default;
   void initialize(int load_result);
   bool ended_ = false;
   std::vector<std::int16_t> frame_pcm_;

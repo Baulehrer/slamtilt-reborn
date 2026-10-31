@@ -4,8 +4,8 @@ import argparse, hashlib, json, struct
 from pathlib import Path
 
 BANK_OFFSETS = (0x5c2d2, 0x61590)  # Original 40f0e3/40f0f5 DAT relocation.
-def extract(data, bank):
-    base = BANK_OFFSETS[bank]
+def extract(data, bank, offsets=BANK_OFFSETS):
+    base = offsets[bank]
     nos, length, patterns = struct.unpack_from('>HHH', data, base + 4)
     if not (nos == 31 and 0 < length <= 128 and 0 < patterns <= 64):
         raise ValueError('Unsupported MEAN.DAT revision/header')

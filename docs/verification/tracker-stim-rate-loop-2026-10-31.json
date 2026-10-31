@@ -1,0 +1,81 @@
+{
+  "status": "EXPERIMENT_ONLY_STABLE_BOUNDED",
+  "scope": "Compare one synthetic looping STIM voice to the executed Retail resampler.\n\nThe actual x86 resampler runs at 44.1 kHz with 137-frame chunks and explicit\nfull volume. One normal-tuning sample, period 226 and a 12-byte forward loop\nare repeated for five seconds. This isolates sample-position drift; it does\nnot exercise the game scheduler, note effects or physical audio output.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "library_sha256": "6443da012564c4612bce28d286a64d16343a7ffa61f5b4e38537d7403c63bd5b",
+  "native_sha256": "84281b7236ae1a61c44affd9b14e11bfd5d7c7411d7ad05ce126d8b44159ab4b",
+  "synthetic_stim_sha256": "178d7b618f5906545d1804a53d5d74bc5411fa0cb81a0e519c32e9590be05e48",
+  "period": 226,
+  "frequency": 15694,
+  "loop_start": 8,
+  "loop_length": 12,
+  "frames": 220500,
+  "original_blocks": 24,
+  "original_pcm_sha256": "160dec4b26b553be9bb0e9af7600a7bcaee74b40413ac17bab84f13a562b411f",
+  "variants": {
+    "baseline": [
+      {
+        "second": 1,
+        "correlation": 0.021002,
+        "rms_ratio": 0.987652,
+        "exact_frames": 0
+      },
+      {
+        "second": 2,
+        "correlation": -0.021026,
+        "rms_ratio": 0.987654,
+        "exact_frames": 0
+      },
+      {
+        "second": 3,
+        "correlation": 0.013381,
+        "rms_ratio": 0.987744,
+        "exact_frames": 0
+      },
+      {
+        "second": 4,
+        "correlation": 0.002799,
+        "rms_ratio": 0.987659,
+        "exact_frames": 0
+      },
+      {
+        "second": 5,
+        "correlation": -0.016687,
+        "rms_ratio": 0.987586,
+        "exact_frames": 0
+      }
+    ],
+    "experiment": [
+      {
+        "second": 1,
+        "correlation": 0.999896,
+        "rms_ratio": 0.995086,
+        "exact_frames": 0
+      },
+      {
+        "second": 2,
+        "correlation": 0.999976,
+        "rms_ratio": 0.995121,
+        "exact_frames": 0
+      },
+      {
+        "second": 3,
+        "correlation": 0.999959,
+        "rms_ratio": 0.995088,
+        "exact_frames": 0
+      },
+      {
+        "second": 4,
+        "correlation": 0.999894,
+        "rms_ratio": 0.995098,
+        "exact_frames": 0
+      },
+      {
+        "second": 5,
+        "correlation": 0.999976,
+        "rms_ratio": 0.995112,
+        "exact_frames": 0
+      }
+    ]
+  }
+}

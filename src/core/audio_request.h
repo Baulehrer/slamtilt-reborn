@@ -4,5 +4,6 @@ namespace slam {
 struct AudioRequest {
   int service, bank, order;
   unsigned descriptor = 0;
+  unsigned period = 0, volume = 64;
 };
 }

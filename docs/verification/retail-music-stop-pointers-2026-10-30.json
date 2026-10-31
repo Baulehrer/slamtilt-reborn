@@ -1,0 +1,496 @@
+{
+  "status": "BOUNDED_SURVEY",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "functions": [
+    {
+      "table": "pirate",
+      "function_start": "0x435134",
+      "end_exclusive": "0x43515a",
+      "music_stop": "0x435149",
+      "service": "0x80",
+      "code_sha256": "b953108521fb22086ac7333713f6d9b62440254df1f7d7a517815047d5d55002",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "pirate",
+      "function_start": "0x4365c0",
+      "end_exclusive": "0x4365e2",
+      "music_stop": "0x4365db",
+      "service": "0x80",
+      "code_sha256": "94c0f4b3e219fc86f565b97407b413670ee2fb5b27bbbea4b2781ab9bf31fcb8",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "space",
+      "function_start": "0x44172c",
+      "end_exclusive": "0x441770",
+      "music_stop": "0x441743",
+      "service": "0x80",
+      "code_sha256": "a61cf10f2d6aa7a821ce53c8bb9cbdf0050a8bdb8628a01a5f5df04142b5b87c",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "space",
+      "function_start": "0x4440bc",
+      "end_exclusive": "0x4440de",
+      "music_stop": "0x4440d7",
+      "service": "0x80",
+      "code_sha256": "75395330430dc86f7475b59ae3cc73eef06b0d0ffd53d66f164dcd7f73a530e2",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": [
+        [
+          "image",
+          "0x169fb",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x1736b",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x17639",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x17649",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x24b39",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x256e9",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x2578f",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x2588e",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x25c74",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x25e5a",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x25f71",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x25f81",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x34a19",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x34cb3",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x34d93",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x35151",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x35161",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x44c9e",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x44d77",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x45074",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x46529",
+          "0x4440c7"
+        ],
+        [
+          "image",
+          "0x46539",
+          "0x4440c7"
+        ]
+      ]
+    },
+    {
+      "table": "space",
+      "function_start": "0x4440e0",
+      "end_exclusive": "0x444124",
+      "music_stop": "0x4440f7",
+      "service": "0x80",
+      "code_sha256": "fdf4b85df58819c255f292ee22673aa827d58499bf42be986578f081e180bbdf",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "space",
+      "function_start": "0x44650c",
+      "end_exclusive": "0x446532",
+      "music_stop": "0x446521",
+      "service": "0x80",
+      "code_sha256": "af5864134a9417ae66b40b8d666b74ecb3d0e04f28926572bd60b01bd430b88c",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": []
+    },
+    {
+      "table": "demon",
+      "function_start": "0x41761c",
+      "end_exclusive": "0x417642",
+      "music_stop": "0x417631",
+      "service": "0x80",
+      "code_sha256": "f973ff78759a0f743a34e52e661ad7aa15c1b3b0aec86dafcfecc828058ffa2a",
+      "raw_external_rel32_candidates": [],
+      "little_endian_address_occurrences": [
+        [
+          "dat",
+          "0x146a91",
+          "0x41761f"
+        ]
+      ]
+    }
+  ],
+  "original_initialized_contexts": {
+    "pirate": {
+      "image_sha256": "5c112a970a16ab4d768201c98b2838f2200bc4996de719db8477e3f42fbf0379",
+      "runtime_sha256": "0ddf844045e1e69ac9c949a638f83601901720a6ad2b057d18c861b2013dbca5",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "aligned_pointer_candidates": [],
+      "unaligned_entry_candidates": []
+    },
+    "space": {
+      "image_sha256": "2e12a0c8590b3cbe7dfe7221ba3881bb647ae414e43c9ad56525e05a6dac385e",
+      "runtime_sha256": "0ddf844045e1e69ac9c949a638f83601901720a6ad2b057d18c861b2013dbca5",
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "aligned_pointer_candidates": [],
+      "unaligned_entry_candidates": []
+    },
+    "demon": {
+      "image_sha256": "dfb7d9549360d68f9cb6ecb88003164650b66017934067d8237c6f494bdcb976",
+      "runtime_sha256": "0ddf844045e1e69ac9c949a638f83601901720a6ad2b057d18c861b2013dbca5",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "aligned_pointer_candidates": [],
+      "unaligned_entry_candidates": []
+    }
+  },
+  "boundary_files": [
+    {
+      "path": "analysis/demon-banks-boundary.json",
+      "sha256": "a1f9751c74397a701de16436e750d57154e509c478c85556ee884eb4ae6ce320",
+      "recorded_edges": 95
+    },
+    {
+      "path": "analysis/demon-base-boundary.json",
+      "sha256": "b04450dfa73a9b6b4673ec42ae3fadf87a0bf39aff7e7260423d135b99932272",
+      "recorded_edges": 44
+    },
+    {
+      "path": "analysis/demon-clock-boundary.json",
+      "sha256": "9b52d075d6f92ac7b8b2a557e32f006cc16de1f22578a44ce10eb48cb53c9db4",
+      "recorded_edges": 107
+    },
+    {
+      "path": "analysis/demon-final-boundary.json",
+      "sha256": "e74b81a07413b2f14d5c3d112317c2e32c73250b811a2b3b83f880e8dc21b66f",
+      "recorded_edges": 98
+    },
+    {
+      "path": "analysis/demon-full-tick-boundary.json",
+      "sha256": "4902ea78e54bdf4d18469ffa4f6dc6aba2129e4b8ebf4800957355cc83ec2ecb",
+      "recorded_edges": 131
+    },
+    {
+      "path": "analysis/demon-legal-boundary.json",
+      "sha256": "32f975557a33125c5442494f1c14a66c8fad6e448a16df6ce85ed8c69f7c0831",
+      "recorded_edges": 46
+    },
+    {
+      "path": "analysis/demon-modes-boundary.json",
+      "sha256": "735f6abaab78a30049a0b79baa1456f3fbcb2460d66a0e90ecc0e8924cf7bba2",
+      "recorded_edges": 179
+    },
+    {
+      "path": "analysis/demon-variants-boundary.json",
+      "sha256": "d09e1f300f72b533494b90fe5446812964172a4b65c828bf5a31809ce28d0707",
+      "recorded_edges": 115
+    },
+    {
+      "path": "analysis/demon-video-boundary.json",
+      "sha256": "599678b6377d614878f629b80659e1ae2b7130604781180f91abbedd165842d9",
+      "recorded_edges": 52
+    },
+    {
+      "path": "analysis/pirate-adventure-boundary.json",
+      "sha256": "c1a14fea8044e00b477a32c3cf210140fef6a261445c1d4057752eab5ff43c28",
+      "recorded_edges": 59
+    },
+    {
+      "path": "analysis/pirate-campaign-finite-boundary.json",
+      "sha256": "c6ed219509906a87d18f791ffae19358fb94badb2eaf6c37660b617d786d3cdd",
+      "recorded_edges": 226
+    },
+    {
+      "path": "analysis/pirate-campaign-magnets-boundary.json",
+      "sha256": "f86654b39811dcaaec18415b1db3e44b14c604b0685d6027e30183be80ecc2cf",
+      "recorded_edges": 230
+    },
+    {
+      "path": "analysis/pirate-complete-game-boundary.json",
+      "sha256": "f349338aee40528573d4591ac959f63221aad4ed4a2ab0d5aef2cf8aa4f28c92",
+      "recorded_edges": 162
+    },
+    {
+      "path": "analysis/pirate-final-boundary.json",
+      "sha256": "f1b38a5df0990be6b3f9b940f87f0070db4789aa4cbfd5da7b99953bb4eb1f57",
+      "recorded_edges": 226
+    },
+    {
+      "path": "analysis/pirate-final-feedback-a-boundary.json",
+      "sha256": "198daf706818739569dcc4aff67d3ba4cdd5cc85e17b7d2e3f98451b49709155",
+      "recorded_edges": 5
+    },
+    {
+      "path": "analysis/pirate-final-feedback-b-boundary.json",
+      "sha256": "3e1bf6b261cd0cf6429ac1223fddd0ed4c196f6043b0c781137d1fb9076e6ec0",
+      "recorded_edges": 5
+    },
+    {
+      "path": "analysis/pirate-full-input-boundary.json",
+      "sha256": "404549379eebe40b78799ed6b820cc7055ef093c3cd14d6934fa7f7a4bd51964",
+      "recorded_edges": 124
+    },
+    {
+      "path": "analysis/pirate-full-tick-boundary.json",
+      "sha256": "fcfe837d856c84c4b2994ac67100c3aaedf86f70a3252fa84f70254c10f7c2ac",
+      "recorded_edges": 100
+    },
+    {
+      "path": "analysis/pirate-knife-auto-boundary.json",
+      "sha256": "c8f3593f9a6a0d3ec6c48144035e6677550aa73a08bedfb119b58af579def5c2",
+      "recorded_edges": 3
+    },
+    {
+      "path": "analysis/pirate-knife-boundary.json",
+      "sha256": "c9e23484b7ea7429991aa215a5c18ca2906f8f1fc0adac798b41a5d8e0b6758a",
+      "recorded_edges": 63
+    },
+    {
+      "path": "analysis/pirate-legal-feedback-boundary.json",
+      "sha256": "e53cf3d7b810c554c0e7be065ffa71c79c1d7861496bddf784ab82dfcd76e4be",
+      "recorded_edges": 111
+    },
+    {
+      "path": "analysis/pirate-lifecycle-boundary.json",
+      "sha256": "4a5801092dab2b5b001bcb97c7bb97a6ee3c88b3b172c9592d03283ebd546336",
+      "recorded_edges": 138
+    },
+    {
+      "path": "analysis/pirate-lock-matrix-boundary.json",
+      "sha256": "9bdfaf6e062ae6365c9d2e5e76049029c0135c48126738ba2768427cf7997f0a",
+      "recorded_edges": 75
+    },
+    {
+      "path": "analysis/pirate-magna-boundary.json",
+      "sha256": "856cc6b3b94baabb3add9de8067c3ee6118f26085bcc93b3125c4a8c1ec799f3",
+      "recorded_edges": 45
+    },
+    {
+      "path": "analysis/pirate-magna-capture-boundary.json",
+      "sha256": "cb1a3d65779e6d7c6f5ac51a58b3f07423b47fdfcdbbd1a211184bc552c287ab",
+      "recorded_edges": 3
+    },
+    {
+      "path": "analysis/pirate-magna-eligibility-boundary.json",
+      "sha256": "a6255df59af68c39937d1c01a6430fd8c9b3eb3e8c52407c9ecd353abca34f33",
+      "recorded_edges": 25
+    },
+    {
+      "path": "analysis/pirate-magna-keys-boundary.json",
+      "sha256": "15761da57a41386d7431433c931f3c1782810c61abdc0d721fb502d8778ebbdd",
+      "recorded_edges": 10
+    },
+    {
+      "path": "analysis/pirate-magnasaver-boundary.json",
+      "sha256": "62f15560c4c221eb3e19e7f1a7664a7a50c0f8f11f65cd4073eccb6ce2673464",
+      "recorded_edges": 5
+    },
+    {
+      "path": "analysis/pirate-mode-feedback-boundary.json",
+      "sha256": "a83634d92eb9c8d0bf8142d6e1dab4db09e1e1db6c95ac6727ddef339d75722e",
+      "recorded_edges": 8
+    },
+    {
+      "path": "analysis/pirate-modes-boundary.json",
+      "sha256": "47f64fd525eab3b0df6cfcf280a06458c70ea4149dcf121cbedef2e140114f87",
+      "recorded_edges": 103
+    },
+    {
+      "path": "analysis/pirate-multiball-boundary.json",
+      "sha256": "cf5b37f100fd913e070e23eabd639bbcceae3ab703e2c3003f51b5d6ec1c412e",
+      "recorded_edges": 75
+    },
+    {
+      "path": "analysis/pirate-multiball-campaign-boundary.json",
+      "sha256": "84017f87910a7a53c94104f75bed976093fb1e310efdf8929daf0b723d2cdfa9",
+      "recorded_edges": 118
+    },
+    {
+      "path": "analysis/pirate-natural-croc-boundary.json",
+      "sha256": "50c84e211798612fdf885efc76d5f905483c813e1f03c8e064395fe937ee3b7d",
+      "recorded_edges": 5
+    },
+    {
+      "path": "analysis/pirate-natural-feedback-boundary.json",
+      "sha256": "c98a3661941cc4be77f1b39189a2077941aa600becfd162d36a705f1c56a4500",
+      "recorded_edges": 47
+    },
+    {
+      "path": "analysis/pirate-natural-plank-boundary.json",
+      "sha256": "f2d41fce40af2792d6a2f53c0423f703109b77581d88483e51bd4d03da46a98a",
+      "recorded_edges": 3
+    },
+    {
+      "path": "analysis/pirate-nudge-boundary.json",
+      "sha256": "d4d4d2fb49872fcb98fbb9e7a8625d5f28c9a81eaeabdf15170be2b025a3c7f9",
+      "recorded_edges": 30
+    },
+    {
+      "path": "analysis/pirate-plank-nudge-boundary.json",
+      "sha256": "c3dcf6c9e451251eccef2ce62730f1485d3f1fc210651425359e18459f029ca1",
+      "recorded_edges": 4
+    },
+    {
+      "path": "analysis/pirate-plank-rope-boundary.json",
+      "sha256": "d6296627ea1397728313652d60a1d32027386bceadd50ea803d35795c826dda0",
+      "recorded_edges": 4
+    },
+    {
+      "path": "analysis/pirate-plank-super-feedback-boundary.json",
+      "sha256": "6624a7b0bf64ca424f94fdd9366d9dd0b88ecdab8fdf80a0e3a8abacc43a5d39",
+      "recorded_edges": 4
+    },
+    {
+      "path": "analysis/pirate-plank-two-ropes-boundary.json",
+      "sha256": "c3dcf6c9e451251eccef2ce62730f1485d3f1fc210651425359e18459f029ca1",
+      "recorded_edges": 4
+    },
+    {
+      "path": "analysis/pirate-surplus-boundary.json",
+      "sha256": "10fee021813d6bc63c32d038e6bc188dd3684960f4a30f998adf510d980a0719",
+      "recorded_edges": 39
+    },
+    {
+      "path": "analysis/reborn-gameplay-boundary.json",
+      "sha256": "8a2448a97b361b771d310fa6222ae94e8931b5d5a6a718d4f684e85f488467d1",
+      "recorded_edges": 37
+    },
+    {
+      "path": "analysis/space-base-rules-boundary.json",
+      "sha256": "84647a22d12adf88294103b99d2240d444d45e306e7b53d39cd42c8e2e3b1cbc",
+      "recorded_edges": 129
+    },
+    {
+      "path": "analysis/space-bigblam-boundary.json",
+      "sha256": "530e3aec96d9b9aae95d91b0293110ca63b1ecaf9c0b8ef749bfa494f39b268f",
+      "recorded_edges": 70
+    },
+    {
+      "path": "analysis/space-full-tick-boundary.json",
+      "sha256": "c70edab714858e08e11506480a8ad2a0308a8ec96d6e4c8ddefba1acb7130a63",
+      "recorded_edges": 153
+    },
+    {
+      "path": "analysis/space-lane-kickback-boundary.json",
+      "sha256": "16885edd4b048b2ed0b1f5d53eef6c8537738b10c149a5d4c30b3278c16e9977",
+      "recorded_edges": 49
+    },
+    {
+      "path": "analysis/space-mission-campaign-boundary.json",
+      "sha256": "2ff1b04d5544bee2c582ccf062827826f7a58952dde6e826587fabdb85dd5954",
+      "recorded_edges": 147
+    },
+    {
+      "path": "analysis/space-mission-family-boundary.json",
+      "sha256": "6240214f84b6d9ea71d86622d9fd91743af5af503c0b642dea8f0520725b90f8",
+      "recorded_edges": 127
+    },
+    {
+      "path": "analysis/space-mode-family-boundary.json",
+      "sha256": "33727c8a275d20cdc526f799af151c348f814f42c85672e3d726ac19c87fd74c",
+      "recorded_edges": 175
+    },
+    {
+      "path": "analysis/space-modes-boundary.json",
+      "sha256": "7c360b7f3b8c3680c7ab28ab959a53a8572ff1b2445682e59b4a870d6fbb8448",
+      "recorded_edges": 100
+    },
+    {
+      "path": "analysis/space-multiball-boundary.json",
+      "sha256": "9f5557b1da32c390c24062315168eef553c870111c7c47e9df3a5a09073826f4",
+      "recorded_edges": 76
+    },
+    {
+      "path": "analysis/space-multiball-rewards-boundary.json",
+      "sha256": "e106c2fde14e43ad9591ab9278e7be87354d1394ea652d2388332498c63aed8e",
+      "recorded_edges": 121
+    },
+    {
+      "path": "analysis/space-planet-success-boundary.json",
+      "sha256": "d94d84aeb1d37319ae3331fb79e07c3e3bc74ab0d59ca225822c881a22a601d8",
+      "recorded_edges": 72
+    },
+    {
+      "path": "analysis/space-variants-boundary.json",
+      "sha256": "cf0c0b333532971c516a43ff781f4a05c56a5a752e736d5e1653db4bb35377d1",
+      "recorded_edges": 203
+    },
+    {
+      "path": "analysis/space-weapons-boundary.json",
+      "sha256": "fbac2a4fa333a06dca5b04dbdab1aefb690ff71de5e371e996434533a229a944",
+      "recorded_edges": 63
+    }
+  ],
+  "recorded_edges": 4448,
+  "matching_edges": [],
+  "scope": "SHA-bound retained initialized Windows Retail contexts: aligned DWORDs in writable PE data, runtime and decoded table data, plus exact function-entry literals at every byte alignment. SHA-identified existing recorded call-edge files are searched for targets inside each function. No whole-game trace, no lifetime heap-write audit, no BE or relative/encoded/computed pointer equivalence, and no unreachability claim."
+}

@@ -90,8 +90,10 @@ int main() {
     key(remap,SDLK_ESCAPE);choose(remap,PortOptions::Cancel,SDLK_RETURN);
     assert(remap.settings.key(PortAction::SpecialLeft)==SDL_SCANCODE_LCTRL);
     PortOptions space;space.full_controls=false;space.space_specials=true;key(space,SDLK_ESCAPE);space.select_category(4);
-    for(int i=0;i<4;++i)key(space,SDLK_DOWN);assert(space.selected_option()==PortOptions::SpecialRight);
+    for(int i=0;i<7;++i)key(space,SDLK_DOWN);assert(space.selected_option()==PortOptions::SpecialRight);
     key(space,SDLK_RETURN);binding.key.scancode=SDL_SCANCODE_Z;assert(space.handle(binding));assert(space.settings.key(PortAction::SpecialRight)==SDL_SCANCODE_Z);
+    PortOptions demon;demon.full_controls=false;demon.nudge_controls=true;key(demon,SDLK_ESCAPE);demon.select_category(4);
+    for(int i=0;i<5;++i)key(demon,SDLK_DOWN);assert(demon.selected_option()==PortOptions::NudgeUp);
     // Every category and footer remains reachable; menu draws at small/HiDPI sizes.
     SDL_Window* window=nullptr;SDL_Renderer* renderer=nullptr;
     assert(SDL_CreateWindowAndRenderer("Menu acceptance",1366,768,0,&window,&renderer));

@@ -1,0 +1,285 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Compare Mean's two display-callback sound sequences against both binaries.\n\nThe original table consumer is executed by verify_mean_retail_sfx_sequences.\nCallback code/table bindings and Demo/Retail descriptor equivalence are checked\nin the pinned executables. This does not establish a natural gameplay route or\ndevice timing; queue service is observed at the boundary.\n",
+  "demo_sha256": "31192e0b316bf6fe0a4a41336a5ef6ae53ac659c04edf001607a8de63239fc00",
+  "retail_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "native_probe_sha256": "71b7cca2a94a2404f75cfe64859870fd22ff4d8aa9e46c543635b3582c9d2fe0",
+  "events": [
+    {
+      "callback": 4273108,
+      "descriptor": 4423184,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 285,
+      "service": 92,
+      "tick": 16,
+      "volume": 48
+    },
+    {
+      "callback": 4273108,
+      "descriptor": 4423184,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 428,
+      "service": 92,
+      "tick": 20,
+      "volume": 64
+    },
+    {
+      "callback": 4273108,
+      "descriptor": 4423220,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 856,
+      "service": 92,
+      "tick": 24,
+      "volume": 64
+    },
+    {
+      "callback": 4273432,
+      "descriptor": 4423184,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 285,
+      "service": 92,
+      "tick": 16,
+      "volume": 48
+    },
+    {
+      "callback": 4273432,
+      "descriptor": 4423184,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 428,
+      "service": 92,
+      "tick": 20,
+      "volume": 64
+    },
+    {
+      "callback": 4273432,
+      "descriptor": 4423220,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 856,
+      "service": 92,
+      "tick": 24,
+      "volume": 64
+    },
+    {
+      "callback": 4272588,
+      "descriptor": 4423256,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 428,
+      "service": 92,
+      "tick": 0,
+      "volume": 64
+    },
+    {
+      "callback": 4272588,
+      "descriptor": 4423292,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 428,
+      "service": 92,
+      "tick": 24,
+      "volume": 64
+    },
+    {
+      "callback": 4272588,
+      "descriptor": 4423328,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 214,
+      "service": 92,
+      "tick": 44,
+      "volume": 0
+    },
+    {
+      "callback": 4272852,
+      "descriptor": 4423256,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 428,
+      "service": 92,
+      "tick": 0,
+      "volume": 64
+    },
+    {
+      "callback": 4272852,
+      "descriptor": 4423292,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 428,
+      "service": 92,
+      "tick": 24,
+      "volume": 64
+    },
+    {
+      "callback": 4272852,
+      "descriptor": 4423328,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 214,
+      "service": 92,
+      "tick": 44,
+      "volume": 0
+    },
+    {
+      "callback": 4272040,
+      "descriptor": 4423364,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 480,
+      "service": 92,
+      "tick": 12,
+      "volume": 64
+    },
+    {
+      "callback": 4272040,
+      "descriptor": 4423400,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 480,
+      "service": 92,
+      "tick": 20,
+      "volume": 64
+    },
+    {
+      "callback": 4272040,
+      "descriptor": 4423328,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 214,
+      "service": 92,
+      "tick": 72,
+      "volume": 0
+    },
+    {
+      "callback": 4266020,
+      "descriptor": 4423472,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 320,
+      "service": 92,
+      "tick": 0,
+      "volume": 64
+    },
+    {
+      "callback": 4266020,
+      "descriptor": 4423400,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 339,
+      "service": 92,
+      "tick": 20,
+      "volume": 64
+    },
+    {
+      "callback": 4266020,
+      "descriptor": 4423328,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 214,
+      "service": 92,
+      "tick": 60,
+      "volume": 0
+    },
+    {
+      "callback": 4260892,
+      "descriptor": 4423436,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 339,
+      "service": 92,
+      "tick": 0,
+      "volume": 64
+    },
+    {
+      "callback": 4260184,
+      "descriptor": 4423256,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 428,
+      "service": 92,
+      "tick": 0,
+      "volume": 64
+    },
+    {
+      "callback": 4260184,
+      "descriptor": 4423616,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 285,
+      "service": 92,
+      "tick": 12,
+      "volume": 64
+    },
+    {
+      "callback": 4260184,
+      "descriptor": 4423616,
+      "field_1c": -1,
+      "field_20": 256,
+      "period": 285,
+      "service": 92,
+      "tick": 35,
+      "volume": 16
+    }
+  ],
+  "interleaved_cursor_events": [
+    {
+      "descriptor": 4423184,
+      "period": 285,
+      "tick": 16,
+      "volume": 48
+    },
+    {
+      "descriptor": 4423256,
+      "period": 428,
+      "tick": 0,
+      "volume": 64
+    },
+    {
+      "descriptor": 4423184,
+      "period": 428,
+      "tick": 20,
+      "volume": 64
+    },
+    {
+      "descriptor": 4423184,
+      "period": 285,
+      "tick": 16,
+      "volume": 48
+    }
+  ],
+  "queued_duplicate_final_voice": [
+    1,
+    18058992,
+    8948,
+    0,
+    0,
+    428,
+    64,
+    256
+  ],
+  "demo_callbacks": [
+    "0x4133d4",
+    "0x413518",
+    "0x4131cc",
+    "0x4132d4",
+    "0x412fa8",
+    "0x411824",
+    "0x41041c",
+    "0x410158"
+  ],
+  "retail_callbacks": [
+    "0x41fe14",
+    "0x41ff58",
+    "0x41fc0c",
+    "0x41fd14",
+    "0x41f9e8",
+    "0x41e264",
+    "0x41ce5c",
+    "0x41cb98"
+  ]
+}

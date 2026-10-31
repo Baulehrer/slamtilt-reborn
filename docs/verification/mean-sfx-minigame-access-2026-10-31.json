@@ -1,0 +1,23 @@
+{
+  "status": "BOUNDED_NO_TARGET_ACCESSES",
+  "scope": "Instrument the retained Original Demo minigame sound regression.\n\nRuns the existing eight bounded Original/native scenarios with descriptor-read\nand queue-entry hooks. State and score thresholds are synthetic, dispatcher\nservices are adapted and this does not establish complete-game reachability.\n",
+  "demo_sha256": "31192e0b316bf6fe0a4a41336a5ef6ae53ac659c04edf001607a8de63239fc00",
+  "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+  "native_sha256": "5f6b5c4b92cb75cce2341266818b864c952afa493ad823e5df820e1a0a21d811",
+  "source_fixture_sha256": "ed1b6ded781f5efa0ad095e601cbaae67ed2426cb1a3aa09dab426dba20b3dc9",
+  "cases": 8,
+  "targets": [
+    "0x437f54",
+    "0x437f78",
+    "0x437f9c"
+  ],
+  "target_accesses": [],
+  "positive_control_memory_accesses": 29974,
+  "control_descriptor_counts": {
+    "0x437fe4": 8,
+    "0x438008": 8,
+    "0x43802c": 8,
+    "0x438050": 8
+  },
+  "executed_original_blocks": 301
+}

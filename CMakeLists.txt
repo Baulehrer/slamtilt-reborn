@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(slamtilt_reborn VERSION 1.1.0 LANGUAGES CXX)
+project(slamtilt_reborn VERSION 1.2.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Opt-in release experiments: developer/reference builds keep their defaults.
@@ -730,7 +730,7 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/demo-1997/Slam Tilt Demo (Wind
 endif()
 
 find_path(XMP_INCLUDE_DIR xmp.h HINTS "${CMAKE_SOURCE_DIR}/build/libxmp/include")
-find_library(XMP_LIBRARY NAMES xmp HINTS "${CMAKE_SOURCE_DIR}/build/libxmp-build")
+find_library(XMP_LIBRARY NAMES xmp HINTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build" "${CMAKE_SOURCE_DIR}/build/libxmp-build")
 if(XMP_INCLUDE_DIR AND XMP_LIBRARY)
   add_library(slamaudio src/audio/stim_player.cpp src/audio/native_audio.cpp src/audio/mean_sound_assets.cpp src/audio/mean_sample_mixer.cpp src/audio/pirate_sound_assets.cpp src/audio/space_sound_assets.cpp src/audio/demon_sound_assets.cpp)
   target_include_directories(slamaudio PUBLIC src "${XMP_INCLUDE_DIR}")
@@ -784,6 +784,60 @@ if(TARGET slamaudio)
     add_test(NAME native_audio_queue COMMAND native_audio_probe "${CMAKE_SOURCE_DIR}/build/decoded/Music.Bin")
     set_tests_properties(native_audio_queue PROPERTIES ENVIRONMENT "SDL_AUDIODRIVER=dummy")
   endif()
+endif()
+
+if(TARGET pirate_step_lift)
+  add_executable(demon_sfx_callback_probe tests/demon_sfx_callback_probe.cpp)
+  target_link_libraries(demon_sfx_callback_probe PRIVATE pirate_step_lift nlohmann_json::nlohmann_json)
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-runtime.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-dat.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/summary.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE")
+    add_test(NAME demon_sfx_callback_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_demon_sfx_callback.py"
+      --native "$<TARGET_FILE:demon_sfx_callback_probe>"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/demon-sfx-callback")
+  endif()
+endif()
+
+if(TARGET slamslice AND EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/SPACE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/DEMON.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-modes/base-rules-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-modes/kickback-off-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-modes/race-variants-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/twice-cycles-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/legal-game-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/video-wolf-shoot-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/space-base-rules-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/space-kickback-off-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/space-race-variants-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-twice-cycles-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-legal-game-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-video-wolf-shoot-rewards.json")
+  add_test(NAME retail_sfx_coverage_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_retail_sfx_coverage.py" --native "$<TARGET_FILE:slamslice>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/retail-sfx-coverage")
+  set_tests_properties(retail_sfx_coverage_original PROPERTIES TIMEOUT 300)
+endif()
+
+if(TARGET pirate_audio_probe AND TARGET slamview AND EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/pirate-knife-auto-audio.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/pirate-audio-pcm.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-dat.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/PIRATE.DAT")
+  add_test(NAME pirate_sfx_coverage_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_pirate_sfx_coverage.py"
+    --native "$<TARGET_FILE:pirate_audio_probe>" --viewer "$<TARGET_FILE:slamview>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/pirate-sfx-coverage")
+  set_tests_properties(pirate_sfx_coverage_original PROPERTIES TIMEOUT 300)
 endif()
 
 if(TARGET slamaudio)
@@ -1202,6 +1256,22 @@ add_test(NAME mean_options_menu_visible COMMAND "${CMAKE_COMMAND}" -E env SDL_VI
 add_executable(audio_levels tests/audio_levels.cpp)
 target_include_directories(audio_levels PRIVATE src)
 add_test(NAME audio_levels COMMAND audio_levels)
+
+add_executable(retail_final_mix_probe tests/retail_final_mix_probe.cpp src/audio/mean_sample_mixer.cpp)
+target_include_directories(retail_final_mix_probe PRIVATE src)
+if(EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE")
+  add_test(NAME retail_final_mix_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_retail_final_mix.py"
+    --native "$<TARGET_FILE:retail_final_mix_probe>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/retail-final-mix.json")
+  add_test(NAME retail_game_mixer_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_retail_game_mixer.py"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/retail-game-mixer.json")
+  add_test(NAME retail_loop_resampler_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_retail_loop_resampler.py"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/retail-loop-resampler.json")
+endif()
 add_executable(mean_highscores_test tests/mean_highscores_test.cpp)
 target_include_directories(mean_highscores_test PRIVATE src)
 target_link_libraries(mean_highscores_test PRIVATE SDL3::SDL3 nlohmann_json::nlohmann_json)
@@ -1718,4 +1788,549 @@ foreach(probe_target gamepad_view_frontend gamepad_slice_frontend gamepad_menu_f
 endforeach()
 find_package(Threads REQUIRED)
 target_link_libraries(gamepad_frontend_probe PRIVATE ${_gamepad_view_libs} ${_gamepad_slice_libs} ${_gamepad_menu_libs} Threads::Threads)
+endif()
+
+# Original Retail x86 single-voice PCM versus the actual native mixer.
+if(TARGET slamaudio)
+  add_executable(native_audio_deferred_probe tests/native_audio_deferred_probe.cpp)
+  target_link_libraries(native_audio_deferred_probe PRIVATE slamaudio)
+  target_compile_options(native_audio_deferred_probe PRIVATE -Wall -Wextra -Wpedantic)
+  add_test(NAME native_audio_deferred_queue COMMAND "${CMAKE_COMMAND}" -E env SDL_AUDIODRIVER=dummy
+    "$<TARGET_FILE:native_audio_deferred_probe>")
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE")
+    add_test(NAME retail_audio_deferred_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_retail_audio_deferred.py"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/retail-audio-deferred-original.json")
+  endif()
+  add_executable(retail_sample_pcm_probe tests/retail_sample_pcm_probe.cpp)
+  target_link_libraries(retail_sample_pcm_probe PRIVATE slamaudio slamassets nlohmann_json::nlohmann_json)
+  target_compile_options(retail_sample_pcm_probe PRIVATE -Wall -Wextra -Wpedantic)
+  add_executable(sfx_profiles_probe tests/sfx_profiles_probe.cpp)
+  target_link_libraries(sfx_profiles_probe PRIVATE slamaudio nlohmann_json::nlohmann_json)
+  add_executable(sfx_dynamic_probe tests/sfx_dynamic_probe.cpp)
+  target_link_libraries(sfx_dynamic_probe PRIVATE slamaudio)
+  add_executable(pirate_overlap_pcm_probe tests/pirate_overlap_pcm_probe.cpp)
+  target_link_libraries(pirate_overlap_pcm_probe PRIVATE slamaudio)
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/PIRATE.DAT" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE")
+    add_test(NAME pirate_overlap_pcm_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_pirate_overlap_pcm.py"
+      --native "$<TARGET_FILE:pirate_overlap_pcm_probe>"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/pirate-overlap-pcm.json")
+  endif()
+  add_executable(mean_display_sfx_probe tests/mean_display_sfx_probe.cpp)
+  target_include_directories(mean_display_sfx_probe PRIVATE src)
+  target_link_libraries(mean_display_sfx_probe PRIVATE nlohmann_json::nlohmann_json)
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/analysis/pirate-audio-static.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/analysis/space-audio-reuse.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/analysis/demon-audio-profile.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/pirate-audio-events.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/space-audio-events.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-image.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-image.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MEAN.DAT" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/PIRATE.DAT" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/SPACE.DAT" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/DEMON.DAT")
+    add_test(NAME sfx_descriptor_audit COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/audit_sfx_descriptors.py" --native "$<TARGET_FILE:sfx_profiles_probe>"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/sfx-descriptor-audit-ctest.json")
+  endif()
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MEAN.DAT")
+    add_test(NAME mean_retail_sfx_dynamic_pcm COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_dynamic_sfx_pcm.py" --native "$<TARGET_FILE:sfx_dynamic_probe>"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/mean-dynamic-sfx")
+  endif()
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/mean-prepared/pe-data.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/cd-gamer-03-1997/SLAMTILT/SLAMTILT/SLAMTILT.EXE" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MEAN.DAT")
+    add_test(NAME mean_sample_pcm_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_mean_sample_pcm_original.py"
+      --native "$<TARGET_FILE:retail_sample_pcm_probe>"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/mean-sample-pcm-original.json")
+    add_test(NAME mean_display_sfx_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_mean_display_sfx.py"
+      --native "$<TARGET_FILE:mean_display_sfx_probe>"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/mean-display-sfx-original.json")
+    add_test(NAME mean_remaining_sfx_static COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_mean_remaining_sfx.py"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/mean-remaining-sfx-static.json")
+    if(EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/demo-1997/Slam Tilt Demo (Windows, 1996) - SLAMTILT/DAT/MEAN.DAT" AND
+       EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/demo-1997/Slam Tilt Demo (Windows, 1996) - SLAMTILT/DAT/MAIN.DAT")
+      add_test(NAME mean_sfx_descriptor_access_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/trace_mean_sfx_descriptor_access.py"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/mean-sfx-access.json")
+      add_test(NAME mean_sfx_mode_access_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/trace_mean_sfx_mode_access.py"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/mean-sfx-mode-access.json")
+      if(TARGET mean_contact_context_probe)
+        add_test(NAME mean_sfx_contact_access_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+          "${CMAKE_SOURCE_DIR}/tools/trace_mean_sfx_contact_access.py"
+          --probe "$<TARGET_FILE:mean_contact_context_probe>"
+          --output "${CMAKE_CURRENT_BINARY_DIR}/mean-sfx-contact-access.json")
+        set_tests_properties(mean_sfx_contact_access_original PROPERTIES TIMEOUT 120)
+      endif()
+      if(TARGET mean_minigame2_probe)
+        add_test(NAME mean_sfx_minigame_access_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+          "${CMAKE_SOURCE_DIR}/tools/trace_mean_sfx_minigame_access.py"
+          --native "$<TARGET_FILE:mean_minigame2_probe>"
+          --output "${CMAKE_CURRENT_BINARY_DIR}/mean-sfx-minigame-access.json")
+        set_tests_properties(mean_sfx_minigame_access_original PROPERTIES TIMEOUT 120 RESOURCE_LOCK mean_minigame_fixture)
+        if(TEST mean_minigame_samples_oracle)
+          set_tests_properties(mean_minigame_samples_oracle PROPERTIES RESOURCE_LOCK mean_minigame_fixture)
+        endif()
+      endif()
+    endif()
+    if(EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/DEMON.DAT" AND
+       EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/INTRO.DAT" AND
+       EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MAIN.DAT" AND
+       EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MENU.DAT" AND
+       EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MENU2.DAT" AND
+       EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/PIRATE.DAT" AND
+       EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/SPACE.DAT" AND
+       EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE")
+      add_test(NAME mean_sfx_reference_surfaces COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_mean_sfx_reference_surfaces.py"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/mean-sfx-reference-surfaces.json")
+      if(EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Fix_Win_EN/Game Files/Slam_Tilt_Fix/SLAMTILT.EXE")
+        add_test(NAME mean_sfx_fix_reference_surfaces COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+          "${CMAKE_SOURCE_DIR}/tools/verify_mean_sfx_reference_surfaces.py"
+          --fix "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Fix_Win_EN/Game Files/Slam_Tilt_Fix/SLAMTILT.EXE"
+          --output "${CMAKE_CURRENT_BINARY_DIR}/mean-sfx-fix-reference-surfaces.json")
+      endif()
+    endif()
+  endif()
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/analysis/space-audio-reuse.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/analysis/demon-audio-profile.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/analysis/pirate-audio-static.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-image.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-dat.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/summary.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-image.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-dat.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/summary.json" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-dat.bin" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/summary.json")
+    add_test(NAME retail_sample_pcm_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_retail_sample_pcm.py" --native "$<TARGET_FILE:retail_sample_pcm_probe>")
+    set_tests_properties(retail_sample_pcm_original PROPERTIES TIMEOUT 180)
+  endif()
+endif()
+
+if(Python3_EXECUTABLE AND EXISTS "${CMAKE_SOURCE_DIR}/build/amiga-read-verified-data/amiga-import.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/full/Mean.Raw" AND EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/full/Mean.Bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/full/Pirate.Raw" AND EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/full/Pirate.Bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/full/Space.Raw" AND EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/full/Space.Bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/full/Demon.Raw" AND EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/full/Demon.Bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/amiga-read-verified-data/mean/MEAN.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/amiga-read-verified-data/pirate/PIRATE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/amiga-read-verified-data/space/SPACE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/amiga-read-verified-data/demon/DEMON.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MEAN.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/PIRATE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/SPACE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/DEMON.DAT")
+  add_test(NAME amiga_windows_music_banks COMMAND "${Python3_EXECUTABLE}"
+    "${CMAKE_SOURCE_DIR}/tools/verify_amiga_music_banks.py"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/amiga-windows-music-banks.json")
+  add_test(NAME amiga_music_integrity COMMAND "${Python3_EXECUTABLE}"
+    "${CMAKE_SOURCE_DIR}/tests/amiga_music_integrity.py")
+endif()
+
+# Bounded Space station sequence: retained original trace versus live SDL replay.
+if(TARGET slamaudio AND TARGET slamslice AND
+   EXISTS "${CMAKE_SOURCE_DIR}/tools/verify_space_post_jackpot.py" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/SPACE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/table-profiles.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/space-mission-campaign-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-modes/mission-campaign-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-runtime.bin")
+  add_test(NAME space_post_jackpot_original COMMAND "${Python3_EXECUTABLE}"
+    "${CMAKE_SOURCE_DIR}/tools/verify_space_post_jackpot.py" --native "$<TARGET_FILE:slamslice>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/space-post-jackpot"
+    --report "${CMAKE_CURRENT_BINARY_DIR}/space-post-jackpot/report.json")
+  set_tests_properties(space_post_jackpot_original PROPERTIES TIMEOUT 300)
+endif()
+
+# Original Retail integration on naturally reached native snapshots; private
+# game data stays local and reports stay in the build directory.
+if(TARGET mean_sim_probe AND TARGET mean_probe AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/mean-prepared/manifest.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/mean-prepared/lookup.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/mean-flight-100.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MEAN.DAT")
+  add_test(NAME mean_retail_natural_integration COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_mean_natural_components.py" --original-build retail
+    --native-sim "$<TARGET_FILE:mean_sim_probe>" --native-integrator "$<TARGET_FILE:mean_probe>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/mean-retail-natural-integration.json")
+  set_tests_properties(mean_retail_natural_integration PROPERTIES TIMEOUT 180)
+endif()
+
+# Consecutive Demon videos: private, hash-pinned Original plus SDL replay.
+if(TARGET slamaudio AND TARGET slamslice AND
+   EXISTS "${CMAKE_SOURCE_DIR}/tools/verify_demon_video_consecutive.py" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/table-profiles.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-video-consecutive-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/video-consecutive-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/DEMON.DAT")
+  add_test(NAME demon_video_consecutive_original COMMAND "${Python3_EXECUTABLE}"
+    "${CMAKE_SOURCE_DIR}/tools/verify_demon_video_consecutive.py" --native "$<TARGET_FILE:slamslice>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/demon-video-consecutive"
+    --report "${CMAKE_CURRENT_BINARY_DIR}/demon-video-consecutive/report.json")
+  set_tests_properties(demon_video_consecutive_original PROPERTIES TIMEOUT 300)
+endif()
+
+# Verify original Retail startup music selection and SDL requests, including a
+# fresh DAT-only import. Original game files and prepared oracle states are local.
+if(TARGET slamaudio)
+  add_executable(music_order_position tests/music_order_position.cpp)
+  target_link_libraries(music_order_position PRIVATE slamaudio slamassets)
+  target_compile_options(music_order_position PRIVATE -Wall -Wextra -Wpedantic)
+  add_executable(tracker_channel_probe tests/tracker_channel_probe.cpp)
+  target_link_libraries(tracker_channel_probe PRIVATE slamaudio)
+  set(_retail_music_dat "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT")
+  if(EXISTS "${_retail_music_dat}/MEAN.DAT" AND EXISTS "${_retail_music_dat}/PIRATE.DAT" AND
+     EXISTS "${_retail_music_dat}/SPACE.DAT" AND EXISTS "${_retail_music_dat}/DEMON.DAT")
+    add_test(NAME music_all_order_positions COMMAND music_order_position "${_retail_music_dat}")
+    if(TARGET stim_audio_probe AND EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+       EXISTS "${_retail_music_dat}/../SLAMTILT.EXE")
+      add_test(NAME retail_tracker_native_pcm COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_retail_tracker_native.py"
+        --native "$<TARGET_FILE:stim_audio_probe>"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/retail-tracker-comparison")
+      add_test(NAME mean_tracker_sample_phase COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_mean_tracker_phase.py"
+        --native "$<TARGET_FILE:stim_audio_probe>"
+        --work "${CMAKE_CURRENT_BINARY_DIR}/mean-tracker-phase")
+      if(EXISTS "${CMAKE_SOURCE_DIR}/build/tracker-floor-experiment/generated-libxmp-build/libxmp.so.4")
+        add_test(NAME pirate_tracker_channel_periods COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+          "${CMAKE_SOURCE_DIR}/tools/verify_pirate_tracker_channels.py"
+          --native "$<TARGET_FILE:tracker_channel_probe>"
+          --floor-library "${CMAKE_SOURCE_DIR}/build/tracker-floor-experiment/generated-libxmp-build/libxmp.so.4"
+          --work "${CMAKE_CURRENT_BINARY_DIR}/pirate-tracker-channels"
+          --output "${CMAKE_CURRENT_BINARY_DIR}/pirate-tracker-channels.json")
+      endif()
+    endif()
+  endif()
+endif()
+if(Python3_EXECUTABLE)
+  add_test(NAME retail_audio_fixture_adapter COMMAND "${Python3_EXECUTABLE}"
+    "${CMAKE_SOURCE_DIR}/tests/retail_audio_fixture_test.py")
+endif()
+if(TARGET mean_phase1_gameplay_probe AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE")
+  add_test(NAME mean_retail_music_transitions COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_mean_retail_music_transitions.py")
+endif()
+if(EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/docs/verification/retail-music-start-2026-10-30.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/docs/verification/unobserved-music-stops-2026-10-30.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/space-full-tick-boundary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-dat.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-dat.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-dat.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE")
+  add_test(NAME retail_music_stop_pointers COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_music_stop_pointers.py"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/retail-music-stop-pointers.json")
+  add_test(NAME retail_music_stop_wrappers COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_music_stop_wrapper.py"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/retail-music-stop-wrappers.json")
+endif()
+if(TARGET slamslice AND TARGET slamaudio AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/table-profiles.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-dat.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-dat.bin" AND
+   EXISTS "${_retail_music_dat}/MAIN.DAT" AND
+   EXISTS "${_retail_music_dat}/SPACE.DAT" AND EXISTS "${_retail_music_dat}/DEMON.DAT" AND
+   EXISTS "${_retail_music_dat}/../SLAMTILT.EXE")
+  foreach(_tilt_table IN ITEMS space demon)
+    add_test(NAME ${_tilt_table}_tilt_music_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_space_tilt_music.py" --table "${_tilt_table}"
+      --native "$<TARGET_FILE:slamslice>" --output "${CMAKE_CURRENT_BINARY_DIR}/${_tilt_table}-tilt-music")
+    set_tests_properties(${_tilt_table}_tilt_music_original PROPERTIES TIMEOUT 180)
+    string(TOUPPER "${_tilt_table}" _tilt_upper)
+    set(_tilt_amiga "${CMAKE_SOURCE_DIR}/build/amiga-read-verified-data/${_tilt_table}")
+    if(EXISTS "${_tilt_amiga}/${_tilt_upper}.DAT" AND EXISTS "${_tilt_amiga}/MAIN.DAT" AND
+       EXISTS "${_tilt_amiga}/${_tilt_table}-prepared/human-image.bin" AND
+       EXISTS "${_tilt_amiga}/${_tilt_table}-prepared/human-runtime.bin" AND
+       EXISTS "${_tilt_amiga}/${_tilt_table}-prepared/summary.json")
+      add_test(NAME ${_tilt_table}_tilt_music_amiga_adapter COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_space_tilt_music.py" --table "${_tilt_table}"
+        --native "$<TARGET_FILE:slamslice>" --amiga-root "${_tilt_amiga}"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/${_tilt_table}-tilt-music-amiga")
+      set_tests_properties(${_tilt_table}_tilt_music_amiga_adapter PROPERTIES TIMEOUT 180)
+    endif()
+  endforeach()
+endif()
+if(TARGET slamslice AND TARGET slamaudio AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/space-bigblam-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/space-mission-campaign-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/space-multiball-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-final-campaign-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-video-consecutive-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-kickback-on-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-clock-award-4-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-clock-rewards-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-modes/bigblam-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-modes/mission-campaign-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-modes/multiball-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/final-campaign-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/video-consecutive-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/kickback-on-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/clock-award-4-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/clock-rewards-rewards.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+   EXISTS "${_retail_music_dat}/SPACE.DAT" AND EXISTS "${_retail_music_dat}/DEMON.DAT" AND
+   EXISTS "${_retail_music_dat}/../SLAMTILT.EXE")
+  add_test(NAME retail_music_event_sequences COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_retail_music_events.py" --native "$<TARGET_FILE:slamslice>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/retail-music-events")
+  set_tests_properties(retail_music_event_sequences PROPERTIES TIMEOUT 360)
+endif()
+set(_demon_clock_audio_ready TRUE)
+foreach(_clock_index RANGE 0 11)
+  if(NOT EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-clock-award-${_clock_index}-rewards.json" OR
+     NOT EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/clock-award-${_clock_index}-rewards.json")
+    set(_demon_clock_audio_ready FALSE)
+  endif()
+endforeach()
+if(_demon_clock_audio_ready AND TARGET slamslice AND TARGET slamaudio AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+   EXISTS "${_retail_music_dat}/DEMON.DAT" AND EXISTS "${_retail_music_dat}/../SLAMTILT.EXE")
+  add_test(NAME demon_clock_audio_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_demon_clock_audio.py" --native "$<TARGET_FILE:slamslice>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/demon-clock-audio")
+  set_tests_properties(demon_clock_audio_original PROPERTIES TIMEOUT 180)
+endif()
+if(TARGET slamaudio AND TARGET slamview AND TARGET slamslice AND
+   TARGET slampirate-import AND TARGET slamspace-import AND TARGET slamdemon-import AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MAIN.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/PIRATE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/SPACE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/DEMON.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/pirate-full-tick/human-dat.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-full-game/human-dat.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/summary.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-image.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-runtime.bin" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-full-game/human-dat.bin")
+  add_test(NAME retail_original_music_start COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_retail_original_music_start.py" --frontend
+    --native-dir "$<TARGET_FILE_DIR:slamslice>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/retail-original-music-start.json")
+  set_tests_properties(retail_original_music_start PROPERTIES TIMEOUT 180)
+endif()
+
+# Private Retail x86 replays: sample parameters at Space sound request entry.
+set(_space_sfx_state_available TRUE)
+foreach(_space_sfx_state_path IN ITEMS
+    "build/venv/bin/python"
+    "build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE"
+    "build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/SPACE.DAT"
+    "analysis/table-profiles.json" "analysis/space-audio-reuse.json"
+    "analysis/traces/space-audio-events.json" "build/oracle/space-full-tick/trace.json"
+    "build/oracle/space-full-game/summary.json" "build/oracle/space-full-game/human-image.bin"
+    "build/oracle/space-full-game/human-runtime.bin" "build/oracle/space-full-game/human-dat.bin")
+  if(NOT EXISTS "${CMAKE_SOURCE_DIR}/${_space_sfx_state_path}")
+    set(_space_sfx_state_available FALSE)
+  endif()
+endforeach()
+foreach(_space_sfx_state_case IN ITEMS base-rules kickback-off race-variants mission-campaign lane-shift planet-success)
+  if(NOT EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/space-modes/${_space_sfx_state_case}-rewards.json" OR
+     NOT EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/space-${_space_sfx_state_case}-rewards.json")
+    set(_space_sfx_state_available FALSE)
+  endif()
+endforeach()
+if(TARGET sfx_profiles_probe AND _space_sfx_state_available)
+  add_test(NAME space_sfx_descriptor_state COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_space_sfx_descriptor_state.py"
+    --native "$<TARGET_FILE:sfx_profiles_probe>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/space-sfx-descriptor-state.json")
+  set_tests_properties(space_sfx_descriptor_state PROPERTIES TIMEOUT 180)
+endif()
+unset(_space_sfx_state_available)
+unset(_space_sfx_state_path)
+unset(_space_sfx_state_case)
+
+if(TARGET slamaudio AND TARGET pirate_overlap_pcm_probe AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/PIRATE.DAT")
+  add_executable(pirate_combined_audio_probe tests/pirate_combined_audio_probe.cpp)
+  target_link_libraries(pirate_combined_audio_probe PRIVATE slamaudio)
+  add_test(NAME pirate_combined_audio_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_pirate_combined_audio.py"
+    --native "$<TARGET_FILE:pirate_combined_audio_probe>" --sfx "$<TARGET_FILE:pirate_overlap_pcm_probe>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/pirate-combined-audio")
+  set_tests_properties(pirate_combined_audio_original PROPERTIES TIMEOUT 120)
+endif()
+
+# Private Retail Demon sound requests with original descriptor fields.
+set(_demon_sfx_state_available TRUE)
+foreach(_demon_sfx_state_path IN ITEMS
+    "build/venv/bin/python"
+    "build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE"
+    "build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/DEMON.DAT"
+    "analysis/table-profiles.json" "analysis/demon-audio-profile.json"
+    "build/oracle/demon-full-game/summary.json" "build/oracle/demon-full-game/human-image.bin"
+    "build/oracle/demon-full-game/human-runtime.bin" "build/oracle/demon-full-game/human-dat.bin")
+  if(NOT EXISTS "${CMAKE_SOURCE_DIR}/${_demon_sfx_state_path}")
+    set(_demon_sfx_state_available FALSE)
+  endif()
+endforeach()
+foreach(_demon_sfx_state_case IN ITEMS legal-game video-wolf-shoot clock-award-4)
+  if(NOT EXISTS "${CMAKE_SOURCE_DIR}/build/oracle/demon-modes/${_demon_sfx_state_case}-rewards.json" OR
+     NOT EXISTS "${CMAKE_SOURCE_DIR}/analysis/traces/demon-${_demon_sfx_state_case}-rewards.json")
+    set(_demon_sfx_state_available FALSE)
+  endif()
+endforeach()
+if(TARGET sfx_profiles_probe AND _demon_sfx_state_available)
+  add_test(NAME demon_sfx_descriptor_state COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_demon_sfx_descriptor_state.py"
+    --native "$<TARGET_FILE:sfx_profiles_probe>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/demon-sfx-descriptor-state.json")
+  set_tests_properties(demon_sfx_descriptor_state PROPERTIES TIMEOUT 180)
+endif()
+
+if(TEST space_sfx_descriptor_state)
+  add_test(NAME space_sfx_queue_timing_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_space_sfx_queue_timing.py"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/space-sfx-queue-timing.json")
+  add_test(NAME space_sfx_mutations_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/trace_space_sfx_mutations.py" --native "$<TARGET_FILE:sfx_profiles_probe>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/space-sfx-mutations.json")
+  set_tests_properties(space_sfx_queue_timing_original space_sfx_mutations_original PROPERTIES TIMEOUT 120)
+endif()
+
+# Isolated libxmp experiment; it never alters the port's linked library.
+if(TARGET stim_audio_probe AND TARGET tracker_channel_probe AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/venv/bin/python" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp/src/period.c" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/docs/verification/tracker-floor-experiment-2026-10-31.json" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/SLAMTILT.EXE" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/MEAN.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/PIRATE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/SPACE.DAT" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/_dokumente/Slam_Tilt_Win_RIP_EN/Game Files/SLAMTILT/DAT/DEMON.DAT")
+  add_test(NAME tracker_period_experiment COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_tracker_period_experiment.py"
+    --native "$<TARGET_FILE:stim_audio_probe>" --channel-probe "$<TARGET_FILE:tracker_channel_probe>"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/tracker-period-experiment"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/tracker-period-experiment/report.json")
+  set_tests_properties(tracker_period_experiment PROPERTIES TIMEOUT 180 RESOURCE_LOCK tracker_period_experiment)
+endif()
+
+if(TEST tracker_period_experiment AND TARGET stim_audio_probe)
+  add_test(NAME tracker_five_tick_experiment COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_tracker_five_tick_experiment.py"
+    --native "$<TARGET_FILE:stim_audio_probe>"
+    --library "${CMAKE_CURRENT_BINARY_DIR}/tracker-period-experiment/build/libxmp.so.4"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/tracker-five-tick-experiment"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/tracker-five-tick-experiment/report.json")
+  set_tests_properties(tracker_five_tick_experiment PROPERTIES TIMEOUT 180 DEPENDS tracker_period_experiment RESOURCE_LOCK tracker_period_experiment)
+endif()
+
+if(TEST tracker_period_experiment)
+  add_test(NAME tracker_stim_rate_experiment COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_tracker_period_experiment.py" --stim-only --original-rate
+    --native "$<TARGET_FILE:stim_audio_probe>" --channel-probe "$<TARGET_FILE:tracker_channel_probe>"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-experiment"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-experiment/report.json")
+  set_tests_properties(tracker_stim_rate_experiment PROPERTIES TIMEOUT 180 RESOURCE_LOCK tracker_stim_rate)
+  add_test(NAME tracker_stim_rate_five_tick COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_tracker_five_tick_experiment.py"
+    --native "$<TARGET_FILE:stim_audio_probe>" --library "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-experiment/build/libxmp.so.4"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-five-tick"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-five-tick/report.json")
+  set_tests_properties(tracker_stim_rate_five_tick PROPERTIES TIMEOUT 180 DEPENDS tracker_stim_rate_experiment RESOURCE_LOCK tracker_stim_rate)
+  foreach(_loop_note IN ITEMS 13 24 25 28)
+    add_test(NAME tracker_stim_rate_loop_${_loop_note} COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_tracker_long_loop.py" --native "$<TARGET_FILE:stim_audio_probe>"
+      --library "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-experiment/build/libxmp.so.4"
+      --work "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-loop-${_loop_note}"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-loop-${_loop_note}/report.json" --expect-stable --note ${_loop_note})
+    set_tests_properties(tracker_stim_rate_loop_${_loop_note} PROPERTIES TIMEOUT 180 DEPENDS tracker_stim_rate_experiment RESOURCE_LOCK tracker_stim_rate)
+  endforeach()
+endif()
+
+if(TARGET stim_audio_probe AND EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-build/libxmp.so.4" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build/libxmp.so.4" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp/test-dev/data/Gaffeltruck.mod")
+  add_test(NAME stim_non_stim_isolation COMMAND python3 "${CMAKE_SOURCE_DIR}/tools/verify_stim_isolation.py"
+    --probe "$<TARGET_FILE:stim_audio_probe>" --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-build/libxmp.so.4"
+    --fixed "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build/libxmp.so.4"
+    --module "${CMAKE_SOURCE_DIR}/build/libxmp/test-dev/data/Gaffeltruck.mod"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-non-stim-isolation.json")
+endif()
+
+if(TEST tracker_period_experiment)
+  add_test(NAME stim_four_table_long_play COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_long_play.py" --probe "$<TARGET_FILE:stim_audio_probe>"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-long-play"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-long-play/report.json")
+  set_tests_properties(stim_four_table_long_play PROPERTIES TIMEOUT 180)
+endif()
+
+if(TEST tracker_period_experiment AND XMP_LIBRARY MATCHES "stim")
+  add_test(NAME stim_four_table_original_quality COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_original_quality.py" --native "$<TARGET_FILE:stim_audio_probe>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-original-quality")
+  set_tests_properties(stim_four_table_original_quality PROPERTIES TIMEOUT 180)
+endif()
+
+if(TEST pirate_combined_audio_original AND XMP_LIBRARY MATCHES "stim")
+  add_test(NAME pirate_combined_stim_quality COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_pirate_combined_audio.py"
+    --native "$<TARGET_FILE:pirate_combined_audio_probe>" --sfx "$<TARGET_FILE:pirate_overlap_pcm_probe>"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/pirate-combined-stim-quality" --min-correlation 0.999)
+  set_tests_properties(pirate_combined_stim_quality PROPERTIES TIMEOUT 120)
 endif()

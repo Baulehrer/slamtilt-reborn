@@ -1,0 +1,43 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "orders": 563,
+  "banks": 10,
+  "tables": {
+    "mean": {
+      "orders": [
+        80,
+        63
+      ]
+    },
+    "pirate": {
+      "orders": [
+        68,
+        55
+      ]
+    },
+    "space": {
+      "orders": [
+        67,
+        40,
+        56
+      ]
+    },
+    "demon": {
+      "orders": [
+        66,
+        31,
+        37
+      ]
+    }
+  },
+  "dat_sha256": {
+    "mean": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+    "pirate": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+    "space": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+    "demon": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d"
+  },
+  "test_binary_sha256": "38a3493dbac8867344b5838b13d89ef3618caee8dce8f65368ddfaec6ffb284c",
+  "test_source_sha256": "4b07aa8aef5b91086633be3529e1724b9528d20b3ae7a90c46417f397b2caa14",
+  "test_output_sha256": "280e884564987fc325f2658968209a247257b90de44214dd63dcb7674cf5ae14",
+  "scope": "Each raw Windows Retail DAT order-to-pattern entry matches its extracted STIM bank and libxmp first frame position/pattern. Native StimPlayer first 128 stereo frames match a separately positioned libxmp context. Not original player timing, full tracker PCM or proof that every order is used."
+}

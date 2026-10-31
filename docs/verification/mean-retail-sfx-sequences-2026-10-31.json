@@ -1,0 +1,198 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Execute six bounded Mean Retail sound tables and retain service arguments.\n\nThe x86 table consumer and data are original; tick, table pointer, dispatcher\nand queue are synthetic. It does not establish gameplay reachability or native\nparity. No original sound bytes are emitted.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "consumer": "0x41c274",
+  "cases": [
+    {
+      "table": "0x464128",
+      "events": [
+        {
+          "tick": 16,
+          "descriptor": "0x463ec4",
+          "volume": 48,
+          "period": 285,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 20,
+          "descriptor": "0x463ec4",
+          "volume": 64,
+          "period": 428,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 24,
+          "descriptor": "0x463ee8",
+          "volume": 64,
+          "period": 856,
+          "edx": 4294967295,
+          "ebx": 256
+        }
+      ],
+      "executed_blocks": 6
+    },
+    {
+      "table": "0x46415c",
+      "events": [
+        {
+          "tick": 0,
+          "descriptor": "0x463f0c",
+          "volume": 64,
+          "period": 428,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 24,
+          "descriptor": "0x463f30",
+          "volume": 64,
+          "period": 428,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 44,
+          "descriptor": "0x463f54",
+          "volume": 0,
+          "period": 214,
+          "edx": 4294967295,
+          "ebx": 256
+        }
+      ],
+      "executed_blocks": 6
+    },
+    {
+      "table": "0x464190",
+      "events": [
+        {
+          "tick": 12,
+          "descriptor": "0x463f78",
+          "volume": 64,
+          "period": 480,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 20,
+          "descriptor": "0x463f9c",
+          "volume": 64,
+          "period": 480,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 72,
+          "descriptor": "0x463f54",
+          "volume": 0,
+          "period": 214,
+          "edx": 4294967295,
+          "ebx": 256
+        }
+      ],
+      "executed_blocks": 6
+    },
+    {
+      "table": "0x4641c4",
+      "events": [
+        {
+          "tick": 0,
+          "descriptor": "0x463fe4",
+          "volume": 64,
+          "period": 320,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 20,
+          "descriptor": "0x463f9c",
+          "volume": 64,
+          "period": 339,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 60,
+          "descriptor": "0x463f54",
+          "volume": 0,
+          "period": 214,
+          "edx": 4294967295,
+          "ebx": 256
+        }
+      ],
+      "executed_blocks": 6
+    },
+    {
+      "table": "0x4641f8",
+      "events": [
+        {
+          "tick": 0,
+          "descriptor": "0x463fc0",
+          "volume": 64,
+          "period": 339,
+          "edx": 4294967295,
+          "ebx": 256
+        }
+      ],
+      "executed_blocks": 6
+    },
+    {
+      "table": "0x46420c",
+      "events": [
+        {
+          "tick": 0,
+          "descriptor": "0x463f0c",
+          "volume": 64,
+          "period": 428,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 12,
+          "descriptor": "0x464074",
+          "volume": 64,
+          "period": 285,
+          "edx": 4294967295,
+          "ebx": 256
+        },
+        {
+          "tick": 35,
+          "descriptor": "0x464074",
+          "volume": 16,
+          "period": 285,
+          "edx": 4294967295,
+          "ebx": 256
+        }
+      ],
+      "executed_blocks": 6
+    }
+  ],
+  "interleaved_cursor_events": [
+    {
+      "tick": 16,
+      "descriptor": "0x463ec4",
+      "period": 285,
+      "volume": 48
+    },
+    {
+      "tick": 0,
+      "descriptor": "0x463f0c",
+      "period": 428,
+      "volume": 64
+    },
+    {
+      "tick": 20,
+      "descriptor": "0x463ec4",
+      "period": 428,
+      "volume": 64
+    },
+    {
+      "tick": 16,
+      "descriptor": "0x463ec4",
+      "period": 285,
+      "volume": 48
+    }
+  ]
+}

@@ -8,13 +8,15 @@ struct SampleProfile {
   std::size_t offset,length;
   unsigned period;
 };
+std::vector<SampleProfile> mean_sample_profiles();
 // Original Mean direct and bank-relative samples; two SFX slots4/5, allocator4016dc.
 class MeanSampleMixer {
 public:
   explicit MeanSampleMixer(const std::vector<std::uint8_t> &dat);
   MeanSampleMixer(const std::vector<std::uint8_t> &dat,
                   std::vector<SampleProfile> profiles);
-  void request(int field_1c, int field_20, unsigned descriptor = 0);
+  void request(int field_1c, int field_20, unsigned descriptor = 0,
+               unsigned period = 0, unsigned volume = 64);
   void mix(std::int16_t *stereo, std::size_t frames);
   void reset();
   int active() const;
@@ -24,6 +26,7 @@ private:
     unsigned sample = 0;
     std::uint64_t phase = 0;
     int field_20 = 0;
+    unsigned period = 0, volume = 64;
     bool active = false;
   };
   std::vector<SampleProfile> profiles_;
@@ -32,6 +35,7 @@ private:
   struct Request {
     unsigned sample;
     int field_1c, field_20;
+    unsigned period, volume;
   };
   std::vector<Request> pending_;
 };

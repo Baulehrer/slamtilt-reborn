@@ -1,0 +1,136 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "asset_source": "amiga",
+  "asset_revision": 3,
+  "windows_files_required_for_import": false,
+  "copy_map_sha256": "9ee5833d76ddf66d010753931ba138a645a5afc662f64109a8903c12da32a553",
+  "tables": [
+    {
+      "table": "mean",
+      "windows_dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+      "amiga_adapter_dat_sha256": "71c46f6f79a66fc5a65d6463e189dc3f1dd8f92a74e436a32ec048b6eb75187a",
+      "decoded_raw_sha256": "801077564d8091218a58dd5d49a672eebec605f2aa5fe157f15cc228d7e7a926",
+      "decoded_bin_sha256": "431f50821b9e9f1c2a52dd11419d0b09fdedf2876b2635f09908e3035b61680b",
+      "banks": [
+        {
+          "bank": 0,
+          "offset": "0x5c2d2",
+          "orders": 80,
+          "patterns": 64,
+          "stim_sha256": "88bf7d11bd5315f0a5b5e1bed88ce1a4b9151151c8928ab06a2828db5b2d6911",
+          "stim_size": 398740,
+          "amiga_source_backed_distinct_bytes": 398728
+        },
+        {
+          "bank": 1,
+          "offset": "0x61590",
+          "orders": 63,
+          "patterns": 63,
+          "stim_sha256": "20af9795d57d9d5d043eaf557b5b55e106ff422255f4923fd9c90673a8a305fd",
+          "stim_size": 386915,
+          "amiga_source_backed_distinct_bytes": 386903
+        }
+      ]
+    },
+    {
+      "table": "pirate",
+      "windows_dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "amiga_adapter_dat_sha256": "a72344d3fdff63b4cd5ea9cbbdaab221f6e5711db296ddc8aae3562dee915afe",
+      "decoded_raw_sha256": "20a9da2b6a7770ca6fef305b480496d716e0c040dd2e6f4b9bf80481198eb3c0",
+      "decoded_bin_sha256": "13fc718beb8cec5395b9ee440310b49bdecd425ddc1bf78d39327e88aaadbfb9",
+      "banks": [
+        {
+          "bank": 0,
+          "offset": "0x51876",
+          "orders": 68,
+          "patterns": 62,
+          "stim_sha256": "d9e27d7e0685fe47fdb1e2f16d485a0aababe3ddf8ce28ace77b9503367add63",
+          "stim_size": 354540,
+          "amiga_source_backed_distinct_bytes": 354528
+        },
+        {
+          "bank": 1,
+          "offset": "0x568e8",
+          "orders": 55,
+          "patterns": 53,
+          "stim_sha256": "0d9067e5c4a0a487de35a8bac1e619c61b5ae20babc50f917bd32576fdc93d50",
+          "stim_size": 343949,
+          "amiga_source_backed_distinct_bytes": 343937
+        }
+      ]
+    },
+    {
+      "table": "space",
+      "windows_dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "amiga_adapter_dat_sha256": "fb0ca1b88f6d752a928f10a3a31a740017cbb6a700a26e49d282de2e50ba6454",
+      "decoded_raw_sha256": "c0afb00528fb8776922078e004dcec7b2644701a6ca1149e11730dd19cc4fc95",
+      "decoded_bin_sha256": "b9d1a4346c793a001d458c27aa1f4744017f62831bf276c128f3bbaf572aa7c9",
+      "banks": [
+        {
+          "bank": 0,
+          "offset": "0x53642",
+          "orders": 67,
+          "patterns": 64,
+          "stim_sha256": "78fb1a136cb0695a887f61dd05fa9a62f8a44c1132672ee37dc5f70bf92dc416",
+          "stim_size": 375012,
+          "amiga_source_backed_distinct_bytes": 375000
+        },
+        {
+          "bank": 1,
+          "offset": "0x5b8e0",
+          "orders": 40,
+          "patterns": 40,
+          "stim_sha256": "b135bf69c4e86aa25515805fc73aa16f5dd146ac8df65e5dc03b9ef288beb22b",
+          "stim_size": 359518,
+          "amiga_source_backed_distinct_bytes": 359506
+        },
+        {
+          "bank": 2,
+          "offset": "0x5fef8",
+          "orders": 56,
+          "patterns": 56,
+          "stim_sha256": "5a5b00094ff26da9a86b919c78759f707b7b7edff332fff83d07aab252bb3948",
+          "stim_size": 352862,
+          "amiga_source_backed_distinct_bytes": 352850
+        }
+      ]
+    },
+    {
+      "table": "demon",
+      "windows_dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "amiga_adapter_dat_sha256": "65e7392a53ad114bc946868995ea046d3d94df165dfa1f6ea7bb4b1e66326e61",
+      "decoded_raw_sha256": "ac6d5296fae9faab0829b566329994e4acc2d38cc172d939f75d0ae359c9c6f9",
+      "decoded_bin_sha256": "a75ebf97fe80f695d2c8b35d9a566be7cdd9d614e5aad866cd5d5ec8f5ae076e",
+      "banks": [
+        {
+          "bank": 0,
+          "offset": "0x6ffb4",
+          "orders": 66,
+          "patterns": 57,
+          "stim_sha256": "89514f4e11b385206300b5c4a0ccc7149cb07bb644ac1c7eaa0312109d8d6727",
+          "stim_size": 458753,
+          "amiga_source_backed_distinct_bytes": 458741
+        },
+        {
+          "bank": 1,
+          "offset": "0x6b2bc",
+          "orders": 31,
+          "patterns": 31,
+          "stim_sha256": "5a0c436aa4317655854a9058e836ad48d9a8430b8f3749aac9910bdaa315f4cc",
+          "stim_size": 451282,
+          "amiga_source_backed_distinct_bytes": 451270
+        },
+        {
+          "bank": 2,
+          "offset": "0x6e2ce",
+          "orders": 37,
+          "patterns": 37,
+          "stim_sha256": "1e3c22a0069de1012e0a63abbac189b466b545acbe72869195ea7b56058722d8",
+          "stim_size": 446374,
+          "amiga_source_backed_distinct_bytes": 446362
+        }
+      ]
+    }
+  ],
+  "scope": "The ten reconstructed STIM modules, including original pattern bytes, order bytes and all 31 sample headers/PCM payloads, are byte-identical across this Windows Retail DAT set and this decoded Amiga asset set. Source copy-range equality verified; not a claim of original Amiga event sequencing, player timing or final audio mix."
+}

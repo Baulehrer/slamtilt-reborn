@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL3/SDL.h>
+#include "renderer/cabinet_dmd.h"
 #include <algorithm>
 #include <cmath>
 namespace slam {
@@ -10,8 +11,8 @@ inline DisplayLayout display_layout(int w,int h,int position,float size,float zo
   const float dw=std::min(float(w)*.95f,std::min(float(w)*.9f, float(h)*.8f)*size);
   const float dh=dw*20/96;
   l.dmd={(w-dw)/2,gap,dw,dh};
-  if(position==0) { l.viewport.y=dh+2*gap;l.viewport.h-=dh+2*gap; }
-  if(position==1 || position==2) {
+  if(!cabinet_dmd_enabled() && position==0) { l.viewport.y=dh+2*gap;l.viewport.h-=dh+2*gap; }
+  if(!cabinet_dmd_enabled() && (position==1 || position==2)) {
     const float width=std::min(float(w)*.45f,std::min(float(w)*.32f,480.f)*size);
     l.dmd={position==1?gap:float(w)-width-gap,(h-width*20/96)/2,width,width*20/96};
     l.viewport.x=position==1?width+2*gap:0;l.viewport.w-=width+2*gap;

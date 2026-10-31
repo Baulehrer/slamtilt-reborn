@@ -21,6 +21,9 @@ public:
        SDL_GAMEPAD_BUTTON_DPAD_RIGHT, SDL_GAMEPAD_BUTTON_EAST,
        SDL_GAMEPAD_BUTTON_WEST, SDL_GAMEPAD_BUTTON_NORTH}};
   GamepadInput() {
+    // Cabinet evmapy owns translation and hotkey chords; avoid duplicate actions.
+    if (const char* mode=SDL_getenv("SLAMTILT_CABINET_KEYBOARD"); mode && mode[0]=='1')
+      return;
     initialized_ = SDL_InitSubSystem(SDL_INIT_GAMEPAD);
     if (!initialized_)
       return;

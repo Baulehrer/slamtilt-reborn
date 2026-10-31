@@ -1,0 +1,1100 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+  "startup": {
+    "bank": 0,
+    "order": 34,
+    "evidence": "docs/verification/retail-music-start-2026-10-30.json",
+    "historical_synthetic_first_event_excluded": true
+  },
+  "fixture_files": [
+    {
+      "path": "analysis/traces/pirate-audio-events.json",
+      "sha256": "2e8dfa961d57810f949aba9514ec94cebd7bf74fd4858bffe1341db98b206419",
+      "case_count": 81,
+      "steps": 662728
+    },
+    {
+      "path": "analysis/traces/pirate-knife-auto-audio.json",
+      "sha256": "925c5b0380bd6b49b1ef6881cba82853ee05039ddc4836ba0491a48588902b9b",
+      "case_count": 1,
+      "steps": 13076
+    },
+    {
+      "path": "analysis/traces/pirate-mermaid-audio.json",
+      "sha256": "ab83276280ca051e3e63a38173c5e849745a3ac93de91c7ee5468e6bb9c308a7",
+      "case_count": 7,
+      "steps": 52364
+    },
+    {
+      "path": "analysis/traces/pirate-extra-use-audio.json",
+      "sha256": "8798de13fe1194fb7558091fe01d3356fc3eed3437755470578c778cddc26a3e",
+      "case_count": 1,
+      "steps": 9952
+    },
+    {
+      "path": "analysis/traces/pirate-window-audio.json",
+      "sha256": "be1390d5c74ee25310411c75647c69a054dbd0f58ac8cded15f0c830d3e277b5",
+      "case_count": 8,
+      "steps": 19124
+    }
+  ],
+  "observed_music_requests": [
+    {
+      "service": "0x80",
+      "bank": 0,
+      "order": 0,
+      "events": 121,
+      "case_count": 42,
+      "cases": [
+        "acceptance-multiball",
+        "campaign-finite",
+        "campaign-magnets",
+        "feedback-monkey",
+        "final-campaign",
+        "knife-auto-success",
+        "locks-crocodile-3",
+        "locks-crocodile-4",
+        "locks-storm-4",
+        "magna-all-played",
+        "magna-award-0",
+        "magna-award-1",
+        "magna-award-10",
+        "magna-award-11",
+        "magna-award-2",
+        "magna-award-3",
+        "magna-award-4",
+        "magna-award-5",
+        "magna-award-6",
+        "magna-award-7",
+        "magna-award-8",
+        "magna-award-9",
+        "magna-bonus-held",
+        "magna-capture-admit-last",
+        "magna-capture-cooldown",
+        "magna-capture-exit-edge",
+        "magna-capture-tilt-held",
+        "magna-capture-trigger-edge",
+        "magna-key-reward",
+        "magna-kickback-lit",
+        "magna-mode-lit",
+        "mermaid-growth-2m",
+        "mermaid-growth-3m",
+        "mermaid-hold-bonus",
+        "mermaid-hold-multiplier",
+        "mermaid-hold-tilt",
+        "mermaid-hold-tilt-combo",
+        "multiball-surplus",
+        "natural-crocodile-game",
+        "nudge-tilt-crocodile",
+        "nudge-tilt-held-crocodile",
+        "plank-super-feedback"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 0,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "magna-all-played",
+        "multiball-surplus"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 3,
+      "events": 6,
+      "case_count": 6,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "locks-storm-4",
+        "magna-all-played",
+        "multiball-surplus"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 8,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "feedback-monkey",
+        "final-campaign",
+        "magna-all-played"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 13,
+      "events": 12,
+      "case_count": 9,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "magna-all-played",
+        "natural-plank-game",
+        "natural-plank-nudge",
+        "natural-plank-rope",
+        "natural-plank-two-ropes",
+        "plank-super-feedback"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 15,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "feedback-sword",
+        "final-campaign",
+        "magna-all-played"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 26,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "feedback-dive",
+        "final-campaign",
+        "magna-all-played"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 29,
+      "events": 14,
+      "case_count": 14,
+      "cases": [
+        "acceptance-multiball",
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "locks-crocodile-3",
+        "locks-crocodile-4",
+        "locks-storm-4",
+        "magna-all-played",
+        "magna-bonus-held",
+        "magna-kickback-lit",
+        "multiball-surplus",
+        "natural-crocodile-game",
+        "nudge-tilt-crocodile",
+        "nudge-tilt-held-crocodile"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 33,
+      "events": 4,
+      "case_count": 4,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "magna-all-played"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 53,
+      "events": 6,
+      "case_count": 6,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "knife-auto-success",
+        "magna-all-played",
+        "nudge-tilt-knife"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 55,
+      "events": 3,
+      "case_count": 3,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 58,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "magna-all-played",
+        "multiball-surplus"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 63,
+      "events": 30,
+      "case_count": 14,
+      "cases": [
+        "acceptance-multiball",
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "locks-crocodile-3",
+        "locks-crocodile-4",
+        "locks-storm-4",
+        "magna-all-played",
+        "magna-bonus-held",
+        "magna-kickback-lit",
+        "multiball-surplus",
+        "natural-crocodile-game",
+        "nudge-tilt-crocodile",
+        "nudge-tilt-held-crocodile"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 0,
+      "order": 65,
+      "events": 34,
+      "case_count": 32,
+      "cases": [
+        "campaign-magnets",
+        "magna-all-played",
+        "magna-award-0",
+        "magna-award-1",
+        "magna-award-10",
+        "magna-award-11",
+        "magna-award-2",
+        "magna-award-3",
+        "magna-award-4",
+        "magna-award-5",
+        "magna-award-6",
+        "magna-award-7",
+        "magna-award-8",
+        "magna-award-9",
+        "magna-bonus-held",
+        "magna-capture-admit-last",
+        "magna-capture-cooldown",
+        "magna-capture-exit-edge",
+        "magna-capture-tilt-free",
+        "magna-capture-tilt-held",
+        "magna-capture-trigger-edge",
+        "magna-key-reward",
+        "magna-kickback-lit",
+        "magna-mode-lit",
+        "mermaid-growth-2m",
+        "mermaid-growth-3m",
+        "mermaid-hold-bonus",
+        "mermaid-hold-multiplier",
+        "mermaid-hold-tilt",
+        "mermaid-hold-tilt-combo",
+        "nudge-tilt-held-magna",
+        "nudge-tilt-magna"
+      ]
+    },
+    {
+      "service": "0x84",
+      "bank": 1,
+      "order": 51,
+      "events": 13,
+      "case_count": 13,
+      "cases": [
+        "acceptance-tilt",
+        "magna-capture-tilt-free",
+        "magna-capture-tilt-held",
+        "magnasaver-tilt-active",
+        "magnasaver-tilt-armed",
+        "mermaid-hold-tilt",
+        "mermaid-hold-tilt-combo",
+        "nudge-tilt-crocodile",
+        "nudge-tilt-game",
+        "nudge-tilt-held-crocodile",
+        "nudge-tilt-held-magna",
+        "nudge-tilt-knife",
+        "nudge-tilt-magna"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 0,
+      "events": 6,
+      "case_count": 6,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "knife-auto-success",
+        "magna-all-played",
+        "nudge-tilt-knife"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 2,
+      "events": 6,
+      "case_count": 6,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "knife-auto-success",
+        "magna-all-played",
+        "nudge-tilt-knife"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 3,
+      "events": 3,
+      "case_count": 3,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 4,
+      "events": 16,
+      "case_count": 9,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "magna-all-played",
+        "natural-plank-game",
+        "natural-plank-nudge",
+        "natural-plank-rope",
+        "natural-plank-two-ropes",
+        "plank-super-feedback"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 5,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "feedback-sword",
+        "final-campaign",
+        "magna-all-played"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 6,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "feedback-monkey",
+        "final-campaign",
+        "magna-all-played"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 28,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "magna-all-played",
+        "multiball-surplus"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 29,
+      "events": 6,
+      "case_count": 6,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "locks-storm-4",
+        "magna-all-played",
+        "multiball-surplus"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 30,
+      "events": 13,
+      "case_count": 13,
+      "cases": [
+        "acceptance-multiball",
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "locks-crocodile-3",
+        "locks-crocodile-4",
+        "locks-storm-4",
+        "magna-all-played",
+        "magna-bonus-held",
+        "magna-kickback-lit",
+        "multiball-surplus",
+        "natural-crocodile-game",
+        "nudge-tilt-crocodile"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 31,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "final-campaign",
+        "magna-all-played",
+        "multiball-surplus"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 44,
+      "events": 82,
+      "case_count": 35,
+      "cases": [
+        "acceptance-multiball",
+        "acceptance-nudge",
+        "acceptance-tilt",
+        "campaign-finite",
+        "campaign-magnets",
+        "complete-game",
+        "extra-credit-use",
+        "legal-cave-game",
+        "legal-feedback-406650",
+        "legal-feedback-42c514",
+        "legal-feedback-42cf8c",
+        "legal-feedback-42d640",
+        "legal-feedback-42dd00",
+        "magnasaver-force-on",
+        "magnasaver-tilt-active",
+        "magnasaver-tilt-armed",
+        "mermaid-base",
+        "mermaid-growth-2m",
+        "mermaid-growth-3m",
+        "mermaid-hold-bonus",
+        "mermaid-hold-multiplier",
+        "mermaid-hold-tilt",
+        "mermaid-hold-tilt-combo",
+        "natural-crocodile-game",
+        "natural-plank-game",
+        "natural-plank-nudge",
+        "natural-plank-rope",
+        "natural-plank-two-ropes",
+        "nudge-tilt-crocodile",
+        "nudge-tilt-game",
+        "nudge-tilt-held-crocodile",
+        "nudge-tilt-held-magna",
+        "nudge-tilt-knife",
+        "nudge-tilt-magna",
+        "skillshot-success-rearm"
+      ]
+    },
+    {
+      "service": "0x88",
+      "bank": 1,
+      "order": 46,
+      "events": 5,
+      "case_count": 5,
+      "cases": [
+        "campaign-finite",
+        "campaign-magnets",
+        "feedback-dive",
+        "final-campaign",
+        "magna-all-played"
+      ]
+    },
+    {
+      "service": "0x8c",
+      "bank": 0,
+      "order": 0,
+      "events": 13,
+      "case_count": 13,
+      "cases": [
+        "acceptance-tilt",
+        "magna-capture-tilt-free",
+        "magna-capture-tilt-held",
+        "magnasaver-tilt-active",
+        "magnasaver-tilt-armed",
+        "mermaid-hold-tilt",
+        "mermaid-hold-tilt-combo",
+        "nudge-tilt-crocodile",
+        "nudge-tilt-game",
+        "nudge-tilt-held-crocodile",
+        "nudge-tilt-held-magna",
+        "nudge-tilt-knife",
+        "nudge-tilt-magna"
+      ]
+    }
+  ],
+  "original_lookup_instructions": [
+    {
+      "entry": "0x42d844",
+      "call": "0x42d856",
+      "data": "0x465b30",
+      "bank": 1,
+      "orders": [
+        30,
+        29,
+        28,
+        31
+      ],
+      "instruction_sha256": "fd19f0102a261f29b54cb2ec909ce4c30e7d7c7c51001e341b62ad4e22237395"
+    },
+    {
+      "entry": "0x43035f",
+      "call": "0x430374",
+      "data": "0x465b74",
+      "bank": 1,
+      "orders": [
+        4,
+        5,
+        46,
+        6
+      ],
+      "instruction_sha256": "a9ed6409c3c7500db7ecc75fb372c970647204cf82e77b29bb715f3a3ca3397f"
+    }
+  ],
+  "table_music_calls": [
+    {
+      "address": "0x42d856",
+      "service": "0x88",
+      "bank": 1,
+      "native_lift_label_present": true,
+      "orders": [
+        30,
+        29,
+        28,
+        31
+      ]
+    },
+    {
+      "address": "0x430374",
+      "service": "0x88",
+      "bank": 1,
+      "native_lift_label_present": true,
+      "orders": [
+        4,
+        5,
+        46,
+        6
+      ]
+    },
+    {
+      "address": "0x431df2",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        65
+      ]
+    },
+    {
+      "address": "0x432144",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        63
+      ]
+    },
+    {
+      "address": "0x4327f7",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        29
+      ]
+    },
+    {
+      "address": "0x4328d3",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        3
+      ]
+    },
+    {
+      "address": "0x432a22",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        0
+      ]
+    },
+    {
+      "address": "0x432b4d",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        58
+      ]
+    },
+    {
+      "address": "0x4332c3",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        55
+      ]
+    },
+    {
+      "address": "0x433417",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        13
+      ]
+    },
+    {
+      "address": "0x4334a4",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        15
+      ]
+    },
+    {
+      "address": "0x4335c4",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        26
+      ]
+    },
+    {
+      "address": "0x43368c",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        8
+      ]
+    },
+    {
+      "address": "0x433729",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        33
+      ]
+    },
+    {
+      "address": "0x4338f5",
+      "service": "0x88",
+      "bank": 1,
+      "native_lift_label_present": true,
+      "orders": [
+        2
+      ]
+    },
+    {
+      "address": "0x433908",
+      "service": "0x84",
+      "bank": 0,
+      "native_lift_label_present": true,
+      "orders": [
+        53
+      ]
+    },
+    {
+      "address": "0x434518",
+      "service": "0x84",
+      "bank": 1,
+      "native_lift_label_present": true,
+      "orders": [
+        51
+      ]
+    },
+    {
+      "address": "0x4351d1",
+      "service": "0x88",
+      "bank": 1,
+      "native_lift_label_present": true,
+      "orders": [
+        44
+      ]
+    }
+  ],
+  "table_music_stop_candidates": [
+    {
+      "address": "0x4317d4",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x431873",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x431959",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x4319ac",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x4344bd",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x434502",
+      "service_offset": "0x8c",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff908c000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x434c8c",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x434ce6",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x434d6c",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x434dc6",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x435149",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": false
+    },
+    {
+      "address": "0x43516d",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x4365db",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": false
+    },
+    {
+      "address": "0x436603",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x43666b",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x4366d3",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x438456",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": true,
+      "api_source": {
+        "memory": "0x46e2b4",
+        "index_register": null,
+        "base_register": null,
+        "scale": 1
+      },
+      "bank": null,
+      "order": null,
+      "status": "observed_service",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    },
+    {
+      "address": "0x438478",
+      "service_offset": "0x80",
+      "target_register": "eax",
+      "api_pointer_proven": false,
+      "api_source": null,
+      "bank": null,
+      "order": null,
+      "status": "unresolved",
+      "instruction_hex": "ff9080000000",
+      "native_lift_label_present": true
+    }
+  ],
+  "table_music_call_scan": {
+    "start": "0x42b390",
+    "end_exclusive": "0x439ae0",
+    "method": "Capstone linear x86 decoding; same-block vtable producer and constants, or executed lookup tables; generated lift label existence only",
+    "resolved_calls": 18,
+    "all_orders_in_observed_request_fixtures": true
+  },
+  "scope": "SHA-bound previously captured Original service-entry requests from bounded gameplay and diagnostic fixtures. Repeated cases across files are included separately in event counts. Startup is verified separately; linear decoded table range only; stop-service observation does not prove the individual candidate site ran; no claim of exhaustive execution, unaligned/hidden code, shared-engine callers, tracker PCM, live device mix, or actual Amiga sequencing.",
+  "native_replay": {
+    "report_sha256": "7db047b172907311a14b75198dac98cfe9d19bcad1289bdd8083a9893b1ecfdd",
+    "probe_sha256": "bec8638aec388cb40a44a6388caea022f8d536f3f313d1003ae3ea5c63c33fd5",
+    "cases": 81,
+    "steps_per_pass": 662728,
+    "stereo_frames_per_pass": 146131524,
+    "passes": 2,
+    "original_mono_pcm_cases": 60,
+    "scope": "Probe compared each original request after the independently established startup correction, checked both passes for deterministic native PCM and compared bounded mono SFX to original. Does not compare music PCM or original final mix."
+  }
+}

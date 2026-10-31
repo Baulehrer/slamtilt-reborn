@@ -1,0 +1,165 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "original_exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+  "profile_sha256": "be124e35a8b4e2215f6ac71e3d0f4868908cdcd82f08026fe65e30014cdcd9e9",
+  "native_profile_probe_sha256": "eadd0d672e57fe812ba4bbb9375941136de499387f14db1d346443372f5b71e6",
+  "scope": "Check Demon SFX descriptor period/volume in retained original x86 replays.\n\nUses actual Original service-entry observations on private Retail snapshots.\nMode scenarios include diagnostic contacts; this is not all-path proof.\nDescriptor fields are sampled at request time, not at later queue consumption.\nNo original audio or game data is copied into the report.\n",
+  "cases": [
+    {
+      "case": "legal-game",
+      "ticks": 10512,
+      "diagnostic_contacts": 0,
+      "source_sha256": "f0b57a03eba07e24dad6b5f7be0eaa79bea3d78583e004110cae7a2a347335fa",
+      "fixture_sha256": "5d35315bd1a10ce940015ff7a37b73617a06e7c31f7167a1e64e6c0d90c111ab",
+      "events": 27,
+      "fields": [
+        {
+          "descriptor": "0x46329c",
+          "period": 226,
+          "volume": 64,
+          "events": 7
+        },
+        {
+          "descriptor": "0x4632c0",
+          "period": 226,
+          "volume": 64,
+          "events": 5
+        },
+        {
+          "descriptor": "0x46332c",
+          "period": 160,
+          "volume": 64,
+          "events": 7
+        },
+        {
+          "descriptor": "0x463374",
+          "period": 226,
+          "volume": 64,
+          "events": 7
+        },
+        {
+          "descriptor": "0x4633e0",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        }
+      ]
+    },
+    {
+      "case": "video-wolf-shoot",
+      "ticks": 3708,
+      "diagnostic_contacts": 15,
+      "source_sha256": "c305ffcf3c610d9d89ceca9ce25f28cf3812514b1018437a55cbea64bc428ad4",
+      "fixture_sha256": "2f17dd84bfe7ac09d711307b8d36905341405724032dc754eefe23c4f90a43ee",
+      "events": 89,
+      "fields": [
+        {
+          "descriptor": "0x4632e4",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x46332c",
+          "period": 160,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x463374",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x463398",
+          "period": 226,
+          "volume": 64,
+          "events": 40
+        },
+        {
+          "descriptor": "0x4633bc",
+          "period": 226,
+          "volume": 64,
+          "events": 5
+        },
+        {
+          "descriptor": "0x463404",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x463428",
+          "period": 226,
+          "volume": 64,
+          "events": 40
+        }
+      ]
+    },
+    {
+      "case": "clock-award-4",
+      "ticks": 3072,
+      "diagnostic_contacts": 24,
+      "source_sha256": "350c856f71732b1b6506633c0a23763c92c148ef85f42cf88507d838a3c22063",
+      "fixture_sha256": "143b1631fdf09443ed1850614e247742e5cda34faf7063f35584437205d376b5",
+      "events": 15,
+      "fields": [
+        {
+          "descriptor": "0x46329c",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x4632c0",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x4632e4",
+          "period": 226,
+          "volume": 64,
+          "events": 2
+        },
+        {
+          "descriptor": "0x46332c",
+          "period": 160,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x463374",
+          "period": 226,
+          "volume": 64,
+          "events": 1
+        },
+        {
+          "descriptor": "0x4633bc",
+          "period": 226,
+          "volume": 64,
+          "events": 7
+        },
+        {
+          "descriptor": "0x463404",
+          "period": 226,
+          "volume": 64,
+          "events": 2
+        }
+      ]
+    }
+  ],
+  "descriptor_count": 14,
+  "observed_descriptors": 10,
+  "unobserved_descriptors": [
+    "0x463278",
+    "0x463308",
+    "0x463350",
+    "0x46344c"
+  ],
+  "events": 131,
+  "ticks": 17292,
+  "unvisited_mutations": "UNKNOWN"
+}

@@ -1,0 +1,37 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Execute the Retail six-voice game mixer on synthetic tracker/SFX voices.\n\nThis verifies the shared mixer call with 16-bit stereo output and six-voice,\nfull-volume settings, not a particular sound device or a natural gameplay trace.\n",
+  "executable_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "entry": "0x44b560",
+  "voice_mix": "0x44c918",
+  "sample_loop": "0x44cd4d",
+  "final_mix": "0x44b8bc",
+  "factory_gain_factor": 21845,
+  "sample_rate": 44100,
+  "cases": [
+    {
+      "voices": 1,
+      "frames": 221,
+      "left_equals_right": true,
+      "nearest_sample_matches": true,
+      "executed_original_blocks": 77,
+      "mono_sha256": "f3c7538e530da208db864b7114bb769907da1898fe1cd7825309bfe07802b4db"
+    },
+    {
+      "voices": 4,
+      "frames": 221,
+      "left_equals_right": true,
+      "nearest_sample_matches": true,
+      "executed_original_blocks": 77,
+      "mono_sha256": "97d7be2f09ac0958ceb2f5155d8c44aa456db824976c37a38bda01fcef7d3557"
+    },
+    {
+      "voices": 6,
+      "frames": 221,
+      "left_equals_right": true,
+      "nearest_sample_matches": true,
+      "executed_original_blocks": 78,
+      "mono_sha256": "bf514c0450d50c15e3080487ef1e077fbf24572c35f1d825cd9eccd6e509854b"
+    }
+  ]
+}

@@ -147,8 +147,9 @@ int run_pirate_play(int argc,char**argv) {
       SDL_free(modes);
     }
     Owner<SDL_Texture,SDL_DestroyTexture> table(texture(renderer.get(),320,600),SDL_DestroyTexture);
-    Owner<SDL_Texture,SDL_DestroyTexture> target(texture(renderer.get(),320,400,true),SDL_DestroyTexture);
+    Owner<SDL_Texture,SDL_DestroyTexture> target(texture(renderer.get(),320,slam::cabinet_dmd_enabled()?600:400,true),SDL_DestroyTexture);
     Owner<SDL_Texture,SDL_DestroyTexture> ball_texture(texture(renderer.get(),16,15),SDL_DestroyTexture);
+    slam::CabinetDmd cabinet_dmd;
     Owner<SDL_Texture,SDL_DestroyTexture> dmd_texture(texture(renderer.get(),96,20),SDL_DestroyTexture);
     SDL_UpdateTexture(table.get(),nullptr,image.rgba.data(),320*4);
     std::vector<Owner<SDL_Texture,SDL_DestroyTexture>> flipper_textures;
@@ -174,7 +175,7 @@ int run_pirate_play(int argc,char**argv) {
       for(const auto& request:session.take_audio_requests()){
         if(!audio_trace_path.empty())audio_events.push_back({audio_tick,request.service,request.bank,request.order,request.descriptor});
 #ifdef SLAM_AUDIO_XMP
-        if(audio)audio->request(request.service,request.bank,request.order,request.descriptor);
+        if(audio)audio->request(request.service,request.bank,request.order,request.descriptor,request.period,request.volume);
 #endif
       }
     };
@@ -372,7 +373,7 @@ int run_pirate_play(int argc,char**argv) {
       // Original camera consumes the previous rendered projected coordinates,
       // not a new physics center on every5ms tick. Its state stays outside the
       // verified gameplay machine, whose integer fixtures omit render writes.
-      const int scroll=camera.scroll(unsigned(accumulator/1000000)%5);
+      const int scroll=slam::cabinet_dmd_enabled()?0:camera.scroll(unsigned(accumulator/1000000)%5);
       camera_balls.clear();
       for(const auto& shown:balls)camera_balls.push_back({shown.second[1],unsigned(value(shown.first,0x58))&0xffff});
       const auto nudge=session.nudge_state();
@@ -432,7 +433,7 @@ int run_pirate_play(int argc,char**argv) {
       }
       int width=0,height=0;SDL_GetRenderOutputSize(renderer.get(),&width,&height);
       SDL_SetRenderDrawColor(renderer.get(),8,12,20,255);SDL_RenderClear(renderer.get());
-      auto layout=display_layout(width,height,physics_only?3:settings.dmd_position,settings.dmd_size,settings.zoom,settings.aspect,float(position[0]+7),float(position[1]-scroll+7));
+      auto layout=display_layout(width,height,physics_only?3:settings.dmd_position,settings.dmd_size,settings.zoom,settings.aspect,float(position[0]+7),float(position[1]-scroll+7),slam::cabinet_dmd_enabled()?600.f:400.f);
       if(settings.dmd_position==3){layout.dmd.x=(width-layout.dmd.w)*settings.overlay_x;layout.dmd.y=(height-layout.dmd.h)*settings.overlay_y;}
       SDL_SetTextureScaleMode(target.get(),settings.smooth?SDL_SCALEMODE_LINEAR:SDL_SCALEMODE_NEAREST);
       const SDL_Rect clip{int(layout.viewport.x),int(layout.viewport.y),int(layout.viewport.w),int(layout.viewport.h)};
@@ -453,7 +454,8 @@ int run_pirate_play(int argc,char**argv) {
           rgba[i*4+3]=255;
         }
         if(!have_dmd||uploaded_dmd!=rgba){upload(dmd_texture.get(),rgba.data(),96*4);uploaded_dmd=rgba;have_dmd=true;}
-        presentation.draw(dmd_texture.get(),layout.dmd,settings.visual,true);
+        cabinet_dmd.draw(rgba.data());
+        if(!slam::cabinet_dmd_enabled())presentation.draw(dmd_texture.get(),layout.dmd,settings.visual,true);
       }
       if(!failure.empty()||paused){
         const SDL_FRect panel{16,16,float(width)-32,90};UiSkin::round_rect(renderer.get(),panel,12,{8,12,20,240});

@@ -9,6 +9,7 @@
 #include "assets/ball_mask.h"
 #include "assets/ball_occlusion.h"
 #include "core/sha256.h"
+#include "core/retail_music_start.h"
 #include "renderer/ball_display.h"
 #include "renderer/display_layout.h"
 #include "renderer/presentation.h"
@@ -70,6 +71,7 @@ int main(int argc,char** argv){
   for(auto item:{std::pair{"human-image.bin",&m.image},std::pair{"human-runtime.bin",&m.runtime},std::pair{"human-dat.bin",&m.dat}})
    if(slam::sha256(*item.second)!=metadata.at("context_hashes").at(item.first))throw std::runtime_error("Context SHA mismatch: "+std::string(item.first));
   slam::validate_table_dat(definition,m.dat);
+  slam::initialize_retail_music_start(m);
 
   std::map<unsigned,std::vector<json>> inputs;
   if(!replay.empty()){const auto schedule=read_json(replay);for(const auto&e:schedule.at("inputs"))inputs[e.at("tick")].push_back(e);}
@@ -91,7 +93,7 @@ int main(int argc,char** argv){
   check(SDL_Init(SDL_INIT_VIDEO));SDLGuard sdl;
   const bool presenting=force_presentation||(!frames&&(table=="space"||table=="demon"));
   const bool persistent=!frames&&!realtime_steps&&replay.empty()&&diagnostics.empty();
-  PortOptions boot_options;boot_options.full_controls=false;boot_options.space_specials=table=="space";boot_options.load(presenting&&(persistent||persist_options));
+  PortOptions boot_options;boot_options.full_controls=false;boot_options.nudge_controls=true;boot_options.space_specials=table=="space";boot_options.load(presenting&&(persistent||persist_options));
   if(fullscreen)boot_options.settings.fullscreen=true;
   if(windowed||frames||realtime_steps)boot_options.settings.fullscreen=fullscreen&&!windowed;
   PirateHighscores score_store;bool scores_loaded=false;
@@ -109,6 +111,7 @@ int main(int argc,char** argv){
   else if(fullscreen)check(SDL_SetWindowFullscreen(window.get(),true));
   check(SDL_StartTextInput(window.get()));
   Owner<SDL_Renderer,SDL_DestroyRenderer> renderer(presenting?slam::create_presentation_renderer(window.get(),true):SDL_CreateRenderer(window.get(),nullptr),SDL_DestroyRenderer);check(bool(renderer));
+  slam::CabinetDmd cabinet_dmd;
   PortOptions options=std::move(boot_options);
   slam::GamepadInput gamepad;
   if(!frames)(void)SDL_SetRenderVSync(renderer.get(),1);
@@ -168,7 +171,16 @@ int main(int argc,char** argv){
   auto pose_sample=[&](){return json::array({m.rd(pose_addresses[0],2),m.rd(pose_addresses[1],2),m.rd(pose_addresses[2],2)});};
   auto life_sample=[&](){const auto p=m.rd(0x46b758,4);json v=json::array({m.rd(0x46c6ac,4),m.rd(0x46c67c,4),m.rd(0x46c680,4),m.rd(0x46c684,4),m.rd(p+14,2),m.rd(p+16,2),m.rd(0x46c61c,4),m.rd(0x46c620,4)});for(unsigned i=0;i<6;++i)v.push_back(m.rd(p+i,1));v.push_back(m.rd(0x46c60c,4));return v;};
   auto lamp_sample=[&](){std::vector<std::uint8_t>b;const auto n=m.rd(0x46c6a4,4);if(n>256)throw std::runtime_error("Invalid lamp count");for(unsigned i=0;i<n;++i){const auto p=m.rd(m.rd(0x46b74c,4)+i*4,4);b.push_back(m.rd(p+8,1));b.push_back(m.rd(p+9,1));}return slam::sha256(b);};
-  auto key=[&](const json&e){const std::string action=e.at("action");const unsigned scan=action=="key"?e.at("scan").get<unsigned>():action=="new_game"?0x3b:action=="enter"?0x1c:action=="left"?0x2a:action=="right"?0x36:throw std::runtime_error("Unsupported slice input");m.r[2]=scan;m.invoke(0x40404c,e.at("down").get<bool>()?0:1);};
+  auto key=[&](const json&e){const std::string action=e.at("action");
+   if(action=="nudge_left"||action=="nudge_right"||action=="nudge_up"){
+    if(e.at("down").get<bool>()&&m.rd(0x46c6ac,4)){
+     const int direction=action=="nudge_left"?-1:action=="nudge_right"?1:0;
+     m.wr(direction?0x454aac:0x454af8,std::uint32_t(direction?direction:-1),4);
+     m.invoke(0x405eec);
+    }
+    return;
+   }
+   const unsigned scan=action=="key"?e.at("scan").get<unsigned>():action=="new_game"?0x3b:action=="enter"?0x1c:action=="left"?0x2a:action=="right"?0x36:throw std::runtime_error("Unsupported slice input");m.r[2]=scan;m.invoke(0x40404c,e.at("down").get<bool>()?0:1);};
   std::map<unsigned,std::vector<json>> physical_inputs;
   auto live_key=[&](const json&e){key(e);if(!trace.empty())physical_inputs[tick].push_back(e);};
   if(!trace.empty())states.push_back(state());
@@ -203,6 +215,9 @@ int main(int argc,char** argv){
      else if(e.key.scancode==(presenting?options.settings.key(PortAction::LeftFlipper):SDL_SCANCODE_LSHIFT))live_key({{"action","left"},{"down",down}});
      else if(e.key.key==SDLK_BACKSPACE&&down)live_key({{"action","key"},{"scan",0x0e},{"down",true}});
      else if((e.key.key==SDLK_F1||e.key.key==SDLK_R)&&down&&m.rd(0x46c6ac,4)==0)live_key({{"action","new_game"},{"down",true}});
+     else if(presenting&&!paused&&down&&e.key.scancode==options.settings.key(PortAction::NudgeLeft))live_key({{"action","nudge_left"},{"down",true}});
+     else if(presenting&&!paused&&down&&e.key.scancode==options.settings.key(PortAction::NudgeRight))live_key({{"action","nudge_right"},{"down",true}});
+     else if(presenting&&!paused&&down&&e.key.scancode==options.settings.key(PortAction::NudgeUp))live_key({{"action","nudge_up"},{"down",true}});
      else if(table=="space"&&e.key.scancode==(presenting?options.settings.key(PortAction::SpecialLeft):SDL_SCANCODE_LCTRL))live_key({{"action","key"},{"scan",0x1d},{"down",down}});
      else if(table=="space"&&e.key.scancode==(presenting?options.settings.key(PortAction::SpecialRight):SDL_SCANCODE_RCTRL))live_key({{"action","key"},{"scan",0x9d},{"down",down}});
      else if(e.key.scancode==(presenting?options.settings.key(PortAction::RightFlipper):SDL_SCANCODE_RSHIFT))live_key({{"action","right"},{"down",down}});
@@ -270,7 +285,7 @@ int main(int argc,char** argv){
     auto layout=slam::display_layout(width,height,settings.dmd_position,settings.dmd_size,settings.zoom,settings.aspect,bx,by,600);
     if(settings.dmd_position==3){layout.dmd.x=(width-layout.dmd.w)*settings.overlay_x;layout.dmd.y=(height-layout.dmd.h)*settings.overlay_y;}
     check(SDL_SetTextureScaleMode(scene.get(),settings.smooth?SDL_SCALEMODE_LINEAR:SDL_SCALEMODE_NEAREST));const SDL_Rect clip{int(layout.viewport.x),int(layout.viewport.y),int(layout.viewport.w),int(layout.viewport.h)};
-    check(SDL_SetRenderClipRect(renderer.get(),&clip));presentation.draw(scene.get(),layout.table,settings.visual);check(SDL_SetRenderClipRect(renderer.get(),nullptr));presentation.draw(dmd_texture.get(),layout.dmd,settings.visual,true);if(!options.open)slam::draw_gamepad_pull(renderer.get(),gamepad,height);options.draw(renderer.get(),width,height);
+    check(SDL_SetRenderClipRect(renderer.get(),&clip));presentation.draw(scene.get(),layout.table,settings.visual);check(SDL_SetRenderClipRect(renderer.get(),nullptr));cabinet_dmd.draw(dmd.data());if(!slam::cabinet_dmd_enabled())presentation.draw(dmd_texture.get(),layout.dmd,settings.visual,true);if(!options.open)slam::draw_gamepad_pull(renderer.get(),gamepad,height);options.draw(renderer.get(),width,height);
     if(paused&&!options.open){if(!pause_skin)pause_skin=std::make_unique<slam::UiSkin>();pause_skin->text(renderer.get(),"Paused · P to resume",20,20,20,{255,220,160,255},true);}
     if(!trace.empty())ui_frames.push_back({{"elapsed_ms",double(SDL_GetTicksNS()-started)/1e6},{"frame",frame},{"tick",tick},{"menu",options.open},{"focused",audio_focus},{"paused",paused},{"audio_device_paused",audio_device_paused},{"zoom",settings.zoom},{"aspect",settings.aspect},{"dmd_position",settings.dmd_position},{"viewport",{layout.viewport.x,layout.viewport.y,layout.viewport.w,layout.viewport.h}},{"table",{layout.table.x,layout.table.y,layout.table.w,layout.table.h}},{"dmd",{layout.dmd.x,layout.dmd.y,layout.dmd.w,layout.dmd.h}}});
    }

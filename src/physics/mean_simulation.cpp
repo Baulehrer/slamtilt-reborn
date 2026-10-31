@@ -1,4 +1,5 @@
 #include <optional>
+#include "core/mean_display_sfx.h"
 #include "rules/mean_skull_clock.h"
 #include "rules/mean_mode_total_idle.h"
 #include "audio/mean_display_audio.h"
@@ -210,6 +211,7 @@ void MeanSimulation::reset() {
   nudge_tilt_=MeanNudgeTilt{}; nudge_ticks_=0;
   return_passes_=return_pass_awards_=0;
   material5_display_ = {};
+  mean_display_sfx_cursor_ = 0;
   idle_hud_visible_=false;
   idle_hud_={};
   player_hud_={};player_hud_.field_engine_5c=50;
@@ -2414,7 +2416,10 @@ void MeanSimulation::step_mode4_display() {
     load_mode4_fields();
     if (e.bank1_order50)
       audio_requests_.push_back({0x84, 1, 50});
-    // 8c playback control remains a presentation adapter.
+    // Original 0x4141d9..0x4141e4 queues the new lower track before
+    // cancelling the upper track, so the sequencer can resume the new track.
+    if (e.service8c)
+      audio_requests_.push_back({0x8c, 0, 0});
     return;
   }
   // Mode4 idle stays behind native reward/mode6 presentation boundaries.
@@ -2867,6 +2872,9 @@ void MeanSimulation::step_shared_display() {
   const auto counter=material5_display_.counter;
   const auto dispatch=mean_material5_display_scheduled_step(material5_display_,
       material5_display_assets_, bonus_font_.score, lamp_mode_input_.field_1dc);
+  if (dispatch == MeanDisplayDispatch::Callback)
+    if (const auto sound = mean_display_sfx(callback, counter, mean_display_sfx_cursor_))
+      audio_requests_.push_back(*sound);
   // Actual413b04 ->414970/4146ac ->41455c, only on eligible idle ticks.
   const auto &f = ball_reset_state_.fields;
   const auto w = [&](unsigned o) { return std::uint16_t(f[o] | (unsigned(f[o+1]) << 8)); };

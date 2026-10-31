@@ -62,3 +62,7 @@ standalone RC acceptance.** GameplayPreview remainsuntilpackage/release gatepass
 Historical Amiga references: Windows palette DAT+0x146830 +1024bytes then320×600
 pixels; Amiga decoded.Bin code9c2be runtimebase unresolved. STTF highscores at0x76,
 five14byte packedBCD records, aredistinct fromthe verified shared Windows format.
+
+## Consecutive video modes — bounded Retail comparison
+
+A fresh original reset and native reset match for 8,352 steps and 11 state vectors through Werewolf, return, rearming, Brain and its 50M award, then return on the same ball. Entry contacts are diagnostic; the Brain controls are selected using observed internal position. The 56 matching audio service requests do not establish final mixed PCM. Other seeds and outcomes remain open. [Evidence](../verification/demon-video-consecutive-2026-10-30.json).

@@ -1,0 +1,85 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "table": "space",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+  "original_trace_sha256": "09775c7cf89a5adb4a08d59898f97ab69ceb10b65ba239c15c890f67b001241c",
+  "pinned_fixture_sha256": "1893f764aea8ffe51280ef85ccdaa0ec9def664fb7cdb62c860f1282fa93f952",
+  "native_sha256": "a62fa270467c972f3ec7a5c4c62e2c74e966d816eba1c0f42d038fc874871754",
+  "whole_replay_ticks": 25892,
+  "station_tick": 18913,
+  "jackpot_tick": 18965,
+  "prize_tick": 22128,
+  "release_tick": 22278,
+  "ball_state_transitions": [
+    [
+      18913,
+      2
+    ],
+    [
+      18914,
+      3
+    ],
+    [
+      18965,
+      6
+    ],
+    [
+      22128,
+      3
+    ],
+    [
+      22278,
+      2
+    ]
+  ],
+  "scores": {
+    "before": "000176750000",
+    "after_jackpot": "000252250000",
+    "after_prize": "000257250000"
+  },
+  "audio_events": [
+    [
+      18914,
+      92,
+      6,
+      5,
+      4611480
+    ],
+    [
+      18965,
+      132,
+      0,
+      45,
+      0
+    ],
+    [
+      22128,
+      128,
+      0,
+      0,
+      0
+    ],
+    [
+      22278,
+      92,
+      6,
+      5,
+      4611516
+    ]
+  ],
+  "compared_vectors": [
+    "states",
+    "globals",
+    "poses",
+    "lifecycle",
+    "highscore_sha256",
+    "lamp_sha256",
+    "raw_state_sha256",
+    "ball_pool_sha256",
+    "aux_state_sha256",
+    "weapon_state"
+  ],
+  "scope": "Original x86 capture/reset vs current native replay/reset; diagnostic station entry after earlier diagnostic contacts, no contact from entry through release. DMD memory and audio service requests exact; final original audio mix, physical listening and all roulette outcomes unverified.",
+  "historical_startup_audio_correction": "The initial 0/0 audio request in this retained fixture was synthetic and is corrected separately using the actual Retail table configuration; later audio requests remain strictly compared. See retail-music-start-2026-10-30.json."
+}

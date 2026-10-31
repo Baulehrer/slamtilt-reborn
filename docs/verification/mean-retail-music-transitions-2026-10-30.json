@@ -1,0 +1,123 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "original_build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "scope": "Original Retail x86 table config and selected service call sequences; services hooked; no tracker PCM or whole-game coverage.",
+  "table": "mean",
+  "config": "0x464240",
+  "base": [
+    [
+      144,
+      0,
+      4
+    ]
+  ],
+  "phase1": [
+    [
+      132,
+      1,
+      50
+    ],
+    [
+      140,
+      0,
+      0
+    ]
+  ],
+  "original_addresses": [
+    "0x4267c8..0x4267da",
+    "0x420bfd..0x420c29"
+  ],
+  "individually_executed_selectors": [
+    {
+      "start": "0x42212b",
+      "end_exclusive": "0x422156",
+      "service": 132,
+      "bank": 0,
+      "order": 29
+    },
+    {
+      "start": "0x42239c",
+      "end_exclusive": "0x4223af",
+      "service": 132,
+      "bank": 0,
+      "order": 51
+    },
+    {
+      "start": "0x4224f9",
+      "end_exclusive": "0x42250c",
+      "service": 132,
+      "bank": 0,
+      "order": 46
+    },
+    {
+      "start": "0x4225b6",
+      "end_exclusive": "0x4225c9",
+      "service": 132,
+      "bank": 0,
+      "order": 40
+    },
+    {
+      "start": "0x422687",
+      "end_exclusive": "0x42269a",
+      "service": 136,
+      "bank": 1,
+      "order": 53
+    },
+    {
+      "start": "0x42269a",
+      "end_exclusive": "0x4226ad",
+      "service": 132,
+      "bank": 0,
+      "order": 23
+    },
+    {
+      "start": "0x4227ed",
+      "end_exclusive": "0x422800",
+      "service": 132,
+      "bank": 0,
+      "order": 2
+    },
+    {
+      "start": "0x423074",
+      "end_exclusive": "0x42308a",
+      "service": 136,
+      "bank": 1,
+      "order": 56
+    },
+    {
+      "start": "0x42308a",
+      "end_exclusive": "0x42309d",
+      "service": 132,
+      "bank": 0,
+      "order": 73
+    },
+    {
+      "start": "0x4234ea",
+      "end_exclusive": "0x4234fd",
+      "service": 132,
+      "bank": 0,
+      "order": 62
+    },
+    {
+      "start": "0x424574",
+      "end_exclusive": "0x42458a",
+      "service": 132,
+      "bank": 1,
+      "order": 52
+    },
+    {
+      "start": "0x425e0b",
+      "end_exclusive": "0x425e21",
+      "service": 136,
+      "bank": 1,
+      "order": 46
+    },
+    {
+      "start": "0x425fa1",
+      "end_exclusive": "0x425fbc",
+      "service": 136,
+      "bank": 1,
+      "order": 49
+    }
+  ]
+}

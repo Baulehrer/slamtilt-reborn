@@ -1,0 +1,57 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Execute the Retail sample resampler through repeated synthetic loop edges.\n\nThe test covers a single synthetic 8-bit voice, explicit fixed gain and sample\nrate, and bounded forward loops. It does not prove tracker events, device\ncadence, reverse loops, libxmp behavior or natural gameplay timing.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "entry": "0x44cc00",
+  "rate": 44100,
+  "cases": [
+    {
+      "loop_start": 0,
+      "loop_length": 3,
+      "frequency": 8287,
+      "frames": 4096,
+      "chunks": [
+        1,
+        137,
+        4096
+      ],
+      "pcm_sha256": "06d03929e26e898ea17b92d7adb8fded43c32f1cf426f9e0e22249d9b2350c08"
+    },
+    {
+      "loop_start": 7,
+      "loop_length": 13,
+      "frequency": 16574,
+      "frames": 4096,
+      "chunks": [
+        1,
+        137,
+        4096
+      ],
+      "pcm_sha256": "2afe620cead30c3e82b3d40b2f68d985f98344d40ea6c474373f88968890c545"
+    },
+    {
+      "loop_start": 9,
+      "loop_length": 31,
+      "frequency": 18668,
+      "frames": 4096,
+      "chunks": [
+        1,
+        137,
+        4096
+      ],
+      "pcm_sha256": "9ffda636540e0c2d4feade3d7abb6898736ba84e219c2ddffb44062d33220dd6"
+    },
+    {
+      "loop_start": 3,
+      "loop_length": 5,
+      "frequency": 44000,
+      "frames": 4096,
+      "chunks": [
+        1,
+        137,
+        4096
+      ],
+      "pcm_sha256": "b6de92c5921d51662b95507d1ede2e9cf4580c19c6819895d67de3499f6f3cfd"
+    }
+  ]
+}

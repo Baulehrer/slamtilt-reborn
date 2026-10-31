@@ -482,7 +482,8 @@ int main(int argc, char **argv) {
             selected = selected == 4 ? 5 : std::max(0, selected - 1);
           else if (e.key.key == SDLK_RIGHT)
             selected = selected == 5 ? 4 : std::min(6, selected + 1);
-          else if (e.key.key == SDLK_RETURN || e.key.key == SDLK_SPACE)
+          else if (e.key.key == SDLK_RETURN || e.key.key == SDLK_SPACE ||
+                   (e.key.key == SDLK_R && SDL_getenv("SLAMTILT_CABINET_KEYBOARD")))
             activate = true;
           else if (e.key.key == SDLK_V) {
             menu_view.preview_open = !menu_view.preview_open;

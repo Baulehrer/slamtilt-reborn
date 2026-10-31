@@ -22,6 +22,19 @@ int main() {
     for (std::size_t i = 0; i < 44100; i += 137)
       b.mix(y.data() + i * 2, std::min<std::size_t>(137, 44100 - i));
     require(x == y, "Chunk size or duplicate request changed PCM");
+    {
+      for (std::size_t i = 0; i < 8948; ++i)
+        dat[0x38ef0 + i] = std::uint8_t((i * 37 + 19) & 255);
+      slam::MeanSampleMixer queued(dat), latest(dat);
+      queued.request(-1, 1, 0x437e10, 285, 48);
+      queued.request(7, 9, 0x437e10, 428, 64);
+      latest.request(-1, 1, 0x437e10, 428, 64);
+      std::vector<std::int16_t> before(1024), after(1024);
+      queued.mix(before.data(), 512);
+      latest.mix(after.data(), 512);
+      require(before == after && std::any_of(before.begin(), before.end(), [](auto v) { return v != 0; }),
+              "Queued descriptor did not retain latest period/volume");
+    }
     require(a.active() == 0, "Sample did not finish");
     require(x[2] == 0 && x[4] == 42,
             "Original integer frequency/signed PCM wrong");

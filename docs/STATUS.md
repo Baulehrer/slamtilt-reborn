@@ -1,5 +1,97 @@
 # Current status — 2026-10-29
 
+## STIM timing integrated — 2026-10-31 (bounded)
+
+- The port's local native build and four platform packaging paths now use the same pinned, privately patched libxmp source. The correction applies only to STIM. The pinned source files are checked before patching. [Patch](../patches/libxmp-stim-rate.patch), [preparation](../tools/prepare_stim_libxmp.py).
+- Four Original startup comparisons exceed 0.99 correlation; ten-second native playback for all four tables is deterministic across chunk sizes. Pirate combined music/two-SFX correlation improves from 0.987281 to 0.999925 in the adapted first-tick comparison. A non-STIM MOD is bit-identical across 88,200 frames. [Startup](verification/stim-original-quality-2026-10-31.json), [long play](verification/stim-long-play-2026-10-31.json), [Pirate](verification/pirate-combined-stim-fixed-2026-10-31.json), [isolation](verification/stim-non-stim-isolation-2026-10-31.json).
+- Synthetic five-second loops at four notes and five manually clocked startup windows per table pass. Effects, finetune, the full Original scheduler, exact samples and physical device playback remain unverified.
+
+## Version 1.2 candidate and STIM timing — 2026-10-31
+
+- The first STIM-only experiment drifted in a five-second Original resampler comparison. Preserving the Original's integer frequency division before the output-rate division removes that observed drift in four synthetic notes: each five-second window correlates above 0.99. Five manually clocked startup windows on each table also pass. [Startup](verification/tracker-stim-rate-five-tick-2026-10-31.json), [loop example](verification/tracker-stim-rate-loop-2026-10-31.json). This variant has since been integrated as described above; effects, finetune, full scheduling and actual device output are unverified.
+- Local Linux, Windows, ARM64 and browser 1.2 candidate packages were built with the **unmodified** libxmp. They do not contain the experiment. Linux AppImage first import and all four child launches passed; browser offline acceptance passed 19 checks; Wine installer and QEMU smoke were exercised. Physical Windows and ARM64 remain unverified.
+- Platform builds containing the correction supersede those initial candidates; effects and longer Original audio paths remain to be validated.
+
+## Tracker period experiment — 2026-10-31 (experimental)
+
+- A private libxmp variant combines floor sample indexing, normal-tuning ProTracker integer periods, and preservation of those periods for zero pitch bend. For the adapted 882-frame first tick, Pirate channel 1 reports the Original's period 190; mixed PCM correlation rises from 0.979677 to 0.999996 (32 exact frames). Mean 0.999935, Space 0.999876, Demon 0.999999. [Evidence](verification/tracker-period-experiment-2026-10-31.json).
+- This experimental global MODRNG modification is not used by the port. Effects, finetune, loops, later music and device playback are not established; this is not complete PCM parity. CTest `tracker_period_experiment` reproduces the bounded comparison.
+
+## Four-table combined audio and reachability — 2026-10-31 (bounded)
+
+- Mean: 12 additional original mode callback scenarios access none of the three unresolved descriptors; synthetic state and adapted services prevent a reachability conclusion. [Evidence](verification/mean-sfx-mode-access-2026-10-31.json).
+- Pirate: with identical original music, a synthetic two-SFX combination matches original PCM exactly. With the native tracker, 867/882 frames differ (correlation 0.987281); combined playback is therefore not bit-exact. [Evidence](verification/pirate-combined-audio-2026-10-31.json).
+- Space: the original consumes descriptor period/volume at queue consumption, not request time; synthetic mutations affect all ten profiles. Seven original replays contain no watched writes across 70,176 ticks; these replays do not run the consumer. [Timing](verification/space-sfx-queue-timing-2026-10-31.json), [writes](verification/space-sfx-mutations-2026-10-31.json).
+- Demon: three original scenarios cover 131 requests / 17,292 ticks; period and volume match native constants for ten of 14 descriptors at request time. [Evidence](verification/demon-sfx-descriptor-state-2026-10-31.json).
+- Complete natural reachability, actual device playback and full original mixed PCM remain unproven. Pirate tracker mismatch is observed, not merely hypothetical.
+
+## Four-table sound follow-up — 2026-10-31 (bounded)
+
+- Mean: 1,036 original contact replays with 116 adapted sound calls show no access to the three unresolved descriptors; positive controls work. [Evidence](verification/mean-sfx-contact-access-2026-10-31.json).
+- Pirate: two simultaneous Original-trace SFX match native mixed PCM for four output lengths, starting with free voices. [Evidence](verification/pirate-overlap-pcm-2026-10-31.json).
+- Space: seven bounded Original replays cover all ten SFX descriptors and 124 requests; period and volume at the request boundary match native constants. Later queue-time mutations remain unknown. [Evidence](verification/space-sfx-descriptor-state-2026-10-31.json).
+- Demon: all 12 retained Clock award scenarios match native audio requests over 40,048 steps; diagnostic contacts and the separately corrected historical startup are used. [Evidence](verification/demon-clock-audio-2026-10-31.json).
+- These results do not establish complete gameplay reachability, physical playback, or final music-plus-SFX output.
+
+## Remaining Mean SFX references — 2026-10-31 (bounded)
+
+- Memory watchpoints on 16 original Demo display callbacks (1,902 frames) and eight bounded original/native minigame scenarios found no access to the three descriptors. Known descriptor accesses and four minigame sound requests provide positive controls. States are synthetic and services adapted; natural reachability remains unknown. [Display](verification/mean-sfx-access-2026-10-31.json), [minigame](verification/mean-sfx-minigame-access-2026-10-31.json).
+- Scanned all 108 byte addresses inside the three remaining descriptors in pinned Demo, Retail and Fix PE images: no exact 32-bit address bytes. The Fix records are identical to Retail at new addresses `0x46506c/0x465090/0x4650b4`. Eight pinned Windows DAT files contain one coincidental candidate inside Mean sample 26 PCM. Computed pointers, runtime construction, compression and Amiga logic remain unknown; none of the three is proven unreachable. [Evidence](verification/mean-sfx-reference-surfaces-2026-10-31.json).
+
+## Sound effect descriptor audit — 2026-10-31 (partial)
+
+- All 15 Pirate, 10 Space and 14 Demon native profiles match the selected pinned Retail descriptors and resolved DAT slices. Their one-voice original/native PCM tests cover 156 cases. Mean adds 13 formerly unbound Demo-addressed sample profiles; all 24 now have 96 direct Demo/native PCM comparisons using real DAT samples, and the 17 selected Retail descriptors have byte-identical native aliases. [Audit](verification/sfx-descriptor-audit-2026-10-31.json), [Mean PCM](verification/mean-sample-pcm-2026-10-31.json).
+- Six original Retail sound sequences execute 16 sound requests with dynamic period/volume. The mixer matches Original for all 16×2 PCM cases plus a synthetic sweep of 65 volume levels. These sequences now route through eight corresponding Mean display callbacks; bounded Demo/Retail callback, shared-cursor interruption and duplicate-queue mutation checks pass. One 40,380-step legal-input replay produced 42 dynamic requests across four descriptors; other paths remain unverified. [Sequences](verification/mean-retail-sfx-sequences-2026-10-31.json), [dynamic PCM](verification/mean-dynamic-sfx-pcm-2026-10-31.json), [callbacks](verification/mean-display-sfx-2026-10-31.json).
+- Imported Amiga adapter Mean DAT has 23/24 identical native sample slices versus Retail; existing descriptor `0x437cf0` differs. All 13 newly bound shared-sample slices match in this adapter. This is not Amiga event/timing parity.
+- Expanded SHA-identified retained Original event fixtures exercise all 15 selected Pirate and 10 Space descriptors, and 13/14 Demon descriptors. Six additional Original/SDL replays cover the newly located Space/Demon events; the Pirate knife replay covers the final two Pirate descriptors. The remaining Demon descriptor `0x463308` matches Original/native in 100 controlled callback states, including 30 emissions. This is bounded event coverage, not proof of natural reachability or every callsite. [Space/Demon replays](verification/retail-sfx-replays-2026-10-31.json), [Pirate replay](verification/pirate-sfx-replay-2026-10-31.json), [Demon callback](verification/demon-sfx-callback-2026-10-31.json).
+- The complete retained 81-case Pirate event/audio regression also passed again (662,728 steps), along with seven additional Space audio cases (80,328 steps), the six targeted Space/Demon replays and the two Mean minigame sound sequences. For Mean, 14/17 Retail descriptors occur in the bounded display/minigame checks; the remaining three have no direct pointer bytes in either pinned PE, which does not rule out computed or indirect references. [Space acceptance](verification/space-sfx-acceptance-2026-10-31.json), [bounded search](verification/mean-remaining-sfx-static-2026-10-31.json).
+
+## Pirate tracker periods and Retail loops — 2026-10-31
+
+- Pirate startup: original channel 1 uses period 190; libxmp reports 780911/4096 ≈ 190.65. Two other channels use period 214 in both and correlate >0.99999 with the independent original-floor sample model using the experimental floor library. The period mismatch is a strong candidate for the remaining channel-1 difference, not proof of complete causality. [Evidence](verification/pirate-tracker-channels-2026-10-31.json).
+- Original `0x44cc00` matches a Q32 floor/modulo model across four synthetic forward-loop configurations, 4,096 frames and three chunk sizes each. This does not test libxmp loop boundaries or real game cadence. [Loop evidence](verification/retail-loop-resampler-2026-10-31.json).
+
+## Floor-mixer experiment — 2026-10-31
+
+- A private libxmp build that floors nearest sample positions improved the bounded Mean startup PCM correlation from 0.641 to 0.9999, but Pirate fell from 0.9797 to 0.9678 at zero offset; aligning two frames raises Pirate to 0.9796. Space and Demon improved. These are 882-frame comparisons with adapted original startup, not whole-song listening tests. The global library modification is not enabled in the port. [Evidence](verification/tracker-floor-experiment-2026-10-31.json).
+
+## Retail tracker mix — 2026-10-31 (bounded)
+
+- The game sequencer now uses mono, nearest-sample interpolation and an approximate 66% libxmp level. The independent `StimPlayer` default remains unchanged. Retail `0x44b560` / `0x44c918` / `0x44cd4d` combine up to six voices in mono with nearest-sample reads; executable tests cover one, four and six synthetic voices. [Mixer evidence](verification/retail-game-mixer-2026-10-31.json).
+- The first tracker tick of all four Retail tables was executed from original code and DATs with explicitly adapted startup, full volume and an 882-frame window. Native/original RMS ratio is 0.995–1.013; samples still differ, especially Mean. Original truncates fractional sample positions while libxmp nearest rounds them; native interpolation is therefore still approximate. This does not establish original startup, live cadence, complete music or Amiga playback parity. [Four-table comparison](verification/retail-tracker-native-2026-10-31.json).
+
+## Retail final mixer — 2026-10-31 (bounded)
+
+- Signed 16-bit stereo original `0x44b8bc` / `0x44bca9` wraps on overflow; the native gain helper and production SFX mixer clamp. Direct original/native tests cover 1,032 synthetic stereo frames and 768 single-voice frames, including all signed 8-bit sample values. [Evidence](verification/retail-final-mix-2026-10-31.json).
+- At the explicitly tested six-voice/full-volume sample gain, six worst-case sample terms remain within signed 16-bit range. The later normal-game mixer test above uses the shared mono buffer, so the separate-buffer synthetic overflow case is not established as a real game path. Live input levels and device timing remain unverified.
+
+## Music queue and Amiga source parity — 2026-10-30 (bounded)
+
+- Fixed unnecessary SDL queue clearing for a deferred `0x84` under active `0x88`, and for `0x80` when the lower track is not foreground. Original service/scheduler flag behavior and actual SDL queue preservation are tested. A real foreground switch still clears queued data; exact original device timing remains unverified.
+- All ten reconstructed tracker banks for the four tables are byte-identical between the pinned Windows Retail DATs and this decoded Amiga input set, including samples. The adapter's complete bank/sample bytes are traced to matching source-copy ranges; no Windows files are required for Amiga import. Original Amiga trigger order and playback/mix are not established.
+- Seven unobserved stop functions: 55 original boundary records/4,448 call edges and initialized source contexts contain no observed target; three wrappers were executed in six controlled original states. This is not a proof of unreachability.
+- Evidence: [queue](verification/retail-audio-deferred-2026-10-30.json), [Amiga banks](verification/amiga-windows-music-banks-2026-10-30.json), [stop pointers](verification/retail-music-stop-pointers-2026-10-30.json), [stop wrappers](verification/retail-music-stop-wrappers-2026-10-30.json).
+
+## Retail music positions and transitions — 2026-10-30 (partial)
+
+- All 563 raw DAT positions across ten banks select their original order/pattern in libxmp; the actual `StimPlayer` first 128 stereo frames agree with an independently positioned libxmp context. This is not original-player PCM proof.
+- Mean: Retail base 0/4 plus 13 individual cue blocks executed; Mode4 phase1 omitted service 0x8c after 0x84/1/50, now corrected and covered by gameplay/original tests.
+- Pirate: 81 retained scenarios/662,728 steps rerun twice; SHA-bound original event requests agree after the separately proven startup correction. Space/Demon: eight mode/minigame replays/155,060 steps, later service events exact.
+- Original keyboard-driven Warning/Tilt now works for Space and Demon: missing native callbacks and warning DMD were restored, with 800-step original/SDL comparisons per table. Space requests 0x84/2/54; Demon sends 0x8c then 0x84/2/0. Seven other static stop sites remain unvisited. A raw-code survey found no direct external rel32 CALL/JMP into their bounded functions; indirect/computed reachability is unknown ([survey](verification/unobserved-music-stops-2026-10-30.json)). The known native Amiga data adapters pass the same bounded Tilt checks; original Amiga sequencing remains unverified. Original mixed PCM and actual listening remain unverified.
+- [Space Tilt](verification/space-tilt-music-2026-10-30.json), [Demon Tilt](verification/demon-tilt-music-2026-10-30.json), [all positions](verification/music-order-positions-2026-10-30.json), [Mean transitions](verification/mean-retail-music-transitions-2026-10-30.json), [Space/Demon events](verification/space-demon-music-events-2026-10-30.json), [Space/Demon static coverage](verification/space-demon-music-coverage-2026-10-30.json), [Pirate coverage](verification/pirate-music-coverage-2026-10-30.json).
+
+## Retail startup music correction — 2026-10-30
+
+- Demon, Space and Pirate previously started bank 0/order 0 from incomplete cached globals. Actual Retail initialization/reset selects orders 25, 32 and 34 respectively. The native startup now binds both current and saved music fields from each table descriptor.
+- Historical audio fixtures synthetically seeded the same wrong startup, so earlier comparisons did not validate it. They now adapt that first synthetic row only; later events remain strict. Original Amiga music sequencing and audible output are not established by this fix. [Evidence](verification/retail-music-start-2026-10-30.json).
+
+## Windows Retail gameplay and audio verification — 2026-10-30 (partial)
+
+- Pirate, Space and Demon: nine legal-input replays, 204,000 total steps, exact recorded state vectors and audio requests. All use saved original contexts with `original_reset_exact=false`; no complete-original-startup claim.
+- Mean: 22 original Retail integration cases match all 100 ball bytes; 14 incompatible cases excluded. The initial states are native-derived, not an original trajectory. Retail minigame win and abort cases pass under adapted services.
+- Space post-jackpot return and Demon consecutive video modes pass bounded original comparisons with diagnostic entry contacts. Pirate/Space/Demon single-voice PCM: 156 exact cases, explicit full-volume settings.
+- Open: complete natural Mean game, unvisited branches/minigames, music sequencing and final mixed PCM, original display raster, physical listening and Amiga gameplay parity. [Verified inputs and scopes](verification/windows-retail-2026-10-30.json).
+
 ## Version 1.1 release
 
 - Original-inspired menu/options screenshots, native controller support, smaller browser download and Vivaldi canvas fix. Standard downloads retain the static engine.

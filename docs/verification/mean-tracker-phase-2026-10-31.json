@@ -1,0 +1,33 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Verify the bounded Mean first-tick tracker resampling difference.\n\nThe original probe initializes explicit synthetic mixer state, uses music volume\n64 and renders one 882-frame window without SFX or DirectSound. This does not\nprove live game startup, device timing, tracker effects, loops, or later ticks.\nPrivate original data/PCM and the reconstructed module remain under --work;\nthe report contains only derived numbers, hashes and bounded model checks.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+  "native_probe_sha256": "84281b7236ae1a61c44affd9b14e11bfd5d7c7411d7ad05ce126d8b44159ab4b",
+  "table": "mean",
+  "bank": 0,
+  "order": 4,
+  "frames": 882,
+  "original_executed_blocks": 176,
+  "original_pcm_sha256": "242c2b7155d21b8ab8affdab54757c33ac3fe2a323c388c5f3fa3b234468d6e8",
+  "native_pcm_sha256": "486060a9c0b0b0cefcd8e148784a60147c24f48299554de9dc888320c95f40de",
+  "sample_dat_offset": "0x84",
+  "sample_length": 6466,
+  "sample_loop_start": 5036,
+  "sample_loop_length": 1430,
+  "sample_period": 214,
+  "sample_frequency_integer_hz": 16574,
+  "original_gain_factor": 21845,
+  "original_gain_coefficient": 127,
+  "original_exact_floor_lut_frames": 882,
+  "libxmp_nearest_step_q16": 24630,
+  "floor_vs_nearest_different_indices": 440,
+  "native_vs_floor_sample_correlation": 0.641032454,
+  "native_vs_nearest_sample_correlation": 0.99999996,
+  "limits": [
+    "One active Mean tracker voice, first tick only",
+    "Synthetic original mixer initialization and 882-frame window",
+    "Other notes, effects, loops, music changes and live timing untested",
+    "Correlation does not prove native PCM sample equality"
+  ]
+}

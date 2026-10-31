@@ -1,0 +1,17 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Replay the retained Pirate knife scenario and validate both missing SFX.\n\nThe underlying fixture includes diagnostic contacts and a synthetic startup\nrequest corrected from the independently verified Retail reset. It does not\nprove natural gameplay reachability, final original PCM or physical listening.\n",
+  "build_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+  "fixture_sha256": "925c5b0380bd6b49b1ef6881cba82853ee05039ddc4836ba0491a48588902b9b",
+  "native_sha256": "901351623b7ead0ed5139fa1e229f52dd475b528b9cd2bd26c465b59ed13b397",
+  "viewer_sha256": "557b935dcb3fc68aa28ffc46c4bb6d6d95a3551a9e6a9a405e95e18cd7977804",
+  "case": "knife-auto-success",
+  "ticks": 13076,
+  "service_requests": 74,
+  "target_descriptor_counts": {
+    "0x46505c": 31,
+    "0x465080": 25
+  },
+  "pcm_cases": 60
+}

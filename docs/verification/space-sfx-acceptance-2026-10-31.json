@@ -1,0 +1,55 @@
+{
+  "status": "VERIFIED",
+  "cases": [
+    {
+      "case": "launch",
+      "steps": 1200,
+      "requests": 5,
+      "original_native_exact": true,
+      "queued_bytes": 20480
+    },
+    {
+      "case": "race",
+      "steps": 17216,
+      "requests": 15,
+      "original_native_exact": true,
+      "queued_bytes": 20480
+    },
+    {
+      "case": "hack",
+      "steps": 5852,
+      "requests": 15,
+      "original_native_exact": true,
+      "queued_bytes": 20480
+    },
+    {
+      "case": "blam",
+      "steps": 7628,
+      "requests": 17,
+      "original_native_exact": true,
+      "queued_bytes": 20480
+    },
+    {
+      "case": "blam-guard",
+      "steps": 16716,
+      "requests": 17,
+      "original_native_exact": true,
+      "queued_bytes": 20480
+    },
+    {
+      "case": "asteroid-chain",
+      "steps": 25072,
+      "requests": 32,
+      "original_native_exact": true,
+      "queued_bytes": 20480
+    },
+    {
+      "case": "asteroid-traps",
+      "steps": 6644,
+      "requests": 18,
+      "original_native_exact": true,
+      "queued_bytes": 20480
+    }
+  ],
+  "scope": "Original request ordering/registers plusSDLqueue; assets/PCM separatelyverified. Not Original mixed-device PCM or physical listening parity."
+}

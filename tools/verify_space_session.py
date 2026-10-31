@@ -18,12 +18,13 @@ def main():
   source=ROOT/'build/oracle/space-full-tick/trace.json';t=read(source)
   actual=run('presentation','--presentation','--frames',300,'--replay',source)
   compare(actual,t)
-  keys=['Escape','Down','Down','Down','Right','Tab','Right','Tab','Right','Tab','Left','Tab','Down','Down','Down','Down','Down','Down','Return']
-  events=[dict(frame=i,type='key',key=k,down=True)for i,k in enumerate(keys)]+[dict(frame=19,type='focus_lost'),dict(frame=20,type='focus_gained')]
+  keys=['Escape','Down','Down','Down','Right','Tab','Right','Tab','Right','Tab','Left','Tab']+['Down']*17+['Return']
+  closed=len(keys)-1
+  events=[dict(frame=i,type='key',key=k,down=True)for i,k in enumerate(keys)]+[dict(frame=closed+1,type='focus_lost'),dict(frame=closed+2,type='focus_gained')]
   path=work/'events.json';path.write_text(json.dumps(dict(events=events)))
-  ui=run('menu','--presentation','--persist-options','--frames',22,'--ui-events',path,'--audio','--audio-trace',work/'menu-audio.json','--capture',work/'menu.bmp')
-  f=ui['ui_frames'];assert all(r['tick']==0 and r['menu']for r in f[:18]);assert not f[18]['menu'] and f[19]['tick']==f[18]['tick']and not f[19]['focused'];assert f[20]['focused']and f[20]['tick']>f[19]['tick']
-  assert all(r['audio_device_paused']for r in f[:18]) and not f[18]['audio_device_paused'] and f[19]['audio_device_paused'] and not f[20]['audio_device_paused']
+  ui=run('menu','--presentation','--persist-options','--frames',closed+4,'--ui-events',path,'--audio','--audio-trace',work/'menu-audio.json','--capture',work/'menu.bmp')
+  f=ui['ui_frames'];assert all(r['tick']==0 and r['menu']for r in f[:closed]);assert not f[closed]['menu'] and f[closed+1]['tick']==f[closed]['tick']and not f[closed+1]['focused'];assert f[closed+2]['focused']and f[closed+2]['tick']>f[closed+1]['tick']
+  assert all(r['audio_device_paused']for r in f[:closed]) and not f[closed]['audio_device_paused'] and f[closed+1]['audio_device_paused'] and not f[closed+2]['audio_device_paused']
   sound=read(work/'menu-audio.json');assert sound['enabled']and sound['queued_bytes']>0
   assert abs(f[-1]['zoom']-1.05)<1e-5 and f[-1]['dmd_position']==1
   settings=list((private/'prefs').rglob('options.json'));assert len(settings)==1;stored=read(settings[0]);assert stored['visual']['preset']==3 and abs(stored['volume']-.95)<1e-5

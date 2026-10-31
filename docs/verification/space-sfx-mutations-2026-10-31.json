@@ -1,0 +1,31 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Watch descriptor writes during bounded Original Space event replays.\n\nAudio consumption is not scheduled by these replays, and the contact scenarios\nuse diagnostic shots. This checks writes in the executed gameplay, not all paths.\n",
+  "replay_report_sha256": "af3a839026660b3756fa14fb1171dbb314cb28d3d7e83b7aa4b3e332184e29c9",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+  "ticks": 70176,
+  "events": 124,
+  "cases": 7,
+  "descriptor_count": 10,
+  "period_volume_writes": [],
+  "positive_queue_write_count": 109,
+  "positive_queue_writes": [
+    {
+      "pc": "0x406611",
+      "address": "0x465d68"
+    },
+    {
+      "pc": "0x406614",
+      "address": "0x465d6c"
+    },
+    {
+      "pc": "0x406617",
+      "address": "0x465d70"
+    },
+    {
+      "pc": "0x40663b",
+      "address": "0x465e1c"
+    }
+  ]
+}

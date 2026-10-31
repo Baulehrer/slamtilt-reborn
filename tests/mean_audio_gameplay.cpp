@@ -26,15 +26,22 @@ json replay(const char *dat_path, const char *prepared, const char *flight,
   slam::MeanMusicSequencer music(banks);
   slam::MeanSampleMixer samples(dat), effects_only(dat);
   std::map<unsigned, unsigned> counts;
+  std::map<unsigned, unsigned> dynamic_sfx;
   std::uint64_t pcm_hash=1469598103934665603ull, request_hash=pcm_hash;
   std::uint64_t frames_total=0, nonzero_music=0, nonzero_sfx=0, nonzero_mixed=0;
   unsigned tick=0, max_voices=0;
   auto route = [&] {
     for (const auto &q : sim.take_audio_requests()) {
+      if (q.service == 0x5c && q.period) {
+        ++dynamic_sfx[q.descriptor];
+        hash(request_hash, q.period);
+        hash(request_hash, q.volume);
+      }
       ++counts[q.service]; hash(request_hash,q.service); hash(request_hash,q.bank);
       hash(request_hash,q.order); hash(request_hash,q.descriptor); hash(request_hash,tick);
       switch(q.service) {
-      case 0x5c: samples.request(q.bank,q.order,q.descriptor); effects_only.request(q.bank,q.order,q.descriptor); break;
+      case 0x5c: samples.request(q.bank,q.order,q.descriptor,q.period,q.volume);
+                 effects_only.request(q.bank,q.order,q.descriptor,q.period,q.volume); break;
       case 0x80: music.stop84(); break;
       case 0x84: music.request84(q.bank,q.order); break;
       case 0x88: music.request88(q.bank,q.order); break;
@@ -122,9 +129,10 @@ json replay(const char *dat_path, const char *prepared, const char *flight,
   require(sim.step() && !sim.game_over() && scores.entries()[0].score==final_score,
     "Newgame failed to advance or lost saved score");
   json services=json::object(); for(const auto &[service,count]:counts)services[std::to_string(service)]=count;
+  json dynamic=json::object(); for(const auto &[descriptor,count]:dynamic_sfx)dynamic[std::to_string(descriptor)]=count;
   return {{"ticks",tick},{"final_score",final_score},{"bonus_completions",bonuses},
     {"highscore_reload",true},{"initials","RAB"},{"gameover_frozen_steps",64},{"pcm_frames",frames_total},{"pcm_hash",pcm_hash},{"request_hash",request_hash},
-    {"services_decimal",services},{"nonzero_music_samples",nonzero_music},
+    {"services_decimal",services},{"dynamic_sfx_descriptors",dynamic},{"nonzero_music_samples",nonzero_music},
     {"nonzero_sfx_samples",nonzero_sfx},{"nonzero_mixed_samples",nonzero_mixed},{"max_sfx_voices",max_voices}};
 }
 }

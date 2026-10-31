@@ -1,0 +1,779 @@
+{
+  "table": "mean",
+  "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+  "build_sha256": "31192e0b316bf6fe0a4a41336a5ef6ae53ac659c04edf001607a8de63239fc00",
+  "image_sha256": "8ec7d39b5b56cee1d929536d71446743604fb0ae8fcf260f9be6a3fde81e96d1",
+  "profile_count": 24,
+  "cases": [
+    {
+      "descriptor": 4422896,
+      "offset": 408093,
+      "length": 6465,
+      "period": 160,
+      "frames": 1,
+      "mono_sha256": "ec464daf3e26475c0700b395dc7fdb7a45fd7335f5180d1323ac5eaaeb54b56b"
+    },
+    {
+      "descriptor": 4422896,
+      "offset": 408093,
+      "length": 6465,
+      "period": 160,
+      "frames": 221,
+      "mono_sha256": "447cdaf1935c8370f8fa5227f0423ba0caf2d3265b78c48b959c62e42ab866f6"
+    },
+    {
+      "descriptor": 4422896,
+      "offset": 408093,
+      "length": 6465,
+      "period": 160,
+      "frames": 2048,
+      "mono_sha256": "6eeea41e165783916550dc3e00258cf675dfb0e860afcc56f4fb62100e526ab1"
+    },
+    {
+      "descriptor": 4422896,
+      "offset": 408093,
+      "length": 6465,
+      "period": 160,
+      "frames": 30000,
+      "mono_sha256": "af582ede3575285d92d930aaa17f24f0600a8c72befbab7735b5d2da8f0bd3f2"
+    },
+    {
+      "descriptor": 4422932,
+      "offset": 414558,
+      "length": 4078,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4422932,
+      "offset": 414558,
+      "length": 4078,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "73241c5143ead19510d286c556083cbd254df2c252581e55c5b6265a80d69c39"
+    },
+    {
+      "descriptor": 4422932,
+      "offset": 414558,
+      "length": 4078,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "b648e78fc8225d19974fa9c30f4c4effab23dd3fa8aad2dca0d4f0968c1a6121"
+    },
+    {
+      "descriptor": 4422932,
+      "offset": 414558,
+      "length": 4078,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "ee433a140ef6c54387db6b605f979c011eaf786ca4613cef9203ca96d3176bd6"
+    },
+    {
+      "descriptor": 4423076,
+      "offset": 436900,
+      "length": 3026,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423076,
+      "offset": 436900,
+      "length": 3026,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "9217c5c842e3d4bb12145c7299e0953ebfb48ecb53a1b92023cc4db919f9f798"
+    },
+    {
+      "descriptor": 4423076,
+      "offset": 436900,
+      "length": 3026,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "139c537cd8077363e2230acdff738fdab1d88911c61eff827554c739d54c838c"
+    },
+    {
+      "descriptor": 4423076,
+      "offset": 436900,
+      "length": 3026,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "8331d1a9752e112aae1aa2dd07fa25e764b7706f31102e58b1fbcfa512d5a9f3"
+    },
+    {
+      "descriptor": 4422968,
+      "offset": 418636,
+      "length": 4490,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4422968,
+      "offset": 418636,
+      "length": 4490,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "7724101f7ecf411540c51a2004adc761f0dd955100a46df894501b0d10cce159"
+    },
+    {
+      "descriptor": 4422968,
+      "offset": 418636,
+      "length": 4490,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "2efa705f86b60f68c713be11642107a36702d4fb6f8db1980ad76759ea9168de"
+    },
+    {
+      "descriptor": 4422968,
+      "offset": 418636,
+      "length": 4490,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "c5edf74100290618df5ad8dbdd8ec416c9e58bcc9fef9f4a2d8e0acdb7349e58"
+    },
+    {
+      "descriptor": 4423004,
+      "offset": 423126,
+      "length": 4012,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423004,
+      "offset": 423126,
+      "length": 4012,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "2b9df7ec415b81259bcc5fe6ff9dacef6e707a878c2e0946616152de47f66e01"
+    },
+    {
+      "descriptor": 4423004,
+      "offset": 423126,
+      "length": 4012,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "6dcdd517f5c5a2452a9e1d1d7fdd808016768425c7d3cf62230102d5116c2c72"
+    },
+    {
+      "descriptor": 4423004,
+      "offset": 423126,
+      "length": 4012,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "0bd76b9acfd1c3fdaba79494eb87bf4f81edd8529ff37e5e8e15e3d38e19e427"
+    },
+    {
+      "descriptor": 4423148,
+      "offset": 447502,
+      "length": 5808,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423148,
+      "offset": 447502,
+      "length": 5808,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "21a541aacfec9d7b90df909b482a29a3653f8eb21b01105dc0baf3743fe836b1"
+    },
+    {
+      "descriptor": 4423148,
+      "offset": 447502,
+      "length": 5808,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "c40ceb327bdc032f1608281cf620d42370b1316bfc632a1bf2e387dd33a277f0"
+    },
+    {
+      "descriptor": 4423148,
+      "offset": 447502,
+      "length": 5808,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "ae372bddb4dcb12a42e0aec0f937d8543b83f35050ea691ddec5e3bd7b0e904d"
+    },
+    {
+      "descriptor": 4423112,
+      "offset": 439926,
+      "length": 7576,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423112,
+      "offset": 439926,
+      "length": 7576,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "d0944c9c17ce309319bc615c481fa3c3b07a09cf6e0a2ef854d32543e163c4cc"
+    },
+    {
+      "descriptor": 4423112,
+      "offset": 439926,
+      "length": 7576,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "16480edd3d5046befa6a211119825652fc14ba4e45232db6fec2b5fc492da311"
+    },
+    {
+      "descriptor": 4423112,
+      "offset": 439926,
+      "length": 7576,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "4fb8de8494cd38be14b03ef23135e40e694734c5dc3a43762a915c04cf723662"
+    },
+    {
+      "descriptor": 4423652,
+      "offset": 162662,
+      "length": 2747,
+      "period": 428,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423652,
+      "offset": 162662,
+      "length": 2747,
+      "period": 428,
+      "frames": 221,
+      "mono_sha256": "d4ec0e3baca6b1b1c88fdee5ce81154c650af8bc9f545532dd8b91bc373da009"
+    },
+    {
+      "descriptor": 4423652,
+      "offset": 162662,
+      "length": 2747,
+      "period": 428,
+      "frames": 2048,
+      "mono_sha256": "bb18ce436f17d0b9bc71b69c73f8b6e1b90f79452c98ddb96eadb23917363b3f"
+    },
+    {
+      "descriptor": 4423652,
+      "offset": 162662,
+      "length": 2747,
+      "period": 428,
+      "frames": 30000,
+      "mono_sha256": "6c5bfbfe1e708097958a528ce32d2158215f04a95d4244df6ec84a8fd8cf5f1c"
+    },
+    {
+      "descriptor": 4423688,
+      "offset": 165610,
+      "length": 2882,
+      "period": 428,
+      "frames": 1,
+      "mono_sha256": "86c11f10c038a75279e64a09cbc5cacb478a9af27d1b5cce1d1b1cc7e23a1b81"
+    },
+    {
+      "descriptor": 4423688,
+      "offset": 165610,
+      "length": 2882,
+      "period": 428,
+      "frames": 221,
+      "mono_sha256": "e7a11b1d515489c0b3a3846c3585e3a0b5dd37cba5c72b5b8ba60f50cb3553db"
+    },
+    {
+      "descriptor": 4423688,
+      "offset": 165610,
+      "length": 2882,
+      "period": 428,
+      "frames": 2048,
+      "mono_sha256": "c4f570bec1f7cac5040eef7dae39a0ad8857df6d87add5f88fe9f51dd26fc3d9"
+    },
+    {
+      "descriptor": 4423688,
+      "offset": 165610,
+      "length": 2882,
+      "period": 428,
+      "frames": 30000,
+      "mono_sha256": "966de7e3da867b5baa9fb411fd0261ed2e43bd42d4baa01a6af149df2025badf"
+    },
+    {
+      "descriptor": 4423724,
+      "offset": 168693,
+      "length": 3395,
+      "period": 428,
+      "frames": 1,
+      "mono_sha256": "da73abdb5c5eca1f53d241f53c2aec335b43f356584e1f66c1f38750221eb236"
+    },
+    {
+      "descriptor": 4423724,
+      "offset": 168693,
+      "length": 3395,
+      "period": 428,
+      "frames": 221,
+      "mono_sha256": "b4b8eb4018d39d9cbd0ec734f7704c6823518c616cc1f76a2adfd4142d4ca940"
+    },
+    {
+      "descriptor": 4423724,
+      "offset": 168693,
+      "length": 3395,
+      "period": 428,
+      "frames": 2048,
+      "mono_sha256": "4919346be6966508340871204ee8e5c41385e35b1bc192b44e8f7b5beb6908ed"
+    },
+    {
+      "descriptor": 4423724,
+      "offset": 168693,
+      "length": 3395,
+      "period": 428,
+      "frames": 30000,
+      "mono_sha256": "1ac8410fbdb9eda4693999000a4748019b53e453be78dba27bf69e3098c5b759"
+    },
+    {
+      "descriptor": 4423760,
+      "offset": 172288,
+      "length": 4536,
+      "period": 428,
+      "frames": 1,
+      "mono_sha256": "8acfa43e0e462f378d370219cfe9134ca61367881e86c76bebda9b85771debc1"
+    },
+    {
+      "descriptor": 4423760,
+      "offset": 172288,
+      "length": 4536,
+      "period": 428,
+      "frames": 221,
+      "mono_sha256": "3c49add19a3f9f5704580de01388ecdacbbb6a8d20dcee2e05ad888e5e0d0f03"
+    },
+    {
+      "descriptor": 4423760,
+      "offset": 172288,
+      "length": 4536,
+      "period": 428,
+      "frames": 2048,
+      "mono_sha256": "7eef790c495568e99cba3581f6807c9d6fbac3670baeb0e53938718f69726973"
+    },
+    {
+      "descriptor": 4423760,
+      "offset": 172288,
+      "length": 4536,
+      "period": 428,
+      "frames": 30000,
+      "mono_sha256": "20d39958fbd81fccb5e549f6b0031f415c5ab8a6c782230940ab1a067fdc82e7"
+    },
+    {
+      "descriptor": 4423184,
+      "offset": 233200,
+      "length": 8948,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423184,
+      "offset": 233200,
+      "length": 8948,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "13d2a5a3081adbb80844192262a1888ef845ba738896aae3fb4a9026a8093e0d"
+    },
+    {
+      "descriptor": 4423184,
+      "offset": 233200,
+      "length": 8948,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "e25e51ec0ef845c9b2f0bf28026f13e5872bd5e6def228e9d909ac69bf96e16a"
+    },
+    {
+      "descriptor": 4423184,
+      "offset": 233200,
+      "length": 8948,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "db1ef0977bb40094d7894ca49c0e41dd8b33b5dd3aa4b9ddbf9e52f7c2adfd88"
+    },
+    {
+      "descriptor": 4423220,
+      "offset": 210928,
+      "length": 4006,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423220,
+      "offset": 210928,
+      "length": 4006,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "964d2aaff6e54c8279ca4e58d9cef400cee3c532bb775d80f7b61c2576f02f08"
+    },
+    {
+      "descriptor": 4423220,
+      "offset": 210928,
+      "length": 4006,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "4ccac0075675792f5882996904cb7fcfe6199ba2d0d908ea51e1a1d1594c8589"
+    },
+    {
+      "descriptor": 4423220,
+      "offset": 210928,
+      "length": 4006,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "19f4b1a0081f133f6704ce5dc45f1b3ea0a652523f36e00d2bfbd197a3287032"
+    },
+    {
+      "descriptor": 4423256,
+      "offset": 319602,
+      "length": 23600,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423256,
+      "offset": 319602,
+      "length": 23600,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "d923a5214a5b4b3b26868f025dfde90a5b45c08ace313203dc3ff9fdb950f007"
+    },
+    {
+      "descriptor": 4423256,
+      "offset": 319602,
+      "length": 23600,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "4252278f095dfe255f88d39aec74af6d120954adcb4b73294fe4799bd1358b42"
+    },
+    {
+      "descriptor": 4423256,
+      "offset": 319602,
+      "length": 23600,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "95029bed48adfa68a19eecc2dbd3c08f07193586ee50a9e5c2d87fd391454e0a"
+    },
+    {
+      "descriptor": 4423292,
+      "offset": 293610,
+      "length": 12388,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423292,
+      "offset": 293610,
+      "length": 12388,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "64c16c19cbb1f63518e68750c06f85bed5834f8ea7794b0ed52d4ed1ff35577c"
+    },
+    {
+      "descriptor": 4423292,
+      "offset": 293610,
+      "length": 12388,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "a07ca23ec25d1187d453582bf1f993cfbe9c75ee3e350d3efa9199f34a3f478d"
+    },
+    {
+      "descriptor": 4423292,
+      "offset": 293610,
+      "length": 12388,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "f3c9b4395f52653b2d9182e87ac97e4eddf6f0237fec1d0264f4dfda1bbdb538"
+    },
+    {
+      "descriptor": 4423328,
+      "offset": 132,
+      "length": 200,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423328,
+      "offset": 132,
+      "length": 200,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "582677e26c7430be8ff4f4926533793b1211733ac4bc61ac7c5c741b0295fc86"
+    },
+    {
+      "descriptor": 4423328,
+      "offset": 132,
+      "length": 200,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "78085c0de78fdf6063c228c0015dfb4aac436e52d1515506540e8a9804449ff2"
+    },
+    {
+      "descriptor": 4423328,
+      "offset": 132,
+      "length": 200,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "85ebe5b7d31edcea1f85dccd9edc2c57bf710e68f4cf77592ee25dc3fe05a995"
+    },
+    {
+      "descriptor": 4423364,
+      "offset": 285708,
+      "length": 7894,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "f8a0360e51b00d416ff59c8471cf77229cee58778bae6db6e595fa4e6a341be1"
+    },
+    {
+      "descriptor": 4423364,
+      "offset": 285708,
+      "length": 7894,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "a4a3a494f91e1c3687143f7ffa72ad7b0fee5761d7972b9ea9ce39e16e4a4710"
+    },
+    {
+      "descriptor": 4423364,
+      "offset": 285708,
+      "length": 7894,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "53ecafd2c0dced9283302c03a77fe42150a9fc94a60186d737a684e972f65bd4"
+    },
+    {
+      "descriptor": 4423364,
+      "offset": 285708,
+      "length": 7894,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "8f97eeecd079b577763dab821f04ff3f7f26c54cb932b6e48c937549dc19cd71"
+    },
+    {
+      "descriptor": 4423400,
+      "offset": 277568,
+      "length": 16034,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "5bf8a79034fed57e66c0b2122f0440ac22d41420053e564a1077a8f2d861826a"
+    },
+    {
+      "descriptor": 4423400,
+      "offset": 277568,
+      "length": 16034,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "b6eaa34251a27875afc695759768e62247062bd7beb6547df434e44d0994619c"
+    },
+    {
+      "descriptor": 4423400,
+      "offset": 277568,
+      "length": 16034,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "e8b37b4ed8c00e95c15c42d8ae8dd9b05bdbfe738f5d56c0f9eedb1a167ca40f"
+    },
+    {
+      "descriptor": 4423400,
+      "offset": 277568,
+      "length": 16034,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "5873ec39160b68b86ef9fdfee6dc2d8ba6da9a86b7d1d7b242890acf2342e1e8"
+    },
+    {
+      "descriptor": 4423436,
+      "offset": 107944,
+      "length": 21680,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423436,
+      "offset": 107944,
+      "length": 21680,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "a18cc2b2b3511b0fe0661f765aab53eaaee86618b425c17d1eedad6884c3966c"
+    },
+    {
+      "descriptor": 4423436,
+      "offset": 107944,
+      "length": 21680,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "008c5a2107dc32c64fe76aca9b4e5d6d9e7b72ef34bacff9a9fab926423ba02e"
+    },
+    {
+      "descriptor": 4423436,
+      "offset": 107944,
+      "length": 21680,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "8823c8370a73f377ddf0bab83972275f04b060ac5b57f19528819340fc9d3c70"
+    },
+    {
+      "descriptor": 4423472,
+      "offset": 255108,
+      "length": 14000,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423472,
+      "offset": 255108,
+      "length": 14000,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "713726768c7d1f4133fcb3c2780716f435074b9d0fa9b53a6a580e7fcdcb6c67"
+    },
+    {
+      "descriptor": 4423472,
+      "offset": 255108,
+      "length": 14000,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "b93d5546589896f5a9db4af520bb7120eda4563977b69cefc7fee768c71c7989"
+    },
+    {
+      "descriptor": 4423472,
+      "offset": 255108,
+      "length": 14000,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "055562b2610e156d617152a9c07a96857df5831c84b893414efc64eb19edb9c1"
+    },
+    {
+      "descriptor": 4423508,
+      "offset": 129368,
+      "length": 2400,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423508,
+      "offset": 129368,
+      "length": 2400,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "02a861b5b4228b4978ac50e75cd165d9974752d99b79d7967948491a16d199d3"
+    },
+    {
+      "descriptor": 4423508,
+      "offset": 129368,
+      "length": 2400,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "759e06056749f13a17db7ddc660544034cf16bfb48a0f237e0741d4fdebc55bb"
+    },
+    {
+      "descriptor": 4423508,
+      "offset": 129368,
+      "length": 2400,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "a3e5367ceb8e189ce5a6579d7df841117273f2a3bff908ee66bed1ee463b4cea"
+    },
+    {
+      "descriptor": 4423544,
+      "offset": 35666,
+      "length": 7200,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423544,
+      "offset": 35666,
+      "length": 7200,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "048492f3aa8773f7ce4b5d42a2d838b90bb96f94a51378a51622476908c14cd2"
+    },
+    {
+      "descriptor": 4423544,
+      "offset": 35666,
+      "length": 7200,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "4f0d680205b092a47cea725178529b94211ba6a2860a89a59cef05ad6b1345cb"
+    },
+    {
+      "descriptor": 4423544,
+      "offset": 35666,
+      "length": 7200,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "f65563caf790b6258f169949f0f31c15e57a8a5f0c012f35176ffe6b9b54fac9"
+    },
+    {
+      "descriptor": 4423580,
+      "offset": 67544,
+      "length": 4264,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423580,
+      "offset": 67544,
+      "length": 4264,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "720b2625c8a74c99b5de491bcdd51e83ffde1502572ab8fc3d37cc37ea28e931"
+    },
+    {
+      "descriptor": 4423580,
+      "offset": 67544,
+      "length": 4264,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "31f5a6bed752a696a46b732988cd21fccf3a520b1065cab1c5102d61c4b4d930"
+    },
+    {
+      "descriptor": 4423580,
+      "offset": 67544,
+      "length": 4264,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "2460d244111c6072a49819947f0c73f6e540712f81427bb336b5cddc55df105d"
+    },
+    {
+      "descriptor": 4423616,
+      "offset": 311260,
+      "length": 8334,
+      "period": 226,
+      "frames": 1,
+      "mono_sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+    },
+    {
+      "descriptor": 4423616,
+      "offset": 311260,
+      "length": 8334,
+      "period": 226,
+      "frames": 221,
+      "mono_sha256": "72ab9c990de41e7f1adaaf33b5e8c4009347f4ac460a01c4a2bdd55abe695a2e"
+    },
+    {
+      "descriptor": 4423616,
+      "offset": 311260,
+      "length": 8334,
+      "period": 226,
+      "frames": 2048,
+      "mono_sha256": "e88ab3958a4b6474d740db474c690de4d4ae574205a39d2f9bcea510a8e5be31"
+    },
+    {
+      "descriptor": 4423616,
+      "offset": 311260,
+      "length": 8334,
+      "period": 226,
+      "frames": 30000,
+      "mono_sha256": "40a3e0bbaa0498391f60fcbb3bf0d5850cd2418c13ba1cd967697826db9b292d"
+    }
+  ],
+  "scope": "Compare every native Mean sample to the Demo's actual resampler.\n\nOriginal descriptors, period and length are checked against the pinned Demo\nimage; PCM offsets are the existing adapter's bindings, supplied explicitly.\nThis does not prove all Retail-only descriptors or event reachability.\n",
+  "executed_original_blocks": 21
+}

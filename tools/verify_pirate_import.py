@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Native raw Pirate import, protected outputs and full finite SDL trajectory."""
+from retail_audio_fixture import corrected_audio_events
 import argparse,hashlib,json,os,subprocess,tempfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
@@ -39,7 +40,7 @@ def main():
             for key in ['tick','camera_state','camera_scroll']:assert row[key]==expected[key]
         assert len(t['presentation_origins'])==len(camera['frames'])
         expected_audio=next(r for r in json.loads((ROOT/'analysis/traces/pirate-audio-events.json').read_text())['cases']if r['case']==case)
-        actual=json.loads(audio.read_text());assert actual['events']==expected_audio['events']and actual['queued_bytes']>0 and not actual['error']
+        actual=json.loads(audio.read_text());assert actual['events']==corrected_audio_events(expected_audio['events'], 'pirate')and actual['queued_bytes']>0 and not actual['error']
         for name,expected in recipe['files_sha256'].items():assert sha(out/name)==expected
         for path,expected in protected.items():assert sha(path)==expected
         report=dict(status='VERIFIED',steps=f['tick_count'],files=recipe['files_sha256'],native_only_import=True,

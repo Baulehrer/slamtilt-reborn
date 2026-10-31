@@ -1,5 +1,75 @@
 # Current gameplay workpack
 
+- STIM correction is integrated into native and four packaging build paths. Next verify effects/finetune and longer Original scheduling, then assess release artifacts; current evidence does not establish full-song PCM parity.
+
+- 1.2: the STIM-only original-rate correction is included in the four rebuilt platform packages. Continue validation of tracker effects, finetune and the Original scheduler; full-song parity remains open.
+
+- Tracker: floor sample indexing plus integer note-period preservation substantially improves the bounded four-table first-tick experiment. Next isolate a STIM-only implementation and validate effects, finetune, loop behavior and longer Original PCM windows before considering production use.
+
+- Audio: investigate the measured Pirate tracker PCM difference and Original queue consumption timing. Find naturally reachable Mean descriptor paths and cover the four Demon descriptors absent from the three state-watch replays; do not infer whole-game reachability from negative traces.
+
+- Sound follow-up: Mean contact watchpoints, Pirate two-voice PCM, Space descriptor fields at request time and twelve Demon Clock audio replays pass. Next check Space queue-time mutations and continue unvisited original event paths.
+
+## Mean SFX reference surfaces — 2026-10-31
+
+- DONE: instrument 16 original display callbacks and eight bounded original/native minigame cases with descriptor watchpoints and positive controls; no target access observed.
+- DONE: scan Demo/Retail/Fix mapped PEs and eight Windows DATs for all descriptor-interior address values; locate the sole DAT coincidence inside sample PCM.
+- NEXT: inspect computed/indexed descriptor access on bounded original Mean gameplay traces; keep three samples unclassified until a runtime access is observed. Do not infer dead code from negative scans.
+
+## Four-table SFX audit — 2026-10-31
+
+- DONE: selected Retail descriptor inventory across four tables; 96 real-sample Mean Demo PCM comparisons; dynamic period/volume verified; six Mean display sound sequences wired to eight corresponding callbacks.
+- NEXT: validate interruption/shared-cursor behavior and extend natural gameplay/SFX verification to remaining callsites and all tables. Unobserved events remain UNKNOWN.
+
+## Expanded Retail SFX evidence — 2026-10-31
+
+- DONE: reuse retained Original traces and run six targeted Space/Demon SDL replays plus Pirate knife replay; remaining Demon descriptor compared at original/native callback over 100 controlled states.
+- DONE: cover 14/17 selected Mean Retail descriptors in bounded display/minigame checks; verify no direct pointer bytes for the other three in the pinned Demo/Retail PE images. Rerun the full retained 81-case Pirate audio suite.
+- NEXT: investigate computed/indexed access for the remaining three Mean descriptors and replace diagnostic or synthetic coverage with natural original gameplay where needed. Do not claim whole-game or Amiga audio parity.
+
+## Tracker loops and periods — 2026-10-31
+
+- DONE: original forward-loop execution and chunk invariance; isolate Pirate first-row channels and identify integer-versus-fractional period mismatch.
+- NEXT: test original note-period tables against libxmp's period generation and compare loop output between original and a scoped native floor/period implementation; then assess packaging and longer playback.
+
+## Floor-index experiment — 2026-10-31
+
+- DONE: compare an isolated floor-sampling libxmp build against four bounded original startup ticks.
+- NEXT: isolate the Pirate regression and validate original loop boundaries and longer multi-voice playback before considering a scoped production implementation.
+
+## Tracker PCM — 2026-10-31
+
+- DONE: execute original six-voice game mixer and first tracker tick for all four Retail tables; apply bounded mono/nearest/approximate level correction to game music.
+- NEXT: verify a portable way to reproduce original floor sample indexing (libxmp nearest rounds), including loops and all tables; then extend to actual tick cadence and music/SFX overlap. Do not infer Amiga playback parity.
+
+## Final audio mix — 2026-10-31
+
+- DONE: compare the actual original stereo final mixer with native gain and SFX paths across synthetic non-overflow and overflow cases.
+- NEXT: capture original tracker and SFX intermediate-buffer levels under reproducible gameplay and align libxmp scale before deciding whether the overflow difference requires a behavioral fix. Device timing and physical listening remain separate checks.
+
+## Music queue and source parity — current work
+
+- DONE: preserve queued foreground audio for deferred/inactive lower commands; compare Retail service/scheduler and SDL queue. Verify ten Windows/Amiga source-backed tracker banks exactly.
+- NEXT: derive actual Retail tracker/device timing at transitions and compare mixed PCM; keep the seven unobserved stop wrappers as UNKNOWN until a real caller or dynamic target is found. Original Amiga music sequencing remains separate.
+
+## Retail music positions and transitions — current work
+
+- DONE: 563 DAT order/pattern mappings and native player starts; Mean 0x84→0x8c phase1 fix; bounded original music request replays for Pirate/Space/Demon.
+- DONE: original Space and Demon Warning/Tilt callbacks and SDL nudge inputs, including music 2/54 and 0x8c→2/0, tested over 800 steps per table; controls exposed in options.
+- NEXT: classify remaining absent or unresolved music/stop callsites against actual execution. Compare final tracker timing/mix and original Amiga behavior separately.
+
+## Retail startup music correction — 2026-10-30
+
+- DONE: corrected table-specific startup music and saved base fields; compare actual original initialization/reset against live native SDL startup, including DAT-only imports.
+- NEXT: compare the resulting audible Retail music and event-driven transitions, including return from mini-games; final mixed audio and original Amiga sequencing remain unverified.
+
+## Windows Retail parity — current workpack (partial)
+
+- DONE: 204k replay steps across Pirate/Space/Demon; fresh bounded Mean Retail integration and minigame checks; Space station and consecutive Demon videos; 156 original PCM cases.
+- NEXT: compare original and native music control/sequence under actual gameplay events, then the final simultaneous music/SFX mix. Extend Mean to an independently started original trajectory. See [scopes and hashes](verification/windows-retail-2026-10-30.json).
+- `tools/gameplay_coverage_inventory.py` indexes 100 historical contract entries for prioritization only; it requires local private `analysis/*-completion*.json` files. Existence or an old status does not verify a claim.
+- Do not infer full gameplay, device audio or Amiga equivalence from bounded checks.
+
 ## Observed asset reads — 071
 
 - DONE: isolated developer-only RD/WR audit, actualPirateinputreuse, three60k exact ball trajectories, independent whole-object classification andMeanexplicitreader audit.

@@ -1,5 +1,61 @@
 # Slam Tilt architecture map
 
+## STIM replay timing — 2026-10-31
+
+`prepare_stim_libxmp.py` creates a pinned private libxmp copy with STIM-only floor sampling, note-period preservation and Original-style integer frequency division. Native and platform builds can use the patched library without changing unrelated formats. [Build instructions](building.md), [Original comparison](verification/stim-original-quality-2026-10-31.json).
+
+## Tracker experiment — 2026-10-31
+
+The initial isolated experiment combined floor indexing and integer period preservation; adapted four-table first-tick comparisons improved. It was superseded by the STIM-specific correction above. [Evidence](verification/tracker-period-experiment-2026-10-31.json).
+
+A subsequent STIM-only variant also reproduces the Original integer frequency division and passes bounded five-second synthetic-loop comparisons; effect and scheduler verification remain open. [Evidence](verification/tracker-stim-rate-loop-2026-10-31.json).
+
+## Audio queue and combined output — 2026-10-31
+
+Space Original reads SFX period/volume at queue consumption; observed replays did not mutate these fields and did not execute the separately tested consumer. Pirate's combined SFX mixer matches with identical music input, but native tracker PCM differs from Original in the bounded startup comparison. [Space](verification/space-sfx-queue-timing-2026-10-31.json), [Pirate](verification/pirate-combined-audio-2026-10-31.json).
+
+## Mean unobserved SFX — 2026-10-31
+
+Bounded original display and minigame executions additionally show no reads or writes to these descriptors, with working positive controls. Other gameplay paths remain untested. [Display](verification/mean-sfx-access-2026-10-31.json), [minigame](verification/mean-sfx-minigame-access-2026-10-31.json).
+
+The three remaining selected Mean descriptors have matching 36-byte Retail/Fix records but no exact address or interior-address bytes in the pinned Demo/Retail/Fix PE images. One raw DAT match is located inside sample PCM. This does not exclude computed runtime access. [Evidence](verification/mean-sfx-reference-surfaces-2026-10-31.json).
+
+## SFX dynamic period and volume — 2026-10-31
+
+`MeanSampleMixer::request` accepts optional explicit period and 0–64 volume; omitted arguments preserve prior full-volume profile behavior. Eight Mean display callbacks emit six original sound sequences through the shared audio request and SDL mixer, using one shared cursor; one synthetic interleaving is checked against Original. Other sound callsites and interruption paths remain open. [Original/native test](verification/mean-dynamic-sfx-pcm-2026-10-31.json), [callbacks](verification/mean-display-sfx-2026-10-31.json).
+
+## Tracker period and loop investigation — 2026-10-31
+
+Retail `0x44cc00` forward loops match a synthetic Q32 floor/modulo model. The experimental libxmp floor mixer still assigns Pirate channel 1 a fractional period where Retail uses integer 190; two period-214 voices match the single-voice floor reference closely. No production tracker change follows from this bounded first-tick test. [Loops](verification/retail-loop-resampler-2026-10-31.json), [Pirate channels](verification/pirate-tracker-channels-2026-10-31.json).
+
+## Experimental tracker sampling — 2026-10-31
+
+The floor-index libxmp variant is confined to a disposable developer build. It is not used by the port or release packaging; a global patch affects unrelated formats and reverse samples, and the bounded Pirate startup comparison needs further investigation. [Experiment](verification/tracker-floor-experiment-2026-10-31.json).
+
+## Retail game tracker rendering — 2026-10-31
+
+The shared `MeanMusicSequencer` selects `TrackerMix::RetailMono`: `StimPlayer` sets libxmp separation 0, nearest interpolation and an empirically approximated 66% tracker level after every start/restart. The original floors fractional sample positions; libxmp nearest rounds them, so this remains approximate. The standalone default playback mode is retained. Original tracker timing, later effects, master-volume defaults and original Amiga output remain separate unknowns. [Comparison](verification/retail-tracker-native-2026-10-31.json).
+
+## Final audio mix — 2026-10-31
+
+In the tested Retail signed 16-bit stereo branch, `0x44b8bc` combines mono and per-channel buffers using 16-bit wrapping addition. Native `MeanSampleMixer::mix` and `mix_audio_levels` saturate. The gap is proven for synthetic overflowing inputs; the subsequently tested normal game path combines voices in the mono buffer and does not establish that the separate-buffer overflow is reachable. Other original output formats remain outside this comparison. [Evidence](verification/retail-final-mix-2026-10-31.json).
+
+## Deferred music and SDL output — 2026-10-30
+
+`NativeAudio::request` leaves the existing SDL queue intact when service `0x84` is deferred under active `0x88`, or when service `0x80` cancels no foreground lower track. The sequencer still receives each command; active changes retain existing queue-clearing behavior. [Original and SDL proof](verification/retail-audio-deferred-2026-10-30.json).
+
+## Retail Warning/Tilt audio — 2026-10-30
+
+Space and Demon route SDL nudge actions into original shared service `0x405eec`. The generated lift now includes Space table callback `0x444a64` and warning DMD `0x43a484`, plus Demon warning DMD `0x410600`; the existing Demon table callback emits the original 0x8c→0x84 sequence. Original and SDL comparisons: [Space](verification/space-tilt-music-2026-10-30.json), [Demon](verification/demon-tilt-music-2026-10-30.json). The recorded cases adapt keyboard bindings and base-music initialization only.
+
+## Retail startup music binding — 2026-10-30
+
+`core/retail_music_start.h` reconstructs the missing post-reset music fields from the retained table descriptor before Pirate/Space/Demon begin playback. Original Retail reset at `0x40841c` uses the same configuration. No original executable is needed at runtime; the verified native data profiles contain the configuration. See [evidence](verification/retail-music-start-2026-10-30.json).
+
+## Windows Retail comparison boundaries — 2026-10-30
+
+`verify_reborn_playtest.py` compares legal-input native execution to retained original state/audio-request vectors for Pirate, Space and Demon. `verify_mean_natural_components.py --original-build retail` executes Retail integration at `0x40aca8` on bounded native-derived states. `verify_retail_sample_pcm.py` independently executes Retail `0x44b640`/`0x44cc00` for selected Pirate/Space/Demon single-voice samples. These are developer verification tools; they are not runtime dependencies. Scope and hashes: [Retail evidence](verification/windows-retail-2026-10-30.json), [sample PCM](verification/retail-sample-pcm-2026-10-30.json). Whole-game and final mixed-audio equivalence remain UNKNOWN.
+
 ## Asset read gate — 071
 
 `build_asset_read_audit.py` creates private header/source copies and wraps labelled liftedRD/WR operations withtheir exact instructionPCs. The audit executable reuses actualPirateSession/replay; source file reads inSDLloaders remain outside its scope. Reads afterDATwrites are excluded from initial-source provenance checks. `classify_asset_read_audit.py` verifies complete originalRaw mask/flipper objects andverifiedPirateframes beforeclassifying differences. Release targets andtheirheaders contain noaudit hooks. Demon adds a separateV3profile; V1/V2 metadata remain unchanged.

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Original-exact legal game plus production highscore save/reload in private profile."""
+from retail_audio_fixture import corrected_audio_events
 import argparse,json,os,subprocess,tempfile
 from pathlib import Path
 from verify_space_asteroid import ROOT,read,sha,digest
@@ -21,7 +22,7 @@ def main():
   profile=Path(tmp)/'scores.json';out=work/'native.json';audio=work/'audio.json';cmd=[ROOT/'build/native/slamslice','demon',ROOT/'build/oracle/demon-full-game',game/'DAT/DEMON.DAT','--frames',str(n//4),'--replay',source,'--replay-only','--trace',out,'--capture',work/'native.bmp','--audio','--audio-trace',audio,'--highscore-file',profile]
   subprocess.run(cmd,check=True,env=env);v=read(out)
   for k in KEYS:assert v[k]==t[k],k
-  assert read(audio)['events']==t['audio_events']and read(audio)['queued_bytes']>0
+  assert read(audio)['events']==corrected_audio_events(t['audio_events'], 'demon')and read(audio)['queued_bytes']>0
   saved=read(profile);assert saved['version']==1 and bytes(saved['records'])==records
   stamp=profile.stat().st_mtime_ns;reload=work/'reload.json'
   subprocess.run([ROOT/'build/native/slamslice','demon',ROOT/'build/oracle/demon-full-game',game/'DAT/DEMON.DAT','--frames','1','--highscore-file',profile,'--trace',reload,'--no-audio'],check=True,env=env)

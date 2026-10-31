@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """SHA-bound Original/native/reset/SDL ball-pool verification for Demon."""
+from retail_audio_fixture import corrected_audio_events
 import argparse,json,os,subprocess
 from verify_space_asteroid import ROOT,read,sha,digest
 from demon_video_contracts import contracts,CASES
@@ -20,7 +21,7 @@ def verify_input(case):
  journal=[dict(tick=int(tick),**e)for tick,es in actual['physical_inputs']for e in es]
  startup=[e for e in journal if e['tick']<cut];assert all(e['tick']==0 and not e['down']for e in startup)
  assert [e for e in journal if e['tick']>=cut]==controls,(case,'SDL input journal')
- assert read(audio)['events']==t['audio_events']
+ assert read(audio)['events']==corrected_audio_events(t['audio_events'], 'demon')
  print(case,'actual SDL key events / eleven vectors / audio exact',flush=True)
  return dict(case=case,steps=n,key_events=len(controls),eleven_vectors_exact=True,audio_exact=True,scope='Programmatically injected SDL events; not physical keyboard or human visualtracking')
 def main():
@@ -42,7 +43,7 @@ def main():
   subprocess.run(cmd,check=True,env=dict(os.environ,SDL_VIDEODRIVER='dummy',SDL_AUDIODRIVER='dummy'))
   actual=read(out)
   for k in KEYS:assert actual[k]==t[k],(case,k)
-  sound=read(audio);assert sound['events']==t['audio_events'] and sound['enabled'] and sound['queued_bytes']>0
+  sound=read(audio);assert sound['events']==corrected_audio_events(t['audio_events'], 'demon') and sound['enabled'] and sound['queued_bytes']>0
   assert capture.read_bytes()[:2]==b'BM';rows.append(dict(case=case,steps=n,max_balls=max(counts),phase=phase,contract=contract,audio_requests=len(t['audio_events']),fixture_sha256=sha(path)));print(case,n,'eleven vectors and audio exact',flush=True)
  input_rows=[verify_input(c)for c in ['video-brain-win','video-wolf-shoot']]
  (ROOT/'analysis/traces/demon-video-acceptance.json').write_text(json.dumps(dict(status='VERIFIED',cases=rows,actual_sdl_keys=input_rows),indent=2)+'\n')

@@ -1,0 +1,93 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Search bounded Mean descriptor interiors across pinned PE/DAT inputs.\n\nAny byte hit is only a candidate, not proof of a pointer or code reference.\nAbsence cannot exclude runtime construction, indexing, relative addresses,\ncompression, other versions or original Amiga behavior.\n",
+  "demo_sha256": "31192e0b316bf6fe0a4a41336a5ef6ae53ac659c04edf001607a8de63239fc00",
+  "retail_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "fix_sha256": "5054441d4966efc4cdf14edef6061bad9c8af70ea56ec7f772d69cdc16612667",
+  "pe_results": [
+    {
+      "build": "demo",
+      "mapped_bytes": 284672,
+      "descriptor_base": "0x437f54",
+      "address_values_scanned": 108,
+      "matches": []
+    },
+    {
+      "build": "retail",
+      "mapped_bytes": 504320,
+      "descriptor_base": "0x464008",
+      "address_values_scanned": 108,
+      "matches": []
+    },
+    {
+      "build": "fix",
+      "mapped_bytes": 508416,
+      "descriptor_base": "0x46506c",
+      "address_values_scanned": 108,
+      "matches": []
+    }
+  ],
+  "dat_results": [
+    {
+      "name": "DEMON.DAT",
+      "sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "size": 1546096,
+      "raw_matches": []
+    },
+    {
+      "name": "INTRO.DAT",
+      "sha256": "596017e94b52e8470d1efd199709f58e5dc6f507df77ae90834c008dd60f04bf",
+      "size": 6159360,
+      "raw_matches": []
+    },
+    {
+      "name": "MAIN.DAT",
+      "sha256": "e82addadc9b40b172615983034825ebf3e077c3ff3c167531520c50dd8c9188c",
+      "size": 61480,
+      "raw_matches": []
+    },
+    {
+      "name": "MEAN.DAT",
+      "sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+      "size": 1622024,
+      "raw_matches": [
+        {
+          "address_space": "retail",
+          "value": "0x464032",
+          "offset": 264608
+        }
+      ]
+    },
+    {
+      "name": "MENU.DAT",
+      "sha256": "eb46503d8a7b7b70366403ffc5a4d9075271bafa10a7efac3abc761dcb5990ee",
+      "size": 3338232,
+      "raw_matches": []
+    },
+    {
+      "name": "MENU2.DAT",
+      "sha256": "9fbfe3a48b41eec57405db8a7cd974bc7a6d7171c255ed7c61dc8d298197130f",
+      "size": 1575899,
+      "raw_matches": []
+    },
+    {
+      "name": "PIRATE.DAT",
+      "sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "size": 1543772,
+      "raw_matches": []
+    },
+    {
+      "name": "SPACE.DAT",
+      "sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "size": 1568309,
+      "raw_matches": []
+    }
+  ],
+  "single_dat_match_location": {
+    "sample_id": 26,
+    "sample_data_offset": "0x3e484",
+    "sample_data_length": 38494,
+    "raw_match_offset": "0x409a0",
+    "classification": "bytes within sample PCM, not established as a pointer"
+  }
+}

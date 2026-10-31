@@ -1,0 +1,2074 @@
+{
+  "status": "PARTIAL",
+  "scope": "Inventory pinned Retail descriptors against compiled native sample profiles.\n\nThis is bounded to the listed descriptor directories and retained event traces;\nliteral presence, PCM equality or an unobserved event do not prove reachability.\nNo original PCM is written to the report.\n",
+  "retail_exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "native_probe_sha256": "eadd0d672e57fe812ba4bbb9375941136de499387f14db1d346443372f5b71e6",
+  "lift_source_sha256": "729c113e643c2a9282c60c7ee76d0d4f013b427f3ee6077dbe7adcbde777eded",
+  "tables": {
+    "mean": {
+      "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+      "native_profile_count": 24,
+      "retail_directory_count": 17,
+      "retail_descriptors": [
+        {
+          "retail_descriptor": "0x463ec4",
+          "sample_id": 23,
+          "dat_offset": "0x38ef0",
+          "length": 8948,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "d4cac4666e270ffcabee7026013e139a14935f9c3ea2632da44648acea7ab911",
+          "native_matching_descriptors": [
+            "0x437e10"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 2,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x463ee8",
+          "sample_id": 21,
+          "dat_offset": "0x337f0",
+          "length": 4006,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "90ac7f540fa3f3e404db6198398037687405760dbf951ae42f0601e045c29571",
+          "native_matching_descriptors": [
+            "0x437e34"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 1,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x463f0c",
+          "sample_id": 29,
+          "dat_offset": "0x4e072",
+          "length": 23600,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "1269c6dce90e09dc2859aa6ff4ebe07b474df4559ce298fb10b7cf6e26a6622d",
+          "native_matching_descriptors": [
+            "0x437e58"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 2,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x463f30",
+          "sample_id": 27,
+          "dat_offset": "0x47aea",
+          "length": 12388,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "b464208e31030785bca512b5b2458d87080a9541fcf9ef45c407c1caede6c22e",
+          "native_matching_descriptors": [
+            "0x437e7c"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 1,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x463f54",
+          "sample_id": 1,
+          "dat_offset": "0x84",
+          "length": 200,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "d4da3dc79e43d43c3177924cf5a696091c74284f03d9a50ce7a79c099e898c07",
+          "native_matching_descriptors": [
+            "0x437ea0"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 3,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x463f78",
+          "sample_id": 26,
+          "dat_offset": "0x45c0c",
+          "length": 7894,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "150156c39fa5174a31e10a9d2726f8064b9ba3b4a4d11ba57b674a3cf76bd11c",
+          "native_matching_descriptors": [
+            "0x437ec4"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 1,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x463f9c",
+          "sample_id": 26,
+          "dat_offset": "0x43c40",
+          "length": 16034,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "d0b49cb006da65fa408704ed1856c9842c57488d52213c061cd22c2c62309d45",
+          "native_matching_descriptors": [
+            "0x437ee8"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 2,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x463fc0",
+          "sample_id": 13,
+          "dat_offset": "0x1a5a8",
+          "length": 21680,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "ba4d98a32a5a9b12d1d37cc0c88ae69b27f738688862a422bb0a5875f99e5fed",
+          "native_matching_descriptors": [
+            "0x437f0c"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 1,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x463fe4",
+          "sample_id": 26,
+          "dat_offset": "0x3e484",
+          "length": 14000,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "8b905331093acc90f7d7c4f5d14778ea082b2fc9e71a627615b1ba015115e7de",
+          "native_matching_descriptors": [
+            "0x437f30"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 1,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x464008",
+          "sample_id": 14,
+          "dat_offset": "0x1f958",
+          "length": 2400,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "b1830bd72df7b8d668e6c0f7b94333518214dc3276dff718603ce1fa31929986",
+          "native_matching_descriptors": [
+            "0x437f54"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 0,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x46402c",
+          "sample_id": 3,
+          "dat_offset": "0x8b52",
+          "length": 7200,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "96866553ca7079957c8cc0bb44ac0bc82e45b354ac2095724bef6d8c60833c85",
+          "native_matching_descriptors": [
+            "0x437f78"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 0,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x464050",
+          "sample_id": 8,
+          "dat_offset": "0x107d8",
+          "length": 4264,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "8f6e8ab953dd4661ab9e32ab86eb6938bcee45bdfd8d745967593ef11be40895",
+          "native_matching_descriptors": [
+            "0x437f9c"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 0,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x464074",
+          "sample_id": 28,
+          "dat_offset": "0x4bfdc",
+          "length": 8334,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "f2cba5c71e6cd270bf7860e9eb2d910e2fa43718d5fd8acebd69bd644d706f3e",
+          "native_matching_descriptors": [
+            "0x437fc0"
+          ],
+          "raw_direct_call_candidates": [],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 2,
+          "demo_minigame_original_requests": 0
+        },
+        {
+          "retail_descriptor": "0x464098",
+          "sample_id": 18,
+          "dat_offset": "0x27b66",
+          "length": 2747,
+          "period": 428,
+          "volume": 64,
+          "pcm_sha256": "858a683bf58143ae9885b05a3e1250b5e2e681162f26ca3f7695e07f6c762783",
+          "native_matching_descriptors": [
+            "0x437fe4"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x424e7b",
+              "service_call": "0x424e80",
+              "lift_label_present": false
+            },
+            {
+              "mov": "0x4259e9",
+              "service_call": "0x4259ee",
+              "lift_label_present": false
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 0,
+          "demo_minigame_original_requests": 8
+        },
+        {
+          "retail_descriptor": "0x4640bc",
+          "sample_id": 18,
+          "dat_offset": "0x286ea",
+          "length": 2882,
+          "period": 428,
+          "volume": 64,
+          "pcm_sha256": "78e2c44a68a70ebb696c0301a74be69dd472e94849a042f6fe2a0144f8ee7a20",
+          "native_matching_descriptors": [
+            "0x438008"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x424e5e",
+              "service_call": "0x424e63",
+              "lift_label_present": false
+            },
+            {
+              "mov": "0x4259cc",
+              "service_call": "0x4259d1",
+              "lift_label_present": false
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 0,
+          "demo_minigame_original_requests": 8
+        },
+        {
+          "retail_descriptor": "0x4640e0",
+          "sample_id": 18,
+          "dat_offset": "0x292f5",
+          "length": 3395,
+          "period": 428,
+          "volume": 64,
+          "pcm_sha256": "ba1e9062f03c3d482dfc95657b580721f825f36a5b98bbfd576a62fad7ca4892",
+          "native_matching_descriptors": [
+            "0x43802c"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x424e41",
+              "service_call": "0x424e46",
+              "lift_label_present": false
+            },
+            {
+              "mov": "0x4259af",
+              "service_call": "0x4259b4",
+              "lift_label_present": false
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 0,
+          "demo_minigame_original_requests": 8
+        },
+        {
+          "retail_descriptor": "0x464104",
+          "sample_id": 18,
+          "dat_offset": "0x2a100",
+          "length": 4536,
+          "period": 428,
+          "volume": 64,
+          "pcm_sha256": "e713d418650a89781e08f3824f62a978415d5bbafd5f848f2eb38d37e734ab2d",
+          "native_matching_descriptors": [
+            "0x438050"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x423f84",
+              "service_call": "0x423fa7",
+              "lift_label_present": false
+            },
+            {
+              "mov": "0x423fdd",
+              "service_call": "0x423fe8",
+              "lift_label_present": false
+            },
+            {
+              "mov": "0x424ee6",
+              "service_call": "0x424ef1",
+              "lift_label_present": false
+            },
+            {
+              "mov": "0x42593c",
+              "service_call": "0x425955",
+              "lift_label_present": false
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": null,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": null,
+          "synthetic_original_sequence_requests": 0,
+          "demo_minigame_original_requests": 8
+        }
+      ],
+      "amiga_adapter_slice_comparison": {
+        "adapter_dat_sha256": "a1a8e925c8b3a08463626bcde7887050eef4a8fe6024a128a01c49b8d64476b9",
+        "matching_native_slices": 23,
+        "different_native_slices": [
+          "0x437cf0"
+        ],
+        "scope": "Imported adapter DAT only; no original Amiga trigger or timing proof"
+      },
+      "event_trace": null,
+      "unmatched_retail_descriptors": []
+    },
+    "pirate": {
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "native_profile_count": 15,
+      "retail_directory_count": 15,
+      "retail_descriptors": [
+        {
+          "retail_descriptor": "0x464f18",
+          "sample_id": 0,
+          "dat_offset": "0x58ffb",
+          "length": 4078,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "af0edcf31f0acb5a8d7f5b824c0a15e22803bbfcbad63bf5bbcd4496bbb51ce5",
+          "native_matching_descriptors": [
+            "0x464f18"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x43900b",
+              "service_call": "0x439010",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x4390d0",
+              "service_call": "0x4390d5",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 155,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 160,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-knife-auto-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x464f3c",
+          "sample_id": 9,
+          "dat_offset": "0x18c92",
+          "length": 4388,
+          "period": 452,
+          "volume": 64,
+          "pcm_sha256": "d72bd29d741ecc86db6536bb19dd851f112ce0fb4c4470d740ee0a0ee8bee10a",
+          "native_matching_descriptors": [
+            "0x464f3c"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x42f613",
+              "service_call": "0x42f618",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 12,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 30,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-window-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x464f60",
+          "sample_id": 0,
+          "dat_offset": "0x59fe9",
+          "length": 4490,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "7ac1a594d0c4ce6366bc0ea5543cfa5c770479468c161a41e90b1563b67ccb11",
+          "native_matching_descriptors": [
+            "0x464f60"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x4342f0",
+              "service_call": "0x4342f5",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 1732,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 1738,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-mermaid-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x464f84",
+          "sample_id": 0,
+          "dat_offset": "0x5b173",
+          "length": 4012,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "59a22840ff1120b42be1a7634ba6f4d590b6336cd668f51eaf549e64b8c6a5ad",
+          "native_matching_descriptors": [
+            "0x464f84"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x4343c8",
+              "service_call": "0x4343cd",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 1692,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 1704,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-mermaid-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x464fa8",
+          "sample_id": 0,
+          "dat_offset": "0x5c11f",
+          "length": 9762,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "f8e9eefee4fcff2bab05104e7f0caaaf03eaa1806d464178c6d158139ce5a1fa",
+          "native_matching_descriptors": [
+            "0x464fa8"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x43788c",
+              "service_call": "0x437891",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 329,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 378,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-extra-use-audio.json",
+            "pirate-knife-auto-audio.json",
+            "pirate-mermaid-audio.json",
+            "pirate-multiplier-payout-audio.json",
+            "pirate-window-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x464fcc",
+          "sample_id": 0,
+          "dat_offset": "0x5e741",
+          "length": 4026,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "cd0ea6db13f6c560f55485e81b39b7ba0cc9222bc222a0fa93c6a8a3e2265245",
+          "native_matching_descriptors": [
+            "0x464fcc"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x43915a",
+              "service_call": "0x43915f",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x4391d4",
+              "service_call": "0x4391d9",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x439253",
+              "service_call": "0x439258",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x4392d4",
+              "service_call": "0x4392d9",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x439356",
+              "service_call": "0x43935b",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x43940b",
+              "service_call": "0x439410",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x43947e",
+              "service_call": "0x439483",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 76,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 76,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x464ff0",
+          "sample_id": 0,
+          "dat_offset": "0x5f6fb",
+          "length": 7576,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "03882957d49b5fbfca601b740879887035c86ad1cd867b8f1987179e572f00f4",
+          "native_matching_descriptors": [
+            "0x464ff0"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x43414b",
+              "service_call": "0x434156",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x4376ea",
+              "service_call": "0x43770d",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x437767",
+              "service_call": "0x437789",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 733,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 812,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-extra-use-audio.json",
+            "pirate-knife-auto-audio.json",
+            "pirate-mermaid-audio.json",
+            "pirate-multiplier-payout-audio.json",
+            "pirate-window-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465014",
+          "sample_id": 0,
+          "dat_offset": "0x61493",
+          "length": 5808,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "7ca06b0a74520784ddc5f17509344cbcb9ef9718ee45d28454ab9ac1a820407d",
+          "native_matching_descriptors": [
+            "0x465014"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x431d1e",
+              "service_call": "0x431d23",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x432511",
+              "service_call": "0x432518",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x4325b5",
+              "service_call": "0x4325c0",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x4325fa",
+              "service_call": "0x4325ff",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x432c5a",
+              "service_call": "0x432c77",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x43303d",
+              "service_call": "0x433059",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x433b43",
+              "service_call": "0x433b60",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x439885",
+              "service_call": "0x43988a",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 650,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 733,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-extra-use-audio.json",
+            "pirate-knife-auto-audio.json",
+            "pirate-mermaid-audio.json",
+            "pirate-multiplier-payout-audio.json",
+            "pirate-window-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465038",
+          "sample_id": 21,
+          "dat_offset": "0x2afb2",
+          "length": 13178,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "9e91f7fbcbbe52e85cf748b33a6c83998cbe6931d7c9ac33c418d95fc3e1e36b",
+          "native_matching_descriptors": [
+            "0x465038",
+            "0x4650ec"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x42db7c",
+              "service_call": "0x42db81",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 5,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 5,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x46505c",
+          "sample_id": 24,
+          "dat_offset": "0x3f188",
+          "length": 3044,
+          "period": 300,
+          "volume": 64,
+          "pcm_sha256": "10c149bd3f574b9d89dfeb94c3f7aa3ca0a35929b9c4841db9f03c8909bc7ec6",
+          "native_matching_descriptors": [
+            "0x46505c"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x4341ba",
+              "service_call": "0x4341bf",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 0,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 31,
+          "additional_original_trace_files": [
+            "pirate-knife-auto-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465080",
+          "sample_id": 19,
+          "dat_offset": "0x23306",
+          "length": 12852,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "21fa1a978ea26edf16deabcca0b2337860113459a2a83dc458013dc9c905649f",
+          "native_matching_descriptors": [
+            "0x465080"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x434c41",
+              "service_call": "0x434c5d",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 0,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 25,
+          "additional_original_trace_files": [
+            "pirate-knife-auto-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x4650a4",
+          "sample_id": 23,
+          "dat_offset": "0x373d0",
+          "length": 12636,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "f83c8e9092e3ebb0e75fb156617dce71fb9efa54c1b51cff45f0549ea4041e99",
+          "native_matching_descriptors": [
+            "0x4650a4"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x42dcc0",
+              "service_call": "0x42dcc5",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 4,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 4,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x4650c8",
+          "sample_id": 17,
+          "dat_offset": "0x1dc70",
+          "length": 7636,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "960f030da1e82910189558ee1b67527e9e2a1bb7527a67fcd959b2716e11e2d4",
+          "native_matching_descriptors": [
+            "0x4650c8"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x42f679",
+              "service_call": "0x42f67e",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 2,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 5,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-window-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x4650ec",
+          "sample_id": 21,
+          "dat_offset": "0x2afb2",
+          "length": 13178,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "9e91f7fbcbbe52e85cf748b33a6c83998cbe6931d7c9ac33c418d95fc3e1e36b",
+          "native_matching_descriptors": [
+            "0x465038",
+            "0x4650ec"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x42f515",
+              "service_call": "0x42f51a",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 2,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 5,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-window-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465110",
+          "sample_id": 0,
+          "dat_offset": "0x62b43",
+          "length": 6465,
+          "period": 160,
+          "volume": 64,
+          "pcm_sha256": "e8db9cbe4b6e381976c39a22b6806d8048d1052cbdd9666542c3d0bcc3e99085",
+          "native_matching_descriptors": [
+            "0x465110"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x4364fb",
+              "service_call": "0x436500",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x43983b",
+              "service_call": "0x439840",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 322,
+          "retained_mode_requests": null,
+          "additional_retained_original_requests": 362,
+          "additional_original_trace_files": [
+            "pirate-audio-events.json",
+            "pirate-extra-use-audio.json",
+            "pirate-knife-auto-audio.json",
+            "pirate-mermaid-audio.json",
+            "pirate-multiplier-payout-audio.json",
+            "pirate-window-audio.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        }
+      ],
+      "amiga_adapter_slice_comparison": null,
+      "event_trace": "pirate-audio-events.json",
+      "unmatched_retail_descriptors": []
+    },
+    "space": {
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+      "native_profile_count": 10,
+      "retail_directory_count": 10,
+      "retail_descriptors": [
+        {
+          "retail_descriptor": "0x465ce4",
+          "sample_id": 0,
+          "dat_offset": "0x66f7d",
+          "length": 4078,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "af0edcf31f0acb5a8d7f5b824c0a15e22803bbfcbad63bf5bbcd4496bbb51ce5",
+          "native_matching_descriptors": [
+            "0x465ce4"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x44ab82",
+              "service_call": "0x44ab87",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x44ac17",
+              "service_call": "0x44ac1c",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 0,
+          "retained_mode_requests": 44,
+          "additional_retained_original_requests": 113,
+          "additional_original_trace_files": [
+            "space-bigblam-rewards.json",
+            "space-bikes-rewards.json",
+            "space-planet-rewards.json",
+            "space-planet-success-rewards.json",
+            "space-sabre-rewards.json",
+            "space-sabre-variants-rewards.json",
+            "space-walker-aim70-rewards.json",
+            "space-walker-aim87-rewards.json",
+            "space-walker-aim88-rewards.json",
+            "space-walker-repeat-rewards.json",
+            "space-walker-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465d08",
+          "sample_id": 0,
+          "dat_offset": "0x67f6b",
+          "length": 4490,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "7ac1a594d0c4ce6366bc0ea5543cfa5c770479468c161a41e90b1563b67ccb11",
+          "native_matching_descriptors": [
+            "0x465d08"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x44489d",
+              "service_call": "0x4448a7",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 1,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 2,
+          "additional_original_trace_files": [
+            "space-lane-shift-rewards.json",
+            "space-weapons-ladder-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465d2c",
+          "sample_id": 0,
+          "dat_offset": "0x690f5",
+          "length": 4012,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "59a22840ff1120b42be1a7634ba6f4d590b6336cd668f51eaf549e64b8c6a5ad",
+          "native_matching_descriptors": [
+            "0x465d2c"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x444971",
+              "service_call": "0x44497b",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 1,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 0,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465d50",
+          "sample_id": 0,
+          "dat_offset": "0x6a0a1",
+          "length": 9762,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "f8e9eefee4fcff2bab05104e7f0caaaf03eaa1806d464178c6d158139ce5a1fa",
+          "native_matching_descriptors": [
+            "0x465d50"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x449145",
+              "service_call": "0x44914a",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 12,
+          "retained_mode_requests": 8,
+          "additional_retained_original_requests": 51,
+          "additional_original_trace_files": [
+            "space-alien-rewards.json",
+            "space-base-rules-rewards.json",
+            "space-bigblam-rewards.json",
+            "space-bikes-rewards.json",
+            "space-combo-mode-guard-rewards.json",
+            "space-kickback-off-rewards.json",
+            "space-kickback-on-rewards.json",
+            "space-lane-default-rewards.json",
+            "space-lane-double-rewards.json",
+            "space-lane-live-rewards.json",
+            "space-lane-shift-rewards.json",
+            "space-lane-toggle-rewards.json",
+            "space-magna-off-rewards.json",
+            "space-magna-on-rewards.json",
+            "space-mission-campaign-rewards.json",
+            "space-multiball-repeat-rewards.json",
+            "space-multiball-rewards.json",
+            "space-planet-rewards.json",
+            "space-planet-success-rewards.json",
+            "space-race-variants-rewards.json",
+            "space-sabre-rewards.json",
+            "space-sabre-variants-rewards.json",
+            "space-skillshot-expiry-rewards.json",
+            "space-special-left-rewards.json",
+            "space-speed-rules-rewards.json",
+            "space-walker-aim70-rewards.json",
+            "space-walker-aim87-rewards.json",
+            "space-walker-aim88-rewards.json",
+            "space-walker-repeat-rewards.json",
+            "space-walker-rewards.json",
+            "space-weapons-ladder-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465d74",
+          "sample_id": 0,
+          "dat_offset": "0x6c6c3",
+          "length": 6330,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "f6578a49bbfd29d8c61aacb5173aac010ca1bd1af33333f743687f9eb7763506",
+          "native_matching_descriptors": [
+            "0x465d74"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x44ac77",
+              "service_call": "0x44ac7c",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x44ad4e",
+              "service_call": "0x44ad53",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x44ae13",
+              "service_call": "0x44ae1a",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x44aef9",
+              "service_call": "0x44af00",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 0,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 15,
+          "additional_original_trace_files": [
+            "space-kickback-off-rewards.json",
+            "space-kickback-on-rewards.json",
+            "space-sabre-variants-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465d98",
+          "sample_id": 0,
+          "dat_offset": "0x6df7d",
+          "length": 7576,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "03882957d49b5fbfca601b740879887035c86ad1cd867b8f1987179e572f00f4",
+          "native_matching_descriptors": [
+            "0x465d98"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x448e6e",
+              "service_call": "0x448e96",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x448ee9",
+              "service_call": "0x448f11",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 38,
+          "retained_mode_requests": 35,
+          "additional_retained_original_requests": 74,
+          "additional_original_trace_files": [
+            "space-alien-rewards.json",
+            "space-base-rules-rewards.json",
+            "space-bigblam-rewards.json",
+            "space-bikes-rewards.json",
+            "space-combo-mode-guard-rewards.json",
+            "space-mission-campaign-rewards.json",
+            "space-multiball-repeat-rewards.json",
+            "space-multiball-rewards.json",
+            "space-planet-rewards.json",
+            "space-planet-success-rewards.json",
+            "space-race-variants-rewards.json",
+            "space-sabre-rewards.json",
+            "space-sabre-variants-rewards.json",
+            "space-walker-aim70-rewards.json",
+            "space-walker-aim87-rewards.json",
+            "space-walker-aim88-rewards.json",
+            "space-walker-repeat-rewards.json",
+            "space-walker-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465dbc",
+          "sample_id": 0,
+          "dat_offset": "0x658cd",
+          "length": 5808,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "7ca06b0a74520784ddc5f17509344cbcb9ef9718ee45d28454ab9ac1a820407d",
+          "native_matching_descriptors": [
+            "0x465dbc"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x442076",
+              "service_call": "0x442081",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x442b08",
+              "service_call": "0x442b0d",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x443095",
+              "service_call": "0x44309a",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x443c72",
+              "service_call": "0x443c77",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x443ce7",
+              "service_call": "0x443cec",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 33,
+          "retained_mode_requests": 33,
+          "additional_retained_original_requests": 68,
+          "additional_original_trace_files": [
+            "space-alien-rewards.json",
+            "space-base-rules-rewards.json",
+            "space-bigblam-rewards.json",
+            "space-kickback-on-rewards.json",
+            "space-mission-campaign-rewards.json",
+            "space-multiball-repeat-rewards.json",
+            "space-multiball-rewards.json",
+            "space-planet-rewards.json",
+            "space-planet-success-rewards.json",
+            "space-race-variants-rewards.json",
+            "space-sabre-rewards.json",
+            "space-sabre-variants-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465de0",
+          "sample_id": 3,
+          "dat_offset": "0x68d2",
+          "length": 2800,
+          "period": 120,
+          "volume": 64,
+          "pcm_sha256": "ebd601d438a6923d05c808e4e9848c80eaba5abe58d6f2e162fab502196d1c18",
+          "native_matching_descriptors": [
+            "0x465de0"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x43f997",
+              "service_call": "0x43f99c",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 0,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 7,
+          "additional_original_trace_files": [
+            "space-race-variants-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465e04",
+          "sample_id": 0,
+          "dat_offset": "0x62b10",
+          "length": 6465,
+          "period": 160,
+          "volume": 64,
+          "pcm_sha256": "e8db9cbe4b6e381976c39a22b6806d8048d1052cbdd9666542c3d0bcc3e99085",
+          "native_matching_descriptors": [
+            "0x465e04"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x4479ff",
+              "service_call": "0x447a04",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x44b295",
+              "service_call": "0x44b29a",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 11,
+          "retained_mode_requests": 8,
+          "additional_retained_original_requests": 51,
+          "additional_original_trace_files": [
+            "space-alien-rewards.json",
+            "space-base-rules-rewards.json",
+            "space-bigblam-rewards.json",
+            "space-bikes-rewards.json",
+            "space-combo-mode-guard-rewards.json",
+            "space-kickback-off-rewards.json",
+            "space-kickback-on-rewards.json",
+            "space-lane-default-rewards.json",
+            "space-lane-double-rewards.json",
+            "space-lane-live-rewards.json",
+            "space-lane-shift-rewards.json",
+            "space-lane-toggle-rewards.json",
+            "space-magna-off-rewards.json",
+            "space-magna-on-rewards.json",
+            "space-mission-campaign-rewards.json",
+            "space-multiball-repeat-rewards.json",
+            "space-multiball-rewards.json",
+            "space-planet-rewards.json",
+            "space-planet-success-rewards.json",
+            "space-race-variants-rewards.json",
+            "space-sabre-rewards.json",
+            "space-sabre-variants-rewards.json",
+            "space-skillshot-expiry-rewards.json",
+            "space-special-left-rewards.json",
+            "space-speed-rules-rewards.json",
+            "space-walker-aim70-rewards.json",
+            "space-walker-aim87-rewards.json",
+            "space-walker-aim88-rewards.json",
+            "space-walker-repeat-rewards.json",
+            "space-walker-rewards.json",
+            "space-weapons-ladder-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x465e28",
+          "sample_id": 0,
+          "dat_offset": "0x64451",
+          "length": 5244,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "c7b9ea4dab958971f3c3aabd86dbb7a122e1ab2e8c584b2470e30f76f9937b85",
+          "native_matching_descriptors": [
+            "0x465e28"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x43d836",
+              "service_call": "0x43d83b",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x43da12",
+              "service_call": "0x43da17",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": 0,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 35,
+          "additional_original_trace_files": [
+            "space-base-rules-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        }
+      ],
+      "amiga_adapter_slice_comparison": null,
+      "event_trace": "space-audio-events.json",
+      "unmatched_retail_descriptors": []
+    },
+    "demon": {
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "native_profile_count": 14,
+      "retail_directory_count": 14,
+      "retail_descriptors": [
+        {
+          "retail_descriptor": "0x463278",
+          "sample_id": 0,
+          "dat_offset": "0x74cf5",
+          "length": 4078,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "af0edcf31f0acb5a8d7f5b824c0a15e22803bbfcbad63bf5bbcd4496bbb51ce5",
+          "native_matching_descriptors": [
+            "0x463278"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x41ac27",
+              "service_call": "0x41ac2c",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 95,
+          "additional_original_trace_files": [
+            "demon-twice-cycles-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x46329c",
+          "sample_id": 0,
+          "dat_offset": "0x79c0d",
+          "length": 4490,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "7ac1a594d0c4ce6366bc0ea5543cfa5c770479468c161a41e90b1563b67ccb11",
+          "native_matching_descriptors": [
+            "0x46329c"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x416b14",
+              "service_call": "0x416b19",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 1,
+          "additional_retained_original_requests": 20,
+          "additional_original_trace_files": [
+            "demon-base-rules-rewards.json",
+            "demon-clock-award-0-rewards.json",
+            "demon-clock-award-1-rewards.json",
+            "demon-clock-award-10-rewards.json",
+            "demon-clock-award-11-rewards.json",
+            "demon-clock-award-2-rewards.json",
+            "demon-clock-award-3-rewards.json",
+            "demon-clock-award-4-rewards.json",
+            "demon-clock-award-5-rewards.json",
+            "demon-clock-award-6-rewards.json",
+            "demon-clock-award-7-rewards.json",
+            "demon-clock-award-8-rewards.json",
+            "demon-clock-award-9-rewards.json",
+            "demon-legal-game-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x4632c0",
+          "sample_id": 0,
+          "dat_offset": "0x7ad97",
+          "length": 4012,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "59a22840ff1120b42be1a7634ba6f4d590b6336cd668f51eaf549e64b8c6a5ad",
+          "native_matching_descriptors": [
+            "0x4632c0"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x416cc1",
+              "service_call": "0x416cc6",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 1,
+          "additional_retained_original_requests": 17,
+          "additional_original_trace_files": [
+            "demon-clock-award-0-rewards.json",
+            "demon-clock-award-1-rewards.json",
+            "demon-clock-award-10-rewards.json",
+            "demon-clock-award-11-rewards.json",
+            "demon-clock-award-2-rewards.json",
+            "demon-clock-award-3-rewards.json",
+            "demon-clock-award-4-rewards.json",
+            "demon-clock-award-5-rewards.json",
+            "demon-clock-award-6-rewards.json",
+            "demon-clock-award-7-rewards.json",
+            "demon-clock-award-8-rewards.json",
+            "demon-clock-award-9-rewards.json",
+            "demon-legal-game-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x4632e4",
+          "sample_id": 0,
+          "dat_offset": "0x81c8c",
+          "length": 5808,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "7ca06b0a74520784ddc5f17509344cbcb9ef9718ee45d28454ab9ac1a820407d",
+          "native_matching_descriptors": [
+            "0x4632e4"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x414fb0",
+              "service_call": "0x414fbb",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x415003",
+              "service_call": "0x41500e",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x415065",
+              "service_call": "0x41506a",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x415084",
+              "service_call": "0x4150a8",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 24,
+          "additional_retained_original_requests": 86,
+          "additional_original_trace_files": [
+            "demon-clock-award-0-rewards.json",
+            "demon-clock-award-1-rewards.json",
+            "demon-clock-award-10-rewards.json",
+            "demon-clock-award-11-rewards.json",
+            "demon-clock-award-2-rewards.json",
+            "demon-clock-award-3-rewards.json",
+            "demon-clock-award-4-rewards.json",
+            "demon-clock-award-5-rewards.json",
+            "demon-clock-award-6-rewards.json",
+            "demon-clock-award-7-rewards.json",
+            "demon-clock-award-8-rewards.json",
+            "demon-clock-award-9-rewards.json",
+            "demon-clock-bonus-rewards.json",
+            "demon-clock-rewards-rewards.json",
+            "demon-clock-tower-rewards.json",
+            "demon-final-campaign-rewards.json",
+            "demon-mode-bat-rewards.json",
+            "demon-mode-grave-rewards.json",
+            "demon-mode-meatball-rewards.json",
+            "demon-mode-twice-rewards.json",
+            "demon-mode-vampires-rewards.json",
+            "demon-mode-witch-rewards.json",
+            "demon-mode-zombie-rewards.json",
+            "demon-twice-cycles-rewards.json",
+            "demon-video-brain-miss-rewards.json",
+            "demon-video-brain-win-rewards.json",
+            "demon-video-consecutive-rewards.json",
+            "demon-video-wolf-idle-rewards.json",
+            "demon-video-wolf-shoot-rewards.json",
+            "demon-witch-force-off-rewards.json",
+            "demon-witch-force-on-rewards.json",
+            "demon-witch-left-rewards.json",
+            "demon-zombie-values-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x463308",
+          "sample_id": 0,
+          "dat_offset": "0x7bd43",
+          "length": 590,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "b699b66493504da6c9969ef3544a72763af8ca3b3df52b445a504e2111903397",
+          "native_matching_descriptors": [
+            "0x463308"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x4130a1",
+              "service_call": "0x4130a6",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 0,
+          "additional_original_trace_files": [],
+          "controlled_callback_emissions": 30,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x46332c",
+          "sample_id": 0,
+          "dat_offset": "0x7dd29",
+          "length": 6465,
+          "period": 160,
+          "volume": 64,
+          "pcm_sha256": "e8db9cbe4b6e381976c39a22b6806d8048d1052cbdd9666542c3d0bcc3e99085",
+          "native_matching_descriptors": [
+            "0x46332c"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x418953",
+              "service_call": "0x418958",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x41b7e4",
+              "service_call": "0x41b7e9",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 18,
+          "additional_retained_original_requests": 85,
+          "additional_original_trace_files": [
+            "demon-base-rules-rewards.json",
+            "demon-clock-award-0-rewards.json",
+            "demon-clock-award-1-rewards.json",
+            "demon-clock-award-10-rewards.json",
+            "demon-clock-award-11-rewards.json",
+            "demon-clock-award-2-rewards.json",
+            "demon-clock-award-3-rewards.json",
+            "demon-clock-award-4-rewards.json",
+            "demon-clock-award-5-rewards.json",
+            "demon-clock-award-6-rewards.json",
+            "demon-clock-award-7-rewards.json",
+            "demon-clock-award-8-rewards.json",
+            "demon-clock-award-9-rewards.json",
+            "demon-clock-bonus-rewards.json",
+            "demon-clock-rewards-rewards.json",
+            "demon-clock-tower-rewards.json",
+            "demon-final-campaign-rewards.json",
+            "demon-kickback-off-rewards.json",
+            "demon-kickback-on-rewards.json",
+            "demon-legal-game-rewards.json",
+            "demon-mode-bat-rewards.json",
+            "demon-mode-grave-rewards.json",
+            "demon-mode-meatball-rewards.json",
+            "demon-mode-twice-rewards.json",
+            "demon-mode-vampires-rewards.json",
+            "demon-mode-witch-rewards.json",
+            "demon-mode-zombie-rewards.json",
+            "demon-twice-cycles-rewards.json",
+            "demon-video-brain-miss-rewards.json",
+            "demon-video-brain-win-rewards.json",
+            "demon-video-consecutive-rewards.json",
+            "demon-video-wolf-idle-rewards.json",
+            "demon-video-wolf-shoot-rewards.json",
+            "demon-witch-force-off-rewards.json",
+            "demon-witch-force-on-rewards.json",
+            "demon-witch-left-rewards.json",
+            "demon-zombie-values-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x463350",
+          "sample_id": 0,
+          "dat_offset": "0x76df3",
+          "length": 11802,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "fb2bc17d71076fbbb6cfefb474165abb69e242f033f39439d2f83256eaf83cc3",
+          "native_matching_descriptors": [
+            "0x463350"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x412f86",
+              "service_call": "0x412f8d",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 9,
+          "additional_original_trace_files": [
+            "demon-mode-twice-rewards.json",
+            "demon-mode-vampires-rewards.json",
+            "demon-mode-witch-rewards.json",
+            "demon-twice-cycles-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x463374",
+          "sample_id": 0,
+          "dat_offset": "0x7f66a",
+          "length": 9762,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "f8e9eefee4fcff2bab05104e7f0caaaf03eaa1806d464178c6d158139ce5a1fa",
+          "native_matching_descriptors": [
+            "0x463374"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x4199ac",
+              "service_call": "0x4199b1",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 18,
+          "additional_retained_original_requests": 83,
+          "additional_original_trace_files": [
+            "demon-base-rules-rewards.json",
+            "demon-clock-award-0-rewards.json",
+            "demon-clock-award-1-rewards.json",
+            "demon-clock-award-10-rewards.json",
+            "demon-clock-award-11-rewards.json",
+            "demon-clock-award-2-rewards.json",
+            "demon-clock-award-3-rewards.json",
+            "demon-clock-award-4-rewards.json",
+            "demon-clock-award-5-rewards.json",
+            "demon-clock-award-6-rewards.json",
+            "demon-clock-award-7-rewards.json",
+            "demon-clock-award-8-rewards.json",
+            "demon-clock-award-9-rewards.json",
+            "demon-clock-bonus-rewards.json",
+            "demon-clock-rewards-rewards.json",
+            "demon-clock-tower-rewards.json",
+            "demon-final-campaign-rewards.json",
+            "demon-kickback-off-rewards.json",
+            "demon-kickback-on-rewards.json",
+            "demon-legal-game-rewards.json",
+            "demon-mode-bat-rewards.json",
+            "demon-mode-grave-rewards.json",
+            "demon-mode-meatball-rewards.json",
+            "demon-mode-twice-rewards.json",
+            "demon-mode-vampires-rewards.json",
+            "demon-mode-witch-rewards.json",
+            "demon-mode-zombie-rewards.json",
+            "demon-twice-cycles-rewards.json",
+            "demon-video-brain-miss-rewards.json",
+            "demon-video-brain-win-rewards.json",
+            "demon-video-consecutive-rewards.json",
+            "demon-video-wolf-idle-rewards.json",
+            "demon-video-wolf-shoot-rewards.json",
+            "demon-witch-force-off-rewards.json",
+            "demon-witch-force-on-rewards.json",
+            "demon-witch-left-rewards.json",
+            "demon-zombie-values-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x4633bc",
+          "sample_id": 0,
+          "dat_offset": "0x8333c",
+          "length": 6330,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "f6578a49bbfd29d8c61aacb5173aac010ca1bd1af33333f743687f9eb7763506",
+          "native_matching_descriptors": [
+            "0x4633bc"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x41ae12",
+              "service_call": "0x41ae17",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 30,
+          "additional_retained_original_requests": 140,
+          "additional_original_trace_files": [
+            "demon-clock-award-0-rewards.json",
+            "demon-clock-award-1-rewards.json",
+            "demon-clock-award-10-rewards.json",
+            "demon-clock-award-11-rewards.json",
+            "demon-clock-award-2-rewards.json",
+            "demon-clock-award-3-rewards.json",
+            "demon-clock-award-4-rewards.json",
+            "demon-clock-award-5-rewards.json",
+            "demon-clock-award-6-rewards.json",
+            "demon-clock-award-7-rewards.json",
+            "demon-clock-award-8-rewards.json",
+            "demon-clock-award-9-rewards.json",
+            "demon-kickback-off-rewards.json",
+            "demon-kickback-on-rewards.json",
+            "demon-video-brain-miss-rewards.json",
+            "demon-video-brain-win-rewards.json",
+            "demon-video-consecutive-rewards.json",
+            "demon-video-wolf-idle-rewards.json",
+            "demon-video-wolf-shoot-rewards.json",
+            "demon-witch-force-off-rewards.json",
+            "demon-witch-force-on-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x4633e0",
+          "sample_id": 0,
+          "dat_offset": "0x75ce3",
+          "length": 4368,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "cf8cc00ad3156370788c7fd68ed7ca0c4211c5c5822dfe25f6ccf999f12705a2",
+          "native_matching_descriptors": [
+            "0x4633e0"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x41ad8d",
+              "service_call": "0x41ad92",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 1,
+          "additional_original_trace_files": [
+            "demon-legal-game-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x463404",
+          "sample_id": 0,
+          "dat_offset": "0x7bf91",
+          "length": 7576,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "03882957d49b5fbfca601b740879887035c86ad1cd867b8f1987179e572f00f4",
+          "native_matching_descriptors": [
+            "0x463404"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x41988b",
+              "service_call": "0x4198a3",
+              "lift_label_present": true
+            },
+            {
+              "mov": "0x41990c",
+              "service_call": "0x419911",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 24,
+          "additional_retained_original_requests": 86,
+          "additional_original_trace_files": [
+            "demon-clock-award-0-rewards.json",
+            "demon-clock-award-1-rewards.json",
+            "demon-clock-award-10-rewards.json",
+            "demon-clock-award-11-rewards.json",
+            "demon-clock-award-2-rewards.json",
+            "demon-clock-award-3-rewards.json",
+            "demon-clock-award-4-rewards.json",
+            "demon-clock-award-5-rewards.json",
+            "demon-clock-award-6-rewards.json",
+            "demon-clock-award-7-rewards.json",
+            "demon-clock-award-8-rewards.json",
+            "demon-clock-award-9-rewards.json",
+            "demon-clock-bonus-rewards.json",
+            "demon-clock-rewards-rewards.json",
+            "demon-clock-tower-rewards.json",
+            "demon-final-campaign-rewards.json",
+            "demon-mode-bat-rewards.json",
+            "demon-mode-grave-rewards.json",
+            "demon-mode-meatball-rewards.json",
+            "demon-mode-twice-rewards.json",
+            "demon-mode-vampires-rewards.json",
+            "demon-mode-witch-rewards.json",
+            "demon-mode-zombie-rewards.json",
+            "demon-twice-cycles-rewards.json",
+            "demon-video-brain-miss-rewards.json",
+            "demon-video-brain-win-rewards.json",
+            "demon-video-consecutive-rewards.json",
+            "demon-video-wolf-idle-rewards.json",
+            "demon-video-wolf-shoot-rewards.json",
+            "demon-witch-force-off-rewards.json",
+            "demon-witch-force-on-rewards.json",
+            "demon-witch-left-rewards.json",
+            "demon-zombie-values-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x463398",
+          "sample_id": 30,
+          "dat_offset": "0x5bbd8",
+          "length": 6232,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "fbefed78c4445ef89a0f71f4d831e9caa500e8d4f94ac7c6e317ce40bcf193e9",
+          "native_matching_descriptors": [
+            "0x463398"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x416bf0",
+              "service_call": "0x416bf5",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 40,
+          "additional_original_trace_files": [
+            "demon-video-wolf-shoot-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x463428",
+          "sample_id": 30,
+          "dat_offset": "0x5d4d8",
+          "length": 2083,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "209365b359f5cdae6c7710a6d2f1a9d44e894e435cc01de5b755b7a9662a9b23",
+          "native_matching_descriptors": [
+            "0x463428"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x416aa5",
+              "service_call": "0x416ab0",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 0,
+          "additional_retained_original_requests": 40,
+          "additional_original_trace_files": [
+            "demon-video-wolf-shoot-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": true,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        },
+        {
+          "retail_descriptor": "0x46344c",
+          "sample_id": 27,
+          "dat_offset": "0x4b040",
+          "length": 3072,
+          "period": 226,
+          "volume": 64,
+          "pcm_sha256": "3011192ab87657326a51ed5a4645879889c249a6a0a6b9283bdc4a3169949d58",
+          "native_matching_descriptors": [
+            "0x46344c"
+          ],
+          "raw_direct_call_candidates": [
+            {
+              "mov": "0x417462",
+              "service_call": "0x41746d",
+              "lift_label_present": true
+            }
+          ],
+          "observed_requests": null,
+          "retained_mode_requests": 31,
+          "additional_retained_original_requests": 93,
+          "additional_original_trace_files": [
+            "demon-video-brain-miss-rewards.json",
+            "demon-video-brain-win-rewards.json",
+            "demon-video-consecutive-rewards.json"
+          ],
+          "controlled_callback_emissions": null,
+          "targeted_native_replay": false,
+          "synthetic_original_sequence_requests": null,
+          "demo_minigame_original_requests": null
+        }
+      ],
+      "amiga_adapter_slice_comparison": null,
+      "event_trace": null,
+      "unmatched_retail_descriptors": []
+    }
+  }
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-27",
+  "updated": "2026-10-31",
   "address_conventions": {
     "amiga": "uncompressed retail HUNK0-relative; file payload offset0x24; no fixed runtime load base",
     "windows": "preferred PE VA in RIP/USA build SHA185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
@@ -117,7 +117,7 @@
     "playfield": {
       "status": "VERIFIED",
       "amiga_addresses": [
-        "decoded Raw BE32@0 \u2192 section+0x18 pixels, section+0x32938 palette"
+        "decoded Raw BE32@0 → section+0x18 pixels, section+0x32938 palette"
       ],
       "windows_addresses": [
         "0x41bb88"
@@ -492,7 +492,7 @@
       ],
       "confidence": 0.95,
       "port_strategy": "Use libxmp; avoid custom tracker implementation",
-      "next_action": "Integrate verified STIM\u2192libxmp PCM path with SDL audio and recover event sequencing",
+      "next_action": "Integrate verified STIM→libxmp PCM path with SDL audio and recover event sequencing",
       "native_mean_delta": {
         "status": "IMPLEMENTED",
         "confidence": "PARTIAL",
@@ -511,6 +511,79 @@
           "F00 completion timing native policy",
           "Callback4 cue unported"
         ]
+      },
+      "retail_final_mix_2026_10_31": {
+        "status": "PARTIAL",
+        "confidence": "VERIFIED_BOUNDED",
+        "windows_addresses": [
+          "0x44b8bc",
+          "0x44bca9"
+        ],
+        "evidence": [
+          "docs/verification/retail-final-mix-2026-10-31.json"
+        ],
+        "finding": "Signed 16-bit stereo original wraps on overflow; native gain and SFX paths clamp. Synthetic non-overflow agrees.",
+        "limits": [
+          "Synthetic inputs only",
+          "Original tracker gain and live overflow not established",
+          "Other original output configurations not tested"
+        ],
+        "next_action": "Compare original and native tracker/SFX intermediate levels during reproducible gameplay before changing output policy."
+      },
+      "retail_tracker_mix_2026_10_31": {
+        "status": "PARTIAL",
+        "confidence": "VERIFIED_BOUNDED",
+        "windows_addresses": [
+          "0x401950",
+          "0x44b560",
+          "0x44c918",
+          "0x44cd4d",
+          "0x44eaf8"
+        ],
+        "evidence": [
+          "docs/verification/retail-game-mixer-2026-10-31.json",
+          "docs/verification/retail-tracker-native-2026-10-31.json",
+          "docs/verification/mean-tracker-phase-2026-10-31.json",
+          "docs/verification/tracker-floor-experiment-2026-10-31.json",
+          "docs/verification/pirate-tracker-channels-2026-10-31.json",
+          "docs/verification/retail-loop-resampler-2026-10-31.json"
+        ],
+        "finding": "Game mixer sums six voices to mono using nearest samples. Original first ticks of four tables are approximately matched in RMS after native mono/nearest/66% settings; PCM is not equal.",
+        "limits": [
+          "Adapted tracker initialization and full-volume settings",
+          "Single 882-frame window per table, without SFX",
+          "No original Amiga playback or device cadence proof",
+          "Original sample index floors; libxmp nearest rounds fractional positions"
+        ],
+        "next_action": "Compare original note period table with libxmp and validate native forward-loop output before a scoped production mixer."
+      },
+      "sfx_audit_2026_10_31": {
+        "status": "PARTIAL",
+        "confidence": "VERIFIED_BOUNDED",
+        "windows_addresses": [
+          "0x41c274",
+          "0x44cc00",
+          "0x40f834",
+          "0x420120"
+        ],
+        "evidence": [
+          "docs/verification/sfx-descriptor-audit-2026-10-31.json",
+          "docs/verification/mean-display-sfx-2026-10-31.json",
+          "docs/verification/mean-sample-pcm-2026-10-31.json",
+          "docs/verification/mean-dynamic-sfx-pcm-2026-10-31.json",
+          "docs/verification/retail-sfx-replays-2026-10-31.json",
+          "docs/verification/pirate-sfx-replay-2026-10-31.json",
+          "docs/verification/demon-sfx-callback-2026-10-31.json",
+          "docs/verification/mean-remaining-sfx-static-2026-10-31.json",
+          "docs/verification/mean-sfx-reference-surfaces-2026-10-31.json"
+        ],
+        "finding": "Selected 56 Retail descriptors have matching native slices. Pirate 15/15 and Space 10/10 occur in retained Original traces; Demon 13/14 occur in traces and one matches in 100 controlled callback states; Mean 14/17 occur in bounded display/minigame checks.",
+        "limits": [
+          "Selected descriptor directories, not exhaustive callsite reachability",
+          "Only bounded original event contexts and two finite native Mean games",
+          "Original Amiga events and live device timing not established"
+        ],
+        "next_action": "Trace computed/indexed accesses to the three remaining Mean descriptor records in bounded original gameplay; literal PE/DAT scans cannot establish unreachability."
       }
     },
     "menu": {
@@ -766,7 +839,7 @@
         "src/physics/mean_right_gate.cpp",
         "src/physics/mean_simulation.cpp"
       ],
-      "scope": "Lower timed switch advances3bc; secondhit arms3a2;416fe0 projects gate;originalmarker20 assigns right-directed collisionmap;actualbitmap switch\u2192callback4\u2192phase2minigame\u2192release",
+      "scope": "Lower timed switch advances3bc; secondhit arms3a2;416fe0 projects gate;originalmarker20 assigns right-directed collisionmap;actualbitmap switch→callback4→phase2minigame→release",
       "limits": [
         "12targeted12000stepcycles use verified progress setup;no autonomous original trajectory equivalence",
         "4ordinary800000step sweeps have2arms but0right captures; autonomous rightcapture remains unverified",
@@ -874,7 +947,7 @@
         "Original suppression43d864 has an explicit replay input; native bonus/gameover already skip active physics",
         "No original LUT asset committed; loaded from user PE"
       ],
-      "next_action": "Complete original phase1 input\u2192magnet release\u2192ramp reward chain with a synchronized original/native event trace."
+      "next_action": "Complete original phase1 input→magnet release→ramp reward chain with a synchronized original/native event trace."
     },
     "mean_phase1_gameplay": {
       "status": "IMPLEMENTED",
@@ -1191,6 +1264,77 @@
         "demon": 2.39
       },
       "xz_package_verified": true
+    },
+    "windows_retail_gameplay_audio_verification": {
+      "status": "PARTIAL",
+      "amiga_addresses": [],
+      "windows_addresses": [
+        "0x40aca8",
+        "0x44b640",
+        "0x44cc00"
+      ],
+      "evidence": [
+        "docs/verification/windows-retail-2026-10-30.json",
+        "docs/verification/space-post-jackpot-2026-10-30.json",
+        "docs/verification/demon-video-consecutive-2026-10-30.json",
+        "docs/verification/retail-sample-pcm-2026-10-30.json"
+      ],
+      "confidence": "VERIFIED only for bounded cases; complete game UNKNOWN",
+      "next_action": "Compare Retail music sequencing and final mixed PCM; trace independently started original Mean gameplay.",
+      "music_start_correction": {
+        "status": "VERIFIED_BOUNDED",
+        "windows_addresses": [
+          "0x404f56",
+          "0x40841c"
+        ],
+        "evidence": "docs/verification/retail-music-start-2026-10-30.json",
+        "bank": 0,
+        "orders": {
+          "pirate": 34,
+          "space": 32,
+          "demon": 25
+        },
+        "limits": "No original final PCM, listening or Amiga music equivalence."
+      }
+    },
+    "retail_music_positions_and_transitions": {
+      "status": "PARTIAL",
+      "windows_addresses": [
+        "0x420c19",
+        "0x420c24",
+        "0x444a64",
+        "0x444ab1",
+        "0x416d6c",
+        "0x416dc1"
+      ],
+      "evidence": [
+        "docs/verification/music-order-positions-2026-10-30.json",
+        "docs/verification/mean-retail-music-transitions-2026-10-30.json",
+        "docs/verification/pirate-music-coverage-2026-10-30.json",
+        "docs/verification/space-demon-music-coverage-2026-10-30.json",
+        "docs/verification/space-tilt-music-2026-10-30.json",
+        "docs/verification/demon-tilt-music-2026-10-30.json",
+        "docs/verification/unobserved-music-stops-2026-10-30.json"
+      ],
+      "confidence": "VERIFIED for tested Retail orders, requests and bounded transitions; other callsites and original audio mix UNKNOWN",
+      "next_action": "Determine reachability of remaining missing/unresolved stop callsites; compare actual original tracker timing/mix and Amiga music."
+    },
+    "retail_music_deferred_queue_and_amiga_banks": {
+      "status": "PARTIAL",
+      "amiga_addresses": [],
+      "windows_addresses": [
+        "0x406240",
+        "0x406268",
+        "0x40634c"
+      ],
+      "evidence": [
+        "docs/verification/retail-audio-deferred-2026-10-30.json",
+        "docs/verification/amiga-windows-music-banks-2026-10-30.json",
+        "docs/verification/retail-music-stop-pointers-2026-10-30.json",
+        "docs/verification/retail-music-stop-wrappers-2026-10-30.json"
+      ],
+      "confidence": "VERIFIED for the bounded x86/SDL queue cases and this source corpus; original mixed PCM and Amiga sequencing UNKNOWN",
+      "next_action": "Compare original tracker sequencing and mixed output during actual gameplay transitions."
     }
   },
   "mean_demo_gameplay": {
@@ -1864,7 +2008,7 @@
         "0x4169e4"
       ],
       "build_sha256": "31192e0b316bf6fe0a4a41336a5ef6ae53ac659c04edf001607a8de63239fc00",
-      "manual": "analysis/table-rule-oracles.json (original USA manual, Mean PDF pages6\u201311, zero-based)",
+      "manual": "analysis/table-rule-oracles.json (original USA manual, Mean PDF pages6–11, zero-based)",
       "callers": {
         "0": "0x416230 captured left timer=-2",
         "1": "0x41b300 layer3/mask1 Y140..159 X<160",
@@ -3820,7 +3964,7 @@
       "analysis/pirate-plank-natural-ropes-island.json"
     ],
     "next_action": "Transfer the verified shared engine to Ace of Space, beginning with its original ball/step and table-specific callbacks; keep Pirate RC evidence frozen.",
-    "nudge_followup": "13400legal-key steps;96\u00d718Nudge fields;two ropes/28.18415M/ABC/F1/free next ball;no third distinct rope proved."
+    "nudge_followup": "13400legal-key steps;96×18Nudge fields;two ropes/28.18415M/ABC/F1/free next ball;no third distinct rope proved."
   },
   "pirate_nudge_presentation": {
     "status": "VERIFIED",
@@ -4257,14 +4401,14 @@
       "bank_persistence": "435710 saves9DWORD at46e2bc toplayer block46e0f4+36*i;435776 restores; bankoffset18",
       "new_game": "4359a2 initializes bank1M",
       "hold_bonus": "408228..408252 checksplayer+14hex; preservesbaseonlyifset,alwaysclearsflagandresetsmultiplier1",
-      "shared_tilt": "407cf6..407d03 skipsbase\u00d7multiplier; table callback407cf1 executesbeforeguard",
-      "combo_bonus": "4351b4 readsWORDplayer+0c viaDWORDplayer+0a>>16;4351e6\u00d71M;4351ec scores,return4351ef"
+      "shared_tilt": "407cf6..407d03 skipsbase×multiplier; table callback407cf1 executesbeforeguard",
+      "combo_bonus": "4351b4 readsWORDplayer+0c viaDWORDplayer+0a>>16;4351e6×1M;4351ec scores,return4351ef"
     },
     "confirmed": [
       "Mermaid capture atlayer0(291,311) paysbank1/3/4M repeatedly withoutconsumption; eachcaptureadds400kbasebonus",
       "Bankpersistsballchange;actualF1 resets1M",
-      "HoldBonus retainsbaseexactlyonce,notmultiplier;verifiedearned\u00d72\u2192\u00d71",
-      "Tilt suppressesbase\u00d7multiplier butdoesnotconsumeheldbase early;holdflagstillspent",
+      "HoldBonus retainsbaseexactlyonce,notmultiplier;verifiedearned×2→×1",
+      "Tilt suppressesbase×multiplier butdoesnotconsumeheldbase early;holdflagstillspent",
       "Combo-count bonus2M paidunderTilt before sharedguard; retainsoriginalquirk"
     ],
     "runtime": "Existing compiledOriginal engine,unchanged24118instructions; no production changes",
@@ -4320,7 +4464,7 @@
     },
     "binary_anchors": {
       "auto_crossing": "434e24..434e72",
-      "auto_throw_call": "434e5a\u2192434184",
+      "auto_throw_call": "434e5a→434184",
       "projectile_pool": "8slots at46e0b8,stride8,signed-negative age marksfree",
       "directions": "434268/434340 set46e294; releasesstopmatchingdirection"
     },
@@ -4510,15 +4654,15 @@
         "demon": 4
       },
       "selection": "Original405ce0 loader and40e7dc menu;0skips startup",
-      "space_initializer": "439ae0\u219246664c;engine466424;callbackdir46ed60",
+      "space_initializer": "439ae0→46664c;engine466424;callbackdir46ed60",
       "space_step": "440d10@200Hz;441aa8 perball;446850@50Hz",
-      "upper_flipper": "graphics WORD+1c==ffff\u2192left;==1\u2192right;Spaceleft,Pirateright",
+      "upper_flipper": "graphics WORD+1c==ffff→left;==1→right;Spaceleft,Pirateright",
       "highscore": "Original404ebf..404ee0 binds46c498=46c510+50*(selected-1);Space46c574,Demon46c5a6",
       "keyboard": "Original40404c compiled once; selected-table callbacks,thirdflipper andlaunch latch preserved"
     },
     "outcomes": {
-      "space": "Three-ball natural game\u2192bonus\u2192ABC/highscore\u2192GameOver10120\u2192F1restart10221\u2192freeball10531. No diagnostic trajectories.",
-      "demon": "Three-ball natural zero-score game\u2192GameOver8400\u2192F1restart8501\u2192second game. No initials qualification or score growth demonstrated."
+      "space": "Three-ball natural game→bonus→ABC/highscore→GameOver10120→F1restart10221→freeball10531. No diagnostic trajectories.",
+      "demon": "Three-ball natural zero-score game→GameOver8400→F1restart8501→second game. No initials qualification or score growth demonstrated."
     },
     "renderer": "Existing all-table playfield/flipper/ball/occlusion/lamp decoders reused; original selected-table DMD palette, DMD above table. Whole playfield viewport; no full raster/scrolling parity claim.",
     "host": {
@@ -4545,7 +4689,7 @@
       "No Amiga/Windows physics equivalence or whole original raster/platform equivalence assumed.",
       "Preview renderer handles the canonical first ball; multiball pool compaction/render and table-specific modes require separate acceptance."
     ],
-    "next_action": "Prove one Ace of Space mode entry\u2192event\u2192award chain through actual original switches, then compile and render that whole island.",
+    "next_action": "Prove one Ace of Space mode entry→event→award chain through actual original switches, then compile and render that whole island.",
     "verification": {
       "regression": "6/6 PASS51.27s; final2/2 PASS11.18s",
       "logs": [
@@ -4830,9 +4974,9 @@
       "demon": "Not enabled; per-table descriptors stillrequired"
     },
     "confirmed": [
-      "Race topcapture\u219225Mgoal,modecontinues;500extra ticks,12501totaltoexpiry;distinct5Mexitcall retained.",
-      "Hack wrongevent leaveswinningflag untouched;actualwinner2\u219275M,400\u2192negativecountdown,normalreturnafter401steps.",
-      "Blam6distinctevents\u21926\u00d710M;duplicateonlyordinary250k;top30M\u2192normalreturn.",
+      "Race topcapture→25Mgoal,modecontinues;500extra ticks,12501totaltoexpiry;distinct5Mexitcall retained.",
+      "Hack wrongevent leaveswinningflag untouched;actualwinner2→75M,400→negativecountdown,normalreturnafter401steps.",
+      "Blam6distinctevents→6×10M;duplicateonlyordinary250k;top30M→normalreturn.",
       "NegativeBlam:old187,82pointtakeslane-directionbranch,not event6;fivehits cannot collectfinal30M. Correct event6=layer1(269,51),X>=220."
     ],
     "scope": "DiagnosticFREE-ball event trajectories, independentOriginal+native resets andSDL; not all-modes/legal-key-only/whole-raster/Originalmixed-PCM equivalence. Hack winner1pair onlystatic, actualwinner2runtime covered.",
@@ -4972,7 +5116,7 @@
       "Shared compaction wired; previous single-ball regressions preserved",
       "Earlier geometric trap names disproven: capture3 airlock(199,188),capture5 mode trap(166,101)"
     ],
-    "next_action": "Space multiball lifecycle: loss/compaction3\u21922\u21921, ramp jackpots and Alien Attack Super Jackpot.",
+    "next_action": "Space multiball lifecycle: loss/compaction3→2→1, ramp jackpots and Alien Attack Super Jackpot.",
     "verification": {
       "build_command": "cmake --build build/native -j3",
       "build": "PASS, zero warnings",
@@ -5280,7 +5424,7 @@
       "level_award_return": "0x445df8",
       "pending_extra_increment": "0x445089",
       "pending_extra_word": "0x46ed50",
-      "collection_call": "0x442103\u21920x444214",
+      "collection_call": "0x442103→0x444214",
       "credit_transfer": "0x444246..0x44425a",
       "actual_credit": "active playerWORD+0x10"
     },
@@ -5302,7 +5446,7 @@
       "One successful input schedule with retained defaultOriginal RNGseed; crash/recovery/boundaryvariants outside this acceptance.",
       "BigBlam/sequential modes campaign, other edge cases and preview options/persistence remain pending."
     ],
-    "next_action": "BigBlam: sequential mode campaign\u2192earned final admission\u2192four-ball finale/rewards/return.",
+    "next_action": "BigBlam: sequential mode campaign→earned final admission→four-ball finale/rewards/return.",
     "verification": {
       "build": "PASS, zero warnings",
       "build_command": "cmake --build build/native -j3",
@@ -5403,9 +5547,9 @@
       "phase": 7,
       "balls": 6,
       "screenshot": "build/space-bigblam-host.png",
-      "scope": "Actual fixed-step fullscreen campaign\u2192six-ball final; not real-time duration/physical input/listening or whole-raster/Original mixedPCM parity."
+      "scope": "Actual fixed-step fullscreen campaign→six-ball final; not real-time duration/physical input/listening or whole-raster/Original mixedPCM parity."
     },
-    "scope": "One reset-based diagnostic physical five-mode campaign through earned final, rewards, six\u2192one pool compaction and normal return; actual keys for Walker, ordinary DP failure. No played/rule/timer/spawn/score writes. Not legal-key-only whole-table/allseeds/whole-raster/Original mixedPCM parity.",
+    "scope": "One reset-based diagnostic physical five-mode campaign through earned final, rewards, six→one pool compaction and normal return; actual keys for Walker, ordinary DP failure. No played/rule/timer/spawn/score writes. Not legal-key-only whole-table/allseeds/whole-raster/Original mixedPCM parity.",
     "limits": [
       "Retail requests5 extra and runtime6FREE balls; manual says4-ball. Reason for edition/manual difference UNKNOWN; retain actual code.",
       "Final bank6-ramp cycle, disabled/duplicate/unearned guards covered; repeated whole campaigns, Tilt and other boundary/seed cases pending.",
@@ -5645,7 +5789,7 @@
       "Other partialcontracts: repeated MBentry requirements, Race otherplaces, Sabre nonbumperdamage, Walker repeatcapture.",
       "Full Retail PDF verifiedtoresolve truncatedBigBlam paragraph; manual wording differences explicitly retained."
     ],
-    "next_action": "Weapon lamp bank\u2192bonus multiplier/payout\u2192earned Magnasaver activation as one native/Original bundle.",
+    "next_action": "Weapon lamp bank→bonus multiplier/payout→earned Magnasaver activation as one native/Original bundle.",
     "verification": {
       "ctest": "21/21 PASS206.29s",
       "ctest_log": "build/space-base-rules-final.log",
@@ -5704,7 +5848,7 @@
       "analysis/traces/space-completion-audit.json"
     ],
     "confidence": 0.99,
-    "next_action": "Four missions in one game \u2192 station SuperJackpot \u2192 clear/rearm; then four partial variants"
+    "next_action": "Four missions in one game → station SuperJackpot → clear/rearm; then four partial variants"
   },
   "space_mission_campaign_051": {
     "status": "VERIFIED",

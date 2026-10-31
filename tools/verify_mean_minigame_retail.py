@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """Actual Retail/Fix code, translated cached entry context, compared to native profile."""
-import hashlib,json,struct,subprocess,sys
+import argparse,hashlib,json,struct,subprocess
 from pathlib import Path
 import pefile
 from capstone import Cs,CS_ARCH_X86,CS_MODE_32
 from capstone.x86 import X86_OP_IMM,X86_OP_MEM
 from unicorn import Uc,UC_ARCH_X86,UC_MODE_32,UC_HOOK_CODE
 from unicorn.x86_const import *
-R=Path(__file__).resolve().parents[1];meta=json.loads((R/'analysis/windows-symbol-map.json').read_text())['builds']
+R=Path(__file__).resolve().parents[1]
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('native',type=Path)
+parser.add_argument('--output',type=Path,default=R/'analysis/traces/mean-minigame-retail-original.json')
+args=parser.parse_args()
+meta=json.loads((R/'analysis/windows-symbol-map.json').read_text())['builds']
 config=[('retail','185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6',0xca40,0x2eb10,0x9a0,0xf00),('fix','5054441d4966efc4cdf14edef6061bad9c8af70ea56ec7f772d69cdc16612667',0xce10,0x2fb10,0xc00,0x12d0)]
 source=R/'build/mean-minigame-prepared';demo=(source/'image.bin').read_bytes();runtime=(source/'runtime.bin').read_bytes()
 keys=json.loads((R/'analysis/traces/mean-minigame1-winning-input.json').read_text())['keys']
@@ -71,11 +76,12 @@ for name,sha,cd,gd,sd,nd in config:
    for byte in u.mem_read(0x43ec3c+gd,480):h=((h^byte)*1099511628211)&0xffffffffffffffff
    rows.append(dict(fields=list(struct.unpack('<24I',u.mem_read(0x43efd8+gd,96))),active=get(0x1001044),mode=get(0x1001030),field_1fa=struct.unpack('<H',u.mem_read(0x43f1fa+gd,2))[0],points=points[0],callback=callback[0],packed_frame_fnv=str(h)))
    if not get(0x1001044):break
-  native=json.loads(subprocess.check_output([sys.argv[1],str(source/'image.bin'),str(source/'runtime.bin'),str(dat_path),str(scenario_path),'retail']))
+  native=json.loads(subprocess.check_output([str(args.native),str(source/'image.bin'),str(source/'runtime.bin'),str(dat_path),str(scenario_path),'retail']))
   assert len(native)==len(rows),(name,scenario,len(native),len(rows))
   for tick,(aa,bb) in enumerate(zip(native,rows)):assert aa==bb,(name,scenario,tick,{k:(aa[k],bb[k]) for k in aa if aa[k]!=bb[k]})
   assert (points[0],callback[0],rows[-1]['fields'][1])==((120000000,0x40fb78,4) if scenario=='win' else (40000000,0x40f994,2))
   reports.append(dict(build=name,scenario=scenario,build_sha256=sha,instructions=instruction_count,diffs=diffs,mapping={hex(aa):hex(bb) for aa,bb in mapping.items()},ticks=len(rows),points=points[0],callback=hex(callback[0]),initial_field_1fa=struct.unpack('<H',initial_image[0x3f1fa+gd:0x3f1fc+gd])[0],final_field_1fa=rows[-1]['field_1fa'],final_fields=rows[-1]['fields'],trace_sha256=hashlib.sha256(json.dumps(rows,sort_keys=True,separators=(',',':')).encode()).hexdigest()))
 
-(R/'analysis/traces/mean-minigame-retail-original.json').write_text(json.dumps(dict(scope='Actual unmodified Retail/Fix code with translated cached Demo selected3-capture context and compatible Demo DAT/LUT; external presentation/audio/scoring/lamp services adapted. Not Retail startup or whole-table equivalence.',dat_sha256=hashlib.sha256(dat).hexdigest(),builds=reports),indent=2)+'\n')
+args.output.parent.mkdir(parents=True,exist_ok=True)
+args.output.write_text(json.dumps(dict(scope='Actual unmodified Retail/Fix code with translated cached Demo selected3-capture context and compatible Demo DAT/LUT; external presentation/audio/scoring/lamp services adapted. Not Retail startup or whole-table equivalence.',dat_sha256=hashlib.sha256(dat).hexdigest(),builds=reports),indent=2)+'\n')
 print('Retail/Fix entire normalized island and actual tick traces match native Retail profile',[(x['build'],x['ticks'],x['points']) for x in reports])

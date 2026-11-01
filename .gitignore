@@ -17,6 +17,12 @@
 !/analysis/import/
 !/analysis/table-profiles.json
 !/analysis/map.json
+!/analysis/stim-pcm-all-orders-survey.json
+!/analysis/stim-pcm-v6-all-orders-survey.json
+!/analysis/stim-pcm-v6-long-survey.json
+!/analysis/stim-pcm-v9-transitions.json
+!/analysis/stim-pcm-v9-all-orders-survey.json
+!/analysis/stim-four-table-combined-v9.json
 /analysis/import/*
 !/analysis/import/*.json
 __pycache__/
@@ -42,3 +48,10 @@ __pycache__/
 /NACHBESCHAFFUNG*.md
 /QUELLEN.md
 /RE-Artefakte.md
+
+!/analysis/stim-pcm-v11-scheduler.json
+!/analysis/stim-pcm-v11-transitions.json
+!/analysis/stim-pcm-v11-mean-effect8.json
+!/analysis/stim-pcm-deferred-scheduler.json
+!/analysis/audio-trace-coverage-v1.4.json
+!/analysis/audio-trace-mix-v1.4.json

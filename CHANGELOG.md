@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4 — 2026-11-01
+
+- Improved tracker voice continuity across music banks, jingles and queued music changes on all four tables.
+- Corrected a Mean Machines instrument-volume transition.
+- Expanded sample-exact comparisons against controlled Windows Retail tracker and mixer scenarios, including trace-derived sound pairs and music on all four tables.
+
+These checks do not establish complete gameplay, physical audio output or Amiga playback parity. Original game data is not included.
+
 ## 1.3 — 2026-11-01
 
 - Improved STIM pitch slides and vibrato timing for all four tables, especially Mean Machines, The Pirate and Night of the Demon.

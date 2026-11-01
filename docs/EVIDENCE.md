@@ -2101,3 +2101,169 @@ STIM-VIBRATO-ROW-2026-10-31: during Pirate order 35, row 5, the SHA-verified Ret
 STIM-VIBRATO-DIRECT-2026-11-01: libxmp's period-to-bend-to-period round trip caused fractional period differences during vibrato in the compared starts. Selecting `period + vibrato` for STIM with zero finetune and no arpeggio eliminates the remaining 27 Mean and 172 Pirate differences; all 29,598 selected period fields match Retail over four 2,000-tick adapted starts. In 32 selected order samples, 221 fields improve and none regress. [Original](verification/stim-vibrato-direct-original-2026-11-01.json), [survey](verification/stim-vibrato-direct-survey-2026-11-01.json). PCM, physical output and untested effects/banks remain unknown.
 
 STIM-DYNAMIC-PCM-2026-11-01: executed SHA-pinned Retail tracker, voice adapter `0x401838`, and mixer for 512 manually clocked windows per table. The harness links active voices; first five windows match the earlier fixed-voice oracle. Native/Original overall correlations are 0.999512–0.999793, but exact samples differ. [Evidence](verification/stim-dynamic-pcm-2026-11-01.json). Original scheduling, device output, SFX and full songs are not covered. Alternative gain experiments are [recorded separately](verification/stim-volume-experiment-2026-11-01.json).
+
+### STIM-PCM-2026-11: bounded Retail comparison
+
+**VERIFIED (bounded):** With the isolated experimental patch, four Retail table
+startup streams match the manually clocked original mixer bit for bit for 2,048
+tracker ticks (40.96 s each); 65 synthetic volume levels and a non-STIM
+isolation sample also match. Original PE SHA-256:
+`185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6`.
+Original sequencer `0x44eaf8`, voice update `0x401838`, mixer `0x44b560`.
+No scheduler, full-game event stream, actual device or Amiga equivalence is
+established by these tests.
+
+**PARTIAL:** The earlier offset candidate yielded 522 exact, 33 different,
+and 8 unresolved of 563 bank/order starts (32 ticks each); see
+`analysis/stim-pcm-all-orders-survey.json`. The unresolved cases raised original
+emulation exceptions. Subsequent per-channel-mute safeguard is not covered by
+that survey. Mean bank 0 order 1 restarts a sample on an instrument-only event;
+a general restart hypothesis fixes this case but regresses Space bank 0 orders
+17 and 18, so it is excluded from the patch. Sample-header voice logs and the
+experimental comparisons are generated under the ignored `build/` directory.
+
+**HYPOTHESIS:** Direct-order timing resets and some tracker effects require
+additional original state. Full PCM/music parity is not yet established. This earlier
+experimental candidate was not enabled; it has since been superseded by v6.
+
+
+### STIM-PCM-V6-2026-11-01
+
+**VERIFIED (bounded):** Retail `0x44e21b` distinguishes an `8xx`
+instrument-only transition; the `0x44e5db` arpeggio uses fixed-point ratios
+at `0x46750c`. All 576 period-table entries at `0x466fec` and 16 arpeggio
+ratios match the patched libxmp tables. `0x44eb46` handles speed zero; the
+Retail order reader accesses the fixed 128-entry list. A fine pitch slide
+without a new note is applied after the prior voice period's first window.
+
+The 33 previously differing 32-tick cases now match. Across all 563 declared
+bank/order starts, 555 produce exact PCM for 32 ticks and eight Mean starts
+fault in Retail `0x401898` due to zero period under fresh synthetic state.
+Thirty selected starts across all ten banks each match for 2,048 ticks; the
+synthetic Pirate music plus two-SFX case matches for four buffer lengths.
+[All orders](../analysis/stim-pcm-v6-all-orders-survey.json),
+[long starts](../analysis/stim-pcm-v6-long-survey.json).
+
+**LIMITS:** The comparisons manually clock the tracker and adapt the voice
+list. They do not establish the eight missing previous states, full-song
+coverage, real-game event timing, physical output or Amiga parity. The current
+patch is integrated in build recipes, not proof of complete PCM equality.
+
+
+### STIM-TRANSITIONS-V9-2026-11-01
+
+**VERIFIED (bounded):** Retail `0x44f138` retains tracker channel state; an
+instrument-only `8xx` transition can therefore depend on the previous order.
+An 8xx on a one-shot sample does not restart that old voice. The port now
+preserves same-bank channel state for repeated services `90`, `84` and `88`
+when built with the pinned STIM patch. A fresh process using system libxmp
+retains the previous restart behavior.
+
+Original and native were each primed with one tracker/mixer tick before a
+position switch. For each service, 15 previously untestable Mean transitions
+match bit for bit for 32 ticks; all eight target positions are covered with
+warm order 5. Warm order 7 to bank 1/order 46 still faults in the adapted
+original. The 15 measurable service-90 transitions also match for 512 ticks.
+Four same-order restarts per service and another 48 Pirate, Space and Demon
+service-90 transitions match for 32 ticks. [Results](../analysis/stim-pcm-v9-transitions.json).
+A separate v9 cold-start survey confirms 555 exact cases and the same eight
+fresh-state original faults: [survey](../analysis/stim-pcm-v9-all-orders-survey.json).
+
+**LIMITS:** The test calls Retail tracker/mixer routines directly and manually
+selects timing and warm states; it does not prove real-game reachability,
+cross-bank context continuity, overlapping service transitions, end-to-end
+SDL queue timing, physical playback or complete song equality. The general
+libxmp mode is compared independently against the v6 patch; unrelated tracker
+formats are compared against stock libxmp.
+
+
+### STIM-SFX-FOUR-TABLE-COMBINED-2026-11-01
+
+**VERIFIED (bounded):** Each of the four Retail DATs supplied its two first
+sample-directory entries as synthetic simultaneous one-shot voices. Original
+`0x44cc00` resampled them, original `0x44eaf8`/`0x401838`/`0x44b560` produced
+three music ticks, and original `0x44b8bc` combined them. Native tracker plus
+both native SFX voices matched all 2,646 stereo frames for chunk sizes 137,
+882 and 2,646 on every table. [Results](../analysis/stim-four-table-combined-v9.json).
+
+**LIMITS:** The simultaneous requests and their timing are synthetic; this does
+not prove gameplay event reachability, cross-bank state, full songs, hardware
+output, overflow behavior or Amiga audio equality.
+
+
+### STIM-SCHEDULER-BANKS-2026-11-01
+
+Historical v11 measurement before the effect-8 correction documented below; the linked scheduler report now contains the rerun with the correction.
+
+**VERIFIED (bounded):** Retail `0x401950` calls service scheduler `0x4062f0`
+prior to tracker `0x44eaf8` and voice adapter `0x401838`. Under synthetic
+service-88 setup, the observed F00 boundary plays two ticks before scheduler
+`0x40634c` restores the saved tracker via `0x44dce0`; service 84 does not
+automatically stop under the same modeled conditions. The native sequencer
+implements these observed paths and compatible cross-bank voice transfers.
+
+[Transition report](../analysis/stim-pcm-v11-transitions.json): 600/600
+32-tick cases match. Scheduler report at that checkpoint: 52/54 selected 512-tick cases matched.
+The two failures were the same Mean bank
+1/order 5 → bank 0/order 16 transition after 200 warm ticks, one each for
+services 84 and 88: 866 first-tick stereo frames differ. The 200-tick warm
+sequence itself matches. The matching cases do not prove whole-song parity.
+
+**LIMITS:** All scheduler states and event timing were manually constructed;
+actual event reachability, device output, other service interactions and Amiga
+behavior remain open. At that checkpoint the two strict warm-200 CTests were disabled. After the correction they were restored and passed; the [current report](../analysis/stim-pcm-v11-scheduler.json) records 54/54.
+
+
+### STIM-MEAN-EFFECT8-VOLUME-2026-11-01
+
+**VERIFIED (bounded):** In the Mean bank 1/order 5 → bank 0/order 16
+transition after 200 warm ticks, the original first target row contains an
+instrument-only effect-8 event on tracker channel 4. The original applies the
+new instrument volume 64 immediately; the previous native patch retained the
+previous volume 61. Isolating each channel showed differences only in channel
+4: 866 of 882 first-tick stereo frames. The STIM-only mixer correction uses
+the new volume for this event. [Targeted cases](../analysis/stim-pcm-v11-mean-effect8.json)
+match 14/14 synthetic transitions for 128 ticks each. The 326 effect-8 order
+references seen in the ten Retail banks all use an instrument without a note;
+these are order references, not necessarily distinct pattern events.
+
+**LIMITS:** Synthetic tracker calls do not establish naturally reachable game
+events, complete songs, end-to-end physical output or Amiga equivalence.
+
+
+### STIM-DEFERRED-SERVICE-2026-11-01
+
+**VERIFIED (bounded):** In the authenticated Windows Retail binary, `0x406240`
+queues lower service 84 while service 88 is active; on its F00 completion,
+`0x4062f0`/`0x40634c` starts the pending tracker via `0x44f138` while retaining
+live voices. A Mean bank 0/order 5 → bank 1/order 31 → queued bank 0/order 16
+comparison initially differed by 356 stereo frames at tick 207. The native
+sequencer now transfers compatible live voices before releasing the upper cue.
+[Results](../analysis/stim-pcm-deferred-scheduler.json) cover ten 512-tick
+controlled comparisons across four tables, all bit-identical. One uses the
+Pirate bank/order request pair observed at step 657 in
+[pirate-audio-events.json](../analysis/traces/pirate-audio-events.json).
+
+**LIMITS:** Tracker warmup, tick cadence and reconstructed service state are
+controlled; the request pair's real-world audible timing, full gameplay
+reachability, physical output and Amiga parity are not established.
+
+
+### AUDIO-TRACE-COMBINED-2026-11-01
+
+**VERIFIED (bounded):** [Trace inventory](../analysis/audio-trace-coverage-v1.4.json)
+counts 418 Pirate same-step SFX request groups in 81 retained cases, comprising
+seven ordered pairs, and 12 Demon groups in 37 fixtures comprising one pair.
+Mean does not have an equivalent complete original service-entry stream.
+[Combined PCM comparisons](../analysis/audio-trace-mix-v1.4.json) cover all
+seven Pirate pairs, the Demon pair, 13 distinct Mean display-table requests,
+and one Space and one Demon SFX/music request pair. Each was compared over
+2,646 stereo frames with SHA-verified Windows Retail tracker, SFX and final
+mixer instructions; all selected samples match. Multiple chunk sizes were
+checked for Mean, Pirate and the Demon SFX pair.
+
+**LIMITS:** Request coincidences are not proof of audible overlap. The Mean
+and Pirate/Demon-pair comparisons use synthetic simultaneous startup music
+and empty voices. Space/Demon SFX/music tests use an assumed 882-frame
+separation and fresh tracker, not an observed audio-device clock. Earlier
+voices, full gameplay and Amiga/device parity are not covered.

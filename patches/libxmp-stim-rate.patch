@@ -1,35 +1,272 @@
+--- a/include/xmp.h
++++ b/include/xmp.h
+@@ -386,0 +387,2 @@
++LIBXMP_EXPORT int         xmp_slam_transfer(xmp_context, xmp_context);
++LIBXMP_EXPORT int         xmp_slam_resume(xmp_context, xmp_context);
+--- a/libxmp.map
++++ b/libxmp.map
+@@ -18,0 +19,2 @@
++    xmp_slam_transfer;
++    xmp_slam_resume;
+--- a/src/common.h
++++ b/src/common.h
+@@ -597,0 +598 @@
++	int slam_f00_hold;
+@@ -625,0 +627,3 @@
++	struct channel_data *slam_snapshot;
++	int slam_snapshot_order;
++	int slam_snapshot_valid;
+--- a/src/control.c
++++ b/src/control.c
+@@ -25,0 +26 @@
++#include "player.h"
+@@ -126,0 +128,3 @@
++		if (strcmp(mod->type, "Slamtilt") == 0 && p->master_vol == 66 &&
++		    ctx->s.interp == XMP_INTERP_NEAREST && !(ctx->s.format & XMP_FORMAT_MONO))
++			f->force_reposition = 1;
+@@ -743,0 +748,143 @@
++
++/* Transfer live Retail STIM voices only between compatible, freshly loaded
++ * sample banks. Validate everything before mutating the destination. */
++int xmp_slam_transfer(xmp_context from, xmp_context to)
++{
++	struct context_data *a = (struct context_data *)from;
++	struct context_data *b = (struct context_data *)to;
++	struct player_data *x, *y;
++	int i;
++	if (!a || !b || a == b) return -1;
++	x = &a->p; y = &b->p;
++	if (a->state < XMP_STATE_PLAYING || b->state < XMP_STATE_PLAYING ||
++	    strcmp(a->m.mod.type, "Slamtilt") || strcmp(b->m.mod.type, "Slamtilt") ||
++	    a->m.mod.chn != 4 || b->m.mod.chn != 4 ||
++	    a->m.mod.smp != b->m.mod.smp || a->m.mod.ins != b->m.mod.ins ||
++	    a->m.mod.ins != a->m.mod.smp || x->virt.maxvoc != y->virt.maxvoc ||
++	    x->virt.virt_channels != y->virt.virt_channels || x->virt.num_tracks != y->virt.num_tracks ||
++	    !x->xc_data || !y->xc_data || !x->virt.voice_array || !y->virt.voice_array ||
++	    !x->virt.virt_channel || !y->virt.virt_channel || y->virt.virt_used != 0 ||
++	    y->buffer_data.in_size != 0 || a->s.freq != b->s.freq || a->s.mix != b->s.mix ||
++	    a->s.interp != b->s.interp || a->s.format != b->s.format || a->s.amplify != b->s.amplify ||
++	    x->master_vol != 66 || y->master_vol != 66 || a->s.mix != 0 ||
++	    a->s.interp != XMP_INTERP_NEAREST || (a->s.format & XMP_FORMAT_MONO) ||
++	    (x->flags & XMP_FLAGS_A500) || (y->flags & XMP_FLAGS_A500)) return -1;
++	for (i = 0; i < a->m.mod.smp; ++i) {
++		struct xmp_sample *s = &a->m.mod.xxs[i], *t = &b->m.mod.xxs[i];
++		struct xmp_instrument *si = &a->m.mod.xxi[i], *ti = &b->m.mod.xxi[i];
++		if (s->len < 0 || s->len != t->len || s->lps != t->lps || s->lpe != t->lpe ||
++		    s->flg != t->flg || (s->flg & (XMP_SAMPLE_16BIT | XMP_SAMPLE_STEREO | XMP_SAMPLE_SYNTH)) ||
++		    ((s->data == NULL) != (t->data == NULL)) ||
++		    (s->data && memcmp(s->data, t->data, (size_t)s->len)) ||
++		    si->nsm != ti->nsm || ((si->sub == NULL) != (ti->sub == NULL)) ||
++		    (si->sub && (si->sub->vol != ti->sub->vol || si->sub->fin != ti->sub->fin ||
++		                 si->sub->xpo != ti->sub->xpo || si->sub->pan != ti->sub->pan ||
++		                 si->sub->sid != ti->sub->sid)) ||
++		    a->m.xtra[i].c5spd != b->m.xtra[i].c5spd) return -2;
++	}
++	for (i = 0; i < x->virt.maxvoc; ++i) {
++		struct mixer_voice *v = &x->virt.voice_array[i];
++		if (y->virt.voice_array[i].chn >= 0) return -1;
++		if (v->chn >= 0 && (v->smp < 0 || v->smp >= a->m.mod.smp ||
++		    (v->sptr && v->sptr != a->m.mod.xxs[v->smp].data))) return -3;
++	}
++	for (i = 0; i < x->virt.virt_channels; ++i) {
++#ifndef LIBXMP_CORE_PLAYER
++		void *extra = y->xc_data[i].extra;
++#endif
++		y->xc_data[i] = x->xc_data[i];
++#ifndef LIBXMP_CORE_PLAYER
++		y->xc_data[i].extra = extra;
++#endif
++		y->virt.virt_channel[i] = x->virt.virt_channel[i];
++	}
++	y->virt.virt_used = x->virt.virt_used;
++	for (i = 0; i < x->virt.maxvoc; ++i) {
++		struct mixer_voice *v = &x->virt.voice_array[i], *w = &y->virt.voice_array[i];
++#ifdef LIBXMP_PAULA_SIMULATOR
++		struct paula_state *paula = w->paula;
++#endif
++		*w = *v;
++#ifdef LIBXMP_PAULA_SIMULATOR
++		w->paula = paula;
++#endif
++		if (v->chn >= 0 && v->sptr) w->sptr = b->m.mod.xxs[v->smp].data;
++		else if (v->chn < 0) w->sptr = NULL;
++	}
++	return 0;
++}
++
++/* Transfer live Retail STIM voices only between compatible, freshly loaded
++ * sample banks. Validate everything before mutating the destination. */
++int xmp_slam_resume(xmp_context from, xmp_context to)
++{
++	struct context_data *a = (struct context_data *)from;
++	struct context_data *b = (struct context_data *)to;
++	struct player_data *x, *y;
++	int i;
++	if (!a || !b || a == b) return -1;
++	if (!b->p.slam_snapshot || !b->p.slam_snapshot_valid || b->p.slam_snapshot_order < 0 ||
++	    b->p.slam_snapshot_order >= b->m.mod.len) return -1;
++	x = &a->p; y = &b->p;
++	if (a->state < XMP_STATE_PLAYING || b->state < XMP_STATE_PLAYING ||
++	    strcmp(a->m.mod.type, "Slamtilt") || strcmp(b->m.mod.type, "Slamtilt") ||
++	    a->m.mod.chn != 4 || b->m.mod.chn != 4 ||
++	    a->m.mod.smp != b->m.mod.smp || a->m.mod.ins != b->m.mod.ins ||
++	    a->m.mod.ins != a->m.mod.smp || x->virt.maxvoc != y->virt.maxvoc ||
++	    x->virt.virt_channels != y->virt.virt_channels || x->virt.num_tracks != y->virt.num_tracks ||
++	    !x->xc_data || !y->xc_data || !x->virt.voice_array || !y->virt.voice_array ||
++	    !x->virt.virt_channel || !y->virt.virt_channel ||
++	    a->s.freq != b->s.freq || a->s.mix != b->s.mix ||
++	    a->s.interp != b->s.interp || a->s.format != b->s.format || a->s.amplify != b->s.amplify ||
++	    x->master_vol != 66 || y->master_vol != 66 || a->s.mix != 0 ||
++	    a->s.interp != XMP_INTERP_NEAREST || (a->s.format & XMP_FORMAT_MONO) ||
++	    (x->flags & XMP_FLAGS_A500) || (y->flags & XMP_FLAGS_A500)) return -1;
++	for (i = 0; i < a->m.mod.smp; ++i) {
++		struct xmp_sample *s = &a->m.mod.xxs[i], *t = &b->m.mod.xxs[i];
++		struct xmp_instrument *si = &a->m.mod.xxi[i], *ti = &b->m.mod.xxi[i];
++		if (s->len < 0 || s->len != t->len || s->lps != t->lps || s->lpe != t->lpe ||
++		    s->flg != t->flg || (s->flg & (XMP_SAMPLE_16BIT | XMP_SAMPLE_STEREO | XMP_SAMPLE_SYNTH)) ||
++		    ((s->data == NULL) != (t->data == NULL)) ||
++		    (s->data && memcmp(s->data, t->data, (size_t)s->len)) ||
++		    si->nsm != ti->nsm || ((si->sub == NULL) != (ti->sub == NULL)) ||
++		    (si->sub && (si->sub->vol != ti->sub->vol || si->sub->fin != ti->sub->fin ||
++		                 si->sub->xpo != ti->sub->xpo || si->sub->pan != ti->sub->pan ||
++		                 si->sub->sid != ti->sub->sid)) ||
++		    a->m.xtra[i].c5spd != b->m.xtra[i].c5spd) return -2;
++	}
++	for (i = 0; i < x->virt.maxvoc; ++i) {
++		struct mixer_voice *v = &x->virt.voice_array[i];
++
++		if (v->chn >= 0 && (v->smp < 0 || v->smp >= a->m.mod.smp ||
++		    (v->sptr && v->sptr != a->m.mod.xxs[v->smp].data))) return -3;
++	}
++	/* All validation is complete; discard stale destination output only now. */
++	if (xmp_play_buffer(to, NULL, 0, 0) != 0) return -1;
++	for (i = 0; i < x->virt.virt_channels; ++i) {
++#ifndef LIBXMP_CORE_PLAYER
++		void *extra = y->xc_data[i].extra;
++#endif
++		if (i < 4) y->xc_data[i] = y->slam_snapshot[i];
++		y->xc_data[i].period = x->xc_data[i].period;
++		y->xc_data[i].volume = x->xc_data[i].volume;
++#ifndef LIBXMP_CORE_PLAYER
++		y->xc_data[i].extra = extra;
++#endif
++		y->virt.virt_channel[i] = x->virt.virt_channel[i];
++	}
++	y->virt.virt_used = x->virt.virt_used;
++	for (i = 0; i < x->virt.maxvoc; ++i) {
++		struct mixer_voice *v = &x->virt.voice_array[i], *w = &y->virt.voice_array[i];
++#ifdef LIBXMP_PAULA_SIMULATOR
++		struct paula_state *paula = w->paula;
++#endif
++		*w = *v;
++#ifdef LIBXMP_PAULA_SIMULATOR
++		w->paula = paula;
++#endif
++		if (v->chn >= 0 && v->sptr) w->sptr = b->m.mod.xxs[v->smp].data;
++		else if (v->chn < 0) w->sptr = NULL;
++	}
++	if (xmp_set_position(to, y->slam_snapshot_order) < -1) return -1;
++	return 0;
++}
+--- a/src/effects.c
++++ b/src/effects.c
+@@ -463,0 +464 @@
++		if (strcmp(m->mod.type, "Slamtilt") == 0 && fxp == 0) { p->slam_f00_hold = 1; break; }
+--- a/src/loaders/stim_load.c
++++ b/src/loaders/stim_load.c
+@@ -109,0 +110,3 @@
++	/* Retail continues through valid entries in the fixed 128-byte list. */
++	while (mod->len < 128 && sh.order[mod->len] < sh.pat)
++		mod->len++;
 --- a/src/mix_all.c
 +++ b/src/mix_all.c
 @@ -173,0 +174 @@
 +    if (!vi->slam_stim) { \
 @@ -176,0 +178 @@
 +    } \
---- a/src/mixer.h
-+++ b/src/mixer.h
-@@ -20,0 +21 @@
-+	int slam_stim; /* isolated experiment */
+@@ -301,0 +304,10 @@
++    if (vi->slam_retail) {
++        uint64_t pos_q32 = (uint64_t)(vi->pos * 4294967296.0);
++        LOOP {
++            int v = ((int)sptr[pos_q32 >> 32] * 21845 * vi->slam_gain) >> 16;
++            *(buffer++) += v * 2048;
++            *(buffer++) += v * 2048;
++            pos_q32 += vi->slam_step;
++        }
++        return;
++    }
 --- a/src/mixer.c
 +++ b/src/mixer.c
 @@ -530,0 +531 @@
 +		vi->slam_stim = strcmp(m->mod.type, "Slamtilt") == 0;
-@@ -584,0 +586 @@
+@@ -552,0 +554,19 @@
++		/* The Retail game mixer is used for STIM in this specific output mode. */
++		vi->slam_retail = vi->slam_stim && p->master_vol == 66 &&
++			s->amplify == 1 && s->interp == XMP_INTERP_NEAREST &&
++			!(s->format & XMP_FORMAT_MONO) && vi->pan == 0 &&
++			vi->chn < m->mod.chn && vi->root >= 0 && vi->root < XMP_MAX_CHANNELS &&
++			p->channel_vol[vi->root] == 100;
++		vi->slam_gain = vi->slam_retail ? p->xc_data[vi->chn].volume * 2 : 0;
++		if (vi->slam_retail && p->frame == 0 && (p->xc_data[vi->chn].flags & FINE_VOLS))
++			vi->slam_gain = p->xc_data[vi->chn].slam_prev_fine_volume * 2;
++		if (vi->slam_retail && p->frame == 0 && !(p->xc_data[vi->chn].flags & NEW_NOTE) &&
++		    (p->xc_data[vi->chn].flags & NEW_VOL) && !p->xc_data[vi->chn].slam_effect8_instrument)
++			vi->slam_gain = p->xc_data[vi->chn].slam_prev_row_volume * 2;
++		if (vi->slam_retail && p->frame == 0 && (p->xc_data[vi->chn].flags & TONEPORTA) && (p->xc_data[vi->chn].flags & NEW_INS))
++			vi->slam_gain = p->xc_data[vi->chn].slam_prev_row_volume * 2;
++		if (vi->slam_retail && p->frame == 0 && p->xc_data[vi->chn].slam_invalid_offset_hold)
++			vi->slam_gain = p->xc_data[vi->chn].slam_prev_row_volume * 2;
++		if (vi->slam_retail && p->channel_mute[vi->root]) vi->slam_gain = 0;
++		if (vi->slam_gain > 127) vi->slam_gain = 127;
++		if (vi->slam_gain < 0) vi->slam_gain = 0;
+@@ -584,0 +605,6 @@
 +		if (vi->slam_stim) step = floor(3546895.0 / vi->period) / s->freq;
++		if (vi->slam_retail && !(vi->flags & VOICE_REVERSE)) {
++			uint64_t freq = (uint64_t)floor(3546895.0 / vi->period);
++			vi->slam_step = ((freq << 32) / s->freq) & ~(uint64_t)15;
++			step = (double)vi->slam_step / 4294967296.0;
++		} else vi->slam_retail = 0;
+@@ -638 +664 @@
+-			if (vi->vol) {
++			if (vi->vol || (vi->slam_retail && vi->slam_gain)) {
+@@ -710 +736 @@
+-					do_anticlick(ctx, voc, buf_pos, size);
++					if (!vi->slam_retail) do_anticlick(ctx, voc, buf_pos, size);
+@@ -727 +753 @@
+-					do_anticlick(ctx, voc, buf_pos, size);
++					if (!vi->slam_retail) do_anticlick(ctx, voc, buf_pos, size);
+@@ -820,0 +847,5 @@
++	if (strcmp(m->mod.type, "Slamtilt") == 0 && pos > 0 && pos >= xxs->len) {
++		libxmp_virt_resetvoice(ctx, voc, 1);
++		return;
++	}
++
+--- a/src/mixer.h
++++ b/src/mixer.h
+@@ -2,0 +3,2 @@
++
++#include <stdint.h>
+@@ -20,0 +23,4 @@
++	int slam_stim; /* isolated experiment */
++	int slam_retail;
++	int slam_gain;
++	uint64_t slam_step;
 --- a/src/period.c
 +++ b/src/period.c
-@@ -180,0 +181,10 @@
+@@ -31 +30,0 @@
+-#ifdef LIBXMP_PAULA_SIMULATOR
+@@ -133 +131,0 @@
+-#endif
+@@ -180,0 +179,6 @@
 +
-+	/* Experiment only: normal-tuning ProTracker periods, three octaves. */
-+	if (strcmp(m->mod.type, "Slamtilt") == 0 && f == 0 && n >= 48 && n < 84) {
-+		static const unsigned short notes[36] = {
-+			856,808,762,720,678,640,604,570,538,508,480,453,
-+			428,404,381,360,339,320,302,285,269,254,240,226,
-+			214,202,190,180,170,160,151,143,135,127,120,113
-+		};
-+		return notes[n - 48];
++	/* Retail STIM uses this exact 16 x 36 period table. */
++	if (strcmp(m->mod.type, "Slamtilt") == 0 && n >= 48 && n < 84 && f >= -128 && f <= 112 && f % 16 == 0) {
++		int tuning = (f / 16 + 16) % 16;
++		return pt_period_table[tuning][n - 48];
 +	}
 --- a/src/player.c
 +++ b/src/player.c
-@@ -1277,0 +1278,18 @@
+@@ -1277,0 +1278,24 @@
 +	/* Experiment: preserve the table period only for zero bend. */
 +	if (strcmp(m->mod.type, "Slamtilt") == 0 && xc->finetune == 0 && linear_bend == 0 &&
 +	    xc->note >= 48 && xc->note < 84)
@@ -47,4 +284,102 @@
 +	    TEST(PITCHBEND) && xc->freq.slide > 0 && !TEST(VIBRATO) &&
 +	    arp == 0 && xc->finetune == 0)
 +		final_period = (int)(final_period + 0.5);
++	if (strcmp(m->mod.type, "Slamtilt") == 0 && arp == 0 && !TEST(VIBRATO) && !TEST_PER(VIBRATO)) final_period = period;
++	if (strcmp(m->mod.type, "Slamtilt") == 0 && arp > 0 && arp < 16) {
++		static const int ratios[16] = {65536, 61858, 58386, 55109, 52016, 49097, 46341, 43740, 41285, 38968, 36781, 34716, 32768, 30929, 29193, 27554};
++		int value = ((int)period * ratios[arp]) >> 16;
++		final_period = value < 113 ? 113 : (value > 856 ? 856 : value);
++	}
 +
+@@ -1293,0 +1318,7 @@
++
++	/* The old voice period is mixed once before a no-note fine slide. */
++	if (strcmp(m->mod.type, "Slamtilt") == 0 && p->frame == 0 && TEST(FINE_BEND) && !TEST(NEW_NOTE) && xc->info_period > 0)
++		final_period = xc->info_period / 4096.0;
++
++	if (strcmp(m->mod.type, "Slamtilt") == 0 && p->frame == 0 && xc->slam_invalid_offset_hold && xc->info_period > 0)
++		final_period = xc->info_period / 4096.0;
+@@ -1465,0 +1497 @@
++			xc->slam_prev_fine_volume = xc->volume;
+@@ -1920,0 +1953 @@
++	if (strcmp(m->mod.type, "Slamtilt") == 0) { p->speed = 6; p->bpm = 125; p->slam_f00_hold = 0; }
+@@ -2033,0 +2067,6 @@
++	p->slam_snapshot = NULL;
++	p->slam_snapshot_valid = 0;
++	if (strcmp(mod->type, "Slamtilt") == 0) {
++		p->slam_snapshot = (struct channel_data *)calloc(4, sizeof(struct channel_data));
++		if (!p->slam_snapshot) { free(p->xc_data); p->xc_data = NULL; ret = -XMP_ERROR_SYSTEM; goto err1; }
++	}
+@@ -2055,0 +2095,2 @@
++	free(p->slam_snapshot);
++	p->slam_snapshot = NULL;
+@@ -2139,2 +2180,5 @@
+-		libxmp_virt_reset(ctx);
+-		reset_channels(ctx);
++		if (strcmp(m->mod.type, "Slamtilt") != 0 || p->master_vol != 66 ||
++		    ctx->s.interp != XMP_INTERP_NEAREST || (ctx->s.format & XMP_FORMAT_MONO)) {
++			libxmp_virt_reset(ctx);
++			reset_channels(ctx);
++		}
+@@ -2148,2 +2192,2 @@
+-		p->frame++;
+-		if (p->frame >= (p->speed * (1 + f->delay))) {
++		if (p->slam_f00_hold) p->frame = 1; else p->frame++;
++		if (!p->slam_f00_hold && p->frame >= (p->speed * (1 + f->delay))) {
+@@ -2198,0 +2243,8 @@
++	/* Retail snapshots tracker state at the start of an order. */
++	if (p->slam_snapshot && mod->chn == 4 && p->frame == 0 &&
++	    (p->row == 0 || !p->slam_snapshot_valid || p->ord != p->slam_snapshot_order)) {
++		memcpy(p->slam_snapshot, p->xc_data, 4 * sizeof(struct channel_data));
++		p->slam_snapshot_order = p->ord;
++		p->slam_snapshot_valid = 1;
++	}
++
+@@ -2287,0 +2340,3 @@
++	free(p->slam_snapshot);
++	p->slam_snapshot = NULL;
++	p->slam_snapshot_valid = 0;
+--- a/src/player.h
++++ b/src/player.h
+@@ -106,0 +107,4 @@
++	int slam_prev_fine_volume;
++	int slam_prev_row_volume;
++	int slam_invalid_offset_hold;
++	int slam_effect8_instrument;
+--- a/src/read_event.c
++++ b/src/read_event.c
+@@ -279 +279,10 @@
+-
++	int slam_loop_restart = strcmp(m->mod.type, "Slamtilt") == 0 && e->ins && !e->note && e->fxt == 8 && TEST_NOTE(NOTE_SET) && IS_VALID_SAMPLE(xc->smp);
++	int slam_loop_sample = xc->smp;
++	int slam_effect8 = slam_loop_restart;
++	if (slam_loop_restart && p->master_vol == 66 && ctx->s.interp == XMP_INTERP_NEAREST &&
++	    !(ctx->s.format & XMP_FORMAT_MONO) && !(mod->xxs[slam_loop_sample].flg & XMP_SAMPLE_LOOP))
++		slam_loop_restart = 0;
++
++	xc->slam_prev_row_volume = xc->volume;
++	xc->slam_invalid_offset_hold = 0;
++	xc->slam_effect8_instrument = strcmp(m->mod.type, "Slamtilt") == 0 && e->ins && !e->note && e->fxt == 8;
+@@ -384 +393,11 @@
+-					set_patch(ctx, chn, xc->ins, smp, note);
++					/* Retail keeps an existing voice if 9xx points beyond the new sample. */
++					int offset = (e->fxp ? e->fxp : xc->offset.memory) << 8;
++					int hold = strcmp(m->mod.type, "Slamtilt") == 0 && p->master_vol == 66 &&
++						ctx->s.mix == 0 && ctx->s.amplify == 1 && ctx->s.interp == XMP_INTERP_NEAREST &&
++						!(ctx->s.format & XMP_FORMAT_MONO) && e->fxt == FX_OFFSET &&
++						offset > mod->xxs[smp].len && libxmp_virt_mapchannel(ctx, chn) >= 0;
++					if (!hold) {
++						set_patch(ctx, chn, xc->ins, smp, note);
++						xc->smp = smp;
++					}
++					xc->slam_invalid_offset_hold = hold;
+@@ -386 +404,0 @@
+-					xc->smp = smp;
+@@ -408 +426 @@
+-	if (new_swap_ins && sub && HAS_QUIRK(QUIRK_PROTRACK) && TEST_NOTE(NOTE_SET)) {
++	if (new_swap_ins && sub && HAS_QUIRK(QUIRK_PROTRACK) && TEST_NOTE(NOTE_SET) && !slam_effect8) {
+@@ -448 +466,3 @@
+-	if (note >= 0 && !new_invalid_ins) {
++	if (slam_loop_restart) {
++		libxmp_virt_voicepos(ctx, chn, mod->xxs[slam_loop_sample].lps);
++	} else if (note >= 0 && !new_invalid_ins && !xc->slam_invalid_offset_hold) {

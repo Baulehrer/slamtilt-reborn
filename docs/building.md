@@ -5,15 +5,15 @@ Install a C++17 compiler, CMake, Python3, SDL3 (3.4+ recommended), nlohmann/json
 For the corrected Slam Tilt STIM music timing, use the pinned libxmp source checkout at `build/libxmp` and build a private patched copy before configuring the port:
 
 ```sh
-python3 tools/prepare_stim_libxmp.py --source build/libxmp --output build/libxmp-stim-v4
-cmake -S build/libxmp-stim-v4 -B build/libxmp-stim-v4-build -DBUILD_SHARED=ON -DBUILD_STATIC=OFF -DCMAKE_BUILD_TYPE=Release
-cmake --build build/libxmp-stim-v4-build -j2
+python3 tools/prepare_stim_libxmp.py --source build/libxmp --output build/libxmp-stim-v11
+cmake -S build/libxmp-stim-v11 -B build/libxmp-stim-v11-build -DBUILD_SHARED=ON -DBUILD_STATIC=OFF -DCMAKE_BUILD_TYPE=Release
+cmake --build build/libxmp-stim-v11-build -j2
 ```
 
-The patch is limited to STIM. A system libxmp without it still plays music but does not have the timing correction. For an existing CMake build, explicitly set `-DXMP_INCLUDE_DIR=$PWD/build/libxmp-stim-v4/include -DXMP_LIBRARY=$PWD/build/libxmp-stim-v4-build/libxmp.so` when reconfiguring; otherwise a cached older library may remain selected.
+Set `SLAM_STIM_CHANNEL_HISTORY=ON` only when linking the pinned patch; unpatched libraries retain the safe restart behavior. The patch is limited to STIM. A system libxmp without it still plays music but does not have the timing correction. For an existing CMake build, explicitly set `-DXMP_INCLUDE_DIR=$PWD/build/libxmp-stim-v11/include -DXMP_LIBRARY=$PWD/build/libxmp-stim-v11-build/libxmp.so` when reconfiguring; otherwise a cached older library may remain selected.
 
 ```sh
-cmake -S . -B out/native -DCMAKE_BUILD_TYPE=Release
+cmake -S . -B out/native -DCMAKE_BUILD_TYPE=Release -DSLAM_STIM_CHANNEL_HISTORY=ON
 cmake --build out/native --target slamtilt slamview slamslice -j2
 out/native/slamtilt
 ```

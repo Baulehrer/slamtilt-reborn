@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
       std::cout << c.period << ' ' << int(c.volume) << ' ' << int(c.instrument) << ' '
                 << int(c.event.note) << ' ' << int(c.event.fxt) << ' ' << int(c.event.fxp) << ' ';
     }
-    std::cout << frame.pos << ' ' << frame.row << ' ' << frame.frame << '\n';
+    std::cout << frame.pos << ' ' << frame.row << ' ' << frame.frame << ' ' << frame.speed << '\n';
   }
   xmp_end_player(ctx); xmp_release_module(ctx); xmp_free_context(ctx);
   return std::cout ? 0 : 4;

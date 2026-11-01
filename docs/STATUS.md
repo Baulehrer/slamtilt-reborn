@@ -1,5 +1,93 @@
 # Current status — 2026-10-29
 
+## Trace-derived combined audio — 2026-11-01
+
+- Four new original-mixer tests match over 2,646 stereo frames: 13 Mean
+  display-table requests, all seven distinct same-step Pirate SFX pairs, the
+  one same-step Demon SFX pair, and one Space plus one Demon trace-derived
+  music/SFX pair. [Results](../analysis/audio-trace-mix-v1.4.json).
+- The [trace inventory](../analysis/audio-trace-coverage-v1.4.json) records
+  request coincidences, not audio overlap: Mean lacks a comparable complete
+  original event stream. Mix tests use reconstructed voice/tracker states;
+  true cadence, earlier voices, full-game and Amiga/device parity remain open.
+
+## Deferred music after an upper cue — 2026-11-01
+
+- A pending service 84 now inherits the live upper-cue voices when service 88
+  finishes. Previously a controlled Mean transition differed in 356 stereo
+  frames at the transition tick.
+- Ten controlled comparisons across all four Windows Retail tables match
+  bit-for-bit for 512 ticks each, including the previously failing Mean case
+  and the 88/84 request pair observed together in Pirate's retained
+  `nudge-tilt-knife` trace. [Results](../analysis/stim-pcm-deferred-scheduler.json).
+- The Pirate requests come from a retained diagnostic game trace, but its
+  playback context and tick timing are reconstructed; whole-game, physical
+  audio output and Amiga equivalence remain unverified.
+
+## Mean tracker effect 8 — 2026-11-01
+
+- The previously discrepant bank transition used instrument 29 without a new
+  note. Retail applies its new volume on the first tick; the native mixer kept
+  the preceding volume. The pinned STIM patch corrects that row-specific case.
+- All 14 targeted Mean transitions with effect-8 rows match the Windows Retail
+  tracker/mixer for 128 ticks. All 54 selected scheduler cases now match for
+  512 ticks; the previously disabled tests are restored. [Effect-8 results](../analysis/stim-pcm-v11-mean-effect8.json), [scheduler](../analysis/stim-pcm-v11-scheduler.json).
+- Windows, ARM64 and WebAssembly libraries and the changed native audio sources
+  cross-compile. This is not a device-playback or complete-game parity test.
+
+## Historical STIM bank switching and scheduler — 2026-11-01
+
+- The pinned v11 STIM patch carries compatible voices and channel history
+  across banks. The sequencer also restores the saved tracker pattern after
+  service 88 ends; service 84 remains active until an explicit stop.
+- 600 synthetic 32-tick bank/service transitions are bit-exact against the
+  authenticated Windows Retail routines across all four tables. Nine longer
+  base transitions and four two-switch chains also match for 512 ticks.
+- Scheduler comparison: 52/54 synthetic 512-tick cases match. Both differences
+  are the same Mean bank 1 → 0 transition after 200 warm ticks: 866 of 451,584
+  stereo frames differed at its first tick. The two strict tests were subsequently
+  fixed and restored; see the current status above.
+- Full playback, natural gameplay event reachability, device timing, and Amiga
+  equivalence remain unverified. No release has been made from this work.
+
+## Historical STIM v9 same-bank transitions — 2026-11-01
+
+- A new four-table Original/native combined mixer fixture matches 2,646 stereo
+  frames of tracker plus two simultaneous SFX at three chunk sizes. The
+  simultaneous starts are synthetic, not a live gameplay trace.
+
+- Pinned v9 STIM and the shared music sequencer preserve channel history for
+  repeated same-bank services 90/84/88. Stock libxmp keeps the previous restart
+  behavior when `SLAM_STIM_CHANNEL_HISTORY` is off.
+- All eight previously unresolved Mean targets match for 32 and 512 ticks
+  when primed with one verified tracker/mixer tick; 15 of 16 two-prime cases
+  match, with the remaining adapted original fault explicitly retained.
+  Same-order restarts and 48 sampled transitions on the other tables match
+  for 32 ticks. [Evidence](../analysis/stim-pcm-v9-transitions.json).
+- Cold-start regression: 555 of 563 positions match for 32 ticks; the eight
+  original fresh-state faults remain unchanged. [Survey](../analysis/stim-pcm-v9-all-orders-survey.json).
+- Validation: 24 targeted audio/game tests, three cross-table transition tests
+  and all 42 sound/audio tests pass. Windows, ARM64 and WebAssembly library
+  and changed audio sources cross-compile; device playback is not covered.
+- Still open: real-game transition reachability and timing, cross-bank or
+  overlapping services, complete-song/SFX/device and Amiga equivalence.
+
+## STIM Retail PCM update — 2026-11-01
+
+- At the v6 checkpoint, the 33 previously
+  differing short samples now match; all 30 selected bank/order starts match
+  Retail for 2,048 manually clocked ticks each. In the all-order 32-tick
+  survey, 555 starts match and eight Mean starts fault in the original adapter
+  without an earlier channel period. [Evidence](../analysis/stim-pcm-v6-all-orders-survey.json),
+  [long survey](../analysis/stim-pcm-v6-long-survey.json).
+- A synthetic Pirate music plus two-SFX case matches exactly; this does not
+  establish complete live event scheduling, output-device or Amiga parity.
+- Validation: 26 tracker/audio tests and 42 sound/audio tests passed; the v6
+  library also cross-compiles for Windows, Linux ARM64 and WebAssembly. These
+  are build and bounded-oracle checks, not physical-device acceptance.
+- Next: recover preceding state for those eight starts and compare complete
+  live game audio transitions with the original.
+
 ## Dynamic tracker/mixer PCM — 2026-11-01 (bounded)
 
 - `0x401838` updates each voice's sample, period and volume; retaining the four live voices and rebuilding their list permits 512 manually clocked Retail tracker/mixer ticks per table, including voice changes. The first five windows match the earlier fixed-voice oracle exactly. Full-window Original/native PCM correlations: Mean 0.999512, Pirate 0.999641, Space 0.999703, Demon 0.999793. Individual samples still differ. [Evidence](verification/stim-dynamic-pcm-2026-11-01.json).
@@ -1494,3 +1582,13 @@ Browser HTML: Vivaldi 4x4 canvas collapse fixed by explicit stage-filling CSS. C
 - Final shared-engine state/BMP parity: 12,000 steps on each of four tables, build/shared-engine-local-parity/report.json and build/shared-engine-local-retail/report.json. Runtime installation bundles the matching private engine library, resolved from package lib/; no default runtime change.
 - Optional `tools/slamtilt-pack --compression xz`: full static package 10,315,894 -> 6,632,996 bytes (-35.70%), tar payload exactly identical to gzip. Manifest hashes and no-original-assets check pass; packaged four-table 400-step smokes retain exact states/BMPs. Evidence: build/shared-engine-package/static-compact-verification.json, build/static-package-{mean-pirate,retail}/report.json.
 - Local Linux candidates only, no release update. Remaining: stable GPU tail timing, older Linux and ARM64/Windows validation, full gameplay audit beyond tested scenarios.
+
+### Audio parity investigation, 2026-11-01
+
+- Experimental STIM mixer: four Retail starts each bit-exact for 2,048 manually
+  clocked ticks; 65 synthetic gain levels exact; non-STIM isolation exact.
+- All-order survey: 522 exact, 33 differing, 8 unresolved of 563 starts,
+  32 ticks per case, before the channel-mute safeguard. See
+  `analysis/stim-pcm-all-orders-survey.json` and evidence STIM-PCM-2026-11.
+- The initial experiment has since been superseded by the v6 build; see the
+  later STIM-PCM-2026-11 evidence for its scope and remaining unknowns.

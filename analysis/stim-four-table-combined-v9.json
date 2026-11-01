@@ -1,0 +1,119 @@
+{
+  "status": "VERIFIED_BOUNDED",
+  "scope": "Compare four Retail music starts plus two original-data SFX, synthetically.\n\nThe tracker is manually clocked and two one-shot voices start simultaneously;\nthis is not a recorded event, full-game scheduling, or device-output proof.\nNo original sample or PCM bytes are included in the report.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": {
+    "mean": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+    "pirate": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+    "space": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+    "demon": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d"
+  },
+  "native_sha256": "6080f939cc3c21f2c2a5a0717cb68149462b1775a6bc65f94e847681f7279803",
+  "library_sha256": "efaeb7a4cd01d41fe41c8a9a18355c6b8cde4f64ba488301c4dc416d7aee5279",
+  "cases": [
+    {
+      "table": "mean",
+      "bank_offset": "0x5c2d2",
+      "order": 4,
+      "frames": 2646,
+      "sfx_samples": [
+        {
+          "index": 1,
+          "data_offset": 132,
+          "length": 6466
+        },
+        {
+          "index": 2,
+          "data_offset": 6606,
+          "length": 29052
+        }
+      ],
+      "chunks": [
+        137,
+        882,
+        2646
+      ],
+      "pcm_sha256": "c1d56d64bb0061623f31fbbca1ba58e18ec2baf034bcc2207518155deeef3417",
+      "original_sfx_blocks": 18,
+      "original_final_mix_blocks": 20
+    },
+    {
+      "table": "pirate",
+      "bank_offset": "0x51876",
+      "order": 34,
+      "frames": 2646,
+      "sfx_samples": [
+        {
+          "index": 1,
+          "data_offset": 132,
+          "length": 23776
+        },
+        {
+          "index": 2,
+          "data_offset": 23916,
+          "length": 12734
+        }
+      ],
+      "chunks": [
+        137,
+        882,
+        2646
+      ],
+      "pcm_sha256": "5656aaaf1c5707d834fe08b1ad014617e58c84b1400b8e94591c5b123f09f526",
+      "original_sfx_blocks": 18,
+      "original_final_mix_blocks": 20
+    },
+    {
+      "table": "space",
+      "bank_offset": "0x53642",
+      "order": 32,
+      "frames": 2646,
+      "sfx_samples": [
+        {
+          "index": 1,
+          "data_offset": 132,
+          "length": 3570
+        },
+        {
+          "index": 2,
+          "data_offset": 3710,
+          "length": 3264
+        }
+      ],
+      "chunks": [
+        137,
+        882,
+        2646
+      ],
+      "pcm_sha256": "0196505c392d36989638b08fa14558402d103ea04a3307476b225fead512a22c",
+      "original_sfx_blocks": 18,
+      "original_final_mix_blocks": 20
+    },
+    {
+      "table": "demon",
+      "bank_offset": "0x6ffb4",
+      "order": 25,
+      "frames": 2646,
+      "sfx_samples": [
+        {
+          "index": 1,
+          "data_offset": 132,
+          "length": 15698
+        },
+        {
+          "index": 2,
+          "data_offset": 15838,
+          "length": 6850
+        }
+      ],
+      "chunks": [
+        137,
+        882,
+        2646
+      ],
+      "pcm_sha256": "c1e0b0d8b3d98e94614e2494bcde9caeac334a4b6b1e79f1d67aed846da0c0ac",
+      "original_sfx_blocks": 18,
+      "original_final_mix_blocks": 20
+    }
+  ]
+}

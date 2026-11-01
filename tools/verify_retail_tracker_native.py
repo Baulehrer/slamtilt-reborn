@@ -63,8 +63,6 @@ def main():
             aligned.append((sum(v * w for v, w in zip(x, y)) / math.sqrt(energy), lag))
         best_correlation, best_lag = max(aligned)
         assert 0.9 < ratio < 1.1, f'{name}: first-tick level outside bounded tolerance: {ratio}'
-        # Mean has a significant phase/PCM gap; do not silently equate samples.
-        assert any(x != y for x, y in zip(a, b)), 'unexpected sample identity; reassess test'
         original_report = json.loads((args.output / f'{name}-report.json').read_text())
         results.append({'table': name, 'bank': 0, 'order': order,
                         'original_sha256': digest(original_pcm), 'native_sha256': digest(pcm),
@@ -75,13 +73,13 @@ def main():
                         'original_range': [min(a), max(a)], 'native_range': [min(b), max(b)],
                         'exact_frames': sum(x == y for x, y in zip(a, b)),
                         'executed_original_blocks': original_report['executed_original_blocks']})
-    report = {'status': 'VERIFIED_BOUNDED_WITH_PCM_GAP', 'scope': __doc__,
+    report = {'status': 'VERIFIED_BOUNDED_EXACT' if all(r['exact_frames'] == FRAMES for r in results) else 'VERIFIED_BOUNDED_WITH_PCM_GAP', 'scope': __doc__,
               'native_probe_sha256': digest(args.native.read_bytes()),
               'output': '44100 Hz signed 16-bit duplicated mono', 'frames_per_table': FRAMES,
               'native_tracker_mix': {'separation': 0, 'interpolation': 'nearest', 'volume_percent': 66},
               'cases': results}
     (args.output / 'comparison.json').write_text(json.dumps(report, indent=2) + '\n')
-    print('PASS: four original/native first-tick comparisons; remaining PCM differences recorded')
+    print('PASS: four original/native first-tick comparisons; exact counts recorded')
 
 
 if __name__ == '__main__':

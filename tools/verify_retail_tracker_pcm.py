@@ -37,13 +37,42 @@ def main():
     p.add_argument('--exe', type=Path, default=GAME / 'SLAMTILT.EXE')
     p.add_argument('--table', choices=TABLES, default='pirate')
     p.add_argument('--dat', type=Path)
+    p.add_argument('--order', type=int, help='Override the startup order in the selected bank')
+    p.add_argument('--warm-order', type=int, help='Run one prior tracker tick before selecting the requested order')
+    p.add_argument('--warm-ticks', type=int, default=1, help='Prior tracker/mixer ticks when --warm-order is set')
+    p.add_argument('--warm-bank-offset', type=lambda v:int(v,0), help='Optional DAT bank for the warm tick')
+    p.add_argument('--middle-order', type=int, help='Optional intermediate order after the warm tick')
+    p.add_argument('--middle-bank-offset', type=lambda v:int(v,0), help='DAT bank for the intermediate order')
+    p.add_argument('--middle-ticks', type=int, default=1, help='Tracker/mixer ticks in the intermediate order')
+    p.add_argument('--scheduler-service', type=lambda v:int(v,0), choices=(0x84, 0x88),
+                   help='Run Retail completion scheduler before each tracker tick after a base preemption')
+    p.add_argument('--deferred-bank-offset', type=lambda v:int(v,0), help='Queue a lower-priority bank while service 88 is active')
+    p.add_argument('--deferred-order', type=int, help='Order to queue for the lower-priority service')
+    p.add_argument('--deferred-tick', type=int, default=1, help='Queue the lower service before this target tick')
+    p.add_argument('--bank-offset', type=lambda v:int(v,0), help='Override the DAT bank offset')
     p.add_argument('--output', type=Path, default=ROOT / 'build/retail-tracker-pcm')
     p.add_argument('--ticks', type=int, default=1,
                    help='Adapted consecutive tracker/mixer windows; five is a bounded experiment')
     p.add_argument('--dynamic-voices', action='store_true', help='Update and link all four tracker voices on each manually clocked tick')
+    p.add_argument('--allow-silent', action='store_true', help='Allow bounded cases with no active original samples')
+    p.add_argument('--voice-mask', type=lambda v:int(v,0), default=15, help='Tracker channels to mix in the adapted oracle')
+    p.add_argument('--voice-log', type=Path, help='Optional per-tick voice metadata; no sample data')
+    p.add_argument('--tracker-log', type=Path, help='Optional per-tick tracker fields; no sample data')
+    p.add_argument('--scheduler-log', type=Path, help='Optional per-tick scheduler and tracker control state')
     args = p.parse_args()
-    assert 1 <= args.ticks <= 512 and (args.dynamic_voices or args.ticks in (1, 5))
+    assert 1 <= args.ticks <= 2048 and 0 <= args.voice_mask <= 15 and (args.dynamic_voices or args.ticks in (1, 5))
+    assert args.warm_order is None or (0 <= args.warm_order < 128 and args.dynamic_voices)
+    assert 1 <= args.warm_ticks <= 2048
+    assert args.warm_bank_offset is None or args.warm_order is not None
+    assert (args.middle_order is None and args.middle_bank_offset is None) or (
+        args.warm_order is not None and args.middle_order is not None and
+        args.middle_bank_offset is not None and 0 <= args.middle_order < 128 and 1 <= args.middle_ticks <= 64)
+    assert args.scheduler_service is None or (args.warm_order is not None and args.middle_order is None)
+    assert (args.deferred_bank_offset is None) == (args.deferred_order is None)
+    assert args.deferred_order is None or (args.scheduler_service == 0x88 and 0 <= args.deferred_tick < args.ticks and 0 <= args.deferred_order < 128)
     dat_sha, bank_offset, order = TABLES[args.table]
+    if args.order is not None: order = args.order
+    if args.bank_offset is not None: bank_offset = args.bank_offset
     dat_path = args.dat or GAME / 'DAT' / (args.table.upper() + '.DAT')
     executable, dat = args.exe.read_bytes(), dat_path.read_bytes()
     assert sha(executable) == EXE_SHA and sha(dat) == dat_sha, 'unrecognized input'
@@ -81,45 +110,110 @@ def main():
     for address, value in ((0x467578, 0x1100000 + bank_offset), (0x46757c, 0x1100000),
                            (0x46c72c, 0x46b2a4), (0x46754c, 64), (0x467554, 1)):
         put(address, value)
+    def link_voices(indices):
+        for index, i in enumerate(indices):
+            next_voice = 0x468858 + 0x24 * indices[index + 1] if index + 1 < len(indices) else 0
+            put(0x468858 + 0x24 * i + 0x20, next_voice)
+        put(0x468854, 0x468858 + 0x24 * indices[0] if indices else 0)
+
+    def mixer_setup():
+        run(0x44b5dc, 0x468854)
+        for i in range(6):
+            put(0x468858 + 0x24 * i, 0x46b060 + 0x60 * i)
+            run(0x401838, i)
+        indices = [i for i in range(4) if args.voice_mask & (1 << i) and get(0x468858 + 0x24 * i + 0x10)]
+        link_voices(indices)
+        for address, value in ((0x46eea4, 6), (0x46eeb8, 0x3010000), (0x46eebc, 44100),
+                               (0x46ee98, 882), (0x46eeb0, 0x3002000), (0x46eeb4, 0x3004000),
+                               (0x46eec8, 0x3006000), (0x46eea8, 16), (0x46eecc, 1),
+                               (0x46ee9c, 1), (0x46eeac, 0), (0x46eec4, 0), (0x46ee90, 0)):
+            put(address, value)
+        run(0x44b640, 0x20000 // 6)
+
+    def output_buffer():
+        for address, value in ((0x3008000, 0x3009000), (0x3008004, 0),
+                               (0x3008008, 882), (0x300800c, 0)):
+            put(address, value)
+
+    scheduler_warm_state = None
+    if args.warm_order is not None:
+        if args.warm_bank_offset is not None:
+            put(0x467578, 0x1100000 + args.warm_bank_offset)
+        run(0x44f138, args.warm_order)
+        for warm_tick in range(args.warm_ticks):
+            run(0x44eaf8)
+            if warm_tick == 0:
+                mixer_setup()
+            else:
+                for i in range(4): run(0x401838, i)
+                link_voices([i for i in range(4) if args.voice_mask & (1 << i) and get(0x468858 + 0x24 * i + 0x10)])
+            output_buffer()
+            assert run(0x44b560, 0x3008000, 0x468854) == 1
+        if args.scheduler_service is not None:
+            # 40634c snapshots the prior tracker before installing an overlay.
+            scheduler_warm_state = {'live_order': get(0x467568), 'live_row': get(0x467564),
+                                    'saved_order': get(0x46ef40), 'saved_row': get(0x46ef3c),
+                                    'saved_speed': get(0x46ef30)}
+            run(0x44ddfc, 0x46b7e0)
+        if args.middle_order is not None:
+            put(0x467578, 0x1100000 + args.middle_bank_offset)
+            run(0x44f138, args.middle_order)
+            for _ in range(args.middle_ticks):
+                run(0x44eaf8)
+                for i in range(4): run(0x401838, i)
+                link_voices([i for i in range(4) if args.voice_mask & (1 << i) and get(0x468858 + 0x24 * i + 0x10)])
+                output_buffer()
+                assert run(0x44b560, 0x3008000, 0x468854) == 1
+    put(0x467578, 0x1100000 + bank_offset)
     run(0x44f138, order)
+    if args.scheduler_service is not None:
+        for address in (0x454a50, 0x454a54, 0x454a58, 0x454a5c, 0x454a60): put(address, 0)
+        put(0x454a6c, 2 if args.scheduler_service == 0x88 else 1)
+        if args.deferred_order is not None and args.deferred_tick == 0:
+            put(0x46c644, 0x3003000)
+            put(0x300300c, 0x3003100)
+            put(0x3003100, get(0x46757c))
+            put(0x3003104, 0x3003200)
+            put(0x3003200, 0x1100000 + args.deferred_bank_offset)
+            run(0x406240, args.deferred_order, 0)
+        run(0x4062f0)
     run(0x44eaf8)
     channels = [list(struct.unpack('<8I', u.mem_read(0x46b2d8 + i * 32, 32)))
                 for i in range(4)]
     active = [i for i, row in enumerate(channels) if row[0] == 1]
-    assert active and all(row[0] in (0, 1) for row in channels)
-    if args.table == 'pirate':
+    assert (active or args.dynamic_voices) and all(row[0] in (0, 1) for row in channels)
+    if args.table == 'pirate' and args.order is None and args.bank_offset is None and args.warm_order is None:
         assert active == [1, 2, 3]
         assert [(row[5], row[6]) for row in channels[1:]] == [(190, 64), (214, 64), (214, 64)]
 
-    run(0x44b5dc, 0x468854)
-    for i in range(6):
-        put(0x468858 + 0x24 * i, 0x46b060 + 0x60 * i)
-        run(0x401838, i)
-    # Link the active tracker voices; both SFX voices are intentionally absent.
-    linked = active
-    for index, i in enumerate(linked):
-        next_voice = 0x468858 + 0x24 * linked[index + 1] if index + 1 < len(linked) else 0
-        put(0x468858 + 0x24 * i + 0x20, next_voice)
-    for address, value in ((0x468854, 0x468858 + 0x24 * linked[0]), (0x46eea4, 6),
-                           (0x46eeb8, 0x3010000), (0x46eebc, 44100),
-                           (0x46ee98, 882), (0x46eeb0, 0x3002000),
-                           (0x46eeb4, 0x3004000), (0x46eec8, 0x3006000),
-                           (0x46eea8, 16), (0x46eecc, 1), (0x46ee9c, 1),
-                           (0x46eeac, 0), (0x46eec4, 0), (0x46ee90, 0)):
-        put(address, value)
-    run(0x44b640, 0x20000 // 6)
-    for address, value in ((0x3008000, 0x3009000), (0x3008004, 0),
-                           (0x3008008, 882), (0x300800c, 0)):
-        put(address, value)
-    pcm = bytearray()
+    if args.warm_order is None:
+        mixer_setup()
+    else:
+        for i in range(4):
+            run(0x401838, i)
+        link_voices([i for i in range(4) if args.voice_mask & (1 << i) and get(0x468858 + 0x24 * i + 0x10)])
+    output_buffer()
+    if args.deferred_order is not None:
+        # Synthetic table descriptor: the real scheduler resolves the pending
+        # bank through 46c644 -> descriptor+0xc -> bank pointer array.
+        put(0x46c644, 0x3003000)
+        put(0x300300c, 0x3003100)
+        put(0x3003100, get(0x46757c))
+        put(0x3003104, 0x3003200)
+        put(0x3003200, 0x1100000 + args.deferred_bank_offset)
+    pcm = bytearray(); voice_log = []; tracker_log = []; scheduler_log = []
     for tick in range(args.ticks):
         if tick:
+            if args.deferred_order is not None and tick == args.deferred_tick:
+                run(0x406240, args.deferred_order, 0)
             # Manually clock the sequencer at an assumed 50 Hz. The original
             # scheduler and changing voice-list setup are not reproduced here.
+            if args.scheduler_service is not None:
+                run(0x4062f0)
             run(0x44eaf8)
             if args.dynamic_voices:
                 for i in range(4): run(0x401838, i)
-                linked = [i for i in range(4) if get(0x468858 + 0x24 * i + 0x10)]
+                linked = [i for i in range(4) if args.voice_mask & (1 << i) and get(0x468858 + 0x24 * i + 0x10)]
                 for index, i in enumerate(linked):
                     put(0x468858 + 0x24 * i + 0x20,
                         0x468858 + 0x24 * linked[index + 1] if index + 1 < len(linked) else 0)
@@ -127,13 +221,23 @@ def main():
             for address, value in ((0x3008000, 0x3009000), (0x3008004, 0),
                                    (0x3008008, 882), (0x300800c, 0)):
                 put(address, value)
+        if args.voice_log:
+            voice_log.append([[get(0x468858 + 0x24 * i + off) for off in (0,4,8,12,16,20)] +
+                              [get(0x46b060 + 0x60 * i + off) for off in (0,4,8,12)] for i in range(4)])
+        if args.tracker_log:
+            tracker_log.append([[get(0x467580 + 0xac * i + off) for off in
+                                 (4, 8, 12, 16, 24, 28, 32, 36, 40, 0x9c, 0xa0, 0xa4, 0xa8)] for i in range(4)])
+        if args.scheduler_log:
+            scheduler_log.append({'tick': tick, 'speed': get(0x467558), 'tick_in_row': get(0x46755c),
+                                  'row': get(0x467564), 'order': get(0x467568), 'services': get(0x454a6c),
+                                  'pending_upper': get(0x454a58), 'end_marker': get(0x454a5c)})
         assert run(0x44b560, 0x3008000, 0x468854) == 1
         pcm.extend(u.mem_read(0x3009000, 882 * 4))
     pcm = bytes(pcm)
     samples = struct.unpack(f'<{1764 * args.ticks}h', pcm)
-    assert samples[::2] == samples[1::2] and any(samples)
+    assert samples[::2] == samples[1::2] and (args.allow_silent or any(samples))
     flags = [get(a) for a in (0x46eeac, 0x46eec4, 0x46ee90)]
-    assert flags == [0, 1, 1], flags
+    assert flags in ([0, 1, 1], [1, 1, 1]), flags
     # Match every executed block to the original authenticated PE, not just the
     # copied in-memory image. No external calls, patched instructions or hooks.
     for address, size in blocks:
@@ -142,7 +246,17 @@ def main():
         assert bytes(u.mem_read(address, size)) == executable[offset:offset + size]
     report = {'status': 'VERIFIED_BOUNDED', 'scope': __doc__,
               'exe_sha256': EXE_SHA, 'dat_sha256': dat_sha, 'table': args.table,
-              'bank': 0, 'order': order, 'tracker_ticks': args.ticks,
+              'bank': 0 if args.bank_offset is None else None,
+              'bank_offset': hex(bank_offset), 'order': order, 'warm_order': args.warm_order,
+              'warm_ticks': args.warm_ticks if args.warm_order is not None else 0,
+              'warm_bank_offset': hex(args.warm_bank_offset) if args.warm_bank_offset is not None else None,
+              'middle_order': args.middle_order,
+              'middle_bank_offset': hex(args.middle_bank_offset) if args.middle_bank_offset is not None else None,
+              'middle_ticks': args.middle_ticks if args.middle_order is not None else 0,
+              'scheduler_service': hex(args.scheduler_service) if args.scheduler_service is not None else None,
+              'deferred_order': args.deferred_order, 'deferred_tick': args.deferred_tick if args.deferred_order is not None else None,
+              'scheduler_warm_state': scheduler_warm_state,
+              'tracker_ticks': args.ticks, 'voice_mask': args.voice_mask,
               'original_routines': ['0x44f138', '0x44eaf8', '0x401838',
                                     '0x44b5dc', '0x44b640', '0x44b560'],
               'executed_original_blocks': len(blocks), 'channels': channels,
@@ -152,6 +266,8 @@ def main():
               'min_sample': min(samples), 'max_sample': max(samples),
               'nonzero_samples': sum(v != 0 for v in samples), 'pcm_sha256': sha(pcm),
               'adaptations': ['manual tracker state and four channel indices',
+                              'optional prior and intermediate tracker/mixer ticks',
+                              'optional 4062f0 scheduler with synthetic service state',
                               'explicit DAT and bank pointers', 'music volume 64',
                               'manual voice descriptor pointers and active-voice links',
                               'six-voice LUT and master 65536',
@@ -161,6 +277,15 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output / f'{args.table}-first-tick.s16le').write_bytes(pcm)
     (args.output / f'{args.table}-report.json').write_text(json.dumps(report, indent=2) + '\n')
+    if args.voice_log:
+        args.voice_log.parent.mkdir(parents=True,exist_ok=True)
+        args.voice_log.write_text(json.dumps(voice_log)+'\n')
+    if args.tracker_log:
+        args.tracker_log.parent.mkdir(parents=True,exist_ok=True)
+        args.tracker_log.write_text(json.dumps(tracker_log)+'\n')
+    if args.scheduler_log:
+        args.scheduler_log.parent.mkdir(parents=True,exist_ok=True)
+        args.scheduler_log.write_text(json.dumps(scheduler_log)+'\n')
     print(f"PASS: {args.table} first tracker tick, {len(blocks)} original blocks, "
           f"{report['min_sample']}..{report['max_sample']}; {report['pcm_sha256']}")
 

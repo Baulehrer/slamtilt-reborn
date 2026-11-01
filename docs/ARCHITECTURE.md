@@ -1,5 +1,20 @@
 # Slam Tilt architecture map
 
+## Trace-derived audio mixing — 2026-11-01
+
+The shared tracker and SFX mixer have bounded PCM checks using request data
+from all four tables. Their timing and prior voice state are reconstructed;
+[coverage and limitations](../analysis/audio-trace-mix-v1.4.json) remain
+separate from full gameplay and device-output equivalence.
+
+## STIM service transitions — 2026-11-01
+
+The shared music sequencer uses the pinned STIM library to transfer compatible
+voice state between banks and to restore a saved tracker pattern after service
+88. Service 84 remains active until stopped. These behaviors are validated
+against bounded Windows Retail scheduler calls, not yet all gameplay paths.
+The previously discrepant Mean effect-8 transition now matches in targeted tests. Deferred lower cues inherit upper voices; [ten controlled cases](../analysis/stim-pcm-deferred-scheduler.json) match Retail. [Effect-8 evidence](../analysis/stim-pcm-v11-mean-effect8.json).
+
 ## Dynamic tracker/mixer PCM — 2026-11-01
 
 Original voice adapter `0x401838` can be executed after each manually clocked tracker tick, allowing bounded comparisons through changing voices and notes. Results remain close but not sample-exact. [Evidence](verification/stim-dynamic-pcm-2026-11-01.json).
@@ -1582,3 +1597,13 @@ Batocera launcher preflights native import once from a user data folder, preserv
 
 ## Renderer optimization delta — 2026-10-29
 Retail slice (Space/Demon) now keeps the last uploaded immutable lamp variant per SDL texture. Session-local initialization uses -1, so every texture is initialized before first draw; variant changes upload before drawing. Tick/state evaluation and composition order are unchanged. Trace exposes lamp_texture_uploads. Optional CMake SLAM_RELEASE_COMPACT and SLAM_RELEASE_LTO preserve default build behavior; experiment guide: docs/optimization.md.
+
+Audio (STIM-PCM-2026-11): the private STIM v9 patch implements the measured
+Retail tracker and mixer behavior. Original x86 and native PCM are compared in
+manually clocked windows. Full music, live SFX scheduling, device output and
+Amiga parity remain unverified.
+
+Retail same-bank music changes may reuse the active tracker context for each
+service. This preserves measured channel and mixer state at the selected
+order boundary; cross-bank and preempted-context equivalence remain open.
+Unpatched system libxmp uses the previous restart path.

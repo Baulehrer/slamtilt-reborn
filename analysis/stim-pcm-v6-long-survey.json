@@ -1,0 +1,349 @@
+{
+  "status": "MEASURED_BOUNDED",
+  "scope": "Survey bounded Original/native PCM at sampled orders of all ten banks.\n\nRuns manually clocked tracker/mixer scenarios from explicit bank/order\nboundaries. The game scheduler, effect events and device output are not fully\nmodeled. Failed or non-identical cases remain in the report rather than being\nclassified as matching. Original game data stays in the private work directory.\n",
+  "library_sha256": "4e14f2ed6dbf6d4bfa4d1588a9041596c1621c5692504a4eab92aff711f6b7ff",
+  "ticks_per_case": 2048,
+  "cases": [
+    {
+      "table": "mean",
+      "bank": 0,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "mean",
+      "bank": 0,
+      "order": 40,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "mean",
+      "bank": 0,
+      "order": 79,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "mean",
+      "bank": 1,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "mean",
+      "bank": 1,
+      "order": 31,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "mean",
+      "bank": 1,
+      "order": 62,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "pirate",
+      "bank": 0,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "pirate",
+      "bank": 0,
+      "order": 34,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "pirate",
+      "bank": 0,
+      "order": 67,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "pirate",
+      "bank": 1,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "pirate",
+      "bank": 1,
+      "order": 27,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "pirate",
+      "bank": 1,
+      "order": 54,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "space",
+      "bank": 0,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "space",
+      "bank": 0,
+      "order": 33,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "space",
+      "bank": 0,
+      "order": 66,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "space",
+      "bank": 1,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "space",
+      "bank": 1,
+      "order": 20,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "space",
+      "bank": 1,
+      "order": 39,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "space",
+      "bank": 2,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "space",
+      "bank": 2,
+      "order": 28,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "space",
+      "bank": 2,
+      "order": 55,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "demon",
+      "bank": 0,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "demon",
+      "bank": 0,
+      "order": 33,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "demon",
+      "bank": 0,
+      "order": 65,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "demon",
+      "bank": 1,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "demon",
+      "bank": 1,
+      "order": 15,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "demon",
+      "bank": 1,
+      "order": 30,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "demon",
+      "bank": 2,
+      "order": 0,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "demon",
+      "bank": 2,
+      "order": 18,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    },
+    {
+      "table": "demon",
+      "bank": 2,
+      "order": 36,
+      "status": "EXACT",
+      "exact_frames": 1806336,
+      "frames": 1806336,
+      "overall_correlation": 1.0,
+      "mismatched_windows": 0,
+      "first_mismatches": []
+    }
+  ],
+  "counts": {
+    "EXACT": 30
+  },
+  "source_patch_sha256": "e5955ae4d9bbb65ba6d64c7750b3a86f80445559b2869f66fb9ae5f198e8291d",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "dat_sha256": {
+    "mean": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+    "pirate": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+    "space": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+    "demon": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d"
+  }
+}

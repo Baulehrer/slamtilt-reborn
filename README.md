@@ -10,7 +10,7 @@ Bring your own original game files. Downloads include no original DAT files or A
 
 ## Download and play
 
-[Version 1.3 downloads](https://github.com/Baulehrer/slamtilt-reborn/releases/tag/v1.3):
+[Latest packaged release: version 1.3](https://github.com/Baulehrer/slamtilt-reborn/releases/tag/v1.3). The current source tree is version 1.4:
 
 | Download | Start here |
 | --- | --- |
@@ -34,7 +34,7 @@ Files stay local. Amiga data uses shared native gameplay; exact original Amiga p
 
 Native controller support for the menu and all four tables, saved button mappings and the Batocera bootstrap are included in **1.1**: [controller guide](docs/controllers.md).
 
-[What changed in 1.3](CHANGELOG.md) · The browser download is a single offline HTML file, about 3 MB.
+[Changelog](CHANGELOG.md) · The browser download is a single offline HTML file, about 3 MB.
 
 ## Controls and options
 

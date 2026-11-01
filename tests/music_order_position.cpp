@@ -56,7 +56,9 @@ int main(int argc, char** argv) {
           check(xmp_load_module_from_memory(ctx.value, banks[b].stim.data(), long(banks[b].stim.size())) == 0, label + ": load");
           xmp_module_info info{}; xmp_get_module_info(ctx.value, &info);
           const auto pattern = dat.at(table.offsets[b] + 10 + order);
-          check(info.mod && info.mod->len == int(banks[b].orders) && info.mod->xxo[order] == pattern, label + ": order mapping");
+          // The Retail STIM patch retains valid order entries beyond the
+          // header count. Every advertised order must still map exactly.
+          check(info.mod && info.mod->len >= int(banks[b].orders) && info.mod->xxo[order] == pattern, label + ": order mapping");
           check(xmp_start_player(ctx.value, 44100, 0) == 0, label + ": start");
           if (order) check(xmp_set_position(ctx.value, int(order)) == int(order), label + ": seek");
           check(xmp_play_frame(ctx.value) == 0, label + ": render");

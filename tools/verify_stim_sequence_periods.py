@@ -25,11 +25,12 @@ p.add_argument('--output',type=Path,required=True)
 p.add_argument('--ticks',type=int,default=300)
 p.add_argument('--table',choices=tuple(TABLES),help='Optional single table')
 p.add_argument('--order',type=int,help='Optional order in the selected startup bank')
+p.add_argument('--bank-offset',type=lambda v:int(v,0),help='Optional selected table DAT bank offset')
 p.add_argument('--require-exact',action='store_true',help='Require exact period fields in the bounded cases')
 p.add_argument('--differences',type=Path,help='Optional full period-difference records (no sample data)')
 p.add_argument('--capture',type=Path,help='Optional period and effect records for every compared channel tick')
 p.add_argument('--library',type=Path,help='Optional libxmp shared library to select for the native probe')
-a=p.parse_args(); assert 1 <= a.ticks <= 2000 and (a.order is None or (a.table and a.order >= 0))
+a=p.parse_args(); assert 1 <= a.ticks <= 2000 and (a.order is None or (a.table and a.order >= 0)) and (a.bank_offset is None or a.table)
 a.work.mkdir(parents=True,exist_ok=True)
 exe=(GAME/'SLAMTILT.EXE').read_bytes();assert hashlib.sha256(exe).hexdigest()==EXE_SHA
 pe=pefile.PE(data=exe);image=pe.get_memory_mapped_image();tables=[]; all_differences={}; all_capture={}
@@ -40,6 +41,7 @@ if a.library:
 for table,(dat_sha,offset,order) in TABLES.items():
  if a.table and table != a.table:continue
  if a.order is not None:order=a.order
+ if a.bank_offset is not None:offset=a.bank_offset
  dat=(GAME/'DAT'/f'{table.upper()}.DAT').read_bytes();assert hashlib.sha256(dat).hexdigest()==dat_sha
  u=Uc(UC_ARCH_X86,UC_MODE_32);u.mem_map(0x400000,0x100000);u.mem_write(0x400000,image)
  u.mem_map(0x1100000,0x200000);u.mem_write(0x1100000,dat);u.mem_map(0x3000000,0x60000);blocks=set()
@@ -53,23 +55,24 @@ for table,(dat_sha,offset,order) in TABLES.items():
  for i in range(4):put(0x467580+i*0xac,i)
  for addr,value in ((0x467578,0x1100000+offset),(0x46757c,0x1100000),(0x46c72c,0x46b2a4),(0x46754c,64),(0x467554,1)):put(addr,value)
  run(0x44f138,order)
- states=[]
+ states=[]; clocks=[]
  for tick in range(a.ticks):
   run(0x44eaf8)
   states.append([struct.unpack('<8I',u.mem_read(0x46b2d8+i*32,32)) for i in range(4)])
+  if a.capture:clocks.append([struct.unpack('<I',u.mem_read(addr,4))[0] for addr in (0x467558,0x46755c,0x467564)])
  for addr,size in blocks:
   assert 0x401000 <= addr and addr+size <= 0x454000
   fileoff=pe.get_offset_from_rva(addr-0x400000)
   assert bytes(u.mem_read(addr,size))==exe[fileoff:fileoff+size]
  stim,_=extract(dat,0,(offset,));bank=a.work/f'{table}.stim';bank.write_bytes(stim)
  output=subprocess.check_output([str(a.native.resolve()),str(bank),str(order),str(a.ticks)],text=True,env=env)
- lines=[[int(x) for x in line.split()] for line in output.splitlines()];assert len(lines)==a.ticks and all(len(x)==27 for x in lines)
+ lines=[[int(x) for x in line.split()] for line in output.splitlines()];assert len(lines)==a.ticks and all(len(x)==28 for x in lines)
  compared=0; matches=0; differences=[]; capture=[]
  for tick,(original,native) in enumerate(zip(states,lines)):
   for ch,row in enumerate(original):
+   if a.capture:capture.append({'tick':tick,'channel':ch,'original_period':row[5],'native_period_q12':native[ch*6],'original_volume':row[6],'native_volume':native[ch*6+1],'native_instrument':native[ch*6+2],'original_sample_address':hex(row[1]),'original_sample_length':row[2],'original_loop_start':row[3],'original_loop_length':row[4],'original_new_sample':row[0],'event_note':native[ch*6+3],'effect_type':native[ch*6+4],'effect_parameter':native[ch*6+5],'order':native[24],'row':native[25],'frame':native[26],'native_speed':native[27],'original_speed':clocks[tick][0],'original_tick':clocks[tick][1],'original_row':clocks[tick][2]})
    if not row[5] or not row[6]:continue
    period=row[5];actual=native[ch*6]; compared+=1
-   if a.capture:capture.append({'tick':tick,'channel':ch,'original_period':period,'native_period_q12':actual,'effect_type':native[ch*6+4],'effect_parameter':native[ch*6+5],'order':native[24],'row':native[25],'frame':native[26]})
    if actual==period*4096:matches+=1
    else:differences.append({'tick':tick,'channel':ch,'original_period':period,'native_period_q12':actual,'delta_q12':actual-period*4096,'original_volume':row[6],'native_volume':native[ch*6+1],'event_note':native[ch*6+3],'effect_type':native[ch*6+4],'effect_parameter':native[ch*6+5],'order':native[24],'row':native[25],'frame':native[26]})
  significant=[d for d in differences if abs(d['delta_q12'])>=2048]

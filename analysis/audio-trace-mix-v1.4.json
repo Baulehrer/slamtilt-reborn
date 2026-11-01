@@ -1,0 +1,508 @@
+{
+  "scope": "Bounded trace-derived request selections with reconstructed playback. See each report for timing and state limits; not full-game or physical-device audio parity.",
+  "reports": {
+    "mean": {
+      "status": "MEASURED_BOUNDED",
+      "scope": "Compare Mean Retail display-table SFX requests plus synthetic startup music.\n\nOriginal x86 table callbacks yield descriptor, period, volume and request slot.\nEach resulting request is mixed with synthetic startup music into an empty\nmixer. This is not an observed simultaneous gameplay recording, natural timing,\nprevious-voice arbitration, output-device or Amiga parity test.\n",
+      "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+      "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f",
+      "native_sha256": "bbda9c60af9fdd3cba67cd77fbdd185be023ffdc89afdd4c7c2322907e506d57",
+      "library_sha256": "f22f8a64300fa458d8d1e841a8ed81abdf3acfbd27ce2f60f02137026d4dab6d",
+      "frames": 2646,
+      "cases": [
+        {
+          "table": "0x464128",
+          "tick": 16,
+          "descriptor": "0x463ec4",
+          "period": 285,
+          "volume": 48,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "77539858a4c546e42fb37e8b976c552205c9f5e83588351fdc4b8b46d9aadaa5"
+        },
+        {
+          "table": "0x464128",
+          "tick": 20,
+          "descriptor": "0x463ec4",
+          "period": 428,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "0afaf8546cdc8bbdc154080044252531378735d3489f99e61cdd86094b13cab4"
+        },
+        {
+          "table": "0x464128",
+          "tick": 24,
+          "descriptor": "0x463ee8",
+          "period": 856,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "dd349fa1a0fe831ce7d565fab606a10a1bade1ddf412a82a7cbce1f1db0adfaa"
+        },
+        {
+          "table": "0x46415c",
+          "tick": 0,
+          "descriptor": "0x463f0c",
+          "period": 428,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "b1b72405ca96375197d034d32736320fa2c79d9e1a6b1fea5babc9c6c0516c16"
+        },
+        {
+          "table": "0x46415c",
+          "tick": 24,
+          "descriptor": "0x463f30",
+          "period": 428,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "e76762d592c978aca29a64253b0528128a508137b72b7faa6e82c29b77d6f610"
+        },
+        {
+          "table": "0x46415c",
+          "tick": 44,
+          "descriptor": "0x463f54",
+          "period": 214,
+          "volume": 0,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "876caad232bbbdab3bf7b3a5744842be4a39761938283d79dfeec318a72c7294"
+        },
+        {
+          "table": "0x464190",
+          "tick": 12,
+          "descriptor": "0x463f78",
+          "period": 480,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "80caf8adb946b3ac48b899da86608cab75dad0643305bdfbaf93d9381061a039"
+        },
+        {
+          "table": "0x464190",
+          "tick": 20,
+          "descriptor": "0x463f9c",
+          "period": 480,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "6ea97baa6ff14964c75164823a8a5da94c030314321beff4a54a764dc12281a2"
+        },
+        {
+          "table": "0x4641c4",
+          "tick": 0,
+          "descriptor": "0x463fe4",
+          "period": 320,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "9c64b5a9999f0723f3fd67f0b7237691b17c3b07d7842310d621534c214f0e1a"
+        },
+        {
+          "table": "0x4641c4",
+          "tick": 20,
+          "descriptor": "0x463f9c",
+          "period": 339,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "f5feca18639f441afc3798d0b4c6c7317c8d4434e67ec16ef549825d449a2886"
+        },
+        {
+          "table": "0x4641f8",
+          "tick": 0,
+          "descriptor": "0x463fc0",
+          "period": 339,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "9ba0aa5f47c04fcd611cd35d4bd559398544d1d8ee8234c1b71e071f2d6a5e21"
+        },
+        {
+          "table": "0x46420c",
+          "tick": 12,
+          "descriptor": "0x464074",
+          "period": 285,
+          "volume": 64,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "128dad6f632422b272740f43341353638079d28c0400eefeb540cee2bfe7db8c"
+        },
+        {
+          "table": "0x46420c",
+          "tick": 35,
+          "descriptor": "0x464074",
+          "period": 285,
+          "volume": 16,
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "e29a6204039d87803dd31524f833a174e77914291b65b4c200fc3733bb486b50"
+        }
+      ]
+    },
+    "pirate": {
+      "status": "MEASURED_BOUNDED",
+      "scope": "Compare unique recorded Pirate same-step SFX pairs plus synthetic startup music.\n\nPairs come from pinned original request traces, but this reconstructed mix\nstarts all voices together in an empty mixer. Original in-game voice arbitration,\nactual tracker state, event cadence and physical playback are not modeled.\n",
+      "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6",
+      "fixture_sha256": "2e8dfa961d57810f949aba9514ec94cebd7bf74fd4858bffe1341db98b206419",
+      "native_sha256": "c83a7ca434c60591761bddd826aacfc85a7f1917036424a9f2b6da1bc21f0e67",
+      "library_sha256": "f22f8a64300fa458d8d1e841a8ed81abdf3acfbd27ce2f60f02137026d4dab6d",
+      "frames": 2646,
+      "cases": [
+        {
+          "case": "acceptance-nudge",
+          "tick": 103,
+          "events": [
+            [
+              2,
+              1,
+              "0x464f60"
+            ],
+            [
+              2,
+              1,
+              "0x464f84"
+            ]
+          ],
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "36f0e68d823578158ee364c20a296658606c1816ade99efd93c126cc2d5da185"
+        },
+        {
+          "case": "acceptance-tilt",
+          "tick": 200,
+          "events": [
+            [
+              2,
+              1,
+              "0x464f84"
+            ],
+            [
+              9,
+              8,
+              "0x465110"
+            ]
+          ],
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "6105e2db7d7c188838d1921c3c312f30f424fd6d47eb1799f1b28d880e5eb330"
+        },
+        {
+          "case": "acceptance-tilt",
+          "tick": 3160,
+          "events": [
+            [
+              2,
+              1,
+              "0x464f84"
+            ],
+            [
+              6,
+              5,
+              "0x464ff0"
+            ]
+          ],
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "baf9ca421552db3c94d8749d99fa8c10b51e1372f1a20a3523b008ab866ad184"
+        },
+        {
+          "case": "acceptance-tilt",
+          "tick": 5880,
+          "events": [
+            [
+              2,
+              1,
+              "0x464f84"
+            ],
+            [
+              6,
+              5,
+              "0x465014"
+            ]
+          ],
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "6064027bc9e5cae7236d58370b8eb80d9d33ca1e9a99b73476e573d4e159fba3"
+        },
+        {
+          "case": "acceptance-tilt",
+          "tick": 6520,
+          "events": [
+            [
+              2,
+              1,
+              "0x464f84"
+            ],
+            [
+              6,
+              5,
+              "0x464f18"
+            ]
+          ],
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "e4cea1f0b11a73c3ca395693fcc8e5e13c4b3aeecb8b6a72da128872e3012401"
+        },
+        {
+          "case": "legal-feedback-42cf8c",
+          "tick": 5775,
+          "events": [
+            [
+              2,
+              1,
+              "0x464f60"
+            ],
+            [
+              6,
+              5,
+              "0x465014"
+            ]
+          ],
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "72505f59fee0706fa3adc1c094bc341ec2e585d1c2a5cf728da39ae8e4fdc0ac"
+        },
+        {
+          "case": "legal-feedback-42e478",
+          "tick": 1552,
+          "events": [
+            [
+              2,
+              1,
+              "0x464f60"
+            ],
+            [
+              6,
+              5,
+              "0x464f18"
+            ]
+          ],
+          "chunks": [
+            137,
+            882,
+            2646
+          ],
+          "status": "EXACT",
+          "pcm_sha256": "89309b3b56ad3414f23ab2800e540c7ee9b76255ca3ff36aa294c695a1e125db"
+        }
+      ]
+    },
+    "space_demon": {
+      "status": "MEASURED_BOUNDED",
+      "scope": "Compare two trace-derived Space/Demon SFX+music combinations against Retail.\n\nBoth requests come from retained diagnostic gameplay traces. Playback is an\nisolated reconstruction: the SFX begins 882 frames before a fresh tracker,\nand earlier voices are absent. This assumes a cadence and does not establish\nactual gameplay timing, full-mix equivalence, or physical audio output.\nOriginal media and PCM are written only to --work, never to --output.\n",
+      "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+      "dat_sha256": {
+        "space": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b",
+        "demon": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d"
+      },
+      "native_sha256": "8dd07f041b883f321bcb3f9b3616d75560002eab432b9a55877232e30fa4a7f9",
+      "library_sha256": "f22f8a64300fa458d8d1e841a8ed81abdf3acfbd27ce2f60f02137026d4dab6d",
+      "cases": [
+        {
+          "table": "space",
+          "fixture": "analysis/traces/space-mission-campaign-rewards.json",
+          "fixture_sha256": "1893f764aea8ffe51280ef85ccdaa0ec9def664fb7cdb62c860f1282fa93f952",
+          "sfx_event": [
+            4632,
+            92,
+            6,
+            5,
+            4611516
+          ],
+          "music_event": [
+            4633,
+            132,
+            1,
+            0,
+            0
+          ],
+          "sfx_descriptor": "0x465dbc",
+          "sfx_data_offset": "0x658cd",
+          "sfx_length": 5808,
+          "sfx_profile": "analysis/space-audio-reuse.json",
+          "sfx_profile_sha256": "4e8bf8a60e44fb9cc1c820857f86c182148b900793c365cf617b2efa90aca68c",
+          "sfx_sample_sha256": "7ca06b0a74520784ddc5f17509344cbcb9ef9718ee45d28454ab9ac1a820407d",
+          "music_bank_offset": "0x5b8e0",
+          "music_order": 0,
+          "frames": 2646,
+          "pre_frames": 882,
+          "original_sfx_blocks": 18,
+          "original_mix_blocks": 20,
+          "original_pcm_sha256": "4cd210efbfbd1e37514b5e93295cf68b8ac346732f6a774dc7b9a502ad3d6d5d",
+          "native_pcm_sha256": "4cd210efbfbd1e37514b5e93295cf68b8ac346732f6a774dc7b9a502ad3d6d5d",
+          "mismatch_frames": 0,
+          "status": "EXACT"
+        },
+        {
+          "table": "demon",
+          "fixture": "analysis/traces/demon-kickback-on-rewards.json",
+          "fixture_sha256": "cb898eb1ea39cf11c625be0fc38753451add8e3b665235464e8a359d1c5a381a",
+          "sfx_event": [
+            2004,
+            92,
+            3,
+            2,
+            4600764
+          ],
+          "music_event": [
+            2005,
+            136,
+            2,
+            13,
+            0
+          ],
+          "sfx_descriptor": "0x4633bc",
+          "sfx_data_offset": "0x8333c",
+          "sfx_length": 6330,
+          "sfx_profile": "analysis/demon-audio-profile.json",
+          "sfx_profile_sha256": "be124e35a8b4e2215f6ac71e3d0f4868908cdcd82f08026fe65e30014cdcd9e9",
+          "sfx_sample_sha256": "f6578a49bbfd29d8c61aacb5173aac010ca1bd1af33333f743687f9eb7763506",
+          "music_bank_offset": "0x6e2ce",
+          "music_order": 13,
+          "frames": 2646,
+          "pre_frames": 882,
+          "original_sfx_blocks": 18,
+          "original_mix_blocks": 20,
+          "original_pcm_sha256": "4e2bd0f7604782404ff2bac957b95dd3007e71249b955dda889f321c1093036d",
+          "native_pcm_sha256": "4e2bd0f7604782404ff2bac957b95dd3007e71249b955dda889f321c1093036d",
+          "mismatch_frames": 0,
+          "status": "EXACT"
+        }
+      ]
+    },
+    "demon_pair": {
+      "status": "MEASURED_BOUNDED",
+      "scope": "Compare the two simultaneous Demon trace SFX with Retail tracker output.\n\nThe two SFX requests occurred at the same gameplay step in a retained diagnostic\ntrace. This test reconstructs them as simultaneous idle voices over a fresh\nRetail startup track, not the original preceding voice state, actual game/audio\ncadence, live mixed device output, or a proof of every reachable overlap.\nOriginal assets and PCM are confined to --work, not the metrics-only report.\n",
+      "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d",
+      "fixture": "analysis/traces/demon-clock-award-0-rewards.json",
+      "fixture_sha256": "0603b05437b4e507755fa594cfc430e01890b0fa9fc673a7fd162c3889922712",
+      "profile_sha256": "be124e35a8b4e2215f6ac71e3d0f4868908cdcd82f08026fe65e30014cdcd9e9",
+      "native_sha256": "948a680896d83d0bc26b9b02ec8c24bbccea23eb1d4132793acfbbb09827dad3",
+      "library_sha256": "f22f8a64300fa458d8d1e841a8ed81abdf3acfbd27ce2f60f02137026d4dab6d",
+      "events": [
+        [
+          2360,
+          92,
+          2,
+          1,
+          4600476
+        ],
+        [
+          2360,
+          92,
+          2,
+          1,
+          4600512
+        ]
+      ],
+      "sample_sha256": [
+        "7ac1a594d0c4ce6366bc0ea5543cfa5c770479468c161a41e90b1563b67ccb11",
+        "59a22840ff1120b42be1a7634ba6f4d590b6336cd668f51eaf549e64b8c6a5ad"
+      ],
+      "music_bank_offset": "0x6ffb4",
+      "music_order": 25,
+      "frames": 2646,
+      "original_sfx_blocks": 18,
+      "original_mix_blocks": 20,
+      "original_pcm_sha256": "b8676376156936bdd32f4040dd8115d41035f1d306be9f911e1fd8e8d9b54a28",
+      "chunks": [
+        {
+          "size": 137,
+          "mismatch_frames": 0,
+          "native_pcm_sha256": "b8676376156936bdd32f4040dd8115d41035f1d306be9f911e1fd8e8d9b54a28"
+        },
+        {
+          "size": 882,
+          "mismatch_frames": 0,
+          "native_pcm_sha256": "b8676376156936bdd32f4040dd8115d41035f1d306be9f911e1fd8e8d9b54a28"
+        },
+        {
+          "size": 2646,
+          "mismatch_frames": 0,
+          "native_pcm_sha256": "b8676376156936bdd32f4040dd8115d41035f1d306be9f911e1fd8e8d9b54a28"
+        }
+      ]
+    }
+  }
+}

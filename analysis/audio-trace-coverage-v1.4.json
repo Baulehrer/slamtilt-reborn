@@ -1,0 +1,350 @@
+{
+  "scope": "Inventory audio request coincidences in retained Retail traces.\n\nA same-step request is not proof of an audible overlap: actual channel lifetimes,\ntracker phase and device cadence are not captured. This inventory covers only\nthe listed fixture formats and does not include every possible game state.\n",
+  "tables": {
+    "pirate": {
+      "fixtures": 81,
+      "sources": [
+        {
+          "path": "analysis/traces/pirate-audio-events.json",
+          "sha256": "2e8dfa961d57810f949aba9514ec94cebd7bf74fd4858bffe1341db98b206419"
+        }
+      ],
+      "requests_by_service": {
+        "0x5c": 5714,
+        "0x80": 114,
+        "0x84": 138,
+        "0x88": 136,
+        "0x8c": 11,
+        "0x90": 81
+      },
+      "same_step_sfx_groups": 418,
+      "distinct_ordered_sfx_groups": 7,
+      "same_step_sfx_and_music_requests": 45
+    },
+    "space": {
+      "fixtures": 38,
+      "sources": [
+        {
+          "path": "analysis/traces/space-alien-rewards.json",
+          "sha256": "87cf66ca3854f4198eb3c96f50696e5d1b842c23d8af73c3837c6f6e8b6d68b4"
+        },
+        {
+          "path": "analysis/traces/space-base-rules-rewards.json",
+          "sha256": "75e86e1ca0a91e1f3ffea180febd76f4ffdfa2c9113e26690daa7e61ba9a4f61"
+        },
+        {
+          "path": "analysis/traces/space-bigblam-rewards.json",
+          "sha256": "7639b3d444dc4d3b4828b57b5d0a6c55488243ddcf1117d9bb5ceb6bf99207fb"
+        },
+        {
+          "path": "analysis/traces/space-bikes-rewards.json",
+          "sha256": "25fa0b5924346abd10121ed96dc8ee2587316547d289bcadbfc9f897bb5335e0"
+        },
+        {
+          "path": "analysis/traces/space-combo-mode-guard-rewards.json",
+          "sha256": "8d93ad3d4adf9a29fc0975b13c33e044f53b74d7952525619c4b6461126e09ec"
+        },
+        {
+          "path": "analysis/traces/space-kickback-off-rewards.json",
+          "sha256": "a265627d47a02e83a0e3642c8522d93a692c02ca186f780ab72900df55c791ae"
+        },
+        {
+          "path": "analysis/traces/space-kickback-on-rewards.json",
+          "sha256": "69b016955ec8f3c861c8f9dfa425066693cd1ff0e8f5021a236f07b8d0a71302"
+        },
+        {
+          "path": "analysis/traces/space-lane-default-rewards.json",
+          "sha256": "fc513d275c1531d404f667b7829de08a37111e6e4cbcf2d264b3fd773cc0594a"
+        },
+        {
+          "path": "analysis/traces/space-lane-double-rewards.json",
+          "sha256": "f42a8bc47178933cea0b2462444ae1ae6ada572a5c3dbcc66630a1a578598635"
+        },
+        {
+          "path": "analysis/traces/space-lane-live-rewards.json",
+          "sha256": "30b79c4f1e2209b2f4ffc58c0734633d98a134a2496bbf0a41b67edf06f97d53"
+        },
+        {
+          "path": "analysis/traces/space-lane-shift-rewards.json",
+          "sha256": "b75810245951885f59c1a8cfa7515419050aab9da51411697c443680ddfe88c6"
+        },
+        {
+          "path": "analysis/traces/space-lane-toggle-rewards.json",
+          "sha256": "cf1a1e1c3b6bded0799693aef2cb53b29cfb6a0ad52d1cec76a24651ba0cf167"
+        },
+        {
+          "path": "analysis/traces/space-magna-off-rewards.json",
+          "sha256": "247d2710394443d3a02bf7cf7254c1da8fa459a6048f3f736fa26982a10a62b0"
+        },
+        {
+          "path": "analysis/traces/space-magna-on-rewards.json",
+          "sha256": "c4afca4a996c21d80d8d166846f11fed3b4f9d5836ffd40e7aa8395f276403f5"
+        },
+        {
+          "path": "analysis/traces/space-mission-campaign-rewards.json",
+          "sha256": "1893f764aea8ffe51280ef85ccdaa0ec9def664fb7cdb62c860f1282fa93f952"
+        },
+        {
+          "path": "analysis/traces/space-multiball-repeat-rewards.json",
+          "sha256": "940f102db3bd6b480275299d1252786baf186a8f1a70367ac01d5885b199c7a8"
+        },
+        {
+          "path": "analysis/traces/space-multiball-rewards.json",
+          "sha256": "6eadf88d0302ea4cfb4def601a173a53c447a6849a0d5cb83b3a58f6cc9bde74"
+        },
+        {
+          "path": "analysis/traces/space-planet-rewards.json",
+          "sha256": "dc03bb3382c306d624f0f98b143486c4dec65d7884ec3ba5e5ac2b77149ad59c"
+        },
+        {
+          "path": "analysis/traces/space-planet-success-rewards.json",
+          "sha256": "e29687d8fec5c9f1a36a3815c477ef87972e58122e3815db55b95996a942c53c"
+        },
+        {
+          "path": "analysis/traces/space-race-variants-rewards.json",
+          "sha256": "fa6a9fc0987b571514a8b94d6ba7fa648229cbd21815694b27662449f0e9abf2"
+        },
+        {
+          "path": "analysis/traces/space-sabre-rewards.json",
+          "sha256": "1fba12c31604a1f0725664c27b6fd4dcbb97b0c26fb93d94da36bef5836a473b"
+        },
+        {
+          "path": "analysis/traces/space-sabre-variants-rewards.json",
+          "sha256": "d7d648ec123fd72f1826437c584b596dcba07de4e34866bd9febc6d8dafbe721"
+        },
+        {
+          "path": "analysis/traces/space-skillshot-expiry-rewards.json",
+          "sha256": "1fd74750aa9d4f0e95d8578274a17ccd4020c3cc34c058dea261c41573a2d046"
+        },
+        {
+          "path": "analysis/traces/space-special-left-rewards.json",
+          "sha256": "3b5cffe2127478ac1199bb4e946b599ee159dff93cd7251dfa9d503fc3d74e7d"
+        },
+        {
+          "path": "analysis/traces/space-speed-rules-rewards.json",
+          "sha256": "c9e7af4c3c13ad0a2a060c26d0408996a23dcdf493cfbff6d95d0e369b13d979"
+        },
+        {
+          "path": "analysis/traces/space-walker-aim70-rewards.json",
+          "sha256": "cb905f60e1f2ff2eba886a6930c29de49c87a1928d82d0095ad2b3be777e2f87"
+        },
+        {
+          "path": "analysis/traces/space-walker-aim87-rewards.json",
+          "sha256": "40d696c8a44125df7390fa95953748eb1053b7d4434a09aeb8367e97aa49596b"
+        },
+        {
+          "path": "analysis/traces/space-walker-aim88-rewards.json",
+          "sha256": "cd6b488c63adae6e07564c9df6fa0de05fd89b1f193d48319f5cea717dbb95fd"
+        },
+        {
+          "path": "analysis/traces/space-walker-repeat-rewards.json",
+          "sha256": "f2db649fdd7d346a06c106251bdb60c544444c5a1621bfe57c734b06b8328555"
+        },
+        {
+          "path": "analysis/traces/space-walker-rewards.json",
+          "sha256": "ab25653df393db974f219cd8ef6c21dc1bcd87147c5d30990ec86abaf71b8eae"
+        },
+        {
+          "path": "analysis/traces/space-weapons-ladder-rewards.json",
+          "sha256": "1780370b2bf7aa88d044f1170912739e211ebd9815660a92bf7128ce0f6aca14"
+        },
+        {
+          "path": "analysis/traces/space-audio-events.json",
+          "sha256": "dd7752dc19241b84d6d33a888b55671193f0ce4cc482768cbabe0f3191fe8192"
+        }
+      ],
+      "requests_by_service": {
+        "0x5c": 512,
+        "0x80": 31,
+        "0x84": 36,
+        "0x88": 26,
+        "0x90": 38
+      },
+      "same_step_sfx_groups": 0,
+      "distinct_ordered_sfx_groups": 0,
+      "same_step_sfx_and_music_requests": 0
+    },
+    "demon": {
+      "fixtures": 37,
+      "sources": [
+        {
+          "path": "analysis/traces/demon-base-rules-rewards.json",
+          "sha256": "6a90895bd8575664292111a5386a4e3707f81026209bf6ddd822d2f659dac41c"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-0-rewards.json",
+          "sha256": "0603b05437b4e507755fa594cfc430e01890b0fa9fc673a7fd162c3889922712"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-1-rewards.json",
+          "sha256": "8993026e39d4667f0ce8de8e83400908ef8d7dde19c58b8c7a27ab9f45695136"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-10-rewards.json",
+          "sha256": "9477bf4d0e4c89b858872aadaf1be930b901c2597c0fe6db80914186ecc4dcfe"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-11-rewards.json",
+          "sha256": "86f8f22860f3eac8e3b37d26bd7f390e18095ff88b0bfe6c0f7352db60bb73a1"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-2-rewards.json",
+          "sha256": "d9eee2fe7897797b6c73ce2bd734f6c40bf2f6d3016952b849fa24ad66b58f0b"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-3-rewards.json",
+          "sha256": "2dbec58fc2acb0e88846e3ea50c0ff57732732f92097bfef59cd35a9d50df62a"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-4-rewards.json",
+          "sha256": "143b1631fdf09443ed1850614e247742e5cda34faf7063f35584437205d376b5"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-5-rewards.json",
+          "sha256": "0c0073e2e8445f777f3301aaa57a59dd1d8d779e71c1a879afc2619d5714fd22"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-6-rewards.json",
+          "sha256": "f08afbf40b621e6a03eff5098a70f26d6694f5c0a713dedecde83996a875bbb0"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-7-rewards.json",
+          "sha256": "64bdeafa9b42f9db7771bbc9ad27955ecda9cb6662d323be0d40c92d8a9fb092"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-8-rewards.json",
+          "sha256": "f2c4213d3f3494156ed5c10a29adcebd5dd2c5018f51961e594be4df5e3a65c8"
+        },
+        {
+          "path": "analysis/traces/demon-clock-award-9-rewards.json",
+          "sha256": "0aa111b03dbc0a0ba394ee38d20920042dd64461313d8ab0c68a9f9c30bf3dbe"
+        },
+        {
+          "path": "analysis/traces/demon-clock-bonus-rewards.json",
+          "sha256": "bbfd1fb9c5b8a9e167947a40b65322580f5abc3f0826be56ce1d41ce887adfc9"
+        },
+        {
+          "path": "analysis/traces/demon-clock-rewards-rewards.json",
+          "sha256": "a53aeffe1dac944c0799ba4d2b453980601209af50c31f0f46973907c0b4b1bd"
+        },
+        {
+          "path": "analysis/traces/demon-clock-tower-rewards.json",
+          "sha256": "4230ee4e6b7d1337a5c5ad997f04d5cf807f56cf86c047d01daa8ad0c5b65954"
+        },
+        {
+          "path": "analysis/traces/demon-final-campaign-rewards.json",
+          "sha256": "93b6650ac9f338c453d75208cfc7e90a7b8b36ff6e2377a86b996da826ce7dc2"
+        },
+        {
+          "path": "analysis/traces/demon-kickback-off-rewards.json",
+          "sha256": "b695e5186d0fd3bc198432f2b93b18bf0898ad8430717b2958b322b391aed7a3"
+        },
+        {
+          "path": "analysis/traces/demon-kickback-on-rewards.json",
+          "sha256": "cb898eb1ea39cf11c625be0fc38753451add8e3b665235464e8a359d1c5a381a"
+        },
+        {
+          "path": "analysis/traces/demon-legal-game-rewards.json",
+          "sha256": "5d35315bd1a10ce940015ff7a37b73617a06e7c31f7167a1e64e6c0d90c111ab"
+        },
+        {
+          "path": "analysis/traces/demon-mode-bat-rewards.json",
+          "sha256": "072f15da3fd3f3f2a9f8a3e340dfa49dd932066a4f730dc62371262a074f8fe1"
+        },
+        {
+          "path": "analysis/traces/demon-mode-grave-rewards.json",
+          "sha256": "61660d70cabe964a02d595fa1ca69412223965ee0a4e42f379e9408899d050ac"
+        },
+        {
+          "path": "analysis/traces/demon-mode-meatball-rewards.json",
+          "sha256": "ba7559566609df6b0e0864e6447af90111ca02757b0b83a0c6990aa9e0ce2966"
+        },
+        {
+          "path": "analysis/traces/demon-mode-twice-rewards.json",
+          "sha256": "47bc037096db9bb9604a811202cc16d3a847fdde4425f1b516f985c9f84187f0"
+        },
+        {
+          "path": "analysis/traces/demon-mode-vampires-rewards.json",
+          "sha256": "9d85ec3bd50d09d692206a3b8e0afd423bacd58dd6cb9ed70d78499ce36a6668"
+        },
+        {
+          "path": "analysis/traces/demon-mode-witch-rewards.json",
+          "sha256": "3a3de9ce41bb7c1baab58bf01770e0c604989eb0c1f85fcab65ac67bcb3a3bef"
+        },
+        {
+          "path": "analysis/traces/demon-mode-zombie-rewards.json",
+          "sha256": "e9b97c049da60bcfc3e6d364f1c88e572b60c0fc124a06c6f187fdbf5488ed57"
+        },
+        {
+          "path": "analysis/traces/demon-twice-cycles-rewards.json",
+          "sha256": "dafdb13c9e79764102b85d16b3a6952a3f849e458d5cfe74d8337b9aae24cc91"
+        },
+        {
+          "path": "analysis/traces/demon-video-brain-miss-rewards.json",
+          "sha256": "7f6aa46beac737a440661c1fa56699e023c39a5bb2032107ccbe354e942f3150"
+        },
+        {
+          "path": "analysis/traces/demon-video-brain-win-rewards.json",
+          "sha256": "e15afaec121c578bb2b2097d65f12bc850228d79b49e5d9c5f8c9738e244fe68"
+        },
+        {
+          "path": "analysis/traces/demon-video-consecutive-rewards.json",
+          "sha256": "960cfdebc437c1a6e3df9356a2a5be16368e2142f76260a74b6a46eacac43381"
+        },
+        {
+          "path": "analysis/traces/demon-video-wolf-idle-rewards.json",
+          "sha256": "9b8244c36f59c1cd549eaa3e0d47431d756e139ee587740834375b69a88774e9"
+        },
+        {
+          "path": "analysis/traces/demon-video-wolf-shoot-rewards.json",
+          "sha256": "2f17dd84bfe7ac09d711307b8d36905341405724032dc754eefe23c4f90a43ee"
+        },
+        {
+          "path": "analysis/traces/demon-witch-force-off-rewards.json",
+          "sha256": "de51cc0eaa6693f9b2750efab855468072180ba1bcadfa3472d347878590253c"
+        },
+        {
+          "path": "analysis/traces/demon-witch-force-on-rewards.json",
+          "sha256": "e1115b8d15488f23bbfe47c869dd580cc331f23faec4692a30d73df0abb68e2a"
+        },
+        {
+          "path": "analysis/traces/demon-witch-left-rewards.json",
+          "sha256": "684a04bf01ab001a75ff4ee9bfc209ed678422cb26474eca00bc92af5531a1a2"
+        },
+        {
+          "path": "analysis/traces/demon-zombie-values-rewards.json",
+          "sha256": "755eca4d0e389915bfdbaa9f900af2af7e80b300a923c8c8d2793f2ae9836614"
+        }
+      ],
+      "requests_by_service": {
+        "0x5c": 795,
+        "0x80": 18,
+        "0x84": 22,
+        "0x88": 44,
+        "0x8c": 1,
+        "0x90": 37
+      },
+      "same_step_sfx_groups": 12,
+      "distinct_ordered_sfx_groups": 1,
+      "same_step_sfx_and_music_requests": 5
+    },
+    "mean": {
+      "status": "PARTIAL",
+      "reason": "Retained Mean natural gameplay audio summaries do not contain comparable complete original service-entry event streams.",
+      "sources": [
+        {
+          "path": "analysis/traces/mean-audio-gameplay.json",
+          "sha256": "67ea35376126b7928923e5a558575933511a4786c38d7b1f4301985a0bb1e907"
+        },
+        {
+          "path": "analysis/traces/mean-mode-audio-original.json",
+          "sha256": "13eedf5a364e09097e638a69416cf4c7d9402e61596af1acc42312dd63846bda"
+        },
+        {
+          "path": "analysis/traces/mean-display-audio-original.json",
+          "sha256": "799dca00e85862c73a37b4c6bc9a50344859435e37cdd43d4210f2ca1a7b98d4"
+        }
+      ]
+    }
+  }
+}

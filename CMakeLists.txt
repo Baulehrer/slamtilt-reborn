@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(slamtilt_reborn VERSION 1.3.0 LANGUAGES CXX)
+project(slamtilt_reborn VERSION 1.4.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Opt-in release experiments: developer/reference builds keep their defaults.
@@ -729,10 +729,14 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/demo-1997/Slam Tilt Demo (Wind
   add_test(NAME mean_bonus_pixels_oracle COMMAND python3 "${CMAKE_SOURCE_DIR}/tools/verify_mean_bonus_pixels.py" --native "$<TARGET_FILE:mean_bonus_pixels_probe>" --dat "${CMAKE_SOURCE_DIR}/build/corpus/win95/demo-1997/Slam Tilt Demo (Windows, 1996) - SLAMTILT/DAT/MAIN.DAT" --mean-dat "${CMAKE_SOURCE_DIR}/build/corpus/win95/demo-1997/Slam Tilt Demo (Windows, 1996) - SLAMTILT/DAT/MEAN.DAT")
 endif()
 
-find_path(XMP_INCLUDE_DIR xmp.h HINTS "${CMAKE_SOURCE_DIR}/build/libxmp/include")
-find_library(XMP_LIBRARY NAMES xmp HINTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v4-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v3-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v2-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build" "${CMAKE_SOURCE_DIR}/build/libxmp-build")
+find_path(XMP_INCLUDE_DIR xmp.h HINTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v11/include" "${CMAKE_SOURCE_DIR}/build/libxmp/include")
+find_library(XMP_LIBRARY NAMES xmp HINTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v11-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v4-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v3-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v2-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build" "${CMAKE_SOURCE_DIR}/build/libxmp-build")
+option(SLAM_STIM_CHANNEL_HISTORY "Enable channel-preserving STIM transitions with the pinned libxmp patch" OFF)
 if(XMP_INCLUDE_DIR AND XMP_LIBRARY)
   add_library(slamaudio src/audio/stim_player.cpp src/audio/native_audio.cpp src/audio/mean_sound_assets.cpp src/audio/mean_sample_mixer.cpp src/audio/pirate_sound_assets.cpp src/audio/space_sound_assets.cpp src/audio/demon_sound_assets.cpp)
+  if(SLAM_STIM_CHANNEL_HISTORY)
+    target_compile_definitions(slamaudio PRIVATE SLAM_STIM_CHANNEL_HISTORY=1)
+  endif()
   target_include_directories(slamaudio PUBLIC src "${XMP_INCLUDE_DIR}")
   target_link_libraries(slamaudio PUBLIC SDL3::SDL3 "${XMP_LIBRARY}")
   target_compile_options(slamaudio PRIVATE -Wall -Wextra -Wpedantic)
@@ -773,14 +777,35 @@ if(TARGET slamaudio)
     add_test(NAME pirate_multiplier_payout_audio COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tools/verify_pirate_audio.py" --fixture "${CMAKE_SOURCE_DIR}/analysis/traces/pirate-multiplier-payout-audio.json" --cases bonus-multiplier-payout --work "${CMAKE_SOURCE_DIR}/build/oracle/pirate-payout-audio" --native "$<TARGET_FILE:pirate_audio_probe>" --viewer "$<TARGET_FILE:slamview>")
     set_tests_properties(pirate_multiplier_payout_audio PROPERTIES TIMEOUT 90)
     add_test(NAME pirate_audio_original_native_sdl COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/tools/verify_pirate_audio.py" --native "$<TARGET_FILE:pirate_audio_probe>" --viewer "$<TARGET_FILE:slamview>")
-    set_tests_properties(pirate_audio_original_native_sdl PROPERTIES WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" TIMEOUT 240 COST 120)
+    set_tests_properties(pirate_audio_original_native_sdl PROPERTIES WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" TIMEOUT 600 COST 120)
   endif()
   add_executable(stim_audio_probe tests/stim_audio_probe.cpp)
   target_link_libraries(stim_audio_probe PRIVATE slamaudio)
+  add_executable(table_combined_pcm_probe tests/table_combined_pcm_probe.cpp)
+  target_link_libraries(table_combined_pcm_probe PRIVATE slamaudio)
+  add_executable(stim_transfer_guard_probe tests/stim_transfer_guard_probe.cpp)
+  target_link_libraries(stim_transfer_guard_probe PRIVATE slamaudio)
+  add_executable(stim_bank_chain_probe tests/stim_bank_chain_probe.cpp)
+  target_link_libraries(stim_bank_chain_probe PRIVATE slamaudio)
+  add_executable(stim_crossbank_probe tests/stim_crossbank_probe.cpp)
+  target_link_libraries(stim_crossbank_probe PRIVATE slamaudio)
+  add_executable(stim_deferred_probe tests/stim_deferred_probe.cpp)
+  target_link_libraries(stim_deferred_probe PRIVATE slamaudio)
+  add_executable(pirate_trace_mix_probe tests/pirate_trace_mix_probe.cpp)
+  target_link_libraries(pirate_trace_mix_probe PRIVATE slamaudio)
+  add_executable(mean_trace_mix_probe tests/mean_trace_mix_probe.cpp)
+  target_link_libraries(mean_trace_mix_probe PRIVATE slamaudio)
+  add_executable(stim_trace_mix_probe tests/stim_trace_mix_probe.cpp)
+  target_link_libraries(stim_trace_mix_probe PRIVATE slamaudio)
+  add_executable(stim_transition_probe tests/stim_transition_probe.cpp)
+  target_link_libraries(stim_transition_probe PRIVATE slamaudio)
   add_executable(native_audio_probe tests/native_audio_probe.cpp)
   target_link_libraries(native_audio_probe PRIVATE slamaudio)
   if(EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/Music.Bin" AND EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/IntroMusic.Bin")
+    if(EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-build/libxmp.so.4")
     add_test(NAME native_music_pcm COMMAND python3 "${CMAKE_SOURCE_DIR}/tools/verify_native_music.py" --native "$<TARGET_FILE:stim_audio_probe>")
+    set_tests_properties(native_music_pcm PROPERTIES ENVIRONMENT "LD_LIBRARY_PATH=${CMAKE_SOURCE_DIR}/build/libxmp-build")
+    endif()
     add_test(NAME native_audio_queue COMMAND native_audio_probe "${CMAKE_SOURCE_DIR}/build/decoded/Music.Bin")
     set_tests_properties(native_audio_queue PROPERTIES ENVIRONMENT "SDL_AUDIODRIVER=dummy")
   endif()
@@ -2286,12 +2311,15 @@ if(TEST tracker_period_experiment)
     --work "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-experiment"
     --output "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-experiment/report.json")
   set_tests_properties(tracker_stim_rate_experiment PROPERTIES TIMEOUT 180 RESOURCE_LOCK tracker_stim_rate)
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-build/libxmp.so.4")
   add_test(NAME tracker_stim_rate_five_tick COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
     "${CMAKE_SOURCE_DIR}/tools/verify_tracker_five_tick_experiment.py"
     --native "$<TARGET_FILE:stim_audio_probe>" --library "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-experiment/build/libxmp.so.4"
+    --baseline-library "${CMAKE_SOURCE_DIR}/build/libxmp-build/libxmp.so.4"
     --work "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-five-tick"
     --output "${CMAKE_CURRENT_BINARY_DIR}/tracker-stim-rate-five-tick/report.json")
   set_tests_properties(tracker_stim_rate_five_tick PROPERTIES TIMEOUT 180 DEPENDS tracker_stim_rate_experiment RESOURCE_LOCK tracker_stim_rate)
+  endif()
   foreach(_loop_note IN ITEMS 13 24 25 28)
     add_test(NAME tracker_stim_rate_loop_${_loop_note} COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
       "${CMAKE_SOURCE_DIR}/tools/verify_tracker_long_loop.py" --native "$<TARGET_FILE:stim_audio_probe>"
@@ -2360,6 +2388,7 @@ if(TARGET stim_sequence_probe AND TEST stim_four_table_original_quality AND
    EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v2-build/libxmp.so.4")
   add_test(NAME stim_pitch_slide_targeted_survey COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
     "${CMAKE_SOURCE_DIR}/tools/verify_stim_period_rounding.py" --targeted --survey
+    --base-patch "${CMAKE_SOURCE_DIR}/patches/libxmp-stim-1.3.patch"
     --native "$<TARGET_FILE:stim_sequence_probe>" --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build/libxmp.so.4"
     --work "${CMAKE_CURRENT_BINARY_DIR}/stim-pitch-slide-survey"
     --output "${CMAKE_CURRENT_BINARY_DIR}/stim-pitch-slide-survey/report.json")
@@ -2381,6 +2410,7 @@ if(TARGET stim_sequence_probe AND TEST stim_four_table_original_quality AND
     --output "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-hold-original/report.json")
   add_test(NAME stim_vibrato_hold_survey COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
     "${CMAKE_SOURCE_DIR}/tools/verify_stim_period_rounding.py" --vibrato-hold --survey
+    --base-patch "${CMAKE_SOURCE_DIR}/patches/libxmp-stim-1.3.patch"
     --native "$<TARGET_FILE:stim_sequence_probe>" --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v2-build/libxmp.so.4"
     --work "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-hold-survey"
     --output "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-hold-survey/report.json")
@@ -2397,10 +2427,208 @@ if(TARGET stim_sequence_probe AND TEST stim_four_table_original_quality AND
     --output "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-direct-original/report.json")
   add_test(NAME stim_vibrato_direct_survey COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
     "${CMAKE_SOURCE_DIR}/tools/verify_stim_period_rounding.py" --vibrato-direct --survey
+    --base-patch "${CMAKE_SOURCE_DIR}/patches/libxmp-stim-1.3.patch"
     --native "$<TARGET_FILE:stim_sequence_probe>" --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v3-build/libxmp.so.4"
     --work "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-direct-survey"
     --output "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-direct-survey/report.json")
   set_tests_properties(stim_vibrato_direct_original stim_vibrato_direct_survey PROPERTIES TIMEOUT 180)
+endif()
+
+if(TEST stim_four_table_original_quality AND TARGET stim_audio_probe AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v11-build/libxmp.so.4")
+  set(STIM_V11_LIBRARY "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v11-build/libxmp.so.4")
+  add_test(NAME stim_v11_original_pcm COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_dynamic_pcm.py" --native "$<TARGET_FILE:stim_audio_probe>"
+    --library "${STIM_V11_LIBRARY}" --ticks 2048 --require-exact
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-pcm" --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-pcm/report.json")
+  add_test(NAME stim_v11_demon_finebend_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_dynamic_pcm.py" --native "$<TARGET_FILE:stim_audio_probe>"
+    --library "${STIM_V11_LIBRARY}" --table demon --bank-offset 0x6b2bc --order 0
+    --ticks 2048 --allow-silent --require-exact --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-demon-finebend"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-demon-finebend/report.json")
+  add_test(NAME stim_v11_gain_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_gain_volume.py" --native "$<TARGET_FILE:stim_audio_probe>"
+    --library "${STIM_V11_LIBRARY}" --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-gain"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-gain/report.json")
+  if(TARGET table_combined_pcm_probe)
+    add_test(NAME stim_v11_four_table_combined_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_table_combined_pcm.py" --native "$<TARGET_FILE:table_combined_pcm_probe>"
+      --library "${STIM_V11_LIBRARY}" --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-four-table-combined"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-four-table-combined/report.json")
+    set_tests_properties(stim_v11_four_table_combined_original PROPERTIES TIMEOUT 120)
+  endif()
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-build/libxmp.so.4" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp/test-dev/data/Gaffeltruck.mod")
+    add_test(NAME stim_v11_non_stim_isolation COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_stim_isolation.py" --probe "$<TARGET_FILE:stim_audio_probe>"
+      --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-build/libxmp.so.4" --fixed "${STIM_V11_LIBRARY}"
+      --module "${CMAKE_SOURCE_DIR}/build/libxmp/test-dev/data/Gaffeltruck.mod"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-non-stim-isolation.json")
+  endif()
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v6-build/libxmp.so.4" AND
+     EXISTS "${CMAKE_SOURCE_DIR}/build/decoded/IntroMusic.Bin")
+    add_test(NAME stim_v11_default_mode_isolation COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_stim_isolation.py" --mode default --probe "$<TARGET_FILE:stim_audio_probe>"
+      --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v6-build/libxmp.so.4" --fixed "${STIM_V11_LIBRARY}"
+      --module "${CMAKE_SOURCE_DIR}/build/decoded/IntroMusic.Bin"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-default-mode-isolation.json")
+  endif()
+  if(EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v11/src/period.c")
+    add_test(NAME stim_v11_period_table_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_stim_period_table.py" --libxmp-source "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v11"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-period-table.json")
+    set_tests_properties(stim_v11_period_table_original PROPERTIES TIMEOUT 300)
+  endif()
+  add_test(NAME stim_v11_prior_differences_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_pcm_regressions.py" --native "$<TARGET_FILE:stim_audio_probe>"
+    --library "${STIM_V11_LIBRARY}" --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-prior-differences"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-prior-differences/report.json")
+  if(TARGET stim_transition_probe AND SLAM_STIM_CHANNEL_HISTORY)
+    add_test(NAME stim_v11_transitions_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_stim_transition_pcm.py" --native "$<TARGET_FILE:stim_transition_probe>"
+      --library "${STIM_V11_LIBRARY}" --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-transitions"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-transitions/report.json" --require-exact --allow-original-unresolved)
+    set_tests_properties(stim_v11_transitions_original PROPERTIES TIMEOUT 120)
+    foreach(_service IN ITEMS 0x90 0x84 0x88)
+      add_test(NAME stim_v11_transitions_${_service}_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_stim_transition_pcm.py" --native "$<TARGET_FILE:stim_transition_probe>"
+        --library "${STIM_V11_LIBRARY}" --service "${_service}"
+        --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-transitions-${_service}"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-transitions-${_service}/report.json"
+        --require-exact --allow-original-unresolved)
+      set_tests_properties(stim_v11_transitions_${_service}_original PROPERTIES TIMEOUT 120)
+      add_test(NAME stim_v11_same_order_${_service}_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_stim_transition_pcm.py" --native "$<TARGET_FILE:stim_transition_probe>"
+        --library "${STIM_V11_LIBRARY}" --service "${_service}" --same-order
+        --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-same-order-${_service}"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-same-order-${_service}/report.json" --require-exact)
+      set_tests_properties(stim_v11_same_order_${_service}_original PROPERTIES TIMEOUT 120)
+    endforeach()
+    foreach(_table IN ITEMS pirate space demon)
+      add_test(NAME stim_v11_transitions_${_table}_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_stim_transition_pcm.py" --native "$<TARGET_FILE:stim_transition_probe>"
+        --library "${STIM_V11_LIBRARY}" --service 0x90 --table "${_table}"
+        --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-transitions-${_table}"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-transitions-${_table}/report.json" --require-exact)
+      set_tests_properties(stim_v11_transitions_${_table}_original PROPERTIES TIMEOUT 120)
+    endforeach()
+  endif()
+  if(TARGET stim_transfer_guard_probe AND SLAM_STIM_CHANNEL_HISTORY)
+    add_test(NAME stim_v11_transfer_guard COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_stim_transfer_guard.py" --native "$<TARGET_FILE:stim_transfer_guard_probe>"
+      --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-transfer-guard"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-transfer-guard/report.json")
+    set_tests_properties(stim_v11_transfer_guard PROPERTIES TIMEOUT 120)
+  endif()
+  if(TARGET mean_trace_mix_probe AND SLAM_STIM_CHANNEL_HISTORY)
+    add_test(NAME mean_trace_combined_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_mean_trace_mix.py" --native "$<TARGET_FILE:mean_trace_mix_probe>"
+      --library "${STIM_V11_LIBRARY}" --work "${CMAKE_CURRENT_BINARY_DIR}/mean-trace-mix"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/mean-trace-mix/report.json")
+    set_tests_properties(mean_trace_combined_original PROPERTIES TIMEOUT 360)
+  endif()
+  if(TARGET table_combined_pcm_probe AND SLAM_STIM_CHANNEL_HISTORY)
+    add_test(NAME demon_trace_pair_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_demon_pair_mix.py" --native "$<TARGET_FILE:table_combined_pcm_probe>"
+      --library "${STIM_V11_LIBRARY}" --work "${CMAKE_CURRENT_BINARY_DIR}/demon-trace-pair"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/demon-trace-pair/report.json")
+    set_tests_properties(demon_trace_pair_original PROPERTIES TIMEOUT 360)
+  endif()
+  if(TARGET stim_trace_mix_probe AND SLAM_STIM_CHANNEL_HISTORY)
+    add_test(NAME space_demon_trace_combined_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_space_demon_trace_mix.py" --native "$<TARGET_FILE:stim_trace_mix_probe>"
+      --library "${STIM_V11_LIBRARY}" --work "${CMAKE_CURRENT_BINARY_DIR}/space-demon-trace-mix"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/space-demon-trace-mix/report.json")
+    set_tests_properties(space_demon_trace_combined_original PROPERTIES TIMEOUT 360)
+  endif()
+  if(TARGET pirate_trace_mix_probe AND SLAM_STIM_CHANNEL_HISTORY)
+    add_test(NAME pirate_trace_combined_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_pirate_trace_mix.py" --native "$<TARGET_FILE:pirate_trace_mix_probe>"
+      --library "${STIM_V11_LIBRARY}" --work "${CMAKE_CURRENT_BINARY_DIR}/pirate-trace-mix"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/pirate-trace-mix/report.json")
+    set_tests_properties(pirate_trace_combined_original PROPERTIES TIMEOUT 360)
+  endif()
+  if(TARGET stim_deferred_probe AND SLAM_STIM_CHANNEL_HISTORY)
+    add_test(NAME stim_deferred_scheduler_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_stim_deferred_pcm.py" --native "$<TARGET_FILE:stim_deferred_probe>"
+      --library "${STIM_V11_LIBRARY}" --work "${CMAKE_CURRENT_BINARY_DIR}/stim-deferred-scheduler"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-deferred-scheduler/report.json")
+    set_tests_properties(stim_deferred_scheduler_original PROPERTIES TIMEOUT 360)
+  endif()
+  if(TARGET stim_crossbank_probe AND SLAM_STIM_CHANNEL_HISTORY)
+    if(TARGET stim_bank_chain_probe)
+      add_test(NAME stim_v11_bank_chain_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_stim_bank_chain.py" --native "$<TARGET_FILE:stim_bank_chain_probe>"
+        --library "${STIM_V11_LIBRARY}" --ticks 512
+        --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-bank-chain"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-bank-chain/report.json")
+      set_tests_properties(stim_v11_bank_chain_original PROPERTIES TIMEOUT 180)
+    endif()
+    add_test(NAME stim_v11_crossbank_long_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_stim_crossbank_pcm.py" --native "$<TARGET_FILE:stim_crossbank_probe>"
+      --library "${STIM_V11_LIBRARY}" --service 0x90 --ticks 512 --representative
+      --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-crossbank-long"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-crossbank-long/report.json" --require-exact)
+    set_tests_properties(stim_v11_crossbank_long_original PROPERTIES TIMEOUT 360)
+    add_test(NAME stim_v11_mean_effect8_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+      "${CMAKE_SOURCE_DIR}/tools/verify_stim_crossbank_pcm.py" --native "$<TARGET_FILE:stim_crossbank_probe>"
+      --library "${STIM_V11_LIBRARY}" --service 0x84 --preempt --scheduler --warm-ticks 200
+      --ticks 128 --effect8 --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-mean-effect8"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-mean-effect8/report.json" --require-exact)
+    set_tests_properties(stim_v11_mean_effect8_original PROPERTIES TIMEOUT 360)
+    foreach(_service IN ITEMS 0x84 0x88)
+      foreach(_warm IN ITEMS 1 40 200)
+        add_test(NAME stim_v11_scheduler_${_service}_warm${_warm}_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+          "${CMAKE_SOURCE_DIR}/tools/verify_stim_crossbank_pcm.py" --native "$<TARGET_FILE:stim_crossbank_probe>"
+          --library "${STIM_V11_LIBRARY}" --service "${_service}" --preempt --scheduler --warm-ticks "${_warm}"
+          --ticks 512 --representative --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-scheduler-${_service}-${_warm}"
+          --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-scheduler-${_service}-${_warm}/report.json" --require-exact)
+        set_tests_properties(stim_v11_scheduler_${_service}_warm${_warm}_original PROPERTIES TIMEOUT 360)
+      endforeach()
+      add_test(NAME stim_v11_crossbank_long_${_service}_boundary COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_stim_crossbank_pcm.py" --native "$<TARGET_FILE:stim_crossbank_probe>"
+        --library "${STIM_V11_LIBRARY}" --service "${_service}" --ticks 512 --representative
+        --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-crossbank-long-${_service}"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-crossbank-long-${_service}/report.json"
+        --require-exact --allow-f00-boundary)
+      set_tests_properties(stim_v11_crossbank_long_${_service}_boundary PROPERTIES TIMEOUT 360)
+    endforeach()
+    foreach(_service IN ITEMS 0x90 0x84 0x88)
+      add_test(NAME stim_v11_crossbank_${_service}_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_stim_crossbank_pcm.py" --native "$<TARGET_FILE:stim_crossbank_probe>"
+        --library "${STIM_V11_LIBRARY}" --service "${_service}" --ticks 32
+        --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-crossbank-${_service}"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-crossbank-${_service}/report.json" --require-exact)
+      set_tests_properties(stim_v11_crossbank_${_service}_original PROPERTIES TIMEOUT 360)
+    endforeach()
+    foreach(_service IN ITEMS 0x84 0x88)
+      add_test(NAME stim_v11_preempt_${_service}_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_stim_crossbank_pcm.py" --native "$<TARGET_FILE:stim_crossbank_probe>"
+        --library "${STIM_V11_LIBRARY}" --service "${_service}" --preempt --ticks 32
+        --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-preempt-${_service}"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-preempt-${_service}/report.json" --require-exact)
+      set_tests_properties(stim_v11_preempt_${_service}_original PROPERTIES TIMEOUT 360)
+      add_test(NAME stim_v11_same_bank_preempt_${_service}_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+        "${CMAKE_SOURCE_DIR}/tools/verify_stim_crossbank_pcm.py" --native "$<TARGET_FILE:stim_crossbank_probe>"
+        --library "${STIM_V11_LIBRARY}" --service "${_service}" --preempt --same-bank --ticks 32
+        --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-same-bank-preempt-${_service}"
+        --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-same-bank-preempt-${_service}/report.json" --require-exact)
+      set_tests_properties(stim_v11_same_bank_preempt_${_service}_original PROPERTIES TIMEOUT 360)
+    endforeach()
+  endif()
+  add_test(NAME stim_v11_bank_samples_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_bank_pcm_survey.py" --native "$<TARGET_FILE:stim_audio_probe>"
+    --library "${STIM_V11_LIBRARY}" --ticks 512 --require-exact
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-bank-samples" --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-bank-samples/report.json")
+  if(TARGET pirate_combined_audio_probe AND TARGET pirate_overlap_pcm_probe)
+    add_test(NAME stim_v11_pirate_mixed_original COMMAND "${CMAKE_COMMAND}" -E env
+      "LD_LIBRARY_PATH=${CMAKE_SOURCE_DIR}/build/libxmp-stim-v11-build"
+      "${CMAKE_SOURCE_DIR}/build/venv/bin/python" "${CMAKE_SOURCE_DIR}/tools/verify_pirate_combined_audio.py"
+      --native "$<TARGET_FILE:pirate_combined_audio_probe>" --sfx "$<TARGET_FILE:pirate_overlap_pcm_probe>"
+      --output "${CMAKE_CURRENT_BINARY_DIR}/stim-v11-pirate-mixed" --require-exact)
+    set_tests_properties(stim_v11_pirate_mixed_original PROPERTIES TIMEOUT 120)
+  endif()
+  set_tests_properties(stim_v11_original_pcm stim_v11_demon_finebend_original stim_v11_gain_original stim_v11_prior_differences_original stim_v11_bank_samples_original PROPERTIES TIMEOUT 300)
 endif()
 
 if(TEST stim_four_table_original_quality AND TARGET stim_audio_probe)

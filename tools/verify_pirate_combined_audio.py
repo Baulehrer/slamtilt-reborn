@@ -20,6 +20,7 @@ def main():
  p.add_argument('--sfx',type=Path,required=True)
  p.add_argument('--output',type=Path,required=True)
  p.add_argument('--min-correlation',type=float)
+ p.add_argument('--require-exact',action='store_true',help='Require identical Original/native PCM')
  a=p.parse_args(); a.output.mkdir(parents=True,exist_ok=True)
  exe=(GAME/'SLAMTILT.EXE').read_bytes(); dat_path=GAME/'DAT/PIRATE.DAT'; dat=dat_path.read_bytes()
  assert sha(exe)==EXE_SHA and sha(dat)==TABLES['pirate'][0]
@@ -41,9 +42,10 @@ def main():
  ref=[x for pair in orig for x in pair]; aa=sum(x*x for x in ref);bb=sum(x*x for x in actual_samples)
  corr=sum(x*y for x,y in zip(ref,actual_samples))/math.sqrt(aa*bb)
  exact=sum(x==y for x,y in zip(ref[::2],actual_samples[::2]))
- assert aa and bb and any(x!=y for x,y in zip(ref,actual_samples))
+ assert aa and bb
+ if a.require_exact: assert ref == list(actual_samples), 'Original/native combined PCM differs'
  if a.min_correlation is not None: assert corr >= a.min_correlation, corr
- report={'status':'VERIFIED_BOUNDED_WITH_TRACKER_PCM_GAP','scope':__doc__,'exe_sha256':sha(exe),'dat_sha256':sha(dat),'native_sha256':sha(a.native.read_bytes()),'sfx_probe_sha256':sha(a.sfx.read_bytes()),'frames':882,'sfx_descriptors':['0x464f60','0x464f84'],'shared_input_original_native_exact':True,'final_mix_original_blocks':blocks,'native_music_plus_sfx_exact_frames':exact,'native_music_plus_sfx_correlation':round(corr,6),'native_over_original_rms':round(math.sqrt(bb/aa),6),'original_combined_pcm_sha256':sha(struct.pack('<1764h',*ref)),'native_combined_pcm_sha256':sha(actual)}
+ report={'status':'VERIFIED_BOUNDED_EXACT' if ref == list(actual_samples) else 'VERIFIED_BOUNDED_WITH_TRACKER_PCM_GAP','scope':__doc__,'exe_sha256':sha(exe),'dat_sha256':sha(dat),'native_sha256':sha(a.native.read_bytes()),'sfx_probe_sha256':sha(a.sfx.read_bytes()),'frames':882,'sfx_descriptors':['0x464f60','0x464f84'],'shared_input_original_native_exact':True,'final_mix_original_blocks':blocks,'native_music_plus_sfx_exact_frames':exact,'native_music_plus_sfx_correlation':round(corr,6),'native_over_original_rms':round(math.sqrt(bb/aa),6),'original_combined_pcm_sha256':sha(struct.pack('<1764h',*ref)),'native_combined_pcm_sha256':sha(actual)}
  (a.output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
  print('PASS: same-input mixed PCM exact; actual tracker + SFX differs on',882-exact,'frames, correlation',round(corr,6))
 if __name__=='__main__':main()

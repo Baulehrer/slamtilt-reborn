@@ -2,10 +2,10 @@ Unicode true
 SetCompressor /SOLID lzma
 !include "MUI2.nsh"
 Name "Slamtilt - Reborn"
-VIProductVersion "1.3.0.0"
+VIProductVersion "1.4.0.0"
 VIAddVersionKey "ProductName" "Slamtilt - Reborn"
-VIAddVersionKey "ProductVersion" "1.3"
-VIAddVersionKey "FileVersion" "1.3.0.0"
+VIAddVersionKey "ProductVersion" "1.4"
+VIAddVersionKey "FileVersion" "1.4.0.0"
 VIAddVersionKey "FileDescription" "Slamtilt - Reborn Installer"
 VIAddVersionKey "LegalCopyright" "Slamtilt - Reborn contributors"
 OutFile "${OUTPUT}"
@@ -24,7 +24,7 @@ Section "Slamtilt - Reborn"
  CreateDirectory "$SMPROGRAMS\Slamtilt Reborn"
  CreateShortCut "$SMPROGRAMS\Slamtilt Reborn\Slamtilt Reborn.lnk" "$INSTDIR\bin\slamtilt.exe"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SlamtiltReborn" "DisplayName" "Slamtilt - Reborn"
- WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SlamtiltReborn" "DisplayVersion" "1.3"
+ WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SlamtiltReborn" "DisplayVersion" "1.4"
  WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SlamtiltReborn" "UninstallString" '$\"$INSTDIR\Uninstall.exe$\"'
  WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SlamtiltReborn" "NoModify" 1
  WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\SlamtiltReborn" "NoRepair" 1

@@ -24,6 +24,7 @@ private:
   void resume();
   std::vector<std::vector<std::uint8_t>> banks_;
   std::unique_ptr<StimPlayer> lower_, upper_, base_;
+  int lower_bank_ = -1, upper_bank_ = -1, base_bank_ = -1;
   std::optional<std::pair<int, int>> pending_lower_;
 };
 } // namespace slam

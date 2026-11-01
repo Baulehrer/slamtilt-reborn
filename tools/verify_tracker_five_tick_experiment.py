@@ -25,12 +25,18 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--native', type=Path, required=True)
     p.add_argument('--library', type=Path, required=True)
+    p.add_argument('--baseline-library', type=Path, help='Historical baseline library for this experiment')
     p.add_argument('--work', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
     a = p.parse_args()
     a.work.mkdir(parents=True, exist_ok=True)
     lib = a.library.absolute()
     baseline = dict(os.environ); baseline.pop('LD_LIBRARY_PATH',None)
+    if a.baseline_library:
+        baseline_lib = a.baseline_library.absolute()
+        baseline['LD_LIBRARY_PATH'] = str(baseline_lib.parent)
+        baseline_linkage = subprocess.check_output(['ldd',str(a.native.resolve())],env=baseline,text=True)
+        assert str(baseline_lib) in baseline_linkage
     modified = dict(baseline,LD_LIBRARY_PATH=str(lib.parent))
     linkage = subprocess.check_output(['ldd',str(a.native.resolve())],env=modified,text=True)
     assert str(lib) in linkage

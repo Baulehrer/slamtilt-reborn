@@ -1,5 +1,11 @@
 # Current gameplay workpack
 
+- Audio next: extend retained gameplay-derived request sequences into original
+  scheduler/mixer replays and verify their real cadence and SFX overlap. The
+  deferred 84-after-88 transition matches in ten controlled comparisons;
+  trace-derived combined comparisons exist for all four tables, but actual
+  voice history and original audio-device cadence remain unverified.
+
 - Dynamic Original tracker/voice/mixer PCM now runs for 512 manually clocked ticks per table. Next isolate residual per-window and amplitude differences and validate original scheduling/SFX overlap; full-song parity is not established.
 
 - STIM vibrato now uses the period-domain result locally and matches all compared period fields over four 2,000-tick startup runs. Next validate Original PCM across effect transitions and broaden to remaining banks/orders; v1.2 packages remain unchanged.
@@ -1303,3 +1309,13 @@ Phase measurements now separate startup from simulation and presentation. Next h
 
 ## Release 1.1
 Release artifacts, screenshots, changelog and SHA256 manifest prepared and verified; preserve v1.0. Shared-engine experiments remain opt-in. Follow-ups: stable GPU tail timing, Firefox/Safari, physical Windows/Pi/Batocera.
+
+Audio parity follow-up: resolve the eight fresh-state original-emulator
+exceptions with authenticated preceding music state; compare complete music
+and live SFX scheduling and device output against the original. The v6 STIM
+patch covers bounded Retail comparisons; see STIM-PCM-2026-11.
+
+Audio transition follow-up: compare real game service events and queue timing
+against Retail, including cross-bank and interrupted/preempted contexts.
+The manually primed same-bank cases are covered by STIM-TRANSITIONS-V9;
+they do not establish complete playback or physical-device parity.

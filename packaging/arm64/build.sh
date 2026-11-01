@@ -20,11 +20,11 @@ cmake --install "$out/sdl"
 for feature in SDL_AUDIO_DRIVER_ALSA SDL_VIDEO_DRIVER_KMSDRM SDL_VIDEO_DRIVER_WAYLAND SDL_VIDEO_OPENGL_ES2 SDL_JOYSTICK_LINUX SDL_JOYSTICK_HIDAPI SDL_JOYSTICK_VIRTUAL; do
  grep -q "#define $feature 1" "$out/sdl/include-config-release/build_config/SDL_build_config.h"
 done
-python3 /workspace/tools/prepare_stim_libxmp.py --source "$out/sources/libxmp" --output "$out/stim-xmp-v4-source"
-cmake -S "$out/stim-xmp-v4-source" -B "$out/stim-xmp-v4" -G Ninja -DCMAKE_TOOLCHAIN_FILE=/workspace/packaging/arm64/toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/arm64 -DBUILD_SHARED=ON -DBUILD_STATIC=OFF
-cmake --build "$out/stim-xmp-v4" -j 4
-cmake --install "$out/stim-xmp-v4"
-cmake -S /workspace -B "$out/native" -G Ninja -DCMAKE_TOOLCHAIN_FILE=/workspace/packaging/arm64/toolchain.cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_CXX_FLAGS_RELEASE=-O2 -DNDEBUG' -DCMAKE_PREFIX_PATH=/opt/arm64 -DSDL3_DIR=/opt/arm64/lib/cmake/SDL3 -DXMP_INCLUDE_DIR=/opt/arm64/include -DXMP_LIBRARY=/opt/arm64/lib/libxmp.so
+python3 /workspace/tools/prepare_stim_libxmp.py --source "$out/sources/libxmp" --output "$out/stim-xmp-v11-source"
+cmake -S "$out/stim-xmp-v11-source" -B "$out/stim-xmp-v11" -G Ninja -DCMAKE_TOOLCHAIN_FILE=/workspace/packaging/arm64/toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/opt/arm64 -DBUILD_SHARED=ON -DBUILD_STATIC=OFF
+cmake --build "$out/stim-xmp-v11" -j 4
+cmake --install "$out/stim-xmp-v11"
+cmake -S /workspace -B "$out/native" -G Ninja -DCMAKE_TOOLCHAIN_FILE=/workspace/packaging/arm64/toolchain.cmake -DCMAKE_BUILD_TYPE=Release '-DCMAKE_CXX_FLAGS_RELEASE=-O2 -DNDEBUG' -DCMAKE_PREFIX_PATH=/opt/arm64 -DSDL3_DIR=/opt/arm64/lib/cmake/SDL3 -DXMP_INCLUDE_DIR=/opt/arm64/include -DXMP_LIBRARY=/opt/arm64/lib/libxmp.so -DSLAM_STIM_CHANNEL_HISTORY=ON
 cmake --build "$out/native" --target slamtilt slamview slamslice slamimport slamsetup -j 4
 if [ -f /workspace/tests/gamepad_input_test.cpp ]; then
  cmake --build "$out/native" --target gamepad_input_test -j 4

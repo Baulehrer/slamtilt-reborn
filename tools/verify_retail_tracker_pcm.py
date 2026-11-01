@@ -38,9 +38,11 @@ def main():
     p.add_argument('--table', choices=TABLES, default='pirate')
     p.add_argument('--dat', type=Path)
     p.add_argument('--output', type=Path, default=ROOT / 'build/retail-tracker-pcm')
-    p.add_argument('--ticks', type=int, choices=(1, 5), default=1,
+    p.add_argument('--ticks', type=int, default=1,
                    help='Adapted consecutive tracker/mixer windows; five is a bounded experiment')
+    p.add_argument('--dynamic-voices', action='store_true', help='Update and link all four tracker voices on each manually clocked tick')
     args = p.parse_args()
+    assert 1 <= args.ticks <= 512 and (args.dynamic_voices or args.ticks in (1, 5))
     dat_sha, bank_offset, order = TABLES[args.table]
     dat_path = args.dat or GAME / 'DAT' / (args.table.upper() + '.DAT')
     executable, dat = args.exe.read_bytes(), dat_path.read_bytes()
@@ -94,10 +96,11 @@ def main():
         put(0x468858 + 0x24 * i, 0x46b060 + 0x60 * i)
         run(0x401838, i)
     # Link the active tracker voices; both SFX voices are intentionally absent.
-    for index, i in enumerate(active):
-        next_voice = 0x468858 + 0x24 * active[index + 1] if index + 1 < len(active) else 0
+    linked = active
+    for index, i in enumerate(linked):
+        next_voice = 0x468858 + 0x24 * linked[index + 1] if index + 1 < len(linked) else 0
         put(0x468858 + 0x24 * i + 0x20, next_voice)
-    for address, value in ((0x468854, 0x468858 + 0x24 * active[0]), (0x46eea4, 6),
+    for address, value in ((0x468854, 0x468858 + 0x24 * linked[0]), (0x46eea4, 6),
                            (0x46eeb8, 0x3010000), (0x46eebc, 44100),
                            (0x46ee98, 882), (0x46eeb0, 0x3002000),
                            (0x46eeb4, 0x3004000), (0x46eec8, 0x3006000),
@@ -114,6 +117,13 @@ def main():
             # Manually clock the sequencer at an assumed 50 Hz. The original
             # scheduler and changing voice-list setup are not reproduced here.
             run(0x44eaf8)
+            if args.dynamic_voices:
+                for i in range(4): run(0x401838, i)
+                linked = [i for i in range(4) if get(0x468858 + 0x24 * i + 0x10)]
+                for index, i in enumerate(linked):
+                    put(0x468858 + 0x24 * i + 0x20,
+                        0x468858 + 0x24 * linked[index + 1] if index + 1 < len(linked) else 0)
+                put(0x468854, 0x468858 + 0x24 * linked[0] if linked else 0)
             for address, value in ((0x3008000, 0x3009000), (0x3008004, 0),
                                    (0x3008008, 882), (0x300800c, 0)):
                 put(address, value)
@@ -146,7 +156,7 @@ def main():
                               'manual voice descriptor pointers and active-voice links',
                               'six-voice LUT and master 65536',
                               f'signed 16-bit stereo output, 44100 Hz, {882 * args.ticks} frames',
-                              'manual 50 Hz sequencer cadence and fixed voice links',
+                              'manual 50 Hz sequencer cadence and '+('four linked voices updated each tick' if args.dynamic_voices else 'fixed voice links'),
                               'silent SFX; no DirectSound or game startup']}
     args.output.mkdir(parents=True, exist_ok=True)
     (args.output / f'{args.table}-first-tick.s16le').write_bytes(pcm)

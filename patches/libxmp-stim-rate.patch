@@ -29,9 +29,22 @@
 +	}
 --- a/src/player.c
 +++ b/src/player.c
-@@ -1277,0 +1278,5 @@
+@@ -1277,0 +1278,18 @@
 +	/* Experiment: preserve the table period only for zero bend. */
 +	if (strcmp(m->mod.type, "Slamtilt") == 0 && xc->finetune == 0 && linear_bend == 0 &&
 +	    xc->note >= 48 && xc->note < 84)
 +		final_period = xc->period;
++	/* Preserve the original period-domain STIM vibrato calculation. */
++	if (strcmp(m->mod.type, "Slamtilt") == 0 && final_period > 0 &&
++	    TEST(VIBRATO) && arp == 0 && xc->finetune == 0)
++		final_period = period + vibrato;
++	/* Original STIM retains the preceding vibrato period at row start. */
++	if (strcmp(m->mod.type, "Slamtilt") == 0 && final_period > 0 &&
++	    TEST(VIBRATO) && !TEST(NEW_NOTE) && p->frame == 0 && xc->info_period > 0)
++		final_period = xc->info_period / 4096.0;
++	/* Preserve integer Amiga periods for STIM pitch-down slides. */
++	if (strcmp(m->mod.type, "Slamtilt") == 0 && final_period > 0 &&
++	    TEST(PITCHBEND) && xc->freq.slide > 0 && !TEST(VIBRATO) &&
++	    arp == 0 && xc->finetune == 0)
++		final_period = (int)(final_period + 0.5);
 +

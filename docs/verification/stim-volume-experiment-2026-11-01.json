@@ -1,0 +1,67 @@
+{
+  "status": "EXPERIMENT_ONLY",
+  "scope": "Adapted 256-tick Original/native starting windows; 67 percent and 2/3 internal per-voice gain are isolated experiments. No complete-song or physical playback proof.",
+  "cases": [
+    {
+      "table": "mean",
+      "current_66": {
+        "rms_ratio": 0.994784,
+        "exact_frames": 16524
+      },
+      "candidate_67": {
+        "rms_ratio": 1.01239,
+        "exact_frames": 10277
+      },
+      "candidate_two_thirds": {
+        "rms_ratio": 1.006421,
+        "exact_frames": 15564
+      }
+    },
+    {
+      "table": "pirate",
+      "current_66": {
+        "rms_ratio": 0.995241,
+        "exact_frames": 10089
+      },
+      "candidate_67": {
+        "rms_ratio": 1.012962,
+        "exact_frames": 3051
+      },
+      "candidate_two_thirds": {
+        "rms_ratio": 1.007055,
+        "exact_frames": 6197
+      }
+    },
+    {
+      "table": "space",
+      "current_66": {
+        "rms_ratio": 0.994555,
+        "exact_frames": 14293
+      },
+      "candidate_67": {
+        "rms_ratio": 1.011889,
+        "exact_frames": 20961
+      },
+      "candidate_two_thirds": {
+        "rms_ratio": 1.006356,
+        "exact_frames": 24805
+      }
+    },
+    {
+      "table": "demon",
+      "current_66": {
+        "rms_ratio": 0.994796,
+        "exact_frames": 13638
+      },
+      "candidate_67": {
+        "rms_ratio": 1.012458,
+        "exact_frames": 20873
+      },
+      "candidate_two_thirds": {
+        "rms_ratio": 1.006608,
+        "exact_frames": 22502
+      }
+    }
+  ],
+  "decision": "keep 66 percent; alternatives increase RMS error for all four and have mixed exact-frame effects"
+}

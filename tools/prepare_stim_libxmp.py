@@ -26,6 +26,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--source', type=Path, required=True)
     p.add_argument('--output', type=Path, required=True)
+    p.add_argument('--patch', type=Path, default=PATCH, help='Pinned patch to apply')
     a = p.parse_args()
     source, output = a.source.resolve(), a.output.resolve()
     if source == output or source in output.parents or output in source.parents:
@@ -34,15 +35,16 @@ def main():
         if sha(source/'src'/name) != expected:
             raise ValueError(f'Unexpected libxmp source: {name}')
     marker = output/'.slamtilt-stim-patch.json'
-    manifest = {'patch_sha256': sha(PATCH), 'original_files': EXPECTED}
+    patch = a.patch.resolve()
+    manifest = {'patch_sha256': sha(patch), 'original_files': EXPECTED}
     if output.exists():
         if not marker.is_file() or json.loads(marker.read_text()) != manifest:
             raise ValueError(f'Refusing to overwrite unrecognized tree: {output}')
-        subprocess.run(['patch','--dry-run','--reverse','--batch','-p1','-i',str(PATCH)],cwd=output,check=True,stdout=subprocess.DEVNULL)
+        subprocess.run(['patch','--dry-run','--reverse','--batch','-p1','-i',str(patch)],cwd=output,check=True,stdout=subprocess.DEVNULL)
         return
     output.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(source, output, ignore=shutil.ignore_patterns('.git'))
-    subprocess.run(['patch','--batch','-p1','-i',str(PATCH)],cwd=output,check=True)
+    subprocess.run(['patch','--batch','-p1','-i',str(patch)],cwd=output,check=True)
     marker.write_text(json.dumps(manifest,indent=2)+'\n')
 
 

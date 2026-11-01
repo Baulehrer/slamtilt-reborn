@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(slamtilt_reborn VERSION 1.2.0 LANGUAGES CXX)
+project(slamtilt_reborn VERSION 1.3.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Opt-in release experiments: developer/reference builds keep their defaults.
@@ -730,7 +730,7 @@ if(EXISTS "${CMAKE_SOURCE_DIR}/build/corpus/win95/demo-1997/Slam Tilt Demo (Wind
 endif()
 
 find_path(XMP_INCLUDE_DIR xmp.h HINTS "${CMAKE_SOURCE_DIR}/build/libxmp/include")
-find_library(XMP_LIBRARY NAMES xmp HINTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build" "${CMAKE_SOURCE_DIR}/build/libxmp-build")
+find_library(XMP_LIBRARY NAMES xmp HINTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v4-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v3-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v2-build" "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build" "${CMAKE_SOURCE_DIR}/build/libxmp-build")
 if(XMP_INCLUDE_DIR AND XMP_LIBRARY)
   add_library(slamaudio src/audio/stim_player.cpp src/audio/native_audio.cpp src/audio/mean_sound_assets.cpp src/audio/mean_sample_mixer.cpp src/audio/pirate_sound_assets.cpp src/audio/space_sound_assets.cpp src/audio/demon_sound_assets.cpp)
   target_include_directories(slamaudio PUBLIC src "${XMP_INCLUDE_DIR}")
@@ -2303,11 +2303,11 @@ if(TEST tracker_period_experiment)
 endif()
 
 if(TARGET stim_audio_probe AND EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-build/libxmp.so.4" AND
-   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build/libxmp.so.4" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v4-build/libxmp.so.4" AND
    EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp/test-dev/data/Gaffeltruck.mod")
   add_test(NAME stim_non_stim_isolation COMMAND python3 "${CMAKE_SOURCE_DIR}/tools/verify_stim_isolation.py"
     --probe "$<TARGET_FILE:stim_audio_probe>" --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-build/libxmp.so.4"
-    --fixed "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build/libxmp.so.4"
+    --fixed "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v4-build/libxmp.so.4"
     --module "${CMAKE_SOURCE_DIR}/build/libxmp/test-dev/data/Gaffeltruck.mod"
     --output "${CMAKE_CURRENT_BINARY_DIR}/stim-non-stim-isolation.json")
 endif()
@@ -2333,4 +2333,81 @@ if(TEST pirate_combined_audio_original AND XMP_LIBRARY MATCHES "stim")
     --native "$<TARGET_FILE:pirate_combined_audio_probe>" --sfx "$<TARGET_FILE:pirate_overlap_pcm_probe>"
     --output "${CMAKE_CURRENT_BINARY_DIR}/pirate-combined-stim-quality" --min-correlation 0.999)
   set_tests_properties(pirate_combined_stim_quality PROPERTIES TIMEOUT 120)
+endif()
+
+if(TARGET slamaudio)
+  add_executable(stim_sequence_probe tests/stim_sequence_probe.cpp)
+  target_link_libraries(stim_sequence_probe PRIVATE slamaudio)
+endif()
+
+if(TARGET stim_sequence_probe AND TEST stim_four_table_original_quality AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build/libxmp.so.4")
+  add_test(NAME stim_sequence_periods_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_sequence_periods.py"
+    --native "$<TARGET_FILE:stim_sequence_probe>" --library "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build/libxmp.so.4"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-sequence-periods"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-sequence-periods/report.json" --ticks 2000)
+  add_test(NAME stim_period_rounding_experiment COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_period_rounding.py"
+    --native "$<TARGET_FILE:stim_sequence_probe>" --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build/libxmp.so.4"
+    --base-patch "${CMAKE_SOURCE_DIR}/patches/libxmp-stim-1.2.patch"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-rounding-comparison"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-rounding-comparison/report.json")
+  set_tests_properties(stim_sequence_periods_original stim_period_rounding_experiment PROPERTIES TIMEOUT 180)
+endif()
+
+if(TARGET stim_sequence_probe AND TEST stim_four_table_original_quality AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v2-build/libxmp.so.4")
+  add_test(NAME stim_pitch_slide_targeted_survey COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_period_rounding.py" --targeted --survey
+    --native "$<TARGET_FILE:stim_sequence_probe>" --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-stim-build/libxmp.so.4"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-pitch-slide-survey"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-pitch-slide-survey/report.json")
+  add_test(NAME stim_pitch_slide_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_sequence_periods.py" --ticks 2000
+    --native "$<TARGET_FILE:stim_sequence_probe>" --library "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v2-build/libxmp.so.4"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-pitch-slide-original"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-pitch-slide-original/report.json")
+  set_tests_properties(stim_pitch_slide_targeted_survey stim_pitch_slide_original PROPERTIES TIMEOUT 180)
+endif()
+
+if(TARGET stim_sequence_probe AND TEST stim_four_table_original_quality AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v2-build/libxmp.so.4" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v3-build/libxmp.so.4")
+  add_test(NAME stim_vibrato_hold_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_sequence_periods.py" --ticks 2000
+    --native "$<TARGET_FILE:stim_sequence_probe>" --library "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v3-build/libxmp.so.4"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-hold-original"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-hold-original/report.json")
+  add_test(NAME stim_vibrato_hold_survey COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_period_rounding.py" --vibrato-hold --survey
+    --native "$<TARGET_FILE:stim_sequence_probe>" --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v2-build/libxmp.so.4"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-hold-survey"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-hold-survey/report.json")
+  set_tests_properties(stim_vibrato_hold_original stim_vibrato_hold_survey PROPERTIES TIMEOUT 180)
+endif()
+
+if(TARGET stim_sequence_probe AND TEST stim_four_table_original_quality AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v3-build/libxmp.so.4" AND
+   EXISTS "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v4-build/libxmp.so.4")
+  add_test(NAME stim_vibrato_direct_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_sequence_periods.py" --ticks 2000 --require-exact
+    --native "$<TARGET_FILE:stim_sequence_probe>" --library "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v4-build/libxmp.so.4"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-direct-original"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-direct-original/report.json")
+  add_test(NAME stim_vibrato_direct_survey COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_period_rounding.py" --vibrato-direct --survey
+    --native "$<TARGET_FILE:stim_sequence_probe>" --baseline "${CMAKE_SOURCE_DIR}/build/libxmp-stim-v3-build/libxmp.so.4"
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-direct-survey"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-vibrato-direct-survey/report.json")
+  set_tests_properties(stim_vibrato_direct_original stim_vibrato_direct_survey PROPERTIES TIMEOUT 180)
+endif()
+
+if(TEST stim_four_table_original_quality AND TARGET stim_audio_probe)
+  add_test(NAME stim_dynamic_pcm_original COMMAND "${CMAKE_SOURCE_DIR}/build/venv/bin/python"
+    "${CMAKE_SOURCE_DIR}/tools/verify_stim_dynamic_pcm.py"
+    --native "$<TARGET_FILE:stim_audio_probe>" --ticks 512
+    --work "${CMAKE_CURRENT_BINARY_DIR}/stim-dynamic-pcm"
+    --output "${CMAKE_CURRENT_BINARY_DIR}/stim-dynamic-pcm/report.json")
+  set_tests_properties(stim_dynamic_pcm_original PROPERTIES TIMEOUT 180)
 endif()

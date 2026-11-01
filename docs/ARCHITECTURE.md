@@ -1,5 +1,25 @@
 # Slam Tilt architecture map
 
+## Dynamic tracker/mixer PCM — 2026-11-01
+
+Original voice adapter `0x401838` can be executed after each manually clocked tracker tick, allowing bounded comparisons through changing voices and notes. Results remain close but not sample-exact. [Evidence](verification/stim-dynamic-pcm-2026-11-01.json).
+
+## STIM period-domain vibrato — 2026-11-01
+
+The local STIM-specific libxmp patch computes vibrato directly in period space when the selected finetune and arpeggio conditions permit it. Four adapted 2,000-tick tracker starts match all compared Retail period fields; broader audio equivalence remains unverified. [Evidence](verification/stim-vibrato-direct-original-2026-11-01.json).
+
+## STIM vibrato row boundary — 2026-10-31
+
+The local STIM-only libxmp patch retains the previous period on the first tick of a vibrato row without a new note. Its bounded Original/native test covers four 2,000-tick starts and 32 selected order samples; the v1.2 release predates this change. [Evidence](verification/stim-vibrato-hold-survey-2026-10-31.json).
+
+## STIM pitch slide — 2026-10-31
+
+The local STIM-only libxmp patch rounds the final period for downward pitch slides under explicitly bounded zero-finetune/no-vibrato/no-arpeggio conditions. The v1.2 release retains the prior version of the patch. [Comparison](verification/stim-pitch-slide-survey-2026-10-31.json).
+
+## Tracker period sequences — 2026-10-31
+
+Adapted Original tracker and native libxmp period fields can now be compared across 2,000 manually clocked ticks. A global STIM integer-rounding experiment increases exact matches but also worsens individual Pirate/Mean values; production behavior is unchanged. [Evidence](verification/stim-period-rounding-2026-10-31.json).
+
 ## STIM replay timing — 2026-10-31
 
 `prepare_stim_libxmp.py` creates a pinned private libxmp copy with STIM-only floor sampling, note-period preservation and Original-style integer frequency division. Native and platform builds can use the patched library without changing unrelated formats. [Build instructions](building.md), [Original comparison](verification/stim-original-quality-2026-10-31.json).

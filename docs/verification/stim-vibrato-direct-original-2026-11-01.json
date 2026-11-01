@@ -1,0 +1,61 @@
+{
+  "status": "MEASURED_BOUNDED",
+  "scope": "Compare tracker channel periods in manually clocked Retail/STIM sequences.\n\nThe original tracker is initialized at adapted bank/order boundaries and\ncalled once per native frame; mixer, real scheduler and output are not run.\nReports raw differences rather than inferring their causes or audibility.\n",
+  "exe_sha256": "185d5893c76f025caf5fd08f0aedd35d682123f6ac383b67ba21db0adf14e1c6",
+  "native_sha256": "a57ee12bbad2724419944138b4398005c88a811b6e74e8f04ee6dbd671afb235",
+  "library_sha256": "fcae12a73649095bcadf92873129b8b066c847d324bd4620e11509cda1859325",
+  "tables": [
+    {
+      "table": "mean",
+      "ticks": 2000,
+      "compared_channel_ticks": 7354,
+      "exact_period_ticks": 7354,
+      "sub_half_period_differences": 0,
+      "at_least_half_period_differences": 0,
+      "max_abs_delta_q12": 0,
+      "first_differences": [],
+      "largest_differences": [],
+      "executed_original_blocks": 181,
+      "dat_sha256": "1169210c52fb4cb8785a0ef87e42bcabbc9d7b17bf9b9062f4642fb2cb69755f"
+    },
+    {
+      "table": "pirate",
+      "ticks": 2000,
+      "compared_channel_ticks": 7245,
+      "exact_period_ticks": 7245,
+      "sub_half_period_differences": 0,
+      "at_least_half_period_differences": 0,
+      "max_abs_delta_q12": 0,
+      "first_differences": [],
+      "largest_differences": [],
+      "executed_original_blocks": 177,
+      "dat_sha256": "6050b576678ec9b1878c203c057089b1c2499cdfd4a1ebdd7220f9d665fac7d6"
+    },
+    {
+      "table": "space",
+      "ticks": 2000,
+      "compared_channel_ticks": 7933,
+      "exact_period_ticks": 7933,
+      "sub_half_period_differences": 0,
+      "at_least_half_period_differences": 0,
+      "max_abs_delta_q12": 0,
+      "first_differences": [],
+      "largest_differences": [],
+      "executed_original_blocks": 144,
+      "dat_sha256": "18a308bdfa9fe141f57d4462a44dc4dd69cb32c35f9e6f83462fce770600115b"
+    },
+    {
+      "table": "demon",
+      "ticks": 2000,
+      "compared_channel_ticks": 7066,
+      "exact_period_ticks": 7066,
+      "sub_half_period_differences": 0,
+      "at_least_half_period_differences": 0,
+      "max_abs_delta_q12": 0,
+      "first_differences": [],
+      "largest_differences": [],
+      "executed_original_blocks": 147,
+      "dat_sha256": "0d78f5dbc069c5082cecce06f9620385288f615c03c83696483a43f272069c4d"
+    }
+  ]
+}

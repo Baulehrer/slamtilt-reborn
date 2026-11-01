@@ -6111,5 +6111,20 @@
     "legacy_private_data": "RC4V1 supported unchanged",
     "last_verified_asset_read_steps": 180000,
     "unexplained_observed_read_difference_bytes": 0
+  },
+  "audio_dynamic_pcm_2026_11_01": {
+    "status": "PARTIAL",
+    "evidence": [
+      "docs/verification/stim-dynamic-pcm-2026-11-01.json"
+    ],
+    "original_routines": [
+      "0x44f138",
+      "0x44eaf8",
+      "0x401838",
+      "0x44b560"
+    ],
+    "scope": "512 manually clocked ticks per table, adapted dynamic voice linking; no game scheduler, SFX or device",
+    "confidence": "VERIFIED_BOUNDED",
+    "next_action": "Locate residual gain/timing differences and compare original scheduler plus SFX"
   }
 }

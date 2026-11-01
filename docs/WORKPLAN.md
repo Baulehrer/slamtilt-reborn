@@ -1,5 +1,15 @@
 # Current gameplay workpack
 
+- Dynamic Original tracker/voice/mixer PCM now runs for 512 manually clocked ticks per table. Next isolate residual per-window and amplitude differences and validate original scheduling/SFX overlap; full-song parity is not established.
+
+- STIM vibrato now uses the period-domain result locally and matches all compared period fields over four 2,000-tick startup runs. Next validate Original PCM across effect transitions and broaden to remaining banks/orders; v1.2 packages remain unchanged.
+
+- STIM effect 04/06 row-boundary period retention is implemented locally with bounded four-table and selected-order checks. Next investigate the remaining fractional vibrato differences and verify longer Original mixed PCM before considering another release.
+
+- STIM effect 02 pitch-down correction is implemented locally and checked across four 2,000-tick startup traces and 32 selected order samples. Next isolate effect 04/06 vibrato row transitions, and verify PCM and remaining table/music paths before a new release.
+
+- Tracker effect timing: 2,000 Original/native ticks per table localize remaining period differences; blanket rounding makes some Pirate/Mean periods worse. Next isolate effect/row transitions that account for those regressions before proposing a targeted fix.
+
 - STIM correction is integrated into native and four packaging build paths. Next verify effects/finetune and longer Original scheduling, then assess release artifacts; current evidence does not establish full-song PCM parity.
 
 - 1.2: the STIM-only original-rate correction is included in the four rebuilt platform packages. Continue validation of tracker effects, finetune and the Original scheduler; full-song parity remains open.

@@ -1,0 +1,143 @@
+{
+  "status": "MEASURED_BOUNDED",
+  "scope": "Compare manually clocked original tracker/mixer PCM with four native starts.\n\nOriginal code runs on SHA-pinned Retail EXE/DAT data. The voice list is rebuilt\nfrom four tracker voices on each manually clocked 50 Hz tick; no game scheduler,\nSFX, device timing or complete-song equivalence is claimed. PCM stays private.\n",
+  "native_sha256": "87410a1c8b19c3cec5c477f50ce9500452974b7bed308dbcaeccb4a37db71bc9",
+  "cases": [
+    {
+      "table": "mean",
+      "ticks": 512,
+      "frames": 451584,
+      "initial_five_windows_match_previous_oracle": true,
+      "original_sha256": "85780e02f297f42b5d533d225870b865f5813103838657c7666340c00d10f4fb",
+      "native_sha256": "dd7296c89dd501cbacd73f0cb3d6d5d91b38ebc5c25b41f6ff7b2ec077ece499",
+      "original_blocks": 272,
+      "overall_correlation": 0.999512,
+      "rms_ratio": 0.99493,
+      "exact_frames": 23557,
+      "worst_windows": [
+        {
+          "tick": 12,
+          "correlation": 0.985549
+        },
+        {
+          "tick": 245,
+          "correlation": 0.989157
+        },
+        {
+          "tick": 251,
+          "correlation": 0.993015
+        },
+        {
+          "tick": 501,
+          "correlation": 0.993181
+        },
+        {
+          "tick": 10,
+          "correlation": 0.993552
+        }
+      ]
+    },
+    {
+      "table": "pirate",
+      "ticks": 512,
+      "frames": 451584,
+      "initial_five_windows_match_previous_oracle": true,
+      "original_sha256": "bd3eae5442d658fcb9adccd42535992009896420924a21dd2e79e7bd1b6548aa",
+      "native_sha256": "2a1d3eea019356ff0860e949b85a3662404b88f3a8885128669bb12fc8ebda30",
+      "original_blocks": 268,
+      "overall_correlation": 0.999641,
+      "rms_ratio": 0.99531,
+      "exact_frames": 19063,
+      "worst_windows": [
+        {
+          "tick": 306,
+          "correlation": 0.997749
+        },
+        {
+          "tick": 330,
+          "correlation": 0.997749
+        },
+        {
+          "tick": 354,
+          "correlation": 0.997749
+        },
+        {
+          "tick": 378,
+          "correlation": 0.997749
+        },
+        {
+          "tick": 290,
+          "correlation": 0.99815
+        }
+      ]
+    },
+    {
+      "table": "space",
+      "ticks": 512,
+      "frames": 451584,
+      "initial_five_windows_match_previous_oracle": true,
+      "original_sha256": "4c0d5ac31e1ab59f41d232a688f3c1f72d09aee4662d26be1c15ada231897319",
+      "native_sha256": "fe24bac6fc1d9762ec6c4ad2c3d5fb3f3ff70034e05693dd2f99efdd60025f96",
+      "original_blocks": 239,
+      "overall_correlation": 0.999703,
+      "rms_ratio": 0.994544,
+      "exact_frames": 28152,
+      "worst_windows": [
+        {
+          "tick": 149,
+          "correlation": 0.984434
+        },
+        {
+          "tick": 469,
+          "correlation": 0.984434
+        },
+        {
+          "tick": 142,
+          "correlation": 0.987032
+        },
+        {
+          "tick": 462,
+          "correlation": 0.987032
+        },
+        {
+          "tick": 380,
+          "correlation": 0.989745
+        }
+      ]
+    },
+    {
+      "table": "demon",
+      "ticks": 512,
+      "frames": 451584,
+      "initial_five_windows_match_previous_oracle": true,
+      "original_sha256": "5101c7bfaa0fcad83bbc9b104cd95dddd94a0113232c016cd9ae13e94bf91e86",
+      "native_sha256": "4d29b3202f84cf9012a23080460dacba939f76bcfec127539503d2c039185b56",
+      "original_blocks": 243,
+      "overall_correlation": 0.999793,
+      "rms_ratio": 0.994796,
+      "exact_frames": 27276,
+      "worst_windows": [
+        {
+          "tick": 93,
+          "correlation": 0.968936
+        },
+        {
+          "tick": 349,
+          "correlation": 0.968936
+        },
+        {
+          "tick": 83,
+          "correlation": 0.988689
+        },
+        {
+          "tick": 339,
+          "correlation": 0.988689
+        },
+        {
+          "tick": 86,
+          "correlation": 0.996263
+        }
+      ]
+    }
+  ]
+}

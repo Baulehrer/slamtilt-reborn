@@ -1,5 +1,34 @@
 # Current status — 2026-10-29
 
+## Dynamic tracker/mixer PCM — 2026-11-01 (bounded)
+
+- `0x401838` updates each voice's sample, period and volume; retaining the four live voices and rebuilding their list permits 512 manually clocked Retail tracker/mixer ticks per table, including voice changes. The first five windows match the earlier fixed-voice oracle exactly. Full-window Original/native PCM correlations: Mean 0.999512, Pirate 0.999641, Space 0.999703, Demon 0.999793. Individual samples still differ. [Evidence](verification/stim-dynamic-pcm-2026-11-01.json).
+- Isolated 67% and 2/3 per-voice gain experiments increased overall RMS error for all four tested starts and gave mixed exact-sample results; 66% remains in use. [Evidence](verification/stim-volume-experiment-2026-11-01.json).
+- These use adapted 50 Hz timing, manually linked voices and no SFX or real device; they do not prove full-song or Amiga PCM parity.
+
+## STIM period-domain vibrato — 2026-11-01 (bounded)
+
+- The local STIM-only libxmp patch keeps vibrato in the period domain instead of round-tripping through a pitch-bend conversion when finetune and arpeggio are absent. In four manually clocked 2,000-tick starts, all 29,598 compared nonzero period/volume channel fields now match the SHA-verified Retail tracker exactly. [Direct execution](verification/stim-vibrato-direct-original-2026-11-01.json).
+- Against the previous local patch, 199 startup period fields and 221 fields in 32 selected 256-tick order samples improve, with no observed regressions. Eight relevant tests pass, plus four five-second synthetic loop tests; Windows, ARM64 and WebAssembly library cross-builds succeed. [Survey](verification/stim-vibrato-direct-survey-2026-11-01.json).
+- The published v1.2 packages are unchanged. These are bounded period-field comparisons with an adapted clock, not full-song PCM, full Original scheduling or physical playback proof.
+
+## STIM vibrato row boundary — 2026-10-31 (bounded)
+
+- In the pinned Retail tracker, an existing vibrato without a new note retains the preceding period on the first tick of a continued row. The local STIM patch now reproduces this under those conditions. [Original comparison](verification/stim-vibrato-hold-original-2026-10-31.json).
+- Four 2,000-tick startup comparisons improve three Mean and 15 Pirate channel periods with no observed regression; another 32 selected 256-tick order samples improve 12 values with no observed regression. Seven relevant tests pass. Windows, ARM64 and WebAssembly library cross-builds succeed. [Survey](verification/stim-vibrato-hold-survey-2026-10-31.json).
+- The published v1.2 packages are unchanged. Full original timing, effects, audible PCM and all music paths remain unverified.
+
+## STIM pitch-down correction — 2026-10-31 (bounded)
+
+- Remaining nonzero period-field differences in the first 2,000 manually clocked ticks occur with effect 04/06 (vibrato) on Mean/Pirate and effect 02/01 (pitch down) on Demon. [Baseline](verification/stim-sequence-periods-2026-10-31.json).
+- A STIM-only correction rounds the final period for pitch-down slides with zero finetune, no vibrato and no arpeggio. Original comparison improves Demon from 6,765 to 7,066 exact values out of 7,066; no observed regressions in those four startup sequences or 32 additional 256-tick order samples. [Original](verification/stim-pitch-slide-original-2026-10-31.json), [survey](verification/stim-pitch-slide-survey-2026-10-31.json).
+- Native executables use the correction locally; Windows, ARM64 and WebAssembly libxmp cross-builds pass. Published v1.2 packages are unchanged. Full Original scheduling, physical output and all effect paths remain unverified.
+
+## STIM periods beyond startup — 2026-10-31 (bounded)
+
+- Executed 2,000 manually clocked original tracker ticks and compared channel fields with nonzero period and volume for each table. Exact Q12 matches: Mean 7,326/7,354; Pirate 7,072/7,245; Space 7,933/7,933; Demon 6,765/7,066. This observes tracker fields, not complete audio, original scheduling or audibility. [Evidence](verification/stim-sequence-periods-2026-10-31.json).
+- An isolated integer-rounding experiment increases exact matches (Mean 7,351, Pirate 7,170, Demon 7,066) but makes 71 Pirate and one Mean individual periods less accurate. It is not enabled. [Comparison](verification/stim-period-rounding-2026-10-31.json).
+
 ## STIM timing integrated — 2026-10-31 (bounded)
 
 - The port's local native build and four platform packaging paths now use the same pinned, privately patched libxmp source. The correction applies only to STIM. The pinned source files are checked before patching. [Patch](../patches/libxmp-stim-rate.patch), [preparation](../tools/prepare_stim_libxmp.py).

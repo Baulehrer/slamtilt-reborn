@@ -1,0 +1,305 @@
+{
+  "status": "EXPERIMENT_ONLY",
+  "scope": "Test STIM period rounding against Retail over 2,000 manual tracker ticks.\n\nUses an isolated private libxmp copy. Different ticks are measured in Q12;\nthis does not establish scheduler, PCM, event, or whole-song equivalence.\nThe baseline library supplied to this test remains unchanged.\n",
+  "targeted": false,
+  "vibrato_hold": true,
+  "baseline_library_sha256": "9b4d5e5506408745b494d05d81708f46cca9bf567b419f79899439ff95bbd2f4",
+  "candidate_library_sha256": "cc5e663f08b6fe27ae47bbe74540acdb9a6c83b7979d45cfb4499a9ec52a4753",
+  "tables": [
+    {
+      "table": "mean",
+      "channel_ticks": 7354,
+      "original_exact": 7326,
+      "rounded_exact": 7327,
+      "improved": 3,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "pirate",
+      "channel_ticks": 7245,
+      "original_exact": 7072,
+      "rounded_exact": 7073,
+      "improved": 15,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "space",
+      "channel_ticks": 7933,
+      "original_exact": 7933,
+      "rounded_exact": 7933,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "demon",
+      "channel_ticks": 7066,
+      "original_exact": 7066,
+      "rounded_exact": 7066,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    }
+  ],
+  "survey": [
+    {
+      "table": "mean",
+      "order": 0,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "mean",
+      "order": 4,
+      "ticks": 256,
+      "improved": 3,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "mean",
+      "order": 16,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "mean",
+      "order": 25,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "mean",
+      "order": 32,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "mean",
+      "order": 34,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "mean",
+      "order": 48,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "mean",
+      "order": 60,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "pirate",
+      "order": 0,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "pirate",
+      "order": 4,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "pirate",
+      "order": 16,
+      "ticks": 256,
+      "improved": 6,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "pirate",
+      "order": 25,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "pirate",
+      "order": 32,
+      "ticks": 256,
+      "improved": 1,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "pirate",
+      "order": 34,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "pirate",
+      "order": 48,
+      "ticks": 256,
+      "improved": 2,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "pirate",
+      "order": 60,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "space",
+      "order": 0,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "space",
+      "order": 4,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "space",
+      "order": 16,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "space",
+      "order": 25,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "space",
+      "order": 32,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "space",
+      "order": 34,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "space",
+      "order": 48,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "space",
+      "order": 60,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "demon",
+      "order": 0,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "demon",
+      "order": 4,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "demon",
+      "order": 16,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "demon",
+      "order": 25,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "demon",
+      "order": 32,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "demon",
+      "order": 34,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "demon",
+      "order": 48,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    },
+    {
+      "table": "demon",
+      "order": 60,
+      "ticks": 256,
+      "improved": 0,
+      "worse": 0,
+      "max_worse_q12": 0
+    }
+  ],
+  "decision": "not enabled pending broader PCM/effect validation"
+}

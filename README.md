@@ -10,7 +10,7 @@ Bring your own original game files. Downloads include no original DAT files or A
 
 ## Download and play
 
-[Latest packaged release: version 1.3](https://github.com/Baulehrer/slamtilt-reborn/releases/tag/v1.3). The current source tree is version 1.4:
+[Version 1.4 downloads](https://github.com/Baulehrer/slamtilt-reborn/releases/tag/v1.4):
 
 | Download | Start here |
 | --- | --- |

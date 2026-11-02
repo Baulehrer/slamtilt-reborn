@@ -1,0 +1,48 @@
+{
+  "name": "Slamtilt - Reborn 1.4",
+  "version": "1.4",
+  "tag_commit": "cf14efc290326477512c098dd0c4da09a71e8817",
+  "original_game_data_included": false,
+  "artifacts": [
+    {
+      "name": "SHA256SUMS",
+      "size": 619,
+      "sha256": "26bba82b23346f8618889759375e618d999eedadeac7862aa2d753dbd3a4557a"
+    },
+    {
+      "name": "Slamtilt-Reborn-linux-arm64-preview.tar.gz",
+      "size": 6873342,
+      "sha256": "35f885e55aa9133ee97b53db9f14f3a1a930c5b431851b85feb9dd0320c14bac"
+    },
+    {
+      "name": "Slamtilt-Reborn-linux-x86_64.AppImage",
+      "size": 7399928,
+      "sha256": "04a648d213ab8de75a0a01ff2fb010c93108af4aae7808b02e7ac1e12ec8dd65"
+    },
+    {
+      "name": "Slamtilt-Reborn-linux-x86_64.tar.xz",
+      "size": 3814364,
+      "sha256": "b65d7198b1452932b78df0d70a973f8177768ee4c49813d83b24ede83677f606"
+    },
+    {
+      "name": "Slamtilt-Reborn-windows-x86_64-portable.zip",
+      "size": 9107286,
+      "sha256": "7e44512b57dad21c913e50b091eb7131a3346cb6114ae56ec5fed2770b71fa2f"
+    },
+    {
+      "name": "Slamtilt-Reborn-windows-x86_64-setup.exe",
+      "size": 6051791,
+      "sha256": "c6fbe4176ca277b3fea51b68419ffaada760e2edc0a94cc0515aaecc6bf17921"
+    },
+    {
+      "name": "Slamtilt-Reborn.html",
+      "size": 3037508,
+      "sha256": "e2184238cfe86e6839846cc045d851cbed382f4a8b5342f7700db80b9c8caec6"
+    }
+  ],
+  "limitations": [
+    "Full gameplay and original device audio parity unverified",
+    "Windows tested with Wine, ARM64 with QEMU; physical hardware unverified",
+    "Chromium passed; Vivaldi not verified in this release check"
+  ]
+}
